@@ -1,0 +1,53 @@
+<svg preserveAspectRatio="xMidYMid meet" width="680" height="230" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 680 230">
+<rect width="680" height="230" x="0" y="0" fill="none"></rect>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(0 2)" fill="#5b6875">INR Cr</text>
+<path d="M46.4 196.5L672 196.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-linecap="round" class="zr16-cls-85"></path>
+<path d="M-31 0l62 0l0 22l-62 0Z" transform="translate(108.96 204)" fill="none" pointer-events="visible" class="zr16-cls-85"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5.5" transform="translate(108.96 204)" fill="#5b6875">PV explicit </text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="16.5" transform="translate(108.96 204)" fill="#5b6875">FCFF</text>
+<path d="M-31 0l62 0l0 22l-62 0Z" transform="translate(234.08 204)" fill="none" pointer-events="visible" class="zr16-cls-85"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5.5" transform="translate(234.08 204)" fill="#5b6875">PV terminal </text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="16.5" transform="translate(234.08 204)" fill="#5b6875">value</text>
+<path d="M-31 0l62 0l0 11l-62 0Z" transform="translate(359.2 204)" fill="none" pointer-events="visible" class="zr16-cls-85"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5.5" transform="translate(359.2 204)" fill="#5b6875">Less net debt</text>
+<path d="M-31 0l62 0l0 22l-62 0Z" transform="translate(484.32 204)" fill="none" pointer-events="visible" class="zr16-cls-85"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5.5" transform="translate(484.32 204)" fill="#5b6875">Non-op </text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="16.5" transform="translate(484.32 204)" fill="#5b6875">assets</text>
+<path d="M-31 0l62 0l0 11l-62 0Z" transform="translate(609.44 204)" fill="none" pointer-events="visible" class="zr16-cls-85"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5.5" transform="translate(609.44 204)" fill="#5b6875">Equity value</text>
+<path d="M92 196l34 0l0 0l-34 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr16-cls-85"></path>
+<path d="M217.1 196l34 0l0 -37.4l-34 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr16-cls-85"></path>
+<path d="M342.2 196l34 0l0 -121.2l-34 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr16-cls-85"></path>
+<path d="M467.3 196l34 0l0 -121.2l-34 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr16-cls-85"></path>
+<path d="M592.4 196l34 0l0 0l-34 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="4" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr16-cls-85"></path>
+<path d="M92 196l34 0l0 -37.4l-34 0Z" fill="#0b3d62" ecmeta_series_index="1" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr16-cls-86"></path>
+<path d="M217.1 158.6l34 0l0 -119.8l-34 0Z" fill="#0b3d62" ecmeta_series_index="1" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr16-cls-86"></path>
+<path d="M467.3 74.8l34 0l0 -2.8l-34 0Z" fill="#0b3d62" ecmeta_series_index="1" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr16-cls-86"></path>
+<path d="M342.2 74.8l34 0l0 -36l-34 0Z" fill="#b3261e" ecmeta_series_index="2" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr16-cls-87"></path>
+<path d="M592.4 196l34 0l0 -124l-34 0Z" fill="#bb3968" ecmeta_series_index="3" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr16-cls-88"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:400;" y="-5" transform="translate(108.96 155.6049)" fill="#5b6875">44,518</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:400;" y="-5" transform="translate(234.08 35.768)" fill="#5b6875">1,42,663</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:400;" y="-5" transform="translate(484.32 69.0059)" fill="#5b6875">3,341</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:400;" y="5" transform="translate(359.2 77.8124)" fill="#b3261e">(42,910)</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" y="-5" transform="translate(609.44 69.0059)" fill="#bb3968">1,47,612</text>
+<style ><![CDATA[
+.zr16-cls-85:hover {
+pointer-events:none;
+}
+.zr16-cls-86:hover {
+cursor:pointer;
+fill:rgba(12,67,107,1);
+}
+.zr16-cls-87:hover {
+cursor:pointer;
+fill:rgba(196,41,33,1);
+}
+.zr16-cls-88:hover {
+cursor:pointer;
+fill:rgba(205,62,114,1);
+}
+
+]]>
+
+</style>
+</svg>

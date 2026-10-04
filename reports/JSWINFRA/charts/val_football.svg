@@ -1,0 +1,86 @@
+<svg preserveAspectRatio="xMidYMid meet" width="680" height="269" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 680 269">
+<rect width="680" height="269" x="0" y="0" fill="none"></rect>
+<path d="M144.5 26L144.5 247" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr14-cls-64"></path>
+<path d="M269.5 26L269.5 247" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr14-cls-64"></path>
+<path d="M395.5 26L395.5 247" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr14-cls-64"></path>
+<path d="M520.5 26L520.5 247" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr14-cls-64"></path>
+<path d="M646.5 26L646.5 247" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr14-cls-64"></path>
+<path d="M-132 -5.5l132 0l0 11l-132 0Z" transform="translate(136 44.4167)" fill="none" pointer-events="visible" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(136 44.4167)" fill="#5b6875">Peer P/E (25th-75th)</text>
+<path d="M-132 -5.5l132 0l0 11l-132 0Z" transform="translate(136 81.25)" fill="none" pointer-events="visible" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(136 81.25)" fill="#5b6875">Peer EV/EBITDA (25th-75th)</text>
+<path d="M-132 -5.5l132 0l0 11l-132 0Z" transform="translate(136 118.0833)" fill="none" pointer-events="visible" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(136 118.0833)" fill="#5b6875">Peer P/B (25th-75th)</text>
+<path d="M-132 -5.5l132 0l0 11l-132 0Z" transform="translate(136 154.9167)" fill="none" pointer-events="visible" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(136 154.9167)" fill="#5b6875">DCF (bear-base-bull)</text>
+<path d="M-132 -5.5l132 0l0 11l-132 0Z" transform="translate(136 191.75)" fill="none" pointer-events="visible" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(136 191.75)" fill="#5b6875">DCF, 14x exit multiple</text>
+<path d="M-132 -5.5l132 0l0 11l-132 0Z" transform="translate(136 228.5833)" fill="none" pointer-events="visible" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(136 228.5833)" fill="#5b6875">52-week range</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(144 253)" fill="#5b6875">0</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(269.5 253)" fill="#5b6875">100</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(395 253)" fill="#5b6875">200</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(520.5 253)" fill="#5b6875">300</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(646 253)" fill="#5b6875">400</text>
+<path d="M144 31l173.2 0l0 12.8l-173.2 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M144 67.8l207.1 0l0 12.8l-207.1 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M144 104.6l299.9 0l0 12.8l-299.9 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M144 141.5l66.5 0l0 12.8l-66.5 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M144 178.3l277.4 0l0 12.8l-277.4 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="4" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M144 215.1l292.9 0l0 12.8l-292.9 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="5" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M319.2 31L372.9 31A2 2 0 0 1 374.9 33L374.9 41.8A2 2 0 0 1 372.9 43.8L319.2 43.8A2 2 0 0 1 317.2 41.8L317.2 33A2 2 0 0 1 319.2 31Z" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr14-cls-65"></path>
+<path d="M353.1 67.8L415.6 67.8A2 2 0 0 1 417.6 69.8L417.6 78.6A2 2 0 0 1 415.6 80.6L353.1 80.6A2 2 0 0 1 351.1 78.6L351.1 69.8A2 2 0 0 1 353.1 67.8Z" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr14-cls-65"></path>
+<path d="M445.9 104.6L517.2 104.6A2 2 0 0 1 519.2 106.6L519.2 115.4A2 2 0 0 1 517.2 117.4L445.9 117.4A2 2 0 0 1 443.9 115.4L443.9 106.6A2 2 0 0 1 445.9 104.6Z" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr14-cls-65"></path>
+<path d="M212.5 141.5L331.5 141.5A2 2 0 0 1 333.5 143.5L333.5 152.3A2 2 0 0 1 331.5 154.3L212.5 154.3A2 2 0 0 1 210.5 152.3L210.5 143.5A2 2 0 0 1 212.5 141.5Z" fill="#0b3d62" ecmeta_series_index="1" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr14-cls-66"></path>
+<path d="M421.4 178.3L421.4 191.1L421.4 178.3Z" fill="#0b3d62" ecmeta_series_index="1" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr14-cls-66"></path>
+<path d="M438.9 215.1L613.9 215.1A2 2 0 0 1 615.9 217.1L615.9 225.9A2 2 0 0 1 613.9 227.9L438.9 227.9A2 2 0 0 1 436.9 225.9L436.9 217.1A2 2 0 0 1 438.9 215.1Z" fill="#a9c6dc" ecmeta_series_index="1" ecmeta_data_index="5" ecmeta_ssr_type="chart" class="zr14-cls-67"></path>
+<path d="M144 45.1l230.9 0l0 12.8l-230.9 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="0" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M144 81.9l273.6 0l0 12.8l-273.6 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="1" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M144 118.7l375.2 0l0 12.8l-375.2 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="2" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M144 155.6l189.5 0l0 12.8l-189.5 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="3" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M144 192.4l277.4 0l0 12.8l-277.4 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="4" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M144 229.2l471.9 0l0 12.8l-471.9 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="5" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:600;" transform="translate(321.19 37.3745)" fill="#fff">138</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:600;" transform="translate(355.075 74.2078)" fill="#fff">165</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:600;" transform="translate(447.945 111.0412)" fill="#fff">239</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:600;" transform="translate(214.515 147.8745)" fill="#fff">53</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:600;" transform="translate(425.355 184.7078)" fill="#fff">221</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:600;" transform="translate(440.9421 221.5412)" fill="#fff">233</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(378.92 51.4588)" fill="#5b6875">184</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(421.59 88.2922)" fill="#5b6875">218</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(523.245 125.1255)" fill="#5b6875">299</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(337.505 161.9588)" fill="#5b6875">151</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(425.355 198.7922)" fill="#5b6875">221</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(619.88 235.6255)" fill="#5b6875">376</text>
+<path d="M593 26L593 247" fill="none" pointer-events="visible" stroke="#16202c" stroke-width="2" stroke-dasharray="8,4" ecmeta_series_index="1" ecmeta_data_index="0" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="-5" transform="matrix(0,1,-1,0,596.5998,30)" fill="#16202c">CMP 357</text>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(4,0,0,4,361.115,44.4167)" fill="#16202c" fill-opacity="0.8" stroke="#fff" stroke-width="0.3" stroke-opacity="0.8" ecmeta_series_index="2" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr14-cls-68"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(4,0,0,4,389.98,81.25)" fill="#16202c" fill-opacity="0.8" stroke="#fff" stroke-width="0.3" stroke-opacity="0.8" ecmeta_series_index="2" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr14-cls-68"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(4,0,0,4,491.635,118.0833)" fill="#16202c" fill-opacity="0.8" stroke="#fff" stroke-width="0.3" stroke-opacity="0.8" ecmeta_series_index="2" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr14-cls-68"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(4,0,0,4,302.13,154.9167)" fill="#16202c" fill-opacity="0.8" stroke="#fff" stroke-width="0.3" stroke-opacity="0.8" ecmeta_series_index="2" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr14-cls-68"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(4,0,0,4,421.355,191.75)" fill="#16202c" fill-opacity="0.8" stroke="#fff" stroke-width="0.3" stroke-opacity="0.8" ecmeta_series_index="2" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr14-cls-68"></path>
+<style ><![CDATA[
+.zr14-cls-64:hover {
+pointer-events:none;
+}
+.zr14-cls-65:hover {
+cursor:pointer;
+fill:rgba(18,126,184,1);
+}
+.zr14-cls-66:hover {
+cursor:pointer;
+fill:rgba(12,67,107,1);
+}
+.zr14-cls-67:hover {
+cursor:pointer;
+fill:rgba(185,217,242,1);
+}
+.zr14-cls-68:hover {
+cursor:pointer;
+fill:rgba(24,35,48,1);
+}
+
+]]>
+
+</style>
+</svg>

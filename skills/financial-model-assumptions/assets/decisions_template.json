@@ -1,0 +1,56 @@
+{
+  "_comment": "Working record of every assumption. Edit any 'value' and rerun build_assumptions.py. Schema and the model.py key mapping are in references/integration.md.",
+  "company": "",
+  "ticker": "",
+  "kb": "",
+  "sector": "manufacturing | services | consumer | commodity | realestate",
+  "as_of": "",
+  "currency": "INR cr",
+  "wc_days_on_cogs": true,
+
+  "assumptions": {
+    "forecast_years": {"value": 5},
+
+    "revenue_growth":     {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "volume_growth":      {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "pricing_growth":     {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "new_customers":      {"value": null, "unit": "count", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "customer_retention": {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+
+    "gross_margin":       {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "ebitda_margin":      {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "ebit_margin":        {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+
+    "sga_pct_sales":       {"value": null, "unit": "% of sales", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "rnd_pct_sales":       {"value": null, "unit": "% of sales", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "marketing_pct_sales": {"value": null, "unit": "% of sales", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "employee_pct_sales":  {"value": null, "unit": "% of sales", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+
+    "capex_pct_sales":  {"value": null, "unit": "% of sales", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "dep_pct_sales":    {"value": null, "unit": "% of sales", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "amort_pct_sales":  {"value": null, "unit": "% of sales", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+
+    "dso": {"value": null, "unit": "days", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "dio": {"value": null, "unit": "days", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "dpo": {"value": null, "unit": "days", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+
+    "effective_tax_rate": {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+
+    "interest_rate": {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "debt_growth":   {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+
+    "terminal_growth":     {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "risk_free_rate":      {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": [{"quote": "market data", "source": "external"}]},
+    "equity_risk_premium": {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": [{"quote": "market data", "source": "external"}]},
+    "beta":                {"value": null, "confidence": "", "status": "recommended", "why": [], "evidence": [{"quote": "market data", "source": "external"}]},
+    "target_debt_weight":  {"value": null, "unit": "%", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+
+    "net_debt":      {"value": null, "unit": "cr", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "shares_out":    {"value": null, "unit": "cr shares", "confidence": "", "status": "recommended", "why": [], "evidence": []},
+    "current_price": {"value": null, "unit": "per share", "confidence": "", "status": "recommended", "why": [], "evidence": [{"quote": "market data", "source": "external"}]}
+  },
+
+  "peers": [
+    {"name": "SUBJECT CO", "price": null, "mcap": null, "ev": null, "sales": null, "ebitda": null, "pat": null, "bv": null, "roe": null}
+  ]
+}

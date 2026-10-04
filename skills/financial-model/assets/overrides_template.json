@@ -1,0 +1,72 @@
+{
+  "_readme": [
+    "The only file you edit. Delete these _readme keys once you have filled it in.",
+    "actuals   : figures read off the annual report. Period labels must match the",
+    "            Screener columns exactly (Mar-24). Anything here wins over Screener.",
+    "citations : required for every line in actuals. source is a path inside the",
+    "            knowledge base; page is the printed page number.",
+    "drivers   : a number, or a list with one entry per forecast year. Rates are",
+    "            decimals (0.185 = 18.5%). These win over assumptions.json.",
+    "options   : dep_basis net_block | sales; avg_years is the trailing window used",
+    "            for any driver neither assumptions.json nor this file sets."
+  ],
+
+  "actuals": {
+    "_readme": "Trade payables are the one Screener never carries - always pull them.",
+    "payables": {
+      "Mar-23": null,
+      "Mar-24": null
+    },
+    "capex": {
+      "Mar-24": null
+    }
+  },
+
+  "citations": {
+    "payables": {
+      "source": "tables/table_pNNNN_1.md",
+      "page": 0,
+      "quote": "Trade payables - total outstanding dues"
+    },
+    "capex": {
+      "source": "tables/table_pNNNN_2.md",
+      "page": 0,
+      "quote": "Additions to property, plant and equipment"
+    }
+  },
+
+  "drivers": {
+    "_readme": "Anything omitted comes from assumptions.json, then from the trailing historical average.",
+
+    "rev_growth": null,
+    "gross_margin": null,
+    "ebitda_margin": null,
+    "other_income_pct": null,
+
+    "capex_pct_sales": null,
+    "dep_pct_nb": null,
+    "dep_pct_sales": null,
+    "cwip_pct_sales": null,
+
+    "dso": null,
+    "dio": null,
+    "dpo": null,
+    "other_ca_pct": null,
+    "other_liab_pct": null,
+
+    "tax_rate": null,
+    "cost_of_debt": null,
+    "interest_income_rate": null,
+    "debt_growth": null,
+    "term_debt_repay": null,
+    "equity_issued": null,
+    "payout_ratio": null,
+    "min_cash": null
+  },
+
+  "options": {
+    "forecast_years": 5,
+    "avg_years": 3,
+    "dep_basis": "net_block"
+  }
+}

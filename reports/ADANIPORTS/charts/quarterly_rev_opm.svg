@@ -1,0 +1,88 @@
+<svg preserveAspectRatio="xMidYMid meet" width="680" height="235" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 680 235">
+<rect width="680" height="235" x="0" y="0" fill="none"></rect>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="5" transform="translate(0 2)" fill="#0b3d62">Revenue (INR Cr)</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="5" transform="translate(584.2 2)" fill="#1173a8">Operating margin (%)</text>
+<path d="M24.2 213.5L621.9 213.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr17-cls-89"></path>
+<path d="M24.2 167.5L621.9 167.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr17-cls-89"></path>
+<path d="M24.2 121.5L621.9 121.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr17-cls-89"></path>
+<path d="M24.2 76.5L621.9 76.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr17-cls-89"></path>
+<path d="M24.2 30.5L621.9 30.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr17-cls-89"></path>
+<path d="M24.2 213.5L621.9 213.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-linecap="round" class="zr17-cls-89"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(20.2 213)" fill="#5b6875">0</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(20.2 167.25)" fill="#5b6875">3k</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(20.2 121.5)" fill="#5b6875">6k</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(20.2 75.75)" fill="#5b6875">9k</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(20.2 30)" fill="#5b6875">12k</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(625.9 213)" fill="#5b6875">0%</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(625.9 167.25)" fill="#5b6875">20%</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(625.9 121.5)" fill="#5b6875">40%</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(625.9 75.75)" fill="#5b6875">60%</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(625.9 30)" fill="#5b6875">80%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(54.085 221)" fill="#5b6875">Q4 FY24</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(113.855 221)" fill="#5b6875">Q1 FY25</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(173.625 221)" fill="#5b6875">Q2 FY25</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(233.395 221)" fill="#5b6875">Q3 FY25</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(293.165 221)" fill="#5b6875">Q4 FY25</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(352.935 221)" fill="#5b6875">Q1 FY26</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(412.705 221)" fill="#5b6875">Q2 FY26</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(472.475 221)" fill="#5b6875">Q3 FY26</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(532.245 221)" fill="#5b6875">Q4 FY26</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(592.015 221)" fill="#5b6875">Q1 FY27</text>
+<path d="M43.1 107.8L65.1 107.8A2 2 0 0 1 67.1 109.8L67.1 213L41.1 213L41.1 109.8A2 2 0 0 1 43.1 107.8Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr17-cls-90"></path>
+<path d="M102.9 97.7L124.9 97.7A2 2 0 0 1 126.9 99.7L126.9 213L100.9 213L100.9 99.7A2 2 0 0 1 102.9 97.7Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr17-cls-90"></path>
+<path d="M162.6 105.2L184.6 105.2A2 2 0 0 1 186.6 107.2L186.6 213L160.6 213L160.6 107.2A2 2 0 0 1 162.6 105.2Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr17-cls-90"></path>
+<path d="M222.4 91.5L244.4 91.5A2 2 0 0 1 246.4 93.5L246.4 213L220.4 213L220.4 93.5A2 2 0 0 1 222.4 91.5Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr17-cls-90"></path>
+<path d="M282.2 83.6L304.2 83.6A2 2 0 0 1 306.2 85.6L306.2 213L280.2 213L280.2 85.6A2 2 0 0 1 282.2 83.6Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr17-cls-90"></path>
+<path d="M341.9 73.8L363.9 73.8A2 2 0 0 1 365.9 75.8L365.9 213L339.9 213L339.9 75.8A2 2 0 0 1 341.9 73.8Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="5" ecmeta_ssr_type="chart" class="zr17-cls-90"></path>
+<path d="M401.7 73.2L423.7 73.2A2 2 0 0 1 425.7 75.2L425.7 213L399.7 213L399.7 75.2A2 2 0 0 1 401.7 73.2Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="6" ecmeta_ssr_type="chart" class="zr17-cls-90"></path>
+<path d="M461.5 65L483.5 65A2 2 0 0 1 485.5 67L485.5 213L459.5 213L459.5 67A2 2 0 0 1 461.5 65Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="7" ecmeta_ssr_type="chart" class="zr17-cls-90"></path>
+<path d="M521.2 49.2L543.2 49.2A2 2 0 0 1 545.2 51.2L545.2 213L519.2 213L519.2 51.2A2 2 0 0 1 521.2 49.2Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="8" ecmeta_ssr_type="chart" class="zr17-cls-90"></path>
+<path d="M581 48L603 48A2 2 0 0 1 605 50L605 213L579 213L579 50A2 2 0 0 1 581 48Z" fill="#bb3968" ecmeta_series_index="0" ecmeta_data_index="9" ecmeta_ssr_type="chart" class="zr17-cls-91"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:400;" y="-5" transform="translate(54.085 104.836)" fill="#5b6875">6,896</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" y="-5" transform="translate(592.015 44.9797)" fill="#bb3968">10,821</text>
+<g clip-path="url(#zr17-c0)">
+<path d="M54.1 80.1L113.9 69.6L173.6 71.6L233.4 75.1L293.2 78L352.9 75.3L412.7 79.6L472.5 76.7L532.2 84.7L592 80.8" fill="none" pointer-events="visible" stroke="#1173a8" stroke-width="1.6" stroke-linejoin="bevel" class="zr17-cls-93"></path>
+</g>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,54.085,80.0963)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr17-cls-94"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,113.855,69.5738)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr17-cls-94"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,173.625,71.6325)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr17-cls-94"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,233.395,75.0638)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr17-cls-94"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,293.165,78.0375)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr17-cls-94"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,352.935,75.2925)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="5" ecmeta_ssr_type="chart" class="zr17-cls-94"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,412.705,79.6387)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="6" ecmeta_ssr_type="chart" class="zr17-cls-94"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,472.475,76.665)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="7" ecmeta_ssr_type="chart" class="zr17-cls-94"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,532.245,84.6712)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="8" ecmeta_ssr_type="chart" class="zr17-cls-94"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,592.015,80.7825)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="9" ecmeta_ssr_type="chart" class="zr17-cls-94"></path>
+<defs >
+<clipPath id="zr17-c0">
+<path d="M23 29.2l601 0l0 184.6l-601 0Z" fill="#000" class="zr17-cls-92"></path>
+</clipPath>
+</defs>
+<style ><![CDATA[
+.zr17-cls-89:hover {
+pointer-events:none;
+}
+.zr17-cls-90:hover {
+cursor:pointer;
+fill:rgba(12,67,107,1);
+}
+.zr17-cls-91:hover {
+cursor:pointer;
+fill:rgba(205,62,114,1);
+}
+.zr17-cls-92:hover {
+cursor:pointer;
+fill:rgba(0,0,0,1);
+}
+.zr17-cls-93:hover {
+cursor:pointer;
+}
+.zr17-cls-94:hover {
+cursor:pointer;
+fill:rgba(18,126,184,1);
+}
+
+]]>
+
+</style>
+</svg>

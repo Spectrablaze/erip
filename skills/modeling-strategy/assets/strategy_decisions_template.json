@@ -1,0 +1,141 @@
+{
+  "_readme": [
+    "This is the file the analyst edits. build_strategy.py turns it into",
+    "model_strategy.json + model_strategy.md. Never hand-edit model_strategy.json —",
+    "same discipline as decisions.json -> assumptions.json in",
+    "financial-model-assumptions.",
+    "",
+    "Delete every _readme and _comment key before building; they are ignored, but",
+    "they make the file harder to read once it is real.",
+    "",
+    "scope_status  IN_SCOPE, or OUT_OF_SCOPE for a bank / NBFC / insurer.",
+    "sector        a key from equity-research-report/scripts/sectors.py. Context,",
+    "              not the architecture. 'financials' forces RED.",
+    "",
+    "economic_archetype must be a key from archetypes.py. If nothing in the",
+    "validated library fits, leave economic_archetype null and write your candidate",
+    "into proposed_archetype — that caps modelability at AMBER and asks the analyst",
+    "to sign it off. Do NOT invent a key.",
+    "",
+    "materiality_pct is the segment's share of consolidated revenue in the base",
+    "year. Segments below 10% should normally be folded into the consolidated",
+    "build rather than carrying their own architecture."
+  ],
+
+  "company": "Acme Engineering Ltd",
+  "ticker": "ACME",
+  "as_of": "2026-08-06",
+  "scope_status": "IN_SCOPE",
+  "sector": "manufacturing",
+  "peer_count": 4,
+  "business_description": "One paragraph, from the knowledge base, on how this company actually earns revenue. Not the boilerplate 'about us'.",
+
+  "segments": [
+    {
+      "name": "Projects",
+      "materiality_pct": 62.0,
+      "materiality_basis": "FY26 segment revenue, annual report segment note",
+      "economic_archetype": "order_book_execution",
+      "proposed_archetype": null,
+      "revenue_drivers": [
+        {"id": "opening_order_book", "evidence": [
+          {"quote": "unexecuted order book of INR 12,480 cr as at 31 March 2026",
+           "source": "context/management_discussion.md", "page": 41}]},
+        {"id": "order_inflow", "evidence": [
+          {"quote": "order inflow of INR 5,900 cr during the year",
+           "source": "context/management_discussion.md", "page": 41}]},
+        {"id": "execution_rate", "evidence": [
+          {"quote": "orders typically execute over 30 to 36 months",
+           "source": "concall/pages/page_0007.md", "page": 7}]}
+      ],
+      "margin_drivers": [{"id": "segment_margin"}],
+      "capital_drivers": [{"id": "segment_capex_intensity"}],
+      "working_capital_drivers": [{"id": "segment_wc_days"}],
+      "evidence": [
+        {"quote": "The Projects segment undertakes turnkey EPC contracts",
+         "source": "context/business_overview.md", "page": 18}
+      ],
+      "confidence": "High",
+      "status": "recommended"
+    },
+    {
+      "name": "Products",
+      "materiality_pct": 38.0,
+      "materiality_basis": "FY26 segment revenue",
+      "economic_archetype": "capacity_utilisation_realisation",
+      "proposed_archetype": null,
+      "revenue_drivers": [
+        {"id": "installed_capacity", "evidence": []},
+        {"id": "capacity_addition", "evidence": []},
+        {"id": "utilisation", "evidence": []},
+        {"id": "realisation", "evidence": []}
+      ],
+      "margin_drivers": [{"id": "segment_margin"}],
+      "capital_drivers": [{"id": "segment_capex_intensity"}],
+      "working_capital_drivers": [{"id": "segment_wc_days"}],
+      "evidence": [],
+      "confidence": "Medium",
+      "status": "recommended"
+    }
+  ],
+
+  "model_architecture": {
+    "_comment": "revenue_model is inferred when omitted. required_schedules are added automatically from each archetype; anything listed here is kept as well.",
+    "revenue_model": null,
+    "segment_modeling": "Both segments modelled separately; central costs held outside and carried as unallocated.",
+    "required_schedules": [],
+    "consolidation_method": "sum of segment revenue; segment EBIT margins weighted to a consolidated margin; unallocated corporate cost as a separate line"
+  },
+
+  "declared_unsupported": [],
+  "_declared_unsupported_note": "Free-text requirements the existing financial-model genuinely cannot execute. Any entry here forces RED and makes every downstream skill refuse. Use it rather than approximating.",
+
+  "valuation_methods": [
+    {
+      "method": "fcff_dcf",
+      "applicability": "HIGH",
+      "role": "PRIMARY",
+      "rationale": "Positive and forecastable operating cash flow with identifiable capital requirements; the order book gives visibility over the explicit forecast period.",
+      "manual_steps": []
+    },
+    {
+      "method": "ev_ebitda",
+      "applicability": "HIGH",
+      "role": "CROSS_CHECK",
+      "rationale": "Positive EBITDA and four listed comparables of similar capital intensity."
+    },
+    {
+      "method": "pe",
+      "applicability": "MEDIUM",
+      "role": "SECONDARY",
+      "rationale": "Earnings are positive but leverage differs materially across the peer set, which reduces comparability."
+    },
+    {
+      "method": "nav",
+      "role": "NOT_APPROPRIATE",
+      "rationale": "Asset-based valuation does not reflect the economics of an operating EPC and products business; the balance sheet does not carry the order book, which is where the value is."
+    }
+  ],
+
+  "rejected_methods": [],
+
+  "uncertainties": [
+    {
+      "issue": "Segment EBIT margin is disclosed only for the last two years",
+      "impact": "The Projects margin path is anchored on a two-point history",
+      "required_resolution": "Pull the segment note from FY22-FY24 annual reports, or accept a consolidated margin and say so"
+    }
+  ],
+
+  "modelability": {
+    "status": "GREEN",
+    "rationale": ["Both segments have disclosed drivers and a validated architecture"]
+  },
+
+  "analyst_decision": {
+    "status": "PENDING",
+    "by": null,
+    "date": null,
+    "notes": []
+  }
+}

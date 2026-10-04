@@ -1,0 +1,179 @@
+# {{ company }} — ERIP Audit Book
+
+**Sector:** {{ sector }} | **Currency:** {{ currency }} | **Generated:** {{ generated_at }}
+
+---
+
+## Model Metadata
+
+| Field | Value |
+|-------|-------|
+| Company | {{ company }} |
+| Currency | {{ currency }} |
+| Sector | {{ sector }} |
+| Model built | {{ built }} |
+| Depreciation basis | {{ options.get("dep_basis", "net_block") }} |
+| History | {{ periods.hist[0] }} – {{ periods.hist[-1] }} ({{ periods.hist|length }} yr) |
+| Forecast | {{ periods.fcst[0] }} – {{ periods.fcst[-1] }} ({{ periods.fcst|length }} yr) |
+
+---
+
+## Source Register
+
+This register documents the origin of every material input to the model.
+
+| Row Key | Source | Page | Provenance | Confidence | Period | Notes |
+|---------|--------|------|------------|------------|--------|-------|
+{% for src in source_register %}
+| {{ src.row_key }} | {{ src.source }} | {{ src.page }} | {{ src.provenance_type }} | {{ src.confidence }} | {{ src.period }} | {{ src.notes }} |
+{% endfor %}
+
+### Provenance Type Definitions
+
+| Type | Definition |
+|------|-----------|
+{% for ptype in provenance_types %}
+| {{ ptype }} | {% if ptype == "REPORTED" %}Directly from audited financial statements or regulatory filings{% elif ptype == "DERIVED" %}Calculated from reported figures (e.g., margin %){% elif ptype == "ASSUMPTION" %}Analyst judgment not directly observable{% elif ptype == "MARKET" %}External market data (beta, WACC inputs, comps){% else %}Output of the model's own calculations{% endif %} |
+{% endfor %}
+
+### Confidence Level Definitions
+
+| Level | Definition |
+|-------|-----------|
+{% for clevel, cdef in confidence_levels.items() %}
+| {{ clevel }} | {{ cdef }} |
+{% endfor %}
+
+---
+
+## Assumption Register
+
+This register documents every significant assumption, its provenance, rationale, and approval status.
+
+| Key | Value | Unit | Provenance | Rationale | Approval | Downstream Dependencies |
+|-----|-------|------|------------|-----------|----------|------------------------|
+{% for asm in assumption_register %}
+| {{ asm.key }} | {{ asm.value }} | {{ asm.unit }} | {{ asm.provenance_type }} | {{ asm.rationale }} | {{ asm.approval_status }} | {{ asm.downstream|join(", ") }} |
+{% endfor %}
+
+---
+
+## Data Lineage
+
+Data lineage traces how inputs flow through the model to produce outputs.
+
+### Stage 1: Sources (Raw Inputs)
+
+{{ lineage.stage_1_sources.description }}
+
+**Inputs:** {{ lineage.stage_1_sources.inputs|join(", ") }}
+
+### Stage 2: Assumptions (Analyst Judgment)
+
+{{ lineage.stage_2_assumptions.description }}
+
+**Inputs:** {{ lineage.stage_2_assumptions.inputs|join(", ") }}
+
+### Stage 3: Calculations (Model-Derived)
+
+{{ lineage.stage_3_calculations.description }}
+
+**Inputs:** {{ lineage.stage_3_calculations.inputs|join(", ") }}
+
+### Stage 4: Outputs
+
+{{ lineage.stage_4_outputs.description }}
+
+**Outputs:** {{ lineage.stage_4_outputs.inputs|join(", ") }}
+
+---
+
+## Material Valuation Inputs
+
+This section explains the key inputs that drive the DCF valuation output.
+
+| Input | Value | Format | Source | Provenance | Rationale |
+|-------|-------|--------|--------|------------|-----------|
+{% for vi in valuation_inputs %}
+| {{ vi.name }} | {{ vi.value }} | {{ vi.format }} | {{ vi.source }} | {{ vi.provenance_type }} | {{ vi.rationale }} |
+{% endfor %}
+
+---
+
+## Model Checks
+
+| Status | Count | Description |
+|--------|-------|-------------|
+| Total checks | {{ checks.total }} | All integrity checks in model.json |
+| Passed | {{ checks.passed }} | Checks within tolerance |
+| Failed | {{ checks.failed }} | Checks outside tolerance |
+| Blocking | {{ checks.blocking }} | Severity: blocking |
+| Warning | {{ checks.warning }} | Severity: warning |
+| Overall | **{{ "PASS" if checks.all_pass else "FAIL" }}** | {% if checks.all_pass %}All checks within tolerance{% else %}Review required — one or more checks failed{% endif %} |
+
+### Check Detail
+
+| Check ID | Label | Status | Worst Value | Severity | Period |
+|----------|-------|--------|-------------|----------|--------|
+{% for item in checks['items'] %}
+| {{ item.check }} | {{ item.label }} | {{ "PASS" if item.ok else "FAIL" }} | {{ item.worst }} | {{ item.severity }} | {{ item.period }} |
+{% endfor %}
+
+---
+
+## Screener vs Annual Report Reconciliation
+
+This section documents the reconciliation between Screener.in data and the company's audited Annual Report.
+
+| Line | Period | Screener Value | Annual Report Value | Difference % |
+|------|--------|---------------|--------------------|--------------|
+{% for rec in reconciliation %}
+| {{ rec.row }} | {{ rec.period }} | {{ rec.screener }} | {{ rec.annual_report }} | {{ rec.diff_pct }} |
+{% endfor %}
+
+---
+
+## Annual Report Citations
+
+| Key | Source | Page |
+|------|--------|------|
+{% for key, cit in citations.items() %}
+{% if cit is mapping %}
+| {{ key }} | {{ cit.source }} | {{ cit.page }} |
+{% else %}
+| {{ key }} | {{ cit }} | — |
+{% endif %}
+{% endfor %}
+
+---
+
+## Build Notes
+
+{% for note in notes %}
+- {{ note }}
+{% else %}
+*(No build notes)*
+{% endfor %}
+
+---
+
+## Appendices
+
+### A. Input File Paths
+
+| File | Path |
+|------|------|
+| model.json | {{ model_json_path }} |
+| assumptions.json | {{ assumptions_json_path }} |
+
+### B. Approval Signatures
+
+| Role | Name | Date | Status |
+|------|------|------|--------|
+| Analyst | | | PENDING |
+| Reviewer | | | PENDING |
+| Sign-off Authority | | | PENDING |
+
+---
+
+*This audit book was generated automatically from model.json and assumptions.json. All values trace back to the authoritative model state. The audit book does not recalculate the financial model.*

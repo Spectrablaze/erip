@@ -1,0 +1,127 @@
+{
+  "_README": [
+    "Copy this to the report folder as manual.json and fill it in from the worksheet",
+    "fetch_macro.py printed. Delete any block you did not look up -- an omitted figure",
+    "is listed honestly in macro_pack.md section 6, whereas a guessed one is not.",
+    "",
+    "EVERY entry needs three things or build_pack.py refuses it:",
+    "  value   the number, unitless (units come from the registry)",
+    "  period  WHAT IT OBSERVES, not today. YYYY-MM-DD, YYYY-MM or YYYY.",
+    "          A June-2026 CPI print entered in August is period 2026-06.",
+    "          An Indian FISCAL year uses its END month: FY26 is 2026-03, never 2026.",
+    "          A period in the future is refused (IMF WEO forecasts excepted).",
+    "  source  the citation string, matching the `cite` format in the worksheet",
+    "",
+    "Keys under `figures` must exist in scripts/registry.py. Inventing a key here is",
+    "rejected on purpose: two spellings of the same figure fragment the shared store",
+    "in reports/_knowledge/ and kb.py stops recalling it."
+  ],
+
+  "_WEO_README": [
+    "Fill the `weo` block ONLY when the vintage gate blocked the mirror -- that is the",
+    "route back in for figures read by hand off imf.org. If fetch_macro.py wrote WEO",
+    "figures successfully, delete the whole block; anything here overrides the fetch.",
+    "",
+    "`vintage` is the edition, YYYY-MM, and it becomes the citation for every figure in",
+    "the block: 'IMF WEO 2026-04'. 'IMF WEO' with no month is not a source.",
+    "",
+    "Geographies: world, advanced, emde, euro, us, china, japan, india.",
+    "Subjects: gdp, cpi, gdp_usd, gdp_pc, cad, govt_debt.",
+    "Years are WEO periods. India is FISCAL year: WEO 2026 = FY27."
+  ],
+
+  "weo": {
+    "vintage": "YYYY-MM",
+    "gdp": {
+      "world":    {"2025": 0.0, "2026": 0.0, "2027": 0.0},
+      "advanced": {"2025": 0.0, "2026": 0.0, "2027": 0.0},
+      "emde":     {"2025": 0.0, "2026": 0.0, "2027": 0.0},
+      "us":       {"2025": 0.0, "2026": 0.0, "2027": 0.0},
+      "euro":     {"2025": 0.0, "2026": 0.0, "2027": 0.0},
+      "china":    {"2025": 0.0, "2026": 0.0, "2027": 0.0},
+      "japan":    {"2025": 0.0, "2026": 0.0, "2027": 0.0},
+      "india":    {"2025": 0.0, "2026": 0.0, "2027": 0.0}
+    },
+    "cpi": {
+      "world":    {"2025": 0.0, "2026": 0.0, "2027": 0.0},
+      "advanced": {"2025": 0.0, "2026": 0.0, "2027": 0.0},
+      "emde":     {"2025": 0.0, "2026": 0.0, "2027": 0.0},
+      "india":    {"2025": 0.0, "2026": 0.0, "2027": 0.0}
+    }
+  },
+
+  "figures": {
+    "repo_rate": {
+      "value": 0.0,
+      "period": "YYYY-MM-DD",
+      "source": "RBI Monetary Policy Statement, <Month Year>",
+      "note": "stance: <accommodative | neutral | withdrawal of accommodation>"
+    },
+    "india_10y_gsec": {
+      "value": 0.0,
+      "period": "YYYY-MM-DD",
+      "source": "CCIL, <DD Month Year>",
+      "note": "must reconcile with risk_free in assumptions.json"
+    },
+    "usdinr": {
+      "value": 0.0,
+      "period": "YYYY-MM-DD",
+      "source": "RBI Reference Rate, <DD Month Year>",
+      "note": "match the peer-comps cover date"
+    },
+    "india_cpi": {
+      "value": 0.0,
+      "period": "YYYY-MM",
+      "source": "MoSPI CPI release, <Month Year>"
+    },
+    "india_wpi": {
+      "value": 0.0,
+      "period": "YYYY-MM",
+      "source": "Office of the Economic Adviser, WPI release, <Month Year>"
+    },
+    "india_iip": {
+      "value": 0.0,
+      "period": "YYYY-MM",
+      "source": "MoSPI IIP release, <Month Year>"
+    },
+    "india_gdp_fy_actual": {
+      "value": 0.0,
+      "period": "YYYY-03",
+      "source": "MoSPI, Provisional Estimates of Annual GDP, <Month Year>",
+      "note": "state the FY in the report text, e.g. FY26"
+    },
+    "india_gdp_latest_q": {
+      "value": 0.0,
+      "period": "YYYY-MM",
+      "source": "MoSPI, Quarterly Estimates of GDP, Q<n> FY<yy>",
+      "note": "period = the last month of the quarter observed"
+    }
+  },
+
+  "industry": [
+    {
+      "key": "industry_volume_fy26",
+      "label": "<segment> domestic volumes, FY26",
+      "value": 0.0,
+      "unit": "units mn",
+      "period": "YYYY-03",
+      "body": "SIAM",
+      "source": "SIAM, Flash Report <Month Year>",
+      "url": "https://www.siam.in/statistics.aspx",
+      "forecast_year": null,
+      "note": "SIAM is wholesale despatches; FADA is retail registrations. Say which."
+    },
+    {
+      "key": "industry_market_size",
+      "label": "<industry> India market size",
+      "value": 0.0,
+      "unit": "USD bn",
+      "period": "YYYY-12",
+      "body": "IBEF",
+      "source": "IBEF <sector> report, <Month Year>",
+      "url": "https://www.ibef.org/industry",
+      "forecast_year": 2030,
+      "note": "forecast_year is mandatory for any market-size figure"
+    }
+  ]
+}

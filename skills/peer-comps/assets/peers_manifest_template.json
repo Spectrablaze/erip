@@ -1,0 +1,89 @@
+{
+  "_readme": [
+    "One entry per company. The SUBJECT is one of them, named by `subject` below.",
+    "Every company must be the SAME reporting basis, downloaded from the same Screener",
+    "view. peer_ingest.py reads the basis out of each export header and hard-errors on a",
+    "mismatch, so a standalone file slipped into a consolidated set cannot get through.",
+    "",
+    "`price` is the close on the report's cover date. Supply it for every company or the",
+    "comps are struck on different days. If omitted, the export's own price block is used",
+    "and the discrepancy is flagged.",
+    "",
+    "`surplus_investments` is the ONLY part of Screener's 'Investments' line netted from",
+    "EV. Leave it null unless the annual report shows genuinely surplus liquid",
+    "investments; strategic and subsidiary holdings must not be netted. See",
+    "references/multiples.md.",
+    "",
+    "`forward` stays empty unless you have consensus estimates. Any number in it requires",
+    "`source` and `as_of`, and the result is reported separately from everything computed,",
+    "never blended into the trailing median.",
+    "",
+    "`yahoo` is only needed when the ticker is not <TICKER>.NS — market_data.py assumes an",
+    "NSE listing. Use .BO for BSE-only names. Leave it out otherwise. If you are not using",
+    "market_data.py at all, ignore `yahoo` and fill in `price` by hand."
+  ],
+
+  "as_of": "2026-08-01",
+  "basis": "consolidated",
+  "sector": "two-wheelers",
+  "subject": "EICHERMOT",
+
+  "companies": [
+    {
+      "ticker": "EICHERMOT",
+      "name": "Eicher Motors Ltd",
+      "export": "data/peers/eichermot.xlsx",
+      "basis": "consolidated",
+      "yahoo": null,
+      "price": null,
+      "price_source": "NSE close 2026-08-01",
+      "surplus_investments": null,
+      "minority_interest": null,
+      "preference_capital": null,
+      "forward": {
+        "fy": "FY27E",
+        "eps": null,
+        "ebitda": null,
+        "sales": null,
+        "source": "",
+        "as_of": ""
+      }
+    },
+    {
+      "ticker": "BAJAJ-AUTO",
+      "name": "Bajaj Auto Ltd",
+      "export": "data/peers/bajaj-auto.xlsx",
+      "basis": "consolidated",
+      "price": null,
+      "price_source": "NSE close 2026-08-01",
+      "surplus_investments": null,
+      "minority_interest": null,
+      "preference_capital": null,
+      "forward": {}
+    },
+    {
+      "ticker": "TVSMOTOR",
+      "name": "TVS Motor Company Ltd",
+      "export": "data/peers/tvsmotor.xlsx",
+      "basis": "consolidated",
+      "price": null,
+      "price_source": "NSE close 2026-08-01",
+      "surplus_investments": null,
+      "minority_interest": null,
+      "preference_capital": null,
+      "forward": {}
+    },
+    {
+      "ticker": "HEROMOTOCO",
+      "name": "Hero MotoCorp Ltd",
+      "export": "data/peers/heromotoco.xlsx",
+      "basis": "consolidated",
+      "price": null,
+      "price_source": "NSE close 2026-08-01",
+      "surplus_investments": null,
+      "minority_interest": null,
+      "preference_capital": null,
+      "forward": {}
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.bak
+*.orig
+
+# Node
+node_modules/
+package-lock.json
+
+# Generated artifacts
+*.pdf
+*.svg
+*.png
+*.jpg
+*.jpeg
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Scratch scripts. In Aug 2026 a set of one-shot "_fix_indent.py" rewriters was run
+# over this directory and corrupted render.py and the workbook builder. Nothing
+# matching these patterns is ever part of the skill.
+_*.py
+*_fixed.py
+*_final.py
+fix_*.py
+test_*.txt

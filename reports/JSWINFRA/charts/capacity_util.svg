@@ -1,0 +1,79 @@
+<svg preserveAspectRatio="xMidYMid meet" width="329" height="230" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 329 230">
+<rect width="329" height="230" x="0" y="0" fill="none"></rect>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="5" transform="translate(0 2)" fill="#0b3d62">Capacity (MTPA)</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="5" transform="translate(293.5 2)" fill="#1173a8">Util. (%)</text>
+<path d="M24.8 208.5L270.9 208.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr6-cls-33"></path>
+<path d="M24.8 163.5L270.9 163.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr6-cls-33"></path>
+<path d="M24.8 119.5L270.9 119.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr6-cls-33"></path>
+<path d="M24.8 74.5L270.9 74.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr6-cls-33"></path>
+<path d="M24.8 30.5L270.9 30.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr6-cls-33"></path>
+<path d="M24.8 208.5L270.9 208.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-linecap="round" class="zr6-cls-33"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(20.8 208)" fill="#5b6875">0</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(20.8 163.5)" fill="#5b6875">50</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(20.8 119)" fill="#5b6875">100</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(20.8 74.5)" fill="#5b6875">150</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(20.8 30)" fill="#5b6875">200</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(274.9 208)" fill="#5b6875">0%</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(274.9 163.5)" fill="#5b6875">20%</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(274.9 119)" fill="#5b6875">40%</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(274.9 74.5)" fill="#5b6875">60%</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(274.9 30)" fill="#5b6875">80%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(42.3786 216)" fill="#5b6875">FY21</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(77.5357 216)" fill="#5b6875">FY22</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(112.6929 216)" fill="#5b6875">FY23</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(147.85 216)" fill="#5b6875">FY24</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(183.0071 216)" fill="#5b6875">FY25</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(218.1643 216)" fill="#5b6875">FY26</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(253.3214 216)" fill="#5b6875">Q1 FY27</text>
+<path d="M32.2 102.1L52.5 102.1A2 2 0 0 1 54.5 104.1L54.5 208L30.2 208L30.2 104.1A2 2 0 0 1 32.2 102.1Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr6-cls-34"></path>
+<path d="M67.4 71.8L87.7 71.8A2 2 0 0 1 89.7 73.8L89.7 208L65.4 208L65.4 73.8A2 2 0 0 1 67.4 71.8Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr6-cls-34"></path>
+<path d="M102.6 67.4L122.8 67.4A2 2 0 0 1 124.8 69.4L124.8 208L100.6 208L100.6 69.4A2 2 0 0 1 102.6 67.4Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr6-cls-34"></path>
+<path d="M137.7 56.7L158 56.7A2 2 0 0 1 160 58.7L160 208L135.7 208L135.7 58.7A2 2 0 0 1 137.7 56.7Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr6-cls-34"></path>
+<path d="M172.9 50.5L193.1 50.5A2 2 0 0 1 195.1 52.5L195.1 208L170.9 208L170.9 52.5A2 2 0 0 1 172.9 50.5Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr6-cls-34"></path>
+<path d="M208 45.1L228.3 45.1A2 2 0 0 1 230.3 47.1L230.3 208L206 208L206 47.1A2 2 0 0 1 208 45.1Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="5" ecmeta_ssr_type="chart" class="zr6-cls-34"></path>
+<path d="M243.2 42.5L263.5 42.5A2 2 0 0 1 265.5 44.5L265.5 208L241.2 208L241.2 44.5A2 2 0 0 1 243.2 42.5Z" fill="#bd8621" ecmeta_series_index="0" ecmeta_data_index="6" ecmeta_ssr_type="chart" class="zr6-cls-35"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:400;" y="-5" transform="translate(42.3786 99.09)" fill="#5b6875">119</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" y="-5" transform="translate(253.3214 39.46)" fill="#bd8621">186</text>
+<g clip-path="url(#zr6-c0)">
+<path d="M42.4 129.7L77.5 122.6L112.7 81.4L147.9 72.1L183 65.8L218.2 69.4L253.3 67.4" fill="none" pointer-events="visible" stroke="#1173a8" stroke-width="1.6" stroke-linejoin="bevel" class="zr6-cls-37"></path>
+</g>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,42.3786,129.68)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr6-cls-38"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,77.5357,122.56)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr6-cls-38"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,112.6929,81.3975)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr6-cls-38"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,147.85,72.0525)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr6-cls-38"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,183.0071,65.8225)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr6-cls-38"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,218.1643,69.3825)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="5" ecmeta_ssr_type="chart" class="zr6-cls-38"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(2.25,0,0,2.25,253.3214,67.38)" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="6" ecmeta_ssr_type="chart" class="zr6-cls-38"></path>
+<defs >
+<clipPath id="zr6-c0">
+<path d="M24 29.2l248 0l0 179.6l-248 0Z" fill="#000" class="zr6-cls-36"></path>
+</clipPath>
+</defs>
+<style ><![CDATA[
+.zr6-cls-33:hover {
+pointer-events:none;
+}
+.zr6-cls-34:hover {
+cursor:pointer;
+fill:rgba(12,67,107,1);
+}
+.zr6-cls-35:hover {
+cursor:pointer;
+fill:rgba(207,147,36,1);
+}
+.zr6-cls-36:hover {
+cursor:pointer;
+fill:rgba(0,0,0,1);
+}
+.zr6-cls-37:hover {
+cursor:pointer;
+}
+.zr6-cls-38:hover {
+cursor:pointer;
+fill:rgba(18,126,184,1);
+}
+
+]]>
+
+</style>
+</svg>

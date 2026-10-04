@@ -1,0 +1,53 @@
+<svg preserveAspectRatio="xMidYMid meet" width="329" height="230" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 329 230">
+<rect width="329" height="230" x="0" y="0" fill="none"></rect>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" y="5" transform="translate(110.7 115)" fill="#5b6875">FY26</text>
+<path d="M102 48.3A71.3 71.3 0 1 1 36.1 146.8L57.3 138A48.3 48.3 0 1 0 102 71.3Z" fill="#0b3d62" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr1-cls-7"></path>
+<path d="M36.1 146.8A71.3 71.3 0 0 1 35.5 93.8L57 102.1A48.3 48.3 0 0 0 57.3 138Z" fill="#1173a8" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr1-cls-8"></path>
+<path d="M35.5 93.8A71.3 71.3 0 0 1 71 55.4L81 76.1A48.3 48.3 0 0 0 57 102.1Z" fill="#7fb2d1" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr1-cls-9"></path>
+<path d="M71 55.4A71.3 71.3 0 0 1 102 48.3L102 71.3A48.3 48.3 0 0 0 81 76.1Z" fill="#a9c6dc" stroke="#fff" stroke-width="1.5" stroke-linejoin="round" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr1-cls-10"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" transform="translate(154.1885 154.5164)" fill="#fff">68.8%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" transform="translate(39.1938 120.2874)" fill="#fff">12.1%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" transform="translate(55.8439 77.0045)" fill="#fff">12.0%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" transform="translate(87.986 58.3813)" fill="#fff">7.2%</text>
+<path d="M-5 -5l90.9 0l0 71l-90.9 0Z" transform="translate(243.1 84.5)" fill="rgb(0,0,0)" fill-opacity="0" stroke="#b7b9be" stroke-width="0" class="zr1-cls-11"></path>
+<path d="M1.8 0L5.3 0A1.8 1.8 0 0 1 7 1.7L7 5.3A1.8 1.8 0 0 1 5.3 7L1.8 7A1.8 1.8 0 0 1 0 5.3L0 1.8A1.8 1.8 0 0 1 1.7 0Z" transform="translate(244.1 86)" fill="#0b3d62" stroke="#fff" stroke-width="2" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="round" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="legend" ecmeta_silent="true" class="zr1-cls-11"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" x="12" y="3.5" transform="translate(244.1 86)" fill="#5b6875">Domestic Ports</text>
+<path d="M-1 -1.5l80.9 0l0 10l-80.9 0Z" transform="translate(244.1 86)" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="legend" class="zr1-cls-12"></path>
+<path d="M1.8 0L5.3 0A1.8 1.8 0 0 1 7 1.7L7 5.3A1.8 1.8 0 0 1 5.3 7L1.8 7A1.8 1.8 0 0 1 0 5.3L0 1.8A1.8 1.8 0 0 1 1.7 0Z" transform="translate(244.1 103)" fill="#1173a8" stroke="#fff" stroke-width="2" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="round" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="legend" ecmeta_silent="true" class="zr1-cls-11"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" x="12" y="3.5" transform="translate(244.1 103)" fill="#5b6875">International</text>
+<path d="M-1 -1.5l68.3 0l0 10l-68.3 0Z" transform="translate(244.1 103)" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="legend" class="zr1-cls-12"></path>
+<path d="M1.8 0L5.3 0A1.8 1.8 0 0 1 7 1.7L7 5.3A1.8 1.8 0 0 1 5.3 7L1.8 7A1.8 1.8 0 0 1 0 5.3L0 1.8A1.8 1.8 0 0 1 1.7 0Z" transform="translate(244.1 120)" fill="#7fb2d1" stroke="#fff" stroke-width="2" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="round" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="legend" ecmeta_silent="true" class="zr1-cls-11"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" x="12" y="3.5" transform="translate(244.1 120)" fill="#5b6875">Logistics</text>
+<path d="M-1 -1.5l52 0l0 10l-52 0Z" transform="translate(244.1 120)" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="legend" class="zr1-cls-12"></path>
+<path d="M1.8 0L5.3 0A1.8 1.8 0 0 1 7 1.7L7 5.3A1.8 1.8 0 0 1 5.3 7L1.8 7A1.8 1.8 0 0 1 0 5.3L0 1.8A1.8 1.8 0 0 1 1.7 0Z" transform="translate(244.1 137)" fill="#a9c6dc" stroke="#fff" stroke-width="2" stroke-linecap="butt" stroke-miterlimit="10" stroke-linejoin="round" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="legend" ecmeta_silent="true" class="zr1-cls-11"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" x="12" y="3.5" transform="translate(244.1 137)" fill="#5b6875">Marine</text>
+<path d="M-1 -1.5l43.6 0l0 10l-43.6 0Z" transform="translate(244.1 137)" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="legend" class="zr1-cls-12"></path>
+<style ><![CDATA[
+.zr1-cls-7:hover {
+cursor:pointer;
+fill:rgba(12,67,107,1);
+}
+.zr1-cls-8:hover {
+cursor:pointer;
+fill:rgba(18,126,184,1);
+}
+.zr1-cls-9:hover {
+cursor:pointer;
+fill:rgba(139,195,229,1);
+}
+.zr1-cls-10:hover {
+cursor:pointer;
+fill:rgba(185,217,242,1);
+}
+.zr1-cls-11:hover {
+pointer-events:none;
+}
+.zr1-cls-12:hover {
+cursor:pointer;
+fill:rgba(0,0,0,0);
+}
+
+]]>
+
+</style>
+</svg>

@@ -1,0 +1,107 @@
+/* update.css — the only styles an update note adds on top of report.css.
+ *
+ * Load order matters: report.css, then brand.css (the company palette), then
+ * this file. Everything below is either a component the 44-page blueprint has
+ * no equivalent for (the verdict band, the falsifier status table) or a
+ * density change that lets four pages carry what would otherwise need six.
+ *
+ * All colours come from the variables report.css/brand.css already define, so
+ * an update note picks up the same company palette as its initiating note
+ * without any per-company edit here.
+ */
+
+/* ---- the verdict band -------------------------------------------------
+ * Page 1's first ink. A reader who sees only this must know the call.       */
+.verdict-band {
+  display: flex;
+  align-items: baseline;
+  gap: 4mm;
+  padding: 2.4mm 3mm;
+  border-radius: 1.2mm;
+  margin: 0 0 3.5mm;
+  color: #fff;
+  background: var(--brand);
+  border-left: 3pt solid var(--brand-2);
+}
+.verdict-band .vb-action {
+  font-size: 7.6pt; font-weight: 700; letter-spacing: .8pt;
+  text-transform: uppercase; opacity: .85;
+}
+.verdict-band .vb-rating { font-size: 16pt; font-weight: 700; line-height: 1; }
+.verdict-band .vb-tp     { font-size: 10.5pt; font-weight: 700; }
+.verdict-band .vb-up     { font-size: 9pt; margin-left: auto; opacity: .9; }
+
+/* Rating colour is a signal, not decoration — keep these three and no more. */
+.verdict-band.buy  { background: var(--pos);   border-left-color: var(--brand); }
+.verdict-band.hold { background: var(--brand-2); border-left-color: var(--brand); }
+.verdict-band.sell { background: var(--neg);   border-left-color: var(--brand); }
+
+/* ---- number-led bullets ----------------------------------------------
+ * Every "what changed" bullet opens with the figure that changed. Bolding
+ * the leading number is what makes the page skimmable in ten seconds.     */
+.lead-numbers li { font-size: 8.6pt; margin-bottom: 1.2mm; }
+.lead-numbers li b, .lead-numbers li strong { color: var(--brand); }
+
+/* ---- falsifier status table ------------------------------------------ */
+/* report.css right-aligns table columns after the first, which is right for
+   figures and wrong for prose. These two tables are prose, so left-align them
+   back — an evidence citation ragged off the right edge is unreadable. */
+table.falsifiers td { vertical-align: top; }
+table.falsifiers td, table.falsifiers th { text-align: left; }
+table.falsifiers td:nth-child(2), table.falsifiers th:nth-child(2) { text-align: center; }
+table.revisions td, table.revisions th { text-align: left; }
+table.revisions td:nth-child(2), table.revisions td:nth-child(3),
+table.revisions th:nth-child(2), table.revisions th:nth-child(3) { text-align: right; }
+.status {
+  display: inline-block; font-size: 7pt; font-weight: 700; letter-spacing: .3pt;
+  text-transform: uppercase; padding: .4mm 1.6mm; border-radius: 3mm; color: #fff;
+  white-space: nowrap;
+}
+.status.intact    { background: var(--pos); }
+.status.strained  { background: var(--accent); }
+.status.tripped   { background: var(--neg); }
+/* Unassessed must look wrong, because shipping one is wrong. */
+.status.unassessed {
+  background: repeating-linear-gradient(45deg, var(--neg), var(--neg) 2px,
+                                        #fff 2px, #fff 4px);
+  color: var(--neg); border: .6pt solid var(--neg);
+}
+
+/* ---- four-page density ------------------------------------------------
+ * An update note carries roughly a third of the whitespace of an initiating
+ * note. These are deliberate tightenings, not a different design.          */
+.page h2 { margin-top: 0; margin-bottom: 2mm; }
+.page h3 { margin-top: 3mm; margin-bottom: 1.2mm; }
+.page p  { margin-bottom: 1.6mm; }
+.page table.sm { margin: 1.5mm 0 2mm; }
+.page table.sm th, .page table.sm td { padding: .9mm 1.4mm; }
+
+/* The margin variance sentence — page 2, directly under the variance table.
+   Given prominence because on a note without a seasonal share it is the only
+   figure the quarter measures honestly. */
+.margin-line {
+  border-left: 2.2pt solid var(--brand-2);
+  background: var(--panel);
+  padding: 1.8mm 2.4mm;
+  font-size: 9pt;
+  margin: 0 0 2.5mm;
+}
+.margin-line b { color: var(--brand); }
+
+/* Variance sign colouring. Applied per cell by the writer, not automatic —
+   a red cell on a line where a miss is good news would mislead. */
+td.pos, .pos-num { color: var(--pos); font-weight: 700; }
+td.neg, .neg-num { color: var(--neg); font-weight: 700; }
+td.breach { font-weight: 700; }
+td.breach::after { content: " !"; color: var(--neg); }
+/* A figure the run-rate could not measure honestly — see variance.py's
+   seasonality note. Never let one of these read as hard evidence. */
+td.weak, .weak-num { color: var(--ink-soft); font-style: italic; }
+
+/* Charts on an update note are half-page at most; the tables carry the note. */
+.page .fig img { max-height: 62mm; }
+
+/* KPI labels are short multiplier names ("Peer median P/E"). Hyphenation
+   breaks them mid-token as "P/ E", so turn it off and let them wrap on a
+   space instead. */
+.kpi .lab { hyphens: none; }

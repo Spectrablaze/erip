@@ -1,0 +1,52 @@
+<svg preserveAspectRatio="xMidYMid meet" width="329" height="230" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 329 230">
+<rect width="329" height="230" x="0" y="0" fill="none"></rect>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="5" transform="translate(0 2)" fill="#0b3d62">Management guidance</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="5" transform="translate(263.7 2)" fill="#1173a8">Our base case</text>
+<path d="M40.8 208.5L317 208.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr11-cls-54"></path>
+<path d="M40.8 163.5L317 163.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr11-cls-54"></path>
+<path d="M40.8 119.5L317 119.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr11-cls-54"></path>
+<path d="M40.8 74.5L317 74.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr11-cls-54"></path>
+<path d="M40.8 30.5L317 30.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr11-cls-54"></path>
+<path d="M40.8 208.5L317 208.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-linecap="round" class="zr11-cls-54"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(34.8 208)" fill="#5b6875">0</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(34.8 163.5)" fill="#5b6875">3,000</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(34.8 119)" fill="#5b6875">6,000</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(34.8 74.5)" fill="#5b6875">9,000</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(34.8 30)" fill="#5b6875">12,000</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(75.325 216)" fill="#5b6875">FY27 revenue</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(144.375 216)" fill="#5b6875">FY27 EBITDA</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(213.425 216)" fill="#5b6875">FY28 revenue</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(282.475 216)" fill="#5b6875">FY28 EBITDA</text>
+<path d="M54.2 106.4L72.2 106.4A2 2 0 0 1 74.2 108.4L74.2 208L52.2 208L52.2 108.4A2 2 0 0 1 54.2 106.4Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr11-cls-55"></path>
+<path d="M123.3 163.5L141.3 163.5A2 2 0 0 1 143.3 165.5L143.3 208L121.3 208L121.3 165.5A2 2 0 0 1 123.3 163.5Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr11-cls-55"></path>
+<path d="M192.3 47.8L210.3 47.8A2 2 0 0 1 212.3 49.8L212.3 208L190.3 208L190.3 49.8A2 2 0 0 1 192.3 47.8Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr11-cls-55"></path>
+<path d="M261.4 133.8L279.4 133.8A2 2 0 0 1 281.4 135.8L281.4 208L259.4 208L259.4 135.8A2 2 0 0 1 261.4 133.8Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr11-cls-55"></path>
+<path d="M78.4 113.4L96.4 113.4A2 2 0 0 1 98.4 115.4L98.4 208L76.4 208L76.4 115.4A2 2 0 0 1 78.4 113.4Z" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr11-cls-56"></path>
+<path d="M147.5 165.3L165.5 165.3A2 2 0 0 1 167.5 167.3L167.5 208L145.5 208L145.5 167.3A2 2 0 0 1 147.5 165.3Z" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr11-cls-56"></path>
+<path d="M216.5 71.8L234.5 71.8A2 2 0 0 1 236.5 73.8L236.5 208L214.5 208L214.5 73.8A2 2 0 0 1 216.5 71.8Z" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr11-cls-56"></path>
+<path d="M285.6 140.3L303.6 140.3A2 2 0 0 1 305.6 142.3L305.6 208L283.6 208L283.6 142.3A2 2 0 0 1 285.6 140.3Z" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr11-cls-56"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="-5" transform="translate(63.225 103.3917)" fill="#5b6875">6,850</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="-5" transform="translate(132.275 160.5)" fill="#5b6875">3,000</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="-5" transform="translate(201.325 44.8)" fill="#5b6875">10,800</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="-5" transform="translate(270.375 130.8333)" fill="#5b6875">5,000</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="-5" transform="translate(87.425 110.3633)" fill="#5b6875">6,380</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="-5" transform="translate(156.475 162.3245)" fill="#5b6875">2,877</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="-5" transform="translate(225.525 68.8448)" fill="#5b6875">9,179</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="-5" transform="translate(294.575 137.3303)" fill="#5b6875">4,562</text>
+<style ><![CDATA[
+.zr11-cls-54:hover {
+pointer-events:none;
+}
+.zr11-cls-55:hover {
+cursor:pointer;
+fill:rgba(12,67,107,1);
+}
+.zr11-cls-56:hover {
+cursor:pointer;
+fill:rgba(18,126,184,1);
+}
+
+]]>
+
+</style>
+</svg>

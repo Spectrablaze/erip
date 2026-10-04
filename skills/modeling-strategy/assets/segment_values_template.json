@@ -1,0 +1,67 @@
+{
+  "_readme": [
+    "Values for the approved architecture. Written AFTER the analyst gate, with",
+    "financial-model-assumptions supplying the evidence and confidence for each",
+    "driver — this file is where those agreed values are collected so the segment",
+    "maths can be run deterministically.",
+    "",
+    "years[0] is the BASE year, then one entry per forecast year. Every driver",
+    "series starts at the base year, because the build has to reproduce the year it",
+    "can see before it forecasts years it cannot. segment_build.py checks that",
+    "reconstruction against base_revenue and REFUSES on a mismatch above 1%.",
+    "",
+    "A driver value may be a scalar (held flat) or a list, one entry per year in",
+    "years. Short lists are held flat at the last value and reported.",
+    "",
+    "Rates (utilisation, execution_rate, churn, occupancy, ...) may be given as 38",
+    "or 0.38 — both read as 38%.",
+    "",
+    "unit_scale converts the driver product into INR cr. Leave it null to have the",
+    "base year calibrate it; the implied scale is reported and flagged when it is",
+    "not a clean power of ten, because that means the drivers do not explain the",
+    "reported revenue."
+  ],
+
+  "company": "Acme Engineering Ltd",
+  "years": ["FY26", "FY27", "FY28", "FY29", "FY30", "FY31"],
+
+  "segments": {
+    "Projects": {
+      "base_revenue": 4740.0,
+      "unit_scale": null,
+      "drivers": {
+        "opening_order_book": {
+          "value": 12480.0,
+          "evidence": [{"quote": "unexecuted order book of INR 12,480 cr",
+                        "source": "context/management_discussion.md", "page": 41}]
+        },
+        "order_inflow": {
+          "value": [5900, 6400, 6900, 7300, 7700, 8100],
+          "evidence": [{"quote": "order inflow of INR 5,900 cr during the year",
+                        "source": "context/management_discussion.md", "page": 41}]
+        },
+        "execution_rate": {
+          "value": [38, 38, 37, 37, 36, 36],
+          "evidence": [{"quote": "orders typically execute over 30 to 36 months",
+                        "source": "concall/pages/page_0007.md", "page": 7}]
+        }
+      }
+    },
+
+    "Products": {
+      "base_revenue": 2900.0,
+      "unit_scale": null,
+      "drivers": {
+        "installed_capacity": {"value": [120000, 120000, 150000, 150000, 150000, 180000]},
+        "capacity_addition": {"value": [0, 0, 30000, 0, 0, 30000]},
+        "utilisation": {"value": [82, 84, 78, 84, 88, 82]},
+        "realisation": {"value": [29471, 30500, 31400, 32200, 33000, 33900]}
+      }
+    }
+  },
+
+  "unallocated": {
+    "_comment": "Optional. Inter-segment eliminations or unallocated revenue, per year, in INR cr. Same length as years.",
+    "value": [0, 0, 0, 0, 0, 0]
+  }
+}

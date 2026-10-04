@@ -1,0 +1,30 @@
+<svg preserveAspectRatio="xMidYMid meet" width="329" height="224" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 329 224">
+<rect width="329" height="224" x="0" y="0" fill="none"></rect>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="5" transform="translate(0 2)" fill="#0b3d62">IMF WEO Apr-26 (%)</text>
+<path d="M67.5 30L67.5 204" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-linecap="round" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(59.2 59)" fill="#5b6875">World</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(59.2 117)" fill="#5b6875">EMDE</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(59.2 175)" fill="#5b6875">India (FY27)</text>
+<path d="M67.2 48L162 48A2 2 0 0 1 164 50L164 68A2 2 0 0 1 162 70L67.2 70L67.2 48Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr0-cls-1"></path>
+<path d="M67.2 106L187 106A2 2 0 0 1 189 108L189 126A2 2 0 0 1 187 128L67.2 128L67.2 106Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr0-cls-1"></path>
+<path d="M67.2 164L268.2 164A2 2 0 0 1 270.2 166L270.2 184A2 2 0 0 1 268.2 186L67.2 186L67.2 164Z" fill="#bb3968" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr0-cls-2"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(166.9975 59)" fill="#5b6875">3.1</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(191.9775 117)" fill="#5b6875">3.9</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(273.1625 175)" fill="#5b6875">6.5</text>
+<style ><![CDATA[
+.zr0-cls-0:hover {
+pointer-events:none;
+}
+.zr0-cls-1:hover {
+cursor:pointer;
+fill:rgba(12,67,107,1);
+}
+.zr0-cls-2:hover {
+cursor:pointer;
+fill:rgba(205,62,114,1);
+}
+
+]]>
+
+</style>
+</svg>

@@ -1,0 +1,65 @@
+<svg preserveAspectRatio="xMidYMid meet" width="329" height="230" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 329 230">
+<rect width="329" height="230" x="0" y="0" fill="none"></rect>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="5" transform="translate(0 2)" fill="#0b3d62">Interest coverage</text>
+<path d="M20.6 208.5L305 208.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr7-cls-40"></path>
+<path d="M20.6 172.5L305 172.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr7-cls-40"></path>
+<path d="M20.6 137.5L305 137.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr7-cls-40"></path>
+<path d="M20.6 101.5L305 101.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr7-cls-40"></path>
+<path d="M20.6 65.5L305 65.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr7-cls-40"></path>
+<path d="M20.6 30.5L305 30.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr7-cls-40"></path>
+<path d="M20.6 208.5L305 208.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-linecap="round" class="zr7-cls-40"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(14.6 208)" fill="#5b6875">0x</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(14.6 172.4)" fill="#5b6875">1x</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(14.6 136.8)" fill="#5b6875">2x</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(14.6 101.2)" fill="#5b6875">3x</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(14.6 65.6)" fill="#5b6875">4x</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(14.6 30)" fill="#5b6875">5x</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(34.82 216)" fill="#5b6875">FY17</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(63.26 216)" fill="#5b6875">FY18</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(91.7 216)" fill="#5b6875">FY19</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(120.14 216)" fill="#5b6875">FY20</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(148.58 216)" fill="#5b6875">FY21</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(177.02 216)" fill="#5b6875">FY22</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(205.46 216)" fill="#5b6875">FY23</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(233.9 216)" fill="#5b6875">FY24</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(262.34 216)" fill="#5b6875">FY25</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(290.78 216)" fill="#5b6875">FY26</text>
+<g clip-path="url(#zr7-c0)">
+<path d="M34.8 72.7L63.3 72.7L91.7 72.7L120.1 129.7L148.6 104.8L177 119L205.5 94.1L233.9 54.9L262.3 30L290.8 76.3" fill="none" pointer-events="visible" stroke="#0b3d62" stroke-width="1.6" stroke-linejoin="bevel" class="zr7-cls-42"></path>
+</g>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(1.8,0,0,1.8,34.82,72.72)" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr7-cls-43"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(1.8,0,0,1.8,63.26,72.72)" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr7-cls-43"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(1.8,0,0,1.8,91.7,72.72)" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr7-cls-43"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(1.8,0,0,1.8,120.14,129.68)" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr7-cls-43"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(1.8,0,0,1.8,148.58,104.76)" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr7-cls-43"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(1.8,0,0,1.8,177.02,119)" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="5" ecmeta_ssr_type="chart" class="zr7-cls-43"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(1.8,0,0,1.8,205.46,94.08)" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="6" ecmeta_ssr_type="chart" class="zr7-cls-43"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(1.8,0,0,1.8,233.9,54.92)" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="7" ecmeta_ssr_type="chart" class="zr7-cls-43"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(1.8,0,0,1.8,262.34,30)" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="8" ecmeta_ssr_type="chart" class="zr7-cls-43"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(1.8,0,0,1.8,290.78,76.28)" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="9" ecmeta_ssr_type="chart" class="zr7-cls-43"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" y="-5" transform="translate(290.78 70.48)" fill="#0b3d62">3.7x</text>
+<defs >
+<clipPath id="zr7-c0">
+<path d="M19 29.2l287 0l0 179.6l-287 0Z" fill="#000" class="zr7-cls-41"></path>
+</clipPath>
+</defs>
+<style ><![CDATA[
+.zr7-cls-40:hover {
+pointer-events:none;
+}
+.zr7-cls-41:hover {
+cursor:pointer;
+fill:rgba(0,0,0,1);
+}
+.zr7-cls-42:hover {
+cursor:pointer;
+}
+.zr7-cls-43:hover {
+cursor:pointer;
+fill:rgba(12,67,107,1);
+}
+
+]]>
+
+</style>
+</svg>

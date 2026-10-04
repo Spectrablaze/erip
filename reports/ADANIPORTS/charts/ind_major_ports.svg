@@ -1,0 +1,28 @@
+<svg preserveAspectRatio="xMidYMid meet" width="329" height="211" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 329 211">
+<rect width="329" height="211" x="0" y="0" fill="none"></rect>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="5" transform="translate(0 2)" fill="#0b3d62">Major ports cargo (MMT)</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="5" transform="translate(278.5 2)" fill="#1173a8">+7.0% YoY</text>
+<path d="M24.8 189.5L315 189.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-linecap="round" class="zr1-cls-3"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(97.35 197)" fill="#5b6875">FY25</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(242.45 197)" fill="#5b6875">FY26</text>
+<path d="M86.4 53.1L108.4 53.1A2 2 0 0 1 110.4 55.1L110.4 189L84.4 189L84.4 55.1A2 2 0 0 1 86.4 53.1Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr1-cls-4"></path>
+<path d="M231.5 43.5L253.5 43.5A2 2 0 0 1 255.5 45.5L255.5 189L229.5 189L229.5 45.5A2 2 0 0 1 231.5 43.5Z" fill="#bb3968" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr1-cls-5"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:400;" y="-5" transform="translate(97.35 50.055)" fill="#5b6875">855</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" y="-5" transform="translate(242.45 40.488)" fill="#bb3968">915</text>
+<style ><![CDATA[
+.zr1-cls-3:hover {
+pointer-events:none;
+}
+.zr1-cls-4:hover {
+cursor:pointer;
+fill:rgba(12,67,107,1);
+}
+.zr1-cls-5:hover {
+cursor:pointer;
+fill:rgba(205,62,114,1);
+}
+
+]]>
+
+</style>
+</svg>
