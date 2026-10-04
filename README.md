@@ -139,3 +139,9 @@ are dated: they do not reflect results or events after their cover dates. The au
 position in the securities discussed.
 
 **Author:** Vivek Rathod · vivekrathod107@gmail.com
+
+---
+
+© 2026 Vivek Rathod. All rights reserved. This repository is published for viewing and evaluation. No part of the code or
+reports may be reused, modified or redistributed without written permission. For licensing or engagements:
+vivekrathod107@gmail.com
