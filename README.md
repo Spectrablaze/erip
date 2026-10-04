@@ -46,7 +46,7 @@ assumptions before any valuation is computed.
 ## How it works
 
 ```mermaid
-flowchart LR
+flowchart TD
     A[Annual report, deck,<br/>call transcript PDFs] -->|annual-report-kb| B[Page-cited<br/>knowledge base]
     S[Screener.in export] --> F[financials.json]
     B -->|modeling-strategy| G{{Analyst gate:<br/>architecture and<br/>valuation methods}}
