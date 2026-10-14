@@ -1,0 +1,8 @@
+{"JSWINFRA": {"cover_date": "1 Oct 2026", "short": "JSW Infrastructure",
+  "pdf": "https://github.com/Spectrablaze/erip/blob/main/reports/JSWINFRA/JSW%20Infrastructure%20-%20Equity%20Research%20Report.pdf",
+  "xlsx": "https://github.com/Spectrablaze/erip/raw/main/reports/JSWINFRA/JSW_Infrastructure_Ltd_ERIP_Model.xlsx",
+  "audit": "https://github.com/Spectrablaze/erip/tree/main/reports/JSWINFRA/audit"},
+ "ADANIPORTS": {"cover_date": "7 Aug 2026", "short": "Adani Ports",
+  "pdf": "https://github.com/Spectrablaze/erip/blob/main/reports/ADANIPORTS/Adani%20Ports%20-%20Equity%20Research%20Report.pdf",
+  "xlsx": "https://github.com/Spectrablaze/erip/raw/main/reports/ADANIPORTS/Adani_Ports_and_Special_Economic_Zone_Ltd_ERIP_Model.xlsx",
+  "audit": "https://github.com/Spectrablaze/erip/tree/main/reports/ADANIPORTS/audit"}}

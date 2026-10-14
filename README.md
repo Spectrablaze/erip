@@ -10,6 +10,8 @@ assumptions before any valuation is computed.
 
 > **Academic research project. Not investment advice.** See the [disclaimer](#disclaimer).
 
+**[Open the live valuation page](https://spectrablaze.github.io/erip/)**: the call for each company, and the same DCF the reports use, recomputed in your browser as you move WACC, terminal growth, the exit multiple and the scenario.
+
 ---
 
 ## Sample output
@@ -48,6 +50,9 @@ Each workbook is a working model, not a printout of one. History is data; every 
 valuation cell is a formula (about 2,000 of them), coloured blue for inputs, black for
 calculations and green for links between sheets.
 
+- **Dashboard** first: rating, target, upside, the valuation on the active scenario, value per share by method with a
+  chart, and a three-year financial summary, every cell linked into the model. Sheets print to A4 landscape, and formula
+  cells are locked (no password) so only the blue inputs can be changed by accident.
 - **Scenarios**: one cell switches between base, bull and bear. The revenue-growth, margin and
   capex paths change on the Drivers sheet, and the P&amp;L, balance sheet, cash flow, checks and
   DCF all recalculate.

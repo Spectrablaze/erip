@@ -1093,6 +1093,24 @@ box and spans first ink to last. Pair it with `reports/<T>/pdf_qa.py` for
 the document-level checks: ink density, recap-aware duplicate visuals and cross-document
 figure consistency.
 
+**No model output may be typed into the report code.** Run the typed-number gate:
+
+```bash
+python3 <skill>/scripts/number_lint.py --root reports/<T> --paths scripts/build_report.py scripts/sections
+```
+
+It reads every string literal in the build scripts and flags any number that equals a
+current model output. Those outputs are the valuation bridge, the terminal cross-check,
+scenario values, the sensitivity grid, the tornado bars and the forecast lines. A typed
+copy is right until the next re-run and then silently wrong. The August APSEZ note kept
+quoting INR 641 and a capex "swing of INR 375" after the model said otherwise. Read the
+value from the data file instead.
+
+Quantities and page references are skipped: MT, km, years, months, "p.107". Mark a
+genuine coincidence on its line with `# lint: not-model`, and say what the number is.
+Chart specs follow the same rule: build them from the data files in code, never type
+values into `charts_erip.json`.
+
 ## Phase 7 — Render, verify, deliver
 
 The pre-flight gate catches missing images, placeholder text, unlinked CSS and low page

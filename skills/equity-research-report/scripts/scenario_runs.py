@@ -117,6 +117,9 @@ def main():
             "fcff": [r["FCFF"] for r in m["dcf"]["forecast"]],
             "revenue": [r["Sales"] for r in m["dcf"]["forecast"]],
             "three_statement": os.path.relpath(os.path.join(keep, "model.json"), root),
+            # unrounded inputs to the headline, so a page or a workbook can recompute it exactly
+            "fcff_exact": json.load(open(os.path.join(keep, "model.json"), encoding="utf-8"))["bridge"]["fcff"][:len(m["dcf"]["forecast"])],
+            "timing": m["dcf"].get("timing"),
         }
         if name == "base":
             base_model = m

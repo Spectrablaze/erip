@@ -511,9 +511,123 @@ def build(root, out):
     for j in range(5):
         ws.column_dimensions[COL(2 + j)].width = 12
 
+    # ---- Dashboard: the call on one screen, every cell a link into the model -----------------------
+    from openpyxl.chart import BarChart, Reference
+    from openpyxl.chart.label import DataLabelList
+    ws = wb.create_sheet("Dashboard", 0)
+    B = Sheet(ws, proto)
+    B.title(f"{D['A1'].value.split(' - ')[0]} - Dashboard",
+            "Every figure links into the model: change an input or the scenario switch and this page follows")
+    dcf = lambda k: f"=DCF!B{row_of(k)}"
+    B.header(4, ["Value"], label="The call")
+    call = [("Rating", dcf("rating"), "@", True), ("Target price (INR)", dcf("tgt"), INR, True),
+            ("Current market price (INR)", dcf("cmp"), "#,##0.00", False),
+            ("Upside / (downside) to target", dcf("ups_t"), PCT, True),
+            ("Target basis: DCF with an exit EV/EBITDA of", dcf("mult"), MULT, False),
+            ("Active scenario", "=Scenarios!B5", "@", False)]
+    for k, (lab, f, fmt, bold) in enumerate(call):
+        B.label(5 + k, lab, 1, bold=bold)
+        c = B.put(5 + k, 2, f, "link", fmt, bold)
+        c.alignment = Alignment(horizontal="right")
+    B.header(12, ["Value"], label="Valuation, active scenario")
+    val = [("Perpetuity DCF value per share (INR)", dcf("vps"), INR), ("WACC", dcf("wacc"), "0.00%"),
+           ("Terminal growth", dcf("g"), PCT), ("Terminal value as % of EV", dcf("tv_pct"), PCT),
+           ("Enterprise value (INR Cr)", dcf("ev"), NUM), ("Equity value (INR Cr)", dcf("eq"), NUM)]
+    if "ronic" in REF:
+        val.insert(3, ("Return on new capital in perpetuity (RONIC)", dcf("ronic"), PCT))
+    for k, (lab, f, fmt) in enumerate(val):
+        B.label(13 + k, lab, 1)
+        B.put(13 + k, 2, f, "link", fmt)
+    top = 13 + len(val) + 1
+    B.header(top, ["INR / share"], label="Value per share by method")
+    meth = [(f"{c.title()} case, perpetuity DCF", f"=Scenarios!C{first + i}") for i, c in enumerate(order)]
+    meth += [("Probability-weighted, perpetuity", f"=Scenarios!D{WTD_ROW}"),
+             ("DCF at the target exit multiple", dcf("vps_x")),
+             ("DCF at the alternative exit multiple", dcf("vps_alt")),
+             ("Current market price", dcf("cmp"))]
+    for k, (lab, f) in enumerate(meth):
+        B.label(top + 1 + k, lab, 1)
+        B.put(top + 1 + k, 2, f, "link", INR)
+    m0, m1 = top + 1, top + len(meth)
+    note_r = m1 + 1
+    ws.cell(note_r, 1, "Scenario values are recorded when each case is calculated; switch Scenarios!B4 to reproduce one.").font = \
+        Font(size=8, italic=True, color="FF595959")
+
+    # financial summary to the right: last actual year and the first two forecast years
+    IS_ = R["Income Statement"]
+    cols = [last_hist, fc[0], fc[1]]
+    for j, c in enumerate(cols):
+        h = ws.cell(4, 5 + j, wb["Income Statement"].cell(4, c).value)
+        h.fill = PatternFill("solid", fgColor=proto["A4"].fill.fgColor.rgb)
+        h.font = Font(**_font(proto["A4"]))
+        h.alignment = Alignment(horizontal="right")
+    ws.cell(4, 4, "INR Cr").fill = PatternFill("solid", fgColor=proto["A4"].fill.fgColor.rgb)
+    ws.cell(4, 4).font = Font(**_font(proto["A4"]))
+    fin = [("Revenue", "Revenue", NUM), ("EBITDA", "EBITDA", NUM), ("Profit after tax", "Profit after tax", NUM),
+           ("EPS (INR)", "Earnings per share", "0.00")]
+    for k, (lab, key, fmt) in enumerate(fin):
+        ws.cell(5 + k, 4, lab).font = Font(name=proto["A6"].font.name, size=proto["A6"].font.sz)
+        for j, c in enumerate(cols):
+            B.put(5 + k, 5 + j, f"='Income Statement'!{COL(c)}{IS_[key]}", "link", fmt)
+    ws.cell(9, 4, "EBITDA margin").font = Font(name=proto["A6"].font.name, size=proto["A6"].font.sz)
+    for j in range(3):
+        B.put(9, 5 + j, f"={COL(5 + j)}6/{COL(5 + j)}5", fmt=PCT)
+
+    ch = BarChart()
+    ch.type, ch.style = "bar", 10
+    ch.title = "Value per share by method (INR)"
+    ch.y_axis.title = None
+    ch.x_axis.title = None
+    ch.legend = None
+    ch.add_data(Reference(ws, min_col=2, min_row=m0, max_row=m1), titles_from_data=False)
+    ch.set_categories(Reference(ws, min_col=1, min_row=m0, max_row=m1))
+    ch.dataLabels = DataLabelList()
+    ch.dataLabels.showVal = True
+    for k in ("showSerName", "showCatName", "showLegendKey", "showPercent", "showLeaderLines"):
+        setattr(ch.dataLabels, k, False)
+    ch.gapWidth = 60
+    ch.height, ch.width = 9.5, 16
+    ch.y_axis.majorGridlines = None
+    ch.x_axis.scaling.orientation = "maxMin"     # first method at the top
+    ch.y_axis.delete = False
+    ch.x_axis.delete = False
+    ws.add_chart(ch, "D12")
+    ws.column_dimensions["A"].width = 46
+    ws.column_dimensions["B"].width = 14
+    ws.column_dimensions["C"].width = 3
+    ws.column_dimensions["D"].width = 16
+    for j in range(3):
+        ws.column_dimensions[COL(5 + j)].width = 12
+    ws.sheet_view.showGridLines = False
+
+    # ---- print setup and protection, every sheet -------------------------------------------------
+    # Protection has no password: it stops an accidental overwrite of a formula, not a determined
+    # user (Review > Unprotect Sheet). Blue input cells stay editable.
+    for sh in wb.worksheets:
+        ps = sh.page_setup
+        ps.orientation, ps.paperSize = "landscape", sh.PAPERSIZE_A4
+        ps.fitToWidth, ps.fitToHeight = 1, 0
+        sh.sheet_properties.pageSetUpPr.fitToPage = True
+        sh.print_options.gridLines = False
+        sh.page_margins.left = sh.page_margins.right = 0.4
+        sh.page_margins.top = sh.page_margins.bottom = 0.5
+        if sh.title not in ("Dashboard", "Model info", "WACC"):
+            sh.print_title_cols = "A:A"
+            sh.print_title_rows = "1:4"
+        for row_ in sh.iter_rows():
+            for c in row_:
+                col = c.font.color.rgb if (c.font is not None and c.font.color is not None) else None
+                if isinstance(col, str) and col.upper().endswith("0000FF"):
+                    c.protection = openpyxl.styles.Protection(locked=False)
+        sh.protection.sheet = True
+        sh.protection.formatColumns = False
+        sh.protection.formatRows = False
+        sh.protection.selectLockedCells = False
+        sh.protection.selectUnlockedCells = False
+
     # ---- order, model info ---------------------------------------------------------------------
     names = wb.sheetnames
-    want = ["Model info", "Summary", "Scenarios", "Drivers", "Income Statement", "Balance Sheet", "Cash Flow",
+    want = ["Dashboard", "Model info", "Summary", "Scenarios", "Drivers", "Income Statement", "Balance Sheet", "Cash Flow",
             "Schedules", "WACC", "DCF", "Sensitivity", "Checks"]
     want = [n for n in want if n in names] + [n for n in names if n not in want]
     wb._sheets = [wb[n] for n in want]
@@ -523,6 +637,8 @@ def build(root, out):
     info.cell(r, 1, "Valuation").font = Font(bold=True)
     for k, t in enumerate([
             "- Scenarios!B4 selects the case. The switched driver rows on Drivers are green links to it.",
+            "- Dashboard shows the call; every cell links into the model. Sheets are protected without a password "
+            "so formulas are not overwritten by accident: blue input cells stay editable.",
             "- DCF discounts the free cash flow built from these statements; Sensitivity re-prices every cell.",
             "- Blue = input, black = formula, green = link to another sheet. Iterative calculation is on "
             "(interest on average debt is circular).",

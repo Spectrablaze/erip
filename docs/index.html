@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ERIP Equity Research</title>
+<meta name="description" content="Initiating-coverage research on Indian listed companies, built by an AI-assisted pipeline from company filings. Live DCF you can flex.">
+<style>
+:root{
+  --bg:#f7f7f4; --panel:#ffffff; --ink:#1b1f24; --muted:#5d6670; --line:#e3e5e8; --soft:#eef1f4;
+  --brand:#1f3864; --accent:#c0392b; --pos:#1e7d4f; --neg:#b23b2e; --bar:#7f97b8; --bar2:#1f3864; --dcf:#c9822b;
+  --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111418; --panel:#181c22; --ink:#e7eaee; --muted:#9aa4ae; --line:#2a3038; --soft:#20262e;
+    --brand:#8fb0e3; --accent:#e0705f; --pos:#5cc08c; --neg:#ec7b6c; --bar:#5b7398; --bar2:#8fb0e3; --dcf:#e0a35a;
+    --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111418; --panel:#181c22; --ink:#e7eaee; --muted:#9aa4ae; --line:#2a3038; --soft:#20262e;
+  --brand:#8fb0e3; --accent:#e0705f; --pos:#5cc08c; --neg:#ec7b6c; --bar:#5b7398; --bar2:#8fb0e3; --dcf:#e0a35a; --shadow:none;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+.num{font-variant-numeric:tabular-nums}
+a{color:var(--brand)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header{padding:40px 0 8px}
+.kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+h1{font-size:34px;line-height:1.15;margin:8px 0 10px;color:var(--brand);letter-spacing:-.01em}
+.lede{max-width:760px;color:var(--muted);font-size:16px;margin:0}
+.toplinks{margin-top:14px;display:flex;gap:16px;flex-wrap:wrap;font-size:14px}
+.tabs{display:inline-flex;background:var(--soft);border-radius:10px;padding:4px;margin:28px 0 16px;gap:4px;flex-wrap:wrap}
+.tabs button,.seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-weight:600;padding:8px 14px;border-radius:7px;cursor:pointer}
+.tabs button[aria-selected="true"],.seg button[aria-selected="true"]{background:var(--panel);color:var(--ink);box-shadow:var(--shadow)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+.call{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;overflow:hidden}
+.call>div{padding:16px 18px;border-right:1px solid var(--line)}
+.call>div:last-child{border-right:0}
+.lab{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.big{font-size:26px;font-weight:700;margin-top:2px}
+.sub{font-size:12px;color:var(--muted)}
+.rating{display:inline-block;font-size:20px;font-weight:800;letter-spacing:.04em;padding:2px 10px;border-radius:6px;color:#fff;background:var(--neg);margin-top:4px}
+.rating.BUY{background:var(--pos)} .rating.HOLD{background:#8a8f96}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 26px}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);text-decoration:none;padding:8px 14px;border-radius:8px;font-weight:600;font-size:14px}
+.btn:hover{border-color:var(--brand)}
+h2{font-size:20px;margin:34px 0 12px;color:var(--ink)}
+.grid2{display:grid;grid-template-columns:340px minmax(0,1fr);gap:18px}
+.controls{padding:18px}
+.ctl{margin-bottom:18px}
+.ctl label{display:flex;justify-content:space-between;font-size:14px;font-weight:600}
+.ctl label span{color:var(--brand)}
+input[type=range]{width:100%;accent-color:var(--brand);margin-top:8px}
+.seg{display:flex;background:var(--soft);border-radius:9px;padding:3px;gap:3px;margin-top:8px}
+.seg button{flex:1;padding:7px 6px;font-size:13px}
+.note{font-size:12px;color:var(--muted);margin-top:6px}
+.reset{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:7px;padding:6px 10px;font:inherit;font-size:13px;cursor:pointer}
+.outs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:16px}
+.out{background:var(--soft);border-radius:10px;padding:12px 14px}
+.out .big{font-size:24px}
+.chartbox{padding:6px 16px 14px}
+svg text{fill:var(--muted);font-size:11px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);padding:0 16px 12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.step{padding:14px 16px}
+.step b{display:block;color:var(--brand);font-size:13px;margin-bottom:2px}
+.step p{margin:0;font-size:14px;color:var(--muted)}
+.why{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.why .card{padding:14px 16px;font-size:14px}
+.why b{color:var(--ink)}
+footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+@media (max-width:860px){
+  .call{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .call>div{border-bottom:1px solid var(--line)}
+  .grid2{grid-template-columns:1fr}
+  .outs{grid-template-columns:1fr}
+  .steps,.why{grid-template-columns:1fr}
+  h1{font-size:27px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kicker">ERIP · Equity Research Intelligence Pipeline</div>
+  <h1>Initiating-coverage research, built from the filings up</h1>
+  <p class="lede">Each report starts from the company's own annual report, presentations and call transcripts. Every forecast
+  assumption is cited to a page, the cash flows come from a three-statement model whose balance sheet ties, and the valuation
+  below is the same DCF the report and the Excel model use. Move the sliders to see what it takes to reach the share price.</p>
+  <div class="toplinks"><a href="https://github.com/Spectrablaze/erip">Repository and pipeline</a>
+  <a href="#method">How it is built</a></div>
+</header>
+
+<div class="tabs" role="tablist" id="tabs"></div>
+
+<section id="call" class="card call" aria-live="polite"></section>
+<div class="btns" id="btns"></div>
+
+<h2>Try the valuation</h2>
+<div class="grid2">
+  <div class="card controls">
+    <div class="ctl"><div class="lab">Scenario</div><div class="seg" id="scen" role="tablist"></div>
+      <div class="note" id="scenNote"></div></div>
+    <div class="ctl"><label for="wacc">WACC <span id="waccV" class="num"></span></label>
+      <input id="wacc" type="range" step="0.001"></div>
+    <div class="ctl"><label for="g">Terminal growth <span id="gV" class="num"></span></label>
+      <input id="g" type="range" step="0.0025"></div>
+    <div class="ctl"><label for="mult">Exit EV/EBITDA <span id="multV" class="num"></span></label>
+      <input id="mult" type="range" step="0.5"></div>
+    <button class="reset" id="reset">Reset to the published case</button>
+    <div class="note" id="method1"></div>
+  </div>
+  <div class="card">
+    <div class="outs">
+      <div class="out"><div class="lab">Perpetuity DCF</div><div class="big num" id="oPerp"></div><div class="sub" id="oPerpS"></div></div>
+      <div class="out"><div class="lab">DCF at exit multiple</div><div class="big num" id="oExit"></div><div class="sub" id="oExitS"></div></div>
+      <div class="out"><div class="lab">Rating on these inputs</div><div id="oRate"></div><div class="sub" id="oRateS"></div></div>
+    </div>
+    <div class="chartbox"><svg id="ff" width="100%" height="230" role="img" aria-label="Value per share by method against the share price"></svg></div>
+    <div class="legend"><span><i style="background:var(--bar)"></i>Peer multiple bands</span>
+      <span><i style="background:var(--dcf)"></i>DCF bear to bull</span><span><i style="background:var(--bar2)"></i>Your inputs</span>
+      <span><i style="background:var(--accent)"></i>Share price</span></div>
+  </div>
+</div>
+
+<h2>Free cash flow, active scenario (INR Cr)</h2>
+<div class="card chartbox" style="padding-top:12px"><svg id="fc" width="100%" height="200" role="img" aria-label="Free cash flow by year"></svg>
+  <div class="note" id="fcNote" style="padding:0 0 4px"></div></div>
+
+<h2>What moves the value (INR per share, base case)</h2>
+<div class="card chartbox" style="padding-top:12px"><svg id="tor" width="100%" height="230" role="img" aria-label="Sensitivity tornado"></svg>
+  <div class="note">Each bar re-runs the full three-statement model with one driver flexed.</div></div>
+
+<h2 id="method">How it is built</h2>
+<div class="steps">
+  <div class="card step"><b>Knowledge base</b><p>Annual report, deck and call PDFs become page-cited markdown, tables and classified images.</p></div>
+  <div class="card step"><b>Strategy gate</b><p>Each segment's economics and the valuation methods that fit are set and approved before any number.</p></div>
+  <div class="card step"><b>Cited assumptions</b><p>Every driver carries a page reference and a confidence level, or is declared unsupported.</p></div>
+  <div class="card step"><b>Three-statement model</b><p>A linked P&amp;L, balance sheet and cash flow with a revolver; it must tie every year of every scenario.</p></div>
+  <div class="card step"><b>Valuation</b><p>FCFF DCF on those cash flows, dated to the net-debt date, with a terminal value funded at the company's own return on capital.</p></div>
+  <div class="card step"><b>Verification</b><p>Layout, type size, figure tracing and a check that no model output is typed into the prose; the Excel model is recalculated against every scenario.</p></div>
+</div>
+<div class="why" style="margin-top:12px">
+  <div class="card"><b>One DCF everywhere.</b> The report, the Excel model and this page compute the same value from the same cash flows. The Excel file is live formulas with a scenario switch, not a printout.</div>
+  <div class="card"><b>Calls are scored.</b> Each rating is logged with dated falsifiers and a review date, and update notes score it against what happened.</div>
+</div>
+
+<footer>
+  <p><b>Academic research project. Not investment advice.</b> These reports demonstrate equity research methodology. They are not
+  recommendations to buy, sell or hold any security and do not take account of any person's objectives. Figures come from company
+  filings and other public sources and are dated to each report's cover date. The author holds no position in the securities discussed.</p>
+  <p>© 2026 Vivek Rathod. All rights reserved. Values on this page are generated from the report data files.</p>
+</footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+  const D = window.ERIP;
+  const $ = id => document.getElementById(id);
+  const inr = v => "INR " + Math.round(v).toLocaleString("en-IN");
+  const pct = (v, d=1) => (v*100).toFixed(d) + "%";
+  const sgn = v => (v >= 0 ? "+" : "") + (v*100).toFixed(1) + "%";
+  let co = D[0], caseKey = "base", st = {};
+
+  // ---- the DCF, as model.py computes it ------------------------------------------------------
+  function pv(c, w){ return c.fcff.reduce((s, f, i) => s + f * (i ? 1 : c.first_year_share) / Math.pow(1 + w, c.periods[i]), 0); }
+  function tv(c, w, g){
+    return c.ronic ? c.nopat_T * (1 + g) * (1 - g / c.ronic) / (w - g) : c.fcff[c.fcff.length - 1] * (1 + g) / (w - g);
+  }
+  function eq(c, w, ev){ return (ev - c.net_debt + c.nonop) * c.roll / c.shares; }
+  const perp = (c, w, g) => eq(c, w, pv(c, w) + tv(c, w, g) / Math.pow(1 + w, c.terminal_period));
+  const exitv = (c, w, m) => eq(c, w, pv(c, w) + m * c.ebitda_T / Math.pow(1 + w, c.terminal_period));
+  const rating = (o, co) => o > co.buy_above / 100 ? "BUY" : (o < -co.sell_below / 100 ? "SELL" : "HOLD");
+  function published(co){
+    const b = co.cases.base, t = Math.round(exitv(b, b.wacc, co.house_multiple) / co.round) * co.round;
+    return {target: t, ups: t / co.cmp - 1, rating: rating(t / co.cmp - 1, co)};
+  }
+
+  // ---- tabs and the call ---------------------------------------------------------------------
+  function tabs(){
+    $("tabs").innerHTML = D.map((c, i) => `<button role="tab" aria-selected="${c === co}" data-i="${i}">${c.short || c.name}</button>`).join("");
+    $("tabs").querySelectorAll("button").forEach(b => b.onclick = () => { co = D[+b.dataset.i]; caseKey = "base"; init(); });
+  }
+  function call(){
+    const p = published(co);
+    $("call").innerHTML = `
+      <div><div class="lab">${co.ticker}</div><div style="font-weight:700;margin-top:4px">${co.name}</div><div class="sub">Cover ${co.cover_date}</div></div>
+      <div><div class="lab">Rating</div><span class="rating ${p.rating}">${p.rating}</span></div>
+      <div><div class="lab">Target price</div><div class="big num">${inr(p.target)}</div><div class="sub">DCF, ${co.house_multiple}x exit EV/EBITDA</div></div>
+      <div><div class="lab">Share price</div><div class="big num">${inr(co.cmp)}</div><div class="sub">at the cover date</div></div>
+      <div><div class="lab">To target</div><div class="big num" style="color:${p.ups < 0 ? "var(--neg)" : "var(--pos)"}">${sgn(p.ups)}</div><div class="sub">probability-weighted perpetuity ${inr(co.weighted)}</div></div>`;
+    $("btns").innerHTML = `<a class="btn" href="${co.pdf}">Read the report (PDF)</a><a class="btn" href="${co.xlsx}">Excel model, live formulas</a><a class="btn" href="${co.audit}">Audit trail</a>`;
+  }
+
+  // ---- controls -----------------------------------------------------------------------------
+  function setCase(k){
+    caseKey = k; const c = co.cases[k];
+    st = {w: c.wacc, g: c.g, m: co.house_multiple};
+    const W = $("wacc"); W.min = (c.wacc - 0.04).toFixed(3); W.max = (c.wacc + 0.04).toFixed(3); W.value = c.wacc;
+    const G = $("g"); G.min = 0; G.max = 0.07; G.value = c.g;
+    const M = $("mult"); M.min = 4; M.max = 24; M.value = co.house_multiple;
+    $("scen").querySelectorAll("button").forEach(b => b.setAttribute("aria-selected", b.dataset.k === k));
+    $("scenNote").textContent = `${k[0].toUpperCase() + k.slice(1)} case, probability ${Math.round(c.probability * 100)}%: its own three-statement run.`;
+    render();
+  }
+  function controls(){
+    const order = ["bear", "base", "bull"].filter(k => co.cases[k]);
+    $("scen").innerHTML = order.map(k => `<button data-k="${k}">${k[0].toUpperCase() + k.slice(1)}</button>`).join("");
+    $("scen").querySelectorAll("button").forEach(b => b.onclick = () => setCase(b.dataset.k));
+    ["wacc", "g", "mult"].forEach(id => $(id).oninput = () => { st = {w: +$("wacc").value, g: +$("g").value, m: +$("mult").value}; render(); });
+    $("reset").onclick = () => setCase("base");
+    const b = co.cases.base;
+    $("method1").textContent = `Cash flows discounted from the net-debt date${b.first_year_share < 1 ? ` (first year counted ${Math.round(b.first_year_share * 100)}%)` : ""}, ` +
+      `equity rolled to the cover date. Terminal value funded at a ${pct(b.ronic)} return on new capital.`;
+  }
+
+  // ---- outputs and charts -------------------------------------------------------------------
+  function render(){
+    const c = co.cases[caseKey], g = Math.min(st.g, st.w - 0.005);
+    $("waccV").textContent = pct(st.w, 2); $("gV").textContent = pct(g, 2) + (g < st.g ? " (capped)" : ""); $("multV").textContent = st.m.toFixed(1) + "x";
+    const vp = perp(c, st.w, g), vx = exitv(c, st.w, st.m), o = vx / co.cmp - 1;
+    $("oPerp").textContent = inr(vp); $("oPerpS").textContent = `${sgn(vp / co.cmp - 1)} vs the share price`;
+    $("oExit").textContent = inr(vx); $("oExitS").textContent = `${sgn(o)} vs the share price`;
+    const r = rating(o, co);
+    $("oRate").innerHTML = `<span class="rating ${r}">${r}</span>`;
+    $("oRateS").textContent = `bands: BUY above +${co.buy_above}%, SELL below -${co.sell_below}%`;
+    football(vp, vx); fcff(c); tornado();
+  }
+  function football(vp, vx){
+    const svg = $("ff"), W = svg.clientWidth || 700, L = 200, R = 24, top = 10, rowH = 34;
+    const rows = co.football.map(m => ({label: m.label, low: m.low, high: m.high, col: "var(--bar)"}));
+    const cs = co.cases;
+    rows.push({label: "DCF bear to bull (perpetuity)", low: cs.bear.value, high: cs.bull.value, col: "var(--dcf)", mid: cs.base.value});
+    rows.push({label: "Your inputs: perpetuity / exit", low: Math.min(vp, vx), high: Math.max(vp, vx), col: "var(--bar2)", pts: [vp, vx]});
+    const vals = rows.flatMap(r => [r.low, r.high]).concat([co.cmp]);
+    const hi = Math.max(...vals) * 1.08, x = v => L + (W - L - R) * Math.max(0, v) / hi;
+    svg.setAttribute("height", top + rows.length * rowH + 26);
+    let h = "";
+    rows.forEach((r, i) => {
+      const y = top + i * rowH;
+      h += `<text x="${L - 10}" y="${y + 17}" text-anchor="end">${r.label}</text>`;
+      h += `<rect x="${x(r.low)}" y="${y + 6}" width="${Math.max(3, x(r.high) - x(r.low))}" height="16" rx="3" fill="${r.col}"/>`;
+      h += `<text x="${x(r.high) + 6}" y="${y + 18}" class="num">${Math.round(r.low).toLocaleString("en-IN")}–${Math.round(r.high).toLocaleString("en-IN")}</text>`;
+    });
+    const xc = x(co.cmp), yb = top + rows.length * rowH;
+    h += `<line x1="${xc}" x2="${xc}" y1="${top}" y2="${yb}" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 3"/>`;
+    h += `<text x="${xc}" y="${yb + 16}" text-anchor="middle" style="fill:var(--accent);font-weight:700">Price ${Math.round(co.cmp).toLocaleString("en-IN")}</text>`;
+    svg.innerHTML = h;
+  }
+  function fcff(c){
+    const svg = $("fc"), W = svg.clientWidth || 700, H = 180, L = 52, B = 22, T = 10, n = c.fcff.length;
+    const mx = Math.max(...c.fcff, 0), mn = Math.min(...c.fcff, 0), y = v => T + (H - T - B) * (mx - v) / ((mx - mn) || 1);
+    const bw = (W - L - 10) / n;
+    let h = `<line x1="${L}" x2="${W - 6}" y1="${y(0)}" y2="${y(0)}" stroke="var(--line)"/>`;
+    c.fcff.forEach((f, i) => {
+      const x0 = L + i * bw + bw * 0.18, y0 = Math.min(y(0), y(f));
+      h += `<rect x="${x0}" y="${y0}" width="${bw * 0.64}" height="${Math.max(1, Math.abs(y(f) - y(0)))}" rx="2" fill="${f < 0 ? "var(--neg)" : "var(--bar2)"}"/>`;
+      h += `<text x="${x0 + bw * 0.32}" y="${H - 4}" text-anchor="middle">${co.years[i] || ""}</text>`;
+      // negative bars reach the year labels, so their value sits inside the bar, just under the axis
+      h += f < 0 ? `<text x="${x0 + bw * 0.32}" y="${y(0) + 13}" text-anchor="middle" class="num" style="fill:#fff">${Math.round(f).toLocaleString("en-IN")}</text>`
+                 : `<text x="${x0 + bw * 0.32}" y="${y(f) - 4}" text-anchor="middle" class="num">${Math.round(f).toLocaleString("en-IN")}</text>`;
+    });
+    svg.innerHTML = h;
+    const neg = c.fcff.filter(f => f < 0).length;
+    $("fcNote").textContent = neg ? `Negative while the build-out is funded (${neg} year${neg > 1 ? "s" : ""}); the value depends on the years after it.` :
+      "Positive in every forecast year.";
+  }
+  function tornado(){
+    const svg = $("tor"), W = svg.clientWidth || 700, L = 230, R = 30, T = 8, rh = 28, d = co.tornado, base = co.tornado_base;
+    const ext = Math.max(...d.flatMap(r => [Math.abs(r.low - base), Math.abs(r.high - base)])) * 1.15 || 1;
+    const cx = L + (W - L - R) / 2, sc = (W - L - R) / 2 / ext;
+    svg.setAttribute("height", T + d.length * rh + 22);
+    let h = "";
+    d.forEach((r, i) => {
+      const y = T + i * rh, a = cx + (r.low - base) * sc, b = cx + (r.high - base) * sc;
+      h += `<text x="${L - 10}" y="${y + 16}" text-anchor="end">${r.label}</text>`;
+      h += `<rect x="${Math.min(a, cx)}" y="${y + 5}" width="${Math.abs(a - cx)}" height="15" fill="var(--neg)" opacity=".75"/>`;
+      h += `<rect x="${Math.min(b, cx)}" y="${y + 5}" width="${Math.abs(b - cx)}" height="15" fill="var(--pos)" opacity=".75"/>`;
+      h += `<text x="${Math.min(a, b) - 4}" y="${y + 16}" text-anchor="end" class="num">${Math.min(r.low, r.high)}</text>`;
+      h += `<text x="${Math.max(a, b) + 4}" y="${y + 16}" class="num">${Math.max(r.low, r.high)}</text>`;
+    });
+    h += `<line x1="${cx}" x2="${cx}" y1="${T}" y2="${T + d.length * rh}" stroke="var(--ink)" stroke-width="1"/>`;
+    h += `<text x="${cx}" y="${T + d.length * rh + 16}" text-anchor="middle">base ${base}</text>`;
+    svg.innerHTML = h;
+  }
+  function init(){ tabs(); call(); controls(); setCase("base"); }
+  window.addEventListener("resize", render);
+  window.ERIP_CALC = {perp, exitv, published};
+  init();
+})();
+</script>
+</body>
+</html>

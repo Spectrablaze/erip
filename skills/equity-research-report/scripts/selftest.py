@@ -14,9 +14,11 @@ bulk. Every check writes only to a temp directory; no report folder is modified.
   5  workbook     the JSW live workbook rebuilds and, in LibreOffice, reproduces every
                   scenario's Python value with no formula errors (skipped with --quick or if
                   LibreOffice/UNO is unavailable)
-  6  package      package_skill.py output has no node_modules/__pycache__ and fits the 10 MB
+  6  typed-nums   no current model output is typed as a literal in the fixture reports' build code
+                  (number_lint.py)
+  7  package      package_skill.py output has no node_modules/__pycache__ and fits the 10 MB
                   browser-upload limit
-  7  copies       the project and public-repo copies match this one (ENGINE.md exempt: the
+  8  copies       the project and public-repo copies match this one (ENGINE.md exempt: the
                   public copy has local paths removed on purpose)
 
 Exit code 0 only if no check FAILs.
@@ -174,6 +176,22 @@ def check_workbook(reports, quick):
            + " - each equals its Python value, 0 formula errors")
 
 
+def check_number_lint(reports):
+    """No current model output may be typed into a fixture report's build code."""
+    import number_lint
+    for t in ("JSWINFRA", "ADANIPORTS"):
+        root = os.path.join(reports, t)
+        if not os.path.exists(os.path.join(root, "data", "model.json")):
+            report("typed-nums", "SKIP", f"no {t} fixture")
+            continue
+        paths = (["scripts/build_report.py", "scripts/sections"]
+                 if os.path.exists(os.path.join(root, "scripts", "build_report.py")) else ["build_report.py"])
+        hits, n = number_lint.lint(root, paths)
+        report("typed-nums", "FAIL" if hits else "PASS",
+               f"{t}: " + ("; ".join(f"{f}:{ln} {num}" for f, ln, num, _, _ in hits[:4]) if hits
+                           else f"no model output typed into {n} file(s)"))
+
+
 def check_package():
     pk = os.path.join(SKILLS, "skill-creator", "scripts", "package_skill.py")
     if not os.path.exists(pk):
@@ -225,6 +243,7 @@ def main():
     check_regression(a.reports)
     check_three_statement(a.reports)
     check_workbook(a.reports, a.quick)
+    check_number_lint(a.reports)
     check_package()
     check_copies()
     fails = [n for n, s, _ in results if s == "FAIL"]
