@@ -1259,7 +1259,7 @@ so the workbook rebuilt from rounded drivers while Python ran on full ones. Both
 precision, and the gap is 3e-11.
 
 Publish the pack beside the site: copy it to `erip/docs/validation/<T>.html` and add
-`"validation": "validation/<T>.html"` to `links.json`, which adds the button on the page.
+`"validation_pack": "validation/<T>.html"` to `links.json`, which adds the button on the page.
 The public repo's `hooks/pre-push` runs the quick self-test and every report's validation, and
 refuses the push on any failure. Install it once per clone with
 `cp hooks/pre-push .git/hooks/pre-push`.

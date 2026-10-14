@@ -232,7 +232,7 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
       <div><div class="lab">Share price</div><div class="big num">${inr(co.cmp)}</div><div class="sub">at the cover date</div></div>
       <div><div class="lab">To target</div><div class="big num" style="color:${p.ups < 0 ? "var(--neg)" : "var(--pos)"}">${sgn(p.ups)}</div><div class="sub">bear to bull perpetuity INR ${co.range.low}–${co.range.high}</div></div>`;
     $("btns").innerHTML = `<a class="btn" href="${co.pdf}">Read the report (PDF)</a><a class="btn" href="${co.xlsx}">Excel model, live formulas</a><a class="btn" href="${co.audit}">Audit trail</a>` +
-      (co.validation ? `<a class="btn" href="${co.validation}">Validation pack</a>` : "");
+      (co.validation_pack ? `<a class="btn" href="${co.validation_pack}">Validation pack</a>` : "");
   }
 
   // ---- controls -----------------------------------------------------------------------------
