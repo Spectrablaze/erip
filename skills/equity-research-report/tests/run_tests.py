@@ -17,6 +17,8 @@ that come from closed-form arithmetic, not from the engine being tested:
     8  FCFF re-derived from the rows equals the model's FCFF
   Inputs
     9  rate parsing judges a path as a whole (0.36 in a percent path is 0.36%, not 36%)
+   11  a raw Screener share count comes out in crore, the forecast's unit (a raw count made
+       historical EPS zero and the dividend per share in the target near zero)
   End to end
    10  the synthetic company's value per share matches tests/expected.json (a golden file: catches
        any change in behaviour; regenerate it deliberately with --update-golden)
@@ -226,6 +228,10 @@ def test_three_statement(ts):
     fcff = [ebit[i] * (1 - 0.25) + dep[i] - capex[i] - dnwc[i] for i in range(n)]
     check("8 FCFF re-derived from the rows", all(close(fcff[i], ts["bridge"]["fcff"][i], rel=1e-6, abs_=1e-3) for i in range(n)),
           f"Y1 {fcff[0]:.3f} vs model {ts['bridge']['fcff'][0]:.3f}")
+    # Screener gives a raw share count (1e8 here); history must come out in crore like the forecast
+    sh = v("shares")
+    check("11 share history in crore, same unit as the forecast", all(close(x, 10.0) for x in sh if x),
+          f"history {sh[0]:g} ... forecast {sh[-1]:g}")
 
 
 def test_rate_parsing():
@@ -250,9 +256,10 @@ def main():
            "fcff": [round(x, 3) for x in ts["bridge"]["fcff"]]}
     gp = os.path.join(HERE, "expected.json")
     if update or not os.path.exists(gp):
-        json.dump(got, open(gp, "w"), indent=1)
+        hist = {k: v for k, v in (json.load(open(gp)) if os.path.exists(gp) else {}).items() if k.startswith("_")}
+        json.dump({**got, **hist}, open(gp, "w"), indent=1)
         print(f"  golden file written: {got['value_per_share']} / target {got['target']} {got['rating']}")
-    exp = json.load(open(gp))
+    exp = {k: v for k, v in json.load(open(gp)).items() if not k.startswith("_")}   # _history is commentary
     check("10 end to end matches the golden file", got == exp,
           f"value {got['value_per_share']} target {got['target']} {got['rating']}" + ("" if got == exp else f" vs {exp}"))
     fails = [n for n, ok, _ in RESULTS if not ok]

@@ -339,7 +339,7 @@ def write_xlsx(path, doc, M, checks, notes):
                     cell.font = Font(bold=row.bold, size=10,
                                      color=GREEN if "!" in body else BLACK)
                 else:
-                    cell.value = round(M["fixed"].get((row.key, j), 0.0), 6)
+                    cell.value = M["fixed"].get((row.key, j), 0.0)
                     cell.font = Font(bold=row.bold, size=10, color=BLUE)
                     if row.kind == "input" and j >= nh:
                         cell.fill = inp_fill
@@ -469,12 +469,12 @@ def write_json(path, doc, M, checks, notes):
         out["rows"][row.key] = {
             "label": row.label, "sheet": row.sheet, "kind": row.kind,
             "unit": row.fmt, "note": row.note,
-            "values": [round(v, 6) for v in M["grid"][row.key]],
+            "values": list(M["grid"][row.key]),   # full precision: the workbook rebuilds from these
         }
 
     # A compact forecast bridge for the valuation layer downstream.
     def f(key):
-        return [round(M["grid"][key][j], 4) for j in range(nh, M["ncols"])]
+        return [M["grid"][key][j] for j in range(nh, M["ncols"])]
 
     out["bridge"] = {
         "periods": doc["fcst_periods"],

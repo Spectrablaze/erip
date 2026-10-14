@@ -1,6 +1,6 @@
 {
  "ticker": "JSWINFRA",
- "validated_at": "2026-10-14T22:46:49",
+ "validated_at": "2026-10-14T23:59:13",
  "status": "PASS WITH NOTES",
  "failed": [],
  "notes": [
@@ -16,8 +16,8 @@
   },
   "workbook": {
    "status": "PASS",
-   "detail": "verified 2026-10-14T18:02:28",
-   "run_at": "2026-10-14T18:02:28"
+   "detail": "verified 2026-10-14T23:53:21",
+   "run_at": "2026-10-14T23:53:21"
   },
   "citations": {
    "status": "PASS",
@@ -53,7 +53,7 @@
   },
   "stress": {
    "status": "PASS",
-   "detail": "6 cases, run 2026-10-14T22:43:48; 0 invariant violation(s); 1 case(s) breach a reference level"
+   "detail": "6 cases, run 2026-10-14T23:57:05; 0 invariant violation(s); 1 case(s) breach a reference level"
   },
   "typed_numbers": {
    "status": "PASS",
@@ -69,7 +69,7 @@
   "balance_sheet_date": "2026-06-30",
   "last_actual_period": "Mar-26",
   "forecast": "Mar-27E to Mar-36E",
-  "model_run": "2026-10-14T17:42:22"
+  "model_run": "2026-10-14T23:52:02"
  },
  "call": {
   "rating": "SELL",

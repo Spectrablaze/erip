@@ -81,6 +81,9 @@ svg text{fill:var(--muted);font-size:11px}
 .recon table{border-collapse:collapse;width:100%}
 .recon td,.recon th{padding:4px 8px;text-align:right;border-bottom:1px solid var(--line)}
 .recon th{font-size:12px;color:var(--muted);font-weight:600}
+.vb{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.vb .recon{margin:0;overflow-x:auto}
+.recon tr.tot td{font-weight:700;border-top:1px solid var(--fg)}.recon td.hl{background:var(--bar2);color:#fff;font-weight:700}
+.recon td.pub{outline:2px solid var(--accent);outline-offset:-2px}
 .recon td:first-child,.recon th:first-child{text-align:left}
 .ok{color:var(--pos);font-weight:700} .bad{color:var(--neg);font-weight:700}
 .status{padding:12px 16px;margin:-12px 0 24px;font-size:13.5px}
@@ -153,6 +156,12 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
 <div class="card chartbox" style="padding-top:12px"><svg id="fc" width="100%" height="200" role="img" aria-label="Free cash flow by year"></svg>
   <div class="note" id="fcNote" style="padding:0 0 4px"></div></div>
 
+<h2>From enterprise value to the share, and how the discount rate moves it</h2>
+<div class="grid2 vb">
+  <div class="card recon" id="bridge"></div>
+  <div class="card recon" id="grid"></div>
+</div>
+
 <h2>What moves the value (INR per share, base case)</h2>
 <div class="card chartbox" style="padding-top:12px"><svg id="tor" width="100%" height="230" role="img" aria-label="Sensitivity tornado"></svg>
   <div class="note">Each bar re-runs the full three-statement model with one driver flexed.</div></div>
@@ -222,7 +231,8 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
       <div><div class="lab">Target price</div><div class="big num">${inr(p.target)}</div><div class="sub">Perpetuity DCF, ${co.target.horizon_months}m forward</div></div>
       <div><div class="lab">Share price</div><div class="big num">${inr(co.cmp)}</div><div class="sub">at the cover date</div></div>
       <div><div class="lab">To target</div><div class="big num" style="color:${p.ups < 0 ? "var(--neg)" : "var(--pos)"}">${sgn(p.ups)}</div><div class="sub">bear to bull perpetuity INR ${co.range.low}–${co.range.high}</div></div>`;
-    $("btns").innerHTML = `<a class="btn" href="${co.pdf}">Read the report (PDF)</a><a class="btn" href="${co.xlsx}">Excel model, live formulas</a><a class="btn" href="${co.audit}">Audit trail</a>`;
+    $("btns").innerHTML = `<a class="btn" href="${co.pdf}">Read the report (PDF)</a><a class="btn" href="${co.xlsx}">Excel model, live formulas</a><a class="btn" href="${co.audit}">Audit trail</a>` +
+      (co.validation ? `<a class="btn" href="${co.validation}">Validation pack</a>` : "");
   }
 
   // ---- controls -----------------------------------------------------------------------------
@@ -260,7 +270,40 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
     const r = rating(wo, co);
     $("oRate").innerHTML = `<span class="big num" style="font-size:22px">${inr(wt)}</span> <span class="rating ${r}">${r}</span>`;
     $("oRateS").textContent = `Your inputs, same method as the published call (${sgn(wo)}). Not the published rating.`;
-    football(vp, vx); fcff(c); tornado();
+    football(vp, vx); fcff(c); tornado(); bridge(c, st.w, g); grid(c, st.w, g);
+  }
+  // the equity bridge on the published base case and on the reader's inputs, step by step
+  function steps(c, w, g){
+    const pe = pv(c, w), pt = tv(c, w, g) / Math.pow(1 + w, c.terminal_period), ev = pe + pt;
+    const L = co.claims || {}, le = L.lease_liabilities || 0, mi = L.minority_interest || 0;
+    const eb = ev - c.net_debt - le - mi + c.nonop, ev_ = eb * c.roll;
+    return {pe, pt, ev, nd: -c.net_debt, le: -le, mi: -mi, no: c.nonop, eb, rf: ev_ - eb, eq: ev_, vps: ev_ / c.shares};
+  }
+  function bridge(c, w, g){
+    const b = co.cases.base, P = steps(b, b.wacc, b.g), U = steps(c, w, g);
+    const f = v => Math.round(v).toLocaleString("en-IN"), d = v => (v >= 0.5 ? "+" : "") + f(v);
+    const rows = [["PV of explicit free cash flow", "pe"], ["PV of terminal value", "pt"], ["Enterprise value", "ev", 1],
+      [b.net_debt < 0 ? "Add: net cash" : "Less: net debt", "nd"], ["Less: lease liabilities", "le"], ["Less: minority interest", "mi"],
+      ["Add: non-operating assets", "no"], ["Equity value at the net-debt date", "eb", 1], ["Roll-forward to the cover date", "rf"],
+      ["Equity value at the cover date", "eq", 1]];
+    $("bridge").innerHTML = `<table><tr><th>INR Cr</th><th>Published base</th><th>Your inputs</th><th>Change</th></tr>` +
+      rows.filter(r => r[1] !== "no" || P.no || U.no).map(([lab, k, tot]) =>
+        `<tr class="${tot ? "tot" : ""}"><td>${lab}</td><td class="num">${f(P[k])}</td><td class="num">${f(U[k])}</td><td class="num">${d(U[k] - P[k])}</td></tr>`).join("") +
+      `<tr><td>Shares (Cr)</td><td class="num">${b.shares.toFixed(2)}</td><td class="num">${c.shares.toFixed(2)}</td><td></td></tr>` +
+      `<tr class="tot"><td>Value per share (INR)</td><td class="num">${P.vps.toFixed(2)}</td><td class="num">${U.vps.toFixed(2)}</td><td class="num">${(U.vps - P.vps >= 0 ? "+" : "") + (U.vps - P.vps).toFixed(2)}</td></tr></table>` +
+      `<div class="note">Perpetuity method. ${caseKey === "base" ? "" : `Your inputs use the ${caseKey} case cash flows. `}Terminal value is ${Math.round(U.pt / U.ev * 100)}% of enterprise value on your inputs.</div>`;
+  }
+  // value per share for WACC and terminal growth around the reader's inputs, active scenario
+  function grid(c, w, g){
+    const ws = [-0.01, -0.005, 0, 0.005, 0.01].map(x => w + x), gs = [-0.01, -0.005, 0, 0.005, 0.01].map(x => g + x);
+    const b = co.cases.base, near = (a, x) => Math.abs(a - x) < 1e-9;
+    $("grid").innerHTML = `<table><tr><th>WACC / growth</th>${gs.map(x => `<th>${pct(x)}</th>`).join("")}</tr>` +
+      ws.map(wx => `<tr><th>${pct(wx, 2)}</th>${gs.map(gx => {
+        const cls = (near(wx, w) && near(gx, g) ? "hl " : "") + (caseKey === "base" && near(wx, b.wacc) && near(gx, b.g) ? "pub" : "");
+        return `<td class="num ${cls}">${gx < wx - 0.005 ? Math.round(perp(c, wx, gx)).toLocaleString("en-IN") : "n/a"}</td>`;
+      }).join("")}</tr>`).join("") + `</table>` +
+      `<div class="note">Value per share, INR, ${caseKey} case. Filled cell: your inputs${caseKey === "base" ? "; outlined: the published case" : ""}. ` +
+      (c.ronic ? `New capital earns ${pct(c.ronic)} in perpetuity, so growth adds value only while that exceeds the WACC.` : "") + `</div>`;
   }
   function football(vp, vx){
     const svg = $("ff"), W = svg.clientWidth || 700, L = 200, R = 24, top = 10, rowH = 34;

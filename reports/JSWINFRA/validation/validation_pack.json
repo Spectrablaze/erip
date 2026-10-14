@@ -1,0 +1,55 @@
+{
+ "integrity": {
+  "blocking_checks": 27,
+  "blocking_pass": 27,
+  "tolerance_cr": 0.06448543595674926
+ },
+ "history": {
+  "screener_vs_ar_differences": 1,
+  "worst_cfo_gap_pct": 81.1
+ },
+ "excel": {
+  "numbers_compared": 189,
+  "largest_difference": 2.9103830456733704e-11,
+  "pass": true,
+  "run_at": "2026-10-14T23:53:21"
+ },
+ "valuation": {
+  "value_per_share": 115
+ },
+ "assumptions": {
+  "assumptions": 22,
+  "without_citation": [
+   "forecast_years"
+  ],
+  "accounting_scope": {
+   "N/A": 13,
+   "CONSOLIDATED": 10,
+   "UNSTATED": 8
+  },
+  "evidence_types": {
+   "DERIVED": 3,
+   "REPORTED": 16,
+   "GUIDANCE": 4,
+   "THIRD_PARTY_FORECAST": 2,
+   "MARKET": 5,
+   "ASPIRATION": 1
+  }
+ },
+ "stress": {
+  "cases": 6,
+  "invariant_violations": 0
+ },
+ "limitations": [
+  "Terminal value",
+  "Concession life",
+  "Working capital history",
+  "Historical per-share data",
+  "Debt covenants",
+  "Minority interest",
+  "Citations",
+  "Independence",
+  "Track record"
+ ],
+ "built_at": "2026-10-15T00:00:13"
+}

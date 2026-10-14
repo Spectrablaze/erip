@@ -264,6 +264,10 @@ def canonical(fin: dict, notes: list) -> tuple[list, dict]:
     v["cash"] = B("Cash & Bank", "Cash and Bank", "Cash")
     v["shares"] = B("Adjusted Equity Shares in Cr", "No. of Equity Shares",
                     "Number of Shares")
+    # Screener's "No. of Equity Shares" is a raw count; the model works in crore shares
+    # (forecast share counts and annual-report overrides are in crore). Judge the whole series.
+    if any(s and s > 1e5 for s in v["shares"]):
+        v["shares"] = [None if s is None else s / 1e7 for s in v["shares"]]
 
     other_assets = B("Other Assets")
     other_liabs = B("Other Liabilities")

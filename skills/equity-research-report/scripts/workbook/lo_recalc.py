@@ -94,7 +94,9 @@ def main():
             doc.calculateAll()
             passes += 1
             cur_ = _probe()
-            if prev is not None and abs(cur_ - prev) <= 1e-6 * max(1.0, abs(cur_)) * 1e-3:
+            # one part in 1e13 of the whole workbook: tight enough that every line, not just the
+            # headline value, settles to well under INR 0.01 Cr (the validation pack compares them)
+            if prev is not None and abs(cur_ - prev) <= 1e-13 * max(1.0, abs(cur_)):
                 break
             prev = cur_
         out = {"read": {}, "errors": [], "passes": passes}

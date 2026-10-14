@@ -744,17 +744,52 @@ def _lo(args):
     return json.loads(r.stdout.strip().splitlines()[-1])
 
 
+# Intermediate lines read back from the recalculated DCF sheet, so the validation pack can compare
+# Python and Excel line by line instead of on the final value alone. Found by label, not row number.
+LINE_LABELS = {"revenue": "Revenue", "ebitda": "EBITDA", "ebit": "EBIT", "fcff": "Free cash flow to the firm",
+               "pv_fcff": "Present value of FCFF"}
+SCALAR_LABELS = {"pv_explicit": "Sum of PV of FCFF", "terminal_value": "Terminal value  (NOPAT",
+                 "pv_terminal": "PV of terminal value", "ev": "Enterprise value",
+                 "net_debt": "Net debt at the balance-sheet date", "lease_liabilities": "Lease liabilities",
+                 "minority_interest": "Minority interest", "non_operating_assets": "Non-operating assets",
+                 "equity_balance_date": "Equity value at the balance-sheet date",
+                 "equity_valuation_date": "Equity value at the valuation date", "shares": "Shares outstanding",
+                 "wacc": "WACC", "cost_of_equity": "Cost of equity"}
+
+
+def _line_refs(raw, n):
+    import openpyxl
+    ws = openpyxl.load_workbook(raw)["DCF"]
+    rows = {}
+    for r in range(1, ws.max_row + 1):
+        lab = str(ws.cell(r, 1).value or "").strip()
+        if lab and lab not in rows and ws.cell(r, 2).value is not None:   # skip section headers
+            rows[lab] = r
+    def find(prefix):
+        hit = [r for lab, r in rows.items() if lab == prefix] or [r for lab, r in rows.items() if lab.startswith(prefix)]
+        return hit[0] if hit else None
+    cols = [openpyxl.utils.get_column_letter(2 + j) for j in range(n)]
+    lines = {k: [f"DCF!{c}{find(lab)}" for c in cols] for k, lab in LINE_LABELS.items() if find(lab)}
+    scalars = {k: f"DCF!B{find(lab)}" for k, lab in SCALAR_LABELS.items() if find(lab)}
+    return lines, scalars
+
+
 def recalc_and_verify(raw, out, info):
     """Switch through every case in LibreOffice; each must reproduce its recorded value with no
     formula errors. Then save the workbook on the base case, values cached beside the formulas."""
     rd = info["read"]
+    lines, scalars = _line_refs(raw, info["N"])
+    extra = [ref for refs in lines.values() for ref in refs] + list(scalars.values())
     report = {}
     for i, case in enumerate(info["cases"], 1):
         res = _lo([raw, "--set", f"Scenarios!B4={i}", "--read", rd["value"], "--read", rd["target"],
-                   "--read", rd["rating"], "--read", rd["diff"], "--errors"])
+                   "--read", rd["rating"], "--read", rd["diff"], "--errors"]
+                  + [a for ref in extra for a in ("--read", ref)])
         v = res["read"]
         report[case] = {"value": round(v[rd["value"]], 2), "target": v[rd["target"]], "rating": v[rd["rating"]],
-                        "diff_vs_python": v[rd["diff"]], "errors": res["errors"], "passes": res["passes"]}
+                        "diff_vs_python": v[rd["diff"]], "errors": res["errors"], "passes": res["passes"],
+                        "lines": {k: [v.get(ref) for ref in refs] for k, refs in lines.items()},
+                        "scalars": {k: v.get(ref) for k, ref in scalars.items()}}
         if res["errors"] or v[rd["diff"]] != 0:
             raise SystemExit(f"{case}: workbook does not reproduce the Python value: {report[case]}")
     _lo([raw, "--set", "Scenarios!B4=1", "--out", out])

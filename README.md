@@ -21,6 +21,12 @@ assumptions before any valuation is computed.
 | **JSW Infrastructure Ltd** (JSWINFRA) | SELL | INR 130 | INR 357.45 (1 Oct 2026) | [PDF, 22 pp](reports/JSWINFRA/JSW%20Infrastructure%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/JSWINFRA/JSW_Infrastructure_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro](reports/JSWINFRA/audit/) |
 | **Adani Ports and SEZ Ltd** (ADANIPORTS) | SELL | INR 575 | INR 1,695 (7 Aug 2026) | [PDF, 33 pp](reports/ADANIPORTS/Adani%20Ports%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/ADANIPORTS/Adani_Ports_and_Special_Economic_Zone_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro, audit book](reports/ADANIPORTS/audit/) |
 
+**[JSW Infrastructure validation pack](https://spectrablaze.github.io/erip/validation/JSWINFRA.html)**: the working
+behind the published valuation on one page, so it can be checked rather than trusted. It shows every three-statement
+check with its tolerance, history reconciled to the annual report, Python against Excel on every line, the
+enterprise-to-equity bridge, a WACC by terminal-growth grid, each assumption traced from source to value, and a list
+of known limitations.
+
 <table>
 <tr>
 <td><img src="docs/img/jswinfra_cover.png" width="380" alt="JSW Infrastructure report cover"></td>
@@ -65,7 +71,10 @@ calculations and green for links between sheets.
 - **Sensitivity**: WACC x terminal growth and WACC x exit multiple. Each cell recomputes the DCF.
 
 Before publishing, the build recalculates the workbook in LibreOffice for every scenario and
-stops unless each one reproduces the Python model's value with no formula errors.
+stops unless each one reproduces the Python model's value with no formula errors. It also reads back
+every line of the DCF (revenue, EBITDA, EBIT, free cash flow and its present value, year by year) and
+every step of the equity bridge. On JSW the largest difference from Python across 189 numbers is
+3e-11.
 
 ---
 
@@ -122,9 +131,11 @@ Every report carries a validation record, shown as a status panel on the
 A git `pre-push` hook (`hooks/pre-push`) runs the pipeline self-test and every report's validation,
 and refuses the push if anything fails.
 
-- **Evidence types**:
+- **Evidence types and accounting scope**:
   - Every piece of evidence is labelled: a reported figure, management guidance, long-range ambition, a
     third-party forecast, market data or an analyst convention.
+  - Each cited page is read for whether it comes from the consolidated or the standalone accounts, and
+    validation flags any standalone figure feeding the consolidated model.
   - Each report states which forecast drivers rest only on ambition. For Adani Ports, revenue and
     margin rest on the Ambition 2031 targets.
 - **Engine tests anyone can run** (`skills/equity-research-report/tests/run_tests.py`, run by GitHub
@@ -133,6 +144,8 @@ and refuses the push if anything fails.
   - A fully synthetic company's three statements are checked identity by identity.
   - A golden end-to-end value guards against silent changes.
   - No source documents are needed.
+- **Validation pack** (`validation_pack.py`): builds the page above from the data files alone. Only the
+  limitations list (`audit/limitations.json`) is written by hand.
 - **Track record** (`reports/price_ledger.json`, shown on the live page):
   - Each original call is marked against the NIFTY 50 from its date, in an append-only ledger.
   - Calls are scored only at their 12-month horizon; until then the marks are interim, and they

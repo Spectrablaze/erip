@@ -81,6 +81,8 @@ def validate(root, paths=None):
     ext_no_url = [r for r in cc["rows"] if r["grade"] == "EXTERNAL" and r.get("why")]
     if ext_no_url:
         notes.append(f"{len(ext_no_url)} web citation(s) without a URL")
+    if cc.get("standalone_figures"):
+        notes.append("cited from standalone accounts, check against consolidated: " + ", ".join(cc["standalone_figures"]))
     if cc.get("forward_view_on_aspiration"):
         notes.append("forward view rests on long-range ambition only: " + ", ".join(cc["forward_view_on_aspiration"]))
     if c.get("NOT_HELD"):

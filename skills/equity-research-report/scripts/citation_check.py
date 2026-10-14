@@ -257,6 +257,31 @@ def evidence_type(rec):
     return "REPORTED"
 
 
+SCOPES = ("CONSOLIDATED", "STANDALONE", "BOTH_ON_PAGE", "UNSTATED", "N/A")
+
+
+def accounting_scope(root, r, rec):
+    """Which set of accounts a cited figure comes from, read off the cited page itself.
+
+    Indian annual reports carry standalone and consolidated statements side by side; a number from
+    the wrong set is a real figure that is wrong for the model. BOTH_ON_PAGE and UNSTATED need a
+    look; an explicit "scope" on the evidence record overrides the page reading."""
+    if str(rec.get("scope") or "").upper() in SCOPES:
+        return rec["scope"].upper()
+    if r.get("type") in ("MARKET", "ANALYST", "DERIVED") or r.get("grade") in ("EXTERNAL", "NOT_HELD", "DERIVED"):
+        return "N/A"
+    where, text = str(r.get("found") or ""), ""
+    kb = re.search(r"(kb/[^\s,;]+\.md)", where)
+    pdf = re.search(r"(inputs/[^\s,;]+\.pdf) p\.(\d+)", where)
+    if kb and os.path.exists(os.path.join(root, kb.group(1))):
+        text = page_text(os.path.join(root, kb.group(1)))
+    elif pdf and os.path.exists(os.path.join(root, pdf.group(1))):
+        text = pdf_page_text(os.path.join(root, pdf.group(1)), int(pdf.group(2)))
+    t = text.lower()
+    c, s_ = "consolidated" in t, "standalone" in t
+    return "BOTH_ON_PAGE" if (c and s_) else "CONSOLIDATED" if c else "STANDALONE" if s_ else "UNSTATED"
+
+
 def run(root, strict=False):
     D = json.load(open(os.path.join(root, "decisions.json"), encoding="utf-8"))
     so_p = os.path.join(root, "data", "citation_signoffs.json")
@@ -267,6 +292,7 @@ def run(root, strict=False):
             r = check(root, rec)
             r["assumption"] = key
             r["type"] = evidence_type(rec)
+            r["scope"] = accounting_scope(root, r, rec)
             if r["grade"] in ("IMAGE", "NOT_FOUND"):
                 so = next((x for x in signoffs if x["assumption"] == key
                            and x["source_contains"] in str(rec.get("source"))), None)
@@ -298,7 +324,12 @@ def run(root, strict=False):
     types = {}
     for r in rows:
         types[r["type"]] = types.get(r["type"], 0) + 1
+    scopes = {}
+    for r in rows:
+        scopes[r["scope"]] = scopes.get(r["scope"], 0) + 1
     out = {"run_at": datetime.now().isoformat(timespec="seconds"), "records": len(rows), "counts": counts,
+           "accounting_scope": scopes,
+           "standalone_figures": sorted({r["assumption"] for r in rows if r["scope"] == "STANDALONE"}),
            "evidence_types": types, "strongest_support": support,
            "forward_support": forward,
            "forward_view_on_aspiration": sorted(k for k, t in forward.items() if t == "ASPIRATION"),
@@ -320,6 +351,9 @@ def main():
     for r in out["rows"]:
         if a.verbose or r["grade"] not in ("VERIFIED", "DERIVED"):
             print(f"  {r['grade']:12} {r['assumption']:20} {r.get('why') or r.get('found') or ''}"[:200])
+    print("accounting scope: " + ", ".join(f"{k} {v}" for k, v in sorted(out["accounting_scope"].items())))
+    if out["standalone_figures"]:
+        print("  cited from STANDALONE accounts (model is consolidated): " + ", ".join(out["standalone_figures"]))
     print("evidence types: " + ", ".join(f"{k} {v}" for k, v in sorted(out["evidence_types"].items())))
     if out["forward_view_on_aspiration"]:
         print("  forward view rests on long-range ambition only: " + ", ".join(out["forward_view_on_aspiration"]))

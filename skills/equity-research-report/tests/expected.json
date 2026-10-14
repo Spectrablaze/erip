@@ -1,6 +1,6 @@
 {
  "value_per_share": 499,
- "target": 560.0,
+ "target": 550.0,
  "rating": "BUY",
  "tv_pct_ev": 69.1,
  "fcff": [
@@ -9,5 +9,8 @@
   384.881,
   413.785,
   438.876
+ ],
+ "_history": [
+  "2026-10-15: target 560 -> 550. The share-unit fix in ingest.py made forecast shares crore instead of a raw count, so the 12-month dividend per share in the target is now about INR 9 instead of ~0. Value per share unchanged at 499."
  ]
 }

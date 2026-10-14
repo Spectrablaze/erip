@@ -1,5 +1,5 @@
 {
- "run_at": "2026-10-14T22:46:51",
+ "run_at": "2026-10-14T23:59:17",
  "records": 38,
  "counts": {
   "NUMBERS_ONLY": 16,
@@ -7,6 +7,12 @@
   "DERIVED": 4,
   "VERIFIED": 6
  },
+ "accounting_scope": {
+  "CONSOLIDATED": 14,
+  "UNSTATED": 7,
+  "N/A": 17
+ },
+ "standalone_figures": [],
  "evidence_types": {
   "ASPIRATION": 3,
   "REPORTED": 22,
@@ -60,7 +66,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.22",
    "assumption": "revenue_growth",
-   "type": "ASPIRATION"
+   "type": "ASPIRATION",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "inputs/ambition_2031.pdf deck page 33",
@@ -69,7 +76,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.33",
    "assumption": "revenue_growth",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "UNSTATED"
   },
   {
    "source": "inputs/ambition_2031.pdf deck page 33",
@@ -78,7 +86,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.33",
    "assumption": "revenue_growth",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "UNSTATED"
   },
   {
    "source": "FY26 media release",
@@ -87,7 +96,8 @@
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
    "assumption": "ebitda_margin",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "N/A"
   },
   {
    "source": "FY26 media release segment table",
@@ -96,7 +106,8 @@
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
    "assumption": "ebitda_margin",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "N/A"
   },
   {
    "source": "inputs/ambition_2031.pdf deck page 22",
@@ -105,7 +116,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.22",
    "assumption": "ebitda_margin",
-   "type": "ASPIRATION"
+   "type": "ASPIRATION",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "data/financials.json, from screener.xlsx",
@@ -114,7 +126,8 @@
    "grade": "DERIVED",
    "why": null,
    "assumption": "ebit_margin",
-   "type": "DERIVED"
+   "type": "DERIVED",
+   "scope": "N/A"
   },
   {
    "source": "inputs/ambition_2031.pdf deck page 22",
@@ -123,7 +136,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.22",
    "assumption": "capex_pct_sales",
-   "type": "ASPIRATION"
+   "type": "ASPIRATION",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "inputs/ambition_2031.pdf deck page 33",
@@ -132,7 +146,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.33",
    "assumption": "capex_pct_sales",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "UNSTATED"
   },
   {
    "source": "FY26 media release",
@@ -141,7 +156,8 @@
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
    "assumption": "capex_pct_sales",
-   "type": "GUIDANCE"
+   "type": "GUIDANCE",
+   "scope": "N/A"
   },
   {
    "source": "data/financials.json, from screener.xlsx",
@@ -150,7 +166,8 @@
    "grade": "DERIVED",
    "why": null,
    "assumption": "dep_pct_sales",
-   "type": "DERIVED"
+   "type": "DERIVED",
+   "scope": "N/A"
   },
   {
    "source": "kb/annual_report/tables/table_p0659_1.md",
@@ -159,7 +176,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0659_1.md",
    "assumption": "dso",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "kb/annual_report/tables/table_p0659_1.md",
@@ -168,7 +186,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0659_1.md",
    "assumption": "dio",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "kb/annual_report/tables/table_p0725_1.md, note 19",
@@ -177,7 +196,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0725_1.md",
    "assumption": "dpo",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "UNSTATED"
   },
   {
    "source": "kb/annual_report/sections/12_management_discussion_and_analysis.md",
@@ -186,7 +206,8 @@
    "grade": "VERIFIED",
    "found": "kb/annual_report/sections/12_management_discussion_and_analysis.md",
    "assumption": "effective_tax_rate",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "kb/annual_report/tables/table_p0739_1.md segment note",
@@ -195,7 +216,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0739_1.md",
    "assumption": "effective_tax_rate",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "UNSTATED"
   },
   {
    "source": "data/financials.json, from screener.xlsx",
@@ -204,7 +226,8 @@
    "grade": "DERIVED",
    "why": null,
    "assumption": "interest_rate",
-   "type": "DERIVED"
+   "type": "DERIVED",
+   "scope": "N/A"
   },
   {
    "source": "FY26 media release",
@@ -213,7 +236,8 @@
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
    "assumption": "interest_rate",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "N/A"
   },
   {
    "source": "kb/annual_report/pages/page_0665.md",
@@ -222,7 +246,8 @@
    "grade": "VERIFIED",
    "found": "kb/annual_report/pages/page_0665.md",
    "assumption": "terminal_growth",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "kb/annual_report/pages/page_0665.md",
@@ -231,7 +256,8 @@
    "grade": "VERIFIED",
    "found": "kb/annual_report/pages/page_0665.md",
    "assumption": "terminal_growth",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "kb/annual_report/pages/page_0665.md",
@@ -240,7 +266,8 @@
    "grade": "VERIFIED",
    "found": "kb/annual_report/pages/page_0665.md",
    "assumption": "terminal_growth",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "Trading Economics / RBI policy, 5 August 2026",
@@ -249,7 +276,8 @@
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
    "assumption": "risk_free_rate",
-   "type": "MARKET"
+   "type": "MARKET",
+   "scope": "N/A"
   },
   {
    "source": "external",
@@ -258,7 +286,8 @@
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
    "assumption": "equity_risk_premium",
-   "type": "ANALYST"
+   "type": "ANALYST",
+   "scope": "N/A"
   },
   {
    "source": "GuruFocus, NSE:ADANIPORTS beta",
@@ -267,7 +296,8 @@
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
    "assumption": "beta",
-   "type": "MARKET"
+   "type": "MARKET",
+   "scope": "N/A"
   },
   {
    "source": "TradingView, NSE:ADANIPORTS",
@@ -276,7 +306,8 @@
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
    "assumption": "beta",
-   "type": "MARKET"
+   "type": "MARKET",
+   "scope": "N/A"
   },
   {
    "source": "GuruFocus, NSE:ADANIPORTS WACC",
@@ -285,7 +316,8 @@
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
    "assumption": "beta",
-   "type": "MARKET"
+   "type": "MARKET",
+   "scope": "N/A"
   },
   {
    "source": "Alpha Spread, ADANIPORTS discount rate",
@@ -294,7 +326,8 @@
    "grade": "EXTERNAL",
    "why": "third-party source, no URL or file in the citation",
    "assumption": "beta",
-   "type": "MARKET"
+   "type": "MARKET",
+   "scope": "N/A"
   },
   {
    "source": "inputs/ambition_2031.pdf deck page 33",
@@ -303,7 +336,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.33",
    "assumption": "target_debt_weight",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "UNSTATED"
   },
   {
    "source": "kb/annual_report/tables/table_p0659_1.md",
@@ -312,7 +346,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0659_1.md",
    "assumption": "net_debt",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "FY26 media release",
@@ -321,7 +356,8 @@
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
    "assumption": "net_debt",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "N/A"
   },
   {
    "source": "inputs/shareholding.pdf, BSE filing for quarter ended 30-06-2026",
@@ -330,7 +366,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "inputs/shareholding.pdf p.3",
    "assumption": "shares_out",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "UNSTATED"
   },
   {
    "source": "kb/annual_report/tables/table_p0659_1.md",
@@ -339,7 +376,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0659_1.md",
    "assumption": "shares_out",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "inputs/screener.xlsx, Data Sheet META block",
@@ -348,7 +386,8 @@
    "grade": "VERIFIED",
    "found": "inputs/screener.xlsx",
    "assumption": "current_price",
-   "type": "MARKET"
+   "type": "MARKET",
+   "scope": "N/A"
   },
   {
    "source": "external",
@@ -357,7 +396,8 @@
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
    "assumption": "exit_multiple",
-   "type": "ANALYST"
+   "type": "ANALYST",
+   "scope": "N/A"
   },
   {
    "source": "kb/annual_report/tables/table_p0659_1.md and note 19 table_p0725_1.md",
@@ -366,7 +406,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0659_1.md, kb/annual_report/tables/table_p0725_1.md",
    "assumption": "nwc_pct_sales",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "data/model.json roiic block (Screener.in consolidated)",
@@ -375,7 +416,8 @@
    "grade": "DERIVED",
    "why": null,
    "assumption": "terminal_ronic",
-   "type": "DERIVED"
+   "type": "DERIVED",
+   "scope": "N/A"
   },
   {
    "source": "kb/annual_report/pages/page_0659.md (Consolidated Balance Sheet)",
@@ -384,7 +426,8 @@
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/pages/page_0659.md",
    "assumption": "lease_liabilities",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
   },
   {
    "source": "kb/annual_report/pages/page_0659.md (Consolidated Balance Sheet)",
@@ -393,7 +436,8 @@
    "grade": "VERIFIED",
    "found": "kb/annual_report/pages/page_0659.md",
    "assumption": "minority_interest",
-   "type": "REPORTED"
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
   }
  ]
 }

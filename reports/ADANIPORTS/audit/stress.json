@@ -1,5 +1,5 @@
 {
- "run_at": "2026-10-14T22:43:23",
+ "run_at": "2026-10-14T23:59:00",
  "thresholds": {
   "net_debt_ebitda_max": {
    "value": 2.5,

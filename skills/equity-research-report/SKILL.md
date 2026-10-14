@@ -1225,7 +1225,41 @@ by assertion.
 - typed numbers;
 - whether the standing call in the ledger equals `dcf.target`.
 
+`citation_check.py` also reads each cited page for its **accounting scope**: CONSOLIDATED,
+STANDALONE, BOTH_ON_PAGE or UNSTATED. A standalone figure feeding the consolidated model is a
+real number that is wrong for the model, and validation notes it. Set `"scope"` on an evidence
+record to override the page reading.
+
 It writes PASS, PASS WITH NOTES or FAIL. `showcase_data.py` publishes that status on the web page.
+
+**The validation pack: show the working, not just the verdict.** A reviewer cannot audit a
+PASS. Build the pack after validation:
+
+```bash
+python3 <skill>/scripts/validation_pack.py --root reports/<T>   # -> validation/validation_pack.html + .json
+```
+
+It is assembled from the data files alone:
+- every three-statement check with its tolerance and worst residual, per scenario, with the
+  reason for each failure taken from `data/exceptions.json`;
+- history reconciled to the source (annual-report overrides against Screener, reconstructed
+  against reported CFO by year);
+- Python against Excel on every line of the DCF and every step of the equity bridge. It needs
+  the line reads that `live_valuation.py --recalc` now stores in `workbook_check.json`;
+- the bridge, the WACC by terminal-growth grid and the tornado;
+- each assumption with its model value, the disclosed figure, the model's reading of it, grade,
+  evidence type, scope and value moved;
+- the stress summary;
+- `data/limitations.json`, the only hand-written part. Write it per report: each limitation,
+  whether it moves the value, and what would fix it. A pack without it says so in red.
+
+Python and Excel must agree on every line to 0.01, not only on the headline. Two traps held
+JSW at a 0.05 gap: `build_model.py` rounded driver rows to 6 decimals and the bridge to 4,
+so the workbook rebuilt from rounded drivers while Python ran on full ones. Both now write full
+precision, and the gap is 3e-11.
+
+Publish the pack beside the site: copy it to `erip/docs/validation/<T>.html` and add
+`"validation": "validation/<T>.html"` to `links.json`, which adds the button on the page.
 The public repo's `hooks/pre-push` runs the quick self-test and every report's validation, and
 refuses the push on any failure. Install it once per clone with
 `cp hooks/pre-push .git/hooks/pre-push`.
