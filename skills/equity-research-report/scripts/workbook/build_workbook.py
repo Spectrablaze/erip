@@ -18,7 +18,7 @@ from pathlib import Path
 
 try:
 	from openpyxl import Workbook
-	from openpyxl.styles import Alignment, Font, PatternFill
+	from openpyxl.styles import Border, Side, Alignment, Font, PatternFill
 	from openpyxl.formatting.rule import CellIsRule
 	from openpyxl.utils import get_column_letter
 except ImportError:
@@ -154,7 +154,17 @@ def write_data_sheet(ws, title, model, sectioned_rows, fmt_map, n_hist, ncols):
 		c.alignment = Alignment(horizontal="center")
 	rows_data = model.get("rows", {})
 	row_num = FIRST_ROW
-	for key, label, indent, kind in sectioned_rows:
+	no_gm = any("no gross margin" in str(n_).lower() for n_ in model.get("notes", []))
+	# Where gross margin was set equal to EBITDA margin, every operating cost sits in COGS and opex is zero:
+	# keep the cost line (relabelled), hide gross profit, gross margin and the empty opex line.
+	GM_KEYS = {"gross_profit", "gross_margin", "opex"}
+	for item in sectioned_rows:
+		key, label, indent, kind = item[:4]
+		spec = item[4] if len(item) > 4 else {}
+		if no_gm and (key in GM_KEYS or (key is None and "gross" in label.lower())):
+			continue
+		if no_gm and key == "cogs":
+			label = "Operating costs"
 		if key is None:
 			ws.cell(row_num, 1, (" " * indent) + label).font = Font(bold=True, size=10, color=NAVY)
 			ws.cell(row_num, 1).fill = sec_fill
@@ -162,18 +172,21 @@ def write_data_sheet(ws, title, model, sectioned_rows, fmt_map, n_hist, ncols):
 				ws.cell(row_num, 1 + j).fill = sec_fill
 			row_num += 1
 			continue
-		ws.cell(row_num, 1, (" " * indent) + label)
-		ws.cell(row_num, 1).font = Font(bold=True, size=10)
+		is_total = bool(spec.get("total"))
+		ws.cell(row_num, 1, label)
+		ws.cell(row_num, 1).font = Font(bold=is_total, size=10)
 		ws.cell(row_num, 1).alignment = Alignment(indent=indent)
 		row_data = rows_data.get(key, {})
-		values = row_data.get("values", [])
-		fmt = fmt_map.get(key, "#,##0.00")
+		values = spec.get("values", row_data.get("values", []))
+		blank = spec.get("blank", set())
+		fmt = spec.get("fmt", fmt_map.get(key, "#,##0.00"))
 		is_input = kind == "input"
 		is_chk = kind == "chk"
 		for j in range(ncols):
 			v = values[j] if j < len(values) else None
-			if v is None:
-				v = 0.0
+			# A rate with no prior period (first-year growth) arrives as -1.0: show it blank, not -100%.
+			if (key in ("rev_growth",) and j == 0) or j in blank:
+				v = None
 			fill = None
 			if j >= n_hist:
 				fill = fcst_fill
@@ -181,61 +194,53 @@ def write_data_sheet(ws, title, model, sectioned_rows, fmt_map, n_hist, ncols):
 				fill = inp_fill
 			if is_chk:
 				fill = red_fill
-			c = ws.cell(row_num, DATA_COL0 + j, round(float(v), 6))
+			c = ws.cell(row_num, DATA_COL0 + j, None if v is None else round(float(v), 6))
 			c.number_format = fmt
-			c.font = Font(bold=True, size=10, color="FF0000FF" if (is_input and j >= n_hist) else BLACK)
+			c.font = Font(size=10, bold=is_total, color="FF0000FF" if (is_input and j >= n_hist) else BLACK)
+			if is_total:
+				c.border = Border(top=Side(style="thin", color="FF7F7F7F"))
 			if fill:
 				c.fill = fill
-			row_num += 1
+		row_num += 1      # one row per line item: this sat inside the period loop and staircased every sheet
 	ws.column_dimensions["A"].width = 44
 	for j in range(ncols):
 		ws.column_dimensions[col_letter(DATA_COL0 + j)].width = 14
 	ws.freeze_panes = ws.cell(FIRST_ROW, DATA_COL0)
 
 def write_checks(ws, model, n_hist):
+	"""One row per integrity check: status first, then what the number is. A value of 0 on an identity
+	check means it ties; for a floor check (net block, equity) the worst value is the lowest seen."""
 	ws.sheet_view.showGridLines = False
 	ws.cell(1, 1, "Integrity Checks")
 	ws["A1"].font = Font(bold=True, size=14, color=NAVY)
-	cols = model["periods"]["all"]
-	ncols = len(cols)
-	ws.cell(3, 1, "Actuals")
-	ws.cell(3, 1).font = Font(bold=True, color=HDR_FONT, size=10)
-	ws.cell(3, 1).fill = hdr_fill
-	ws.cell(3, 1).alignment = Alignment(horizontal="center")
-	for j, p in enumerate(cols):
-		c = ws.cell(3, DATA_COL0 + j, p)
+	items = model.get("checks", {}).get("items", [])
+	n_block = sum(1 for it in items if not it.get("ok", True) and it.get("severity") != "advisory")
+	ws.cell(2, 1, f"{len(items)} checks: {n_block} blocking failure(s); advisory flags are explained, not errors."
+	        ).font = Font(italic=True, size=10)
+	hdr = ["Check", "Status", "Severity", "Worst value", "Period", "What it tests"]
+	for j, h in enumerate(hdr):
+		c = ws.cell(4, 1 + j, h)
 		c.font = Font(bold=True, color=HDR_FONT, size=10)
 		c.fill = hdr_fill
-		c.alignment = Alignment(horizontal="center")
-	chk_labels = {
-		"chk_balance": "Balance sheet ties (forecast)",
-		"hist_balance": "Historical balance sheet ties",
-		"chk_reserves": "Reserves identity (forecast)",
-		"chk_fa_roll": "Fixed asset roll (forecast)",
-		"chk_fa_roll_hist": "Fixed asset roll (history)",
-		"chk_reserves_hist": "Reserves moved (history)",
-		"chk_min_cash": "Cash >= minimum balance",
-		"chk_revolver_pos": "Revolver non-negative",
-		"chk_nb_pos": "Net block non-negative",
-		"chk_equity_pos": "Equity non-negative",
-		"cfo_reconstruction": "CFO reconstruction gap",
-	}
-	row_num = FIRST_ROW
-	chk_map = {it["check"]: it for it in model.get("checks", {}).get("items", [])}
-	for key, label in chk_labels.items():
-		ws.cell(row_num, 1, label)
-		ws.cell(row_num, 1).font = Font(bold=True, size=10)
-		ws.cell(row_num, 1).alignment = Alignment(indent=1)
-		chk_item = chk_map.get(key)
-		if chk_item:
-			c = ws.cell(row_num, DATA_COL0, chk_item.get("worst", ""))
-			c.number_format = "#,##0.000"
-			ok = chk_item.get("ok", False)
-			c.font = Font(bold=True, size=10, color=BLACK if ok else "FFC00000")
-		row_num += 1
-	ws.column_dimensions["A"].width = 40
-	for j in range(ncols):
-		ws.column_dimensions[col_letter(DATA_COL0 + j)].width = 14
+	r = 5
+	for it in items:
+		ok, sev = it.get("ok", True), it.get("severity", "blocking")
+		status = "PASS" if ok else ("ADVISORY" if sev == "advisory" else "FAIL")
+		ws.cell(r, 1, it.get("label", it.get("check"))).font = Font(size=10)
+		c = ws.cell(r, 2, status)
+		c.font = Font(bold=True, size=10, color="FF008000" if ok else ("FFB26B00" if sev == "advisory" else "FFC00000"))
+		ws.cell(r, 3, sev).font = Font(size=10)
+		v = it.get("worst")
+		c = ws.cell(r, 4, v if isinstance(v, (int, float)) else None)
+		c.number_format = "#,##0.00"
+		ws.cell(r, 5, it.get("period")).font = Font(size=10)
+		c = ws.cell(r, 6, it.get("detail", ""))
+		c.font = Font(size=9, italic=True)
+		c.alignment = Alignment(wrap_text=True, vertical="top")
+		r += 1
+	for col, wd in zip("ABCDEF", (52, 11, 11, 13, 10, 70)):
+		ws.column_dimensions[col].width = wd
+	ws.freeze_panes = "A5"
 
 def write_summary(ws, model, n_hist):
 	ws.sheet_view.showGridLines = False
@@ -259,11 +264,11 @@ def write_summary(ws, model, n_hist):
 		("ebitda_margin", "EBITDA margin", "0.0%"),
 		("ebit", "EBIT", "#,##0.00"),
 		("pat", "Profit after tax", "#,##0.00"),
-		("eps", "EPS (INR)", "#,##0.00"),
-		("s_fcff", "FCFF", "#,##0.00"),
-		("s_net_debt", "Net debt", "#,##0.00"),
+		("_s_eps", "EPS (INR)", "#,##0.00"),
+		("_s_fcff", "FCFF (history: reported CFO less capex)", "#,##0.00"),
+		("_s_nd", "Net debt", "#,##0.00"),
 		("debt_total", "Total debt", "#,##0.00"),
-		("cash_close", "Cash (closing)", "#,##0.00"),
+		("_s_cash", "Cash and bank", "#,##0.00"),
 	]
 	row_num = FIRST_ROW
 	for key, label, fmt in summary_items:
@@ -272,12 +277,12 @@ def write_summary(ws, model, n_hist):
 		row_data = rows_data.get(key, {})
 		values = row_data.get("values", [])
 		for j in range(ncols):
-			v = values[j] if j < len(values) else 0.0
-			c = ws.cell(row_num, DATA_COL0 + j, round(float(v), 6))
+			v = values[j] if j < len(values) else None
+			c = ws.cell(row_num, DATA_COL0 + j, None if v is None else round(float(v), 6))
 			c.number_format = fmt
 			if j >= n_hist:
 				c.fill = fcst_fill
-			row_num += 1
+		row_num += 1
 	ws.column_dimensions["A"].width = 30
 	for j in range(ncols):
 		ws.column_dimensions[col_letter(DATA_COL0 + j)].width = 14
@@ -449,44 +454,39 @@ def write_valuation(ws, model, assumptions, dcf_model=None):
 		ws.column_dimensions[col_letter(3 + j)].width = 11
 
 
-def write_sensitivity(ws, assumptions):
+def write_sensitivity(ws, assumptions, dcf_model=None):
+	"""WACC x terminal-growth grid of equity value per share, from model.py's output (--dcf)."""
 	ws.sheet_view.showGridLines = False
 	ws.cell(1, 1, "Sensitivity - Equity Value per Share (INR)")
 	ws["A1"].font = Font(bold=True, size=14, color=NAVY)
-	sens = assumptions.get("dcf", {}).get("sensitivity", {})
-	if not sens:
-		ws.cell(3, 1, "No sensitivity data available")
-		ws.column_dimensions["A"].width = 20
+	sens = ((dcf_model or {}).get("dcf") or {}).get("sensitivity") or assumptions.get("dcf", {}).get("sensitivity", {})
+	wacc_vals, tg_vals, grid = sens.get("wacc", []), sens.get("terminal_growth", []), sens.get("grid", [])
+	if not (wacc_vals and tg_vals and grid):
+		ws.cell(3, 1, "No sensitivity grid: pass --dcf data/model.json (model.py output)")
+		ws.column_dimensions["A"].width = 60
 		return
-	wacc_vals = sens.get("wacc", [])
-	tg_vals = sens.get("terminal_growth", [])
-	grid = sens.get("grid", [])
-	if not wacc_vals or not tg_vals or not grid:
-		ws.cell(3, 1, "Incomplete sensitivity data")
-		ws.column_dimensions["A"].width = 20
-		return
-	ws.cell(3, 1, "WACC (rows) / Terminal growth (cols)").font = Font(bold=True, size=10)
-	row_num = 4
-	ws.cell(row_num, 1, "").font = Font(bold=True)
+	br = ((dcf_model or {}).get("dcf") or {}).get("bridge", {})
+	base, cmp_ = br.get("Intrinsic value per share (INR)"), br.get("Current market price (INR)")
+	ws.cell(2, 1, f"Base case INR {base} vs market price INR {cmp_}" if base else "").font = Font(italic=True, size=10)
+	c = ws.cell(4, 1, "WACC x g")
+	c.font = Font(bold=True, color=HDR_FONT, size=10)
+	c.fill = hdr_fill
 	for j, tg in enumerate(tg_vals):
-		c = ws.cell(row_num, 2 + j, tg)
+		c = ws.cell(4, 2 + j, tg)
 		c.font = Font(bold=True, size=10, color=HDR_FONT)
 		c.fill = hdr_fill
 		c.alignment = Alignment(horizontal="center")
-		row_num += 1
-	for i, w in enumerate(wacc_vals):
-		ws.cell(row_num, 1, w).font = Font(bold=True, size=10)
-		ws.cell(row_num, 1).alignment = Alignment(horizontal="right")
-		row_vals = grid[i] if i < len(grid) else []
-		for j, v in enumerate(row_vals):
-			c = ws.cell(row_num, 2 + j, v)
+	for i, wv in enumerate(wacc_vals):
+		ws.cell(5 + i, 1, wv).font = Font(bold=True, size=10)
+		for j, v in enumerate(grid[i] if i < len(grid) else []):
+			c = ws.cell(5 + i, 2 + j, v)
 			c.number_format = "#,##0"
-			c.font = Font(size=10)
 			c.alignment = Alignment(horizontal="center")
-		row_num += 1
-	ws.column_dimensions["A"].width = 16
+			c.font = Font(size=10, bold=(v == base))
+	ws.column_dimensions["A"].width = 14
 	for j in range(len(tg_vals)):
-		ws.column_dimensions[col_letter(2 + j)].width = 14
+		ws.column_dimensions[col_letter(2 + j)].width = 12
+
 
 def build_workbook(model_path, assumptions_path, out_dir, filename=None, dcf_path=None):
 	dcf_model = json.load(open(dcf_path, encoding="utf-8")) if dcf_path else None
@@ -517,6 +517,19 @@ def build_workbook(model_path, assumptions_path, out_dir, filename=None, dcf_pat
 	notes = model.get("notes", [])
 	rows_data = model.get("rows", {})
 	write_info(wb["Model info"], model, checks, recon, notes)
+
+	# ---- presentation helpers: what a reader should see, without changing the model's numbers
+	V = lambda k: list(rows_data.get(k, {}).get("values", [None] * ncols)) + [None] * ncols
+	H = set(range(n_hist))
+	no_gm = any("no gross margin" in str(n_).lower() for n_ in notes)
+	hist_zero = lambda k: {j for j in range(n_hist) if not V(k)[j]}
+	DRV_SPEC = {
+		"rev_growth": {"blank": {0}}, "debt_growth": {"blank": {0}},
+		"capex_pct_sales": {"blank": {0}}, "dep_pct_nb": {"blank": {0}},
+		"interest_income_rate": {"blank": H}, "term_debt_repay": {"blank": H},
+		"equity_issued": {"blank": H}, "min_cash": {"blank": H},
+		"dpo": {"blank": hist_zero("dpo")},
+	}
 
 	# Drivers sheet
 	driver_keys = [
@@ -552,33 +565,38 @@ def build_workbook(model_path, assumptions_path, out_dir, filename=None, dcf_pat
 		"payout_ratio": "0.00%", "min_cash": "#,##0.00",
 		"other_ca_pct": "0.00%", "other_liab_pct": "0.00%",
 	}
+	driver_keys = [(k, l, i, kd, DRV_SPEC.get(k, {})) for k, l, i, kd in driver_keys]
 	write_data_sheet(wb["Drivers"], company + " - Drivers",
 		model, driver_keys, driver_fmts, n_hist, ncols)
 
 	# Income Statement
-	is_items = [
-		(None, "INCOME STATEMENT", 0, "head"),
-		("revenue", "Revenue", 0, "actual"),
-		("cogs", "Cost of goods sold", 0, "actual"),
-		(None, "Gross profit", 1, "head"),
-		("gross_profit", "Gross profit", 1, "calc"),
-		(None, "Operating expenses", 1, "head"),
-		("opex", "Operating expenses", 1, "calc"),
-		(None, "EBITDA", 1, "head"),
-		("ebitda", "EBITDA", 1, "actual"),
-		("dep_charge", "Depreciation and amortisation", 1, "actual"),
-		(None, "EBIT", 1, "head"),
-		("ebit", "EBIT", 1, "calc"),
+	_rev, _eb = V("revenue"), V("ebitda")
+	_opc = [(r - e) if None not in (r, e) else None for r, e in zip(_rev[:ncols], _eb[:ncols])]
+	_ebm = [(e / r) if (r and e is not None) else None for r, e in zip(_rev[:ncols], _eb[:ncols])]
+	is_items = [(None, "INCOME STATEMENT", 0, "head"), ("revenue", "Revenue", 0, "actual")]
+	if no_gm:
+		is_items.append(("_opcost", "Operating costs (revenue less EBITDA)", 0, "calc", {"values": _opc}))
+	else:
+		is_items += [("cogs", "Cost of goods sold", 0, "actual"),
+		             ("gross_profit", "Gross profit", 0, "calc", {"total": True}),
+		             ("opex", "Operating expenses", 0, "calc")]
+	is_items += [
+		("ebitda", "EBITDA", 0, "actual", {"total": True}),
+		("_ebm", "EBITDA margin", 1, "calc", {"values": _ebm, "fmt": "0.0%"}),
+		("dep_charge", "Depreciation and amortisation", 0, "actual"),
+		("ebit", "EBIT", 0, "calc", {"total": True}),
 		("other_income", "Other income", 0, "actual"),
 		("interest_expense", "Interest expense", 0, "actual"),
-		("exceptional", "Exceptional items", 0, "actual"),
-		(None, "Profit before tax", 0, "head"),
-		("pbt", "Profit before tax", 0, "actual"),
-		("tax", "Tax", 0, "actual"),
-		("pat", "Profit after tax", 0, "actual"),
-		("eps", "Earnings per share (INR)", 0, "calc"),
 	]
-	is_fmts = {k: "#,##0.00" for k, _, _, _ in is_items if k}
+	if any(V("exceptional")[:ncols]):
+		is_items.append(("exceptional", "Exceptional items", 0, "actual"))
+	is_items += [
+		("pbt", "Profit before tax", 0, "actual", {"total": True}),
+		("tax", "Tax", 0, "actual"),
+		("pat", "Profit after tax", 0, "actual", {"total": True}),
+		("eps", "Earnings per share (INR)", 0, "calc", {"blank": {j for j in range(n_hist) if abs(V("eps")[j] or 0) < 0.01}}),
+	]
+	is_fmts = {it[0]: "#,##0.00" for it in is_items if it[0]}
 	write_data_sheet(wb["Income Statement"], company + " - Income Statement",
 		model, is_items, is_fmts, n_hist, ncols)
 
@@ -618,51 +636,59 @@ def build_workbook(model_path, assumptions_path, out_dir, filename=None, dcf_pat
 		("term_debt", "Term borrowings", 0, "actual"),
 		("revolver", "Revolver / short-term plug", 0, "actual"),
 		("total_debt", "Total debt", 1, "calc"),
-		("payables", "Trade payables", 0, "actual"),
+		("payables", "Trade payables", 0, "actual", {"blank": hist_zero("payables")}),
 		("other_liab", "Other liabilities", 0, "actual"),
 		("total_liabilities", "Total liabilities", 1, "calc"),
 		("total_liab_eq", "Total liabilities and equity", 0, "calc"),
 	]
-	bs_fmts = {k: "#,##0.00" for k, _, _, _ in bs_items if k}
+	bs_fmts = {it[0]: "#,##0.00" for it in bs_items if it[0]}
 	write_data_sheet(wb["Balance Sheet"], company + " - Balance Sheet",
 		model, bs_items, bs_fmts, n_hist, ncols)
 	model["rows"] = old_rows
 
 	# Cash Flow
+	_rep = lambda mk, rk: [(V(rk)[j] if j < n_hist else V(mk)[j]) for j in range(ncols)]
+	_cfo, _cfi, _cff = _rep("cfo", "rep_cfo"), _rep("cfi", "rep_cfi"), _rep("cff", "rep_cff")
+	_net = [(None if None in (a_, b_, c_) else a_ + b_ + c_) if j < n_hist else V("net_change_cash")[j]
+	        for j, (a_, b_, c_) in enumerate(zip(_cfo, _cfi, _cff))]
+	FH = {"blank": H}
 	cf_items = [
 		(None, "CASH FROM OPERATING ACTIVITIES", 0, "head"),
-		("cf_pat", "Profit after tax", 0, "calc"),
-		("cf_dep", "Depreciation and amortisation", 0, "calc"),
-		("cf_wc", "(Increase)/decrease in net operating assets", 0, "calc"),
-		("cfo", "Cash from operations", 0, "calc"),
+		("cf_pat", "Profit after tax", 1, "calc", FH),
+		("cf_dep", "Depreciation and amortisation", 1, "calc", FH),
+		("cf_wc", "(Increase)/decrease in net operating assets", 1, "calc", FH),
+		("cfo", "Cash from operations", 0, "calc", {"values": _cfo, "total": True}),
 		(None, "CASH FROM INVESTING ACTIVITIES", 0, "head"),
-		("cf_capex", "Capital expenditure", 0, "calc"),
-		("cf_invest", "Investments", 0, "calc"),
-		("cfi", "Cash from investing", 0, "calc"),
+		("cf_capex", "Capital expenditure", 1, "calc", FH),
+		("cf_invest", "Investments", 1, "calc", FH),
+		("cfi", "Cash from investing", 0, "calc", {"values": _cfi, "total": True}),
 		(None, "CASH FROM FINANCING ACTIVITIES", 0, "head"),
-		("cf_debt", "Term debt drawn/(repaid)", 0, "calc"),
-		("cf_revolver", "Revolver drawn/(repaid)", 0, "calc"),
-		("cf_div", "Dividends paid", 0, "calc"),
-		("cf_equity", "Equity issued", 0, "calc"),
-		("cff", "Cash from financing", 0, "calc"),
+		("cf_debt", "Term debt drawn/(repaid)", 1, "calc", FH),
+		("cf_revolver", "Revolver drawn/(repaid)", 1, "calc", FH),
+		("cf_div", "Dividends paid", 1, "calc", FH),
+		("cf_equity", "Equity issued", 1, "calc", FH),
+		("cff", "Cash from financing", 0, "calc", {"values": _cff, "total": True}),
 		(None, "NET CHANGE IN CASH", 0, "head"),
-		("net_change_cash", "Net change in cash", 0, "calc"),
-		("cash_open", "Opening cash", 0, "calc"),
-		("cash_close", "Closing cash", 0, "calc"),
+		("net_change_cash", "Net change in cash", 0, "calc", {"values": _net, "total": True}),
+		("cash_open", "Opening cash", 1, "calc", FH),
+		("cash_close", "Closing cash", 1, "calc", FH),
 	]
-	cf_fmts = {k: "#,##0.00" for k, _, _, _ in cf_items if k}
-	write_data_sheet(wb["Cash Flow"], company + " - Cash Flow",
+	cf_fmts = {it[0]: "#,##0.00" for it in cf_items if it[0]}
+	write_data_sheet(wb["Cash Flow"], company + " - Cash Flow (history: reported totals; line detail is modelled for forecast years)",
 		model, cf_items, cf_fmts, n_hist, ncols)
 
 	# Schedules
+	_nb = V("net_block")
+	_nbo = [(_nb[j - 1] if j else None) if j < n_hist else V("nb_open")[j] for j in range(ncols)]
+	_nbc = [_nb[j] if j < n_hist else V("nb_close")[j] for j in range(ncols)]
 	sched_items = [
-		("nb_open", "Opening net block", 0, "calc"),
-		("capex", "Capital expenditure", 0, "actual"),
+		("nb_open", "Opening net block", 0, "calc", {"values": _nbo}),
+		("capex", "Capital expenditure", 0, "actual", {"blank": {0}}),
 		("sch_dep", "Depreciation charge", 0, "calc"),
-		("nb_close", "Closing net block", 0, "calc"),
+		("nb_close", "Closing net block", 0, "calc", {"values": _nbc, "total": True}),
 		(None, "Net operating assets", 0, "head"),
 		("nwc", "Net operating assets", 0, "calc"),
-		("d_nwc", "Change in net operating assets", 0, "calc"),
+		("d_nwc", "Change in net operating assets", 0, "calc", {"blank": {0}}),
 		("wc_days", "Net operating assets (days)", 0, "calc"),
 	]
 	sched_fmts = {"nb_open": "#,##0.00", "capex": "#,##0.00",
@@ -672,17 +698,20 @@ def build_workbook(model_path, assumptions_path, out_dir, filename=None, dcf_pat
 		model, sched_items, sched_fmts, n_hist, ncols)
 
 	write_checks(wb["Checks"], model, n_hist)
-	chk_ws = wb["Checks"]
-	first_row = FIRST_ROW
-	last_row = first_row + 11
-	rng = col_letter(DATA_COL0) + str(first_row) + ":" + col_letter(DATA_COL0) + str(last_row)
-	chk_ws.conditional_formatting.add(rng, CellIsRule(
-		operator="notBetween", formula=["-0.01", "0.01"], fill=red_fill))
-
+	# Summary history from reported figures; the model's reconstructed history has no opening balances
+	_cash = V("cash")
+	_dbt = V("debt_total")
+	_capx = V("capex")
+	_rs = model["rows"]
+	_rs["_s_cash"] = {"values": _cash[:ncols]}
+	_rs["_s_nd"] = {"values": [(d - c) if None not in (d, c) else None for d, c in zip(_dbt[:ncols], _cash[:ncols])]}
+	_rs["_s_fcff"] = {"values": [((V("rep_cfo")[j] or 0) - (_capx[j] or 0)) if (j < n_hist and j > 0) else
+	                             (None if j < n_hist else V("s_fcff")[j]) for j in range(ncols)]}
+	_rs["_s_eps"] = {"values": [(None if (j < n_hist and abs(V("eps")[j] or 0) < 0.01) else V("eps")[j]) for j in range(ncols)]}
 	write_summary(wb["Summary"], model, n_hist)
 	write_scenarios(wb["Scenarios"], model, assumptions, n_hist, dcf_model)
 	write_valuation(wb["Valuation"], model, assumptions, dcf_model)
-	write_sensitivity(wb["Sensitivity"], assumptions)
+	write_sensitivity(wb["Sensitivity"], assumptions, dcf_model)
 
 	try:
 		wb.calculation.iterate = True
