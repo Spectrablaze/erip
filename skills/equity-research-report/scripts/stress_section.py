@@ -24,13 +24,21 @@ def stress_page(ST, CMP, h, title="Stress tests: what breaks the balance sheet, 
                                     f"{c['peak_nd_ebitda']:.2f}x ({c['peak_nd_ebitda_year']})" + (" !" if hit else ""),
                                     f"{c['min_interest_cover']:.1f}x", n(c["peak_revolver"])],
                         cls="total" if hit else ""))
+    if base["peak_revolver"] > 0:
+        fund = (f"<p><b>The base case is not fully funded.</b> On our capex and dividend path the model draws "
+                f"INR {base['peak_revolver']:,} Cr on its revolver, peaking in {base.get('peak_revolver_year', 'the build-out')}: "
+                "borrowing beyond the term debt we model. The company has not disclosed how it will fund this, so the "
+                "valuation assumes it can be raised at our cost of debt.</p>")
+    else:
+        fund = ("<p><b>The base case is fully funded</b> from operating cash flow, cash on hand and the term debt we model: "
+                "the revolver is never drawn.</p>")
     left = (
         "<h3>How the tests work</h3>"
         "<p>Each stress rebuilds the linked three-statement model, so working capital, the revolver and interest respond to the "
         "shock instead of being estimated beside it. Leverage is measured against "
         f"<b>{nd_t.get('value', 'n/a')}x net debt/EBITDA</b> ({nd_t.get('kind', '')}) and interest cover against "
         f"<b>{ic_t.get('value', 'n/a')}x EBITDA/interest</b> ({ic_t.get('kind', '')}). Neither is a disclosed loan covenant: "
-        "the annual report states only that covenants are met.</p>"
+        "the annual report states only that covenants are met.</p>" + fund
         + table("Named stresses (value per share in INR; leverage peak and year)",
                 ["Stress", "INR/share", "vs base", "Peak ND/EBITDA", "Min cover", "Revolver peak (Cr)"], rows, cls="xs",
                 src=f"stress.json; ! marks a breached reference level. Leverage reference: {nd_t.get('source', '')}")

@@ -1,11 +1,12 @@
 {
  "ticker": "ADANIPORTS",
- "validated_at": "2026-10-14T17:59:30",
+ "validated_at": "2026-10-14T22:46:52",
  "status": "PASS WITH NOTES",
  "failed": [],
  "notes": [
   "1 explained check exception(s)",
-  "12 web citation(s) without a URL"
+  "12 web citation(s) without a URL",
+  "forward view rests on long-range ambition only: ebitda_margin, revenue_growth"
  ],
  "checks": {
   "three_statement": {
@@ -19,14 +20,27 @@
   },
   "citations": {
    "status": "PASS",
-   "detail": "DERIVED 4, EXTERNAL 12, NUMBERS_ONLY 16, VERIFIED 6",
+   "detail": "DERIVED 4, EXTERNAL 12, NUMBERS_ONLY 16, VERIFIED 6; evidence types: ANALYST 2, ASPIRATION 3, DERIVED 4, GUIDANCE 1, MARKET 6, REPORTED 22",
    "counts": {
     "NUMBERS_ONLY": 16,
     "EXTERNAL": 12,
     "DERIVED": 4,
     "VERIFIED": 6
    },
-   "records": 38
+   "records": 38,
+   "evidence_types": {
+    "ASPIRATION": 3,
+    "REPORTED": 22,
+    "DERIVED": 4,
+    "GUIDANCE": 1,
+    "MARKET": 6,
+    "ANALYST": 2
+   },
+   "forward_support": {
+    "revenue_growth": "ASPIRATION",
+    "ebitda_margin": "ASPIRATION",
+    "capex_pct_sales": "GUIDANCE"
+   }
   },
   "sources": {
    "status": "PASS",
@@ -34,7 +48,7 @@
   },
   "stress": {
    "status": "PASS",
-   "detail": "6 cases, run 2026-10-14T17:47:14; 0 invariant violation(s); 0 case(s) breach a reference level"
+   "detail": "6 cases, run 2026-10-14T22:43:23; 0 invariant violation(s); 0 case(s) breach a reference level"
   },
   "typed_numbers": {
    "status": "PASS",

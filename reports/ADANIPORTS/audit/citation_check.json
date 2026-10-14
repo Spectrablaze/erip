@@ -1,5 +1,5 @@
 {
- "run_at": "2026-10-14T17:59:29",
+ "run_at": "2026-10-14T22:46:51",
  "records": 38,
  "counts": {
   "NUMBERS_ONLY": 16,
@@ -7,6 +7,50 @@
   "DERIVED": 4,
   "VERIFIED": 6
  },
+ "evidence_types": {
+  "ASPIRATION": 3,
+  "REPORTED": 22,
+  "DERIVED": 4,
+  "GUIDANCE": 1,
+  "MARKET": 6,
+  "ANALYST": 2
+ },
+ "strongest_support": {
+  "revenue_growth": "REPORTED",
+  "ebitda_margin": "REPORTED",
+  "ebit_margin": "DERIVED",
+  "capex_pct_sales": "REPORTED",
+  "dep_pct_sales": "DERIVED",
+  "dso": "REPORTED",
+  "dio": "REPORTED",
+  "dpo": "REPORTED",
+  "effective_tax_rate": "REPORTED",
+  "interest_rate": "REPORTED",
+  "terminal_growth": "REPORTED",
+  "risk_free_rate": "MARKET",
+  "equity_risk_premium": "ANALYST",
+  "beta": "MARKET",
+  "target_debt_weight": "REPORTED",
+  "net_debt": "REPORTED",
+  "shares_out": "REPORTED",
+  "current_price": "MARKET",
+  "exit_multiple": "ANALYST",
+  "nwc_pct_sales": "REPORTED",
+  "terminal_ronic": "DERIVED",
+  "lease_liabilities": "REPORTED",
+  "minority_interest": "REPORTED"
+ },
+ "forward_support": {
+  "revenue_growth": "ASPIRATION",
+  "ebitda_margin": "ASPIRATION",
+  "capex_pct_sales": "GUIDANCE"
+ },
+ "forward_view_on_aspiration": [
+  "ebitda_margin",
+  "revenue_growth"
+ ],
+ "rests_on_aspiration": [],
+ "rests_on_guidance": [],
  "status": "PASS",
  "rows": [
   {
@@ -15,7 +59,8 @@
    "quote": "APSEZ consolidated forecast: Revenue FY21 12,550, FY26 38,736, FY31F 91,500",
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.22",
-   "assumption": "revenue_growth"
+   "assumption": "revenue_growth",
+   "type": "ASPIRATION"
   },
   {
    "source": "inputs/ambition_2031.pdf deck page 33",
@@ -23,7 +68,8 @@
    "quote": "Comparison of guidance vs reported results FY23-26: Cargo MMT FY23 guidance 350-360 reported 339.2; FY25 guidance 460-480 reported 450; FY26 guidance 505-515 re",
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.33",
-   "assumption": "revenue_growth"
+   "assumption": "revenue_growth",
+   "type": "REPORTED"
   },
   {
    "source": "inputs/ambition_2031.pdf deck page 33",
@@ -31,7 +77,8 @@
    "quote": "Revenue FY23 guidance 19,200-19,800 reported 20,852; FY24 24,000-25,000 reported 26,711; FY25 29,000-31,000 reported 31,079; FY26 38,000 reported 38,736",
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.33",
-   "assumption": "revenue_growth"
+   "assumption": "revenue_growth",
+   "type": "REPORTED"
   },
   {
    "source": "FY26 media release",
@@ -39,7 +86,8 @@
    "quote": "EBITDA INR 22,851 cr, +20% YoY, against revenue of INR 38,736 cr",
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
-   "assumption": "ebitda_margin"
+   "assumption": "ebitda_margin",
+   "type": "REPORTED"
   },
   {
    "source": "FY26 media release segment table",
@@ -47,7 +95,8 @@
    "quote": "Segment EBITDA margins FY26: Domestic Ports 73.2%, International Ports 28.6%, Logistics 19.3%, Marine 51.0%",
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
-   "assumption": "ebitda_margin"
+   "assumption": "ebitda_margin",
+   "type": "REPORTED"
   },
   {
    "source": "inputs/ambition_2031.pdf deck page 22",
@@ -55,7 +104,8 @@
    "quote": "EBITDA FY21 8,063, FY26 22,851, FY31F 52,000",
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.22",
-   "assumption": "ebitda_margin"
+   "assumption": "ebitda_margin",
+   "type": "ASPIRATION"
   },
   {
    "source": "data/financials.json, from screener.xlsx",
@@ -63,7 +113,8 @@
    "quote": "Depreciation INR 5,517.38 cr on revenue INR 38,735.77 cr in FY26, i.e. 14.24% of sales",
    "grade": "DERIVED",
    "why": null,
-   "assumption": "ebit_margin"
+   "assumption": "ebit_margin",
+   "type": "DERIVED"
   },
   {
    "source": "inputs/ambition_2031.pdf deck page 22",
@@ -71,7 +122,8 @@
    "quote": "Business 5-year capex plan (FY27-FY31): Domestic ports INR 60,000-63,000 Cr, International ports INR 6,000-7,000 Cr, Logistics INR 7,000-9,000 Cr, Marine INR 11",
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.22",
-   "assumption": "capex_pct_sales"
+   "assumption": "capex_pct_sales",
+   "type": "ASPIRATION"
   },
   {
    "source": "inputs/ambition_2031.pdf deck page 33",
@@ -79,7 +131,8 @@
    "quote": "Capex FY23 guidance 8,600 reported 9,141; FY24 guidance 4,000-4,500 reported 7,416; FY25 guidance 10,500-11,500 reported 8,049; FY26 guidance 11,000-12,000 repo",
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.33",
-   "assumption": "capex_pct_sales"
+   "assumption": "capex_pct_sales",
+   "type": "REPORTED"
   },
   {
    "source": "FY26 media release",
@@ -87,7 +140,8 @@
    "quote": "FY27 capex guidance INR 12,000-14,000 cr",
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
-   "assumption": "capex_pct_sales"
+   "assumption": "capex_pct_sales",
+   "type": "GUIDANCE"
   },
   {
    "source": "data/financials.json, from screener.xlsx",
@@ -95,7 +149,8 @@
    "quote": "Depreciation FY26 INR 5,517.38 cr; FY25 INR 4,378.93 cr; FY24 INR 3,888.46 cr",
    "grade": "DERIVED",
    "why": null,
-   "assumption": "dep_pct_sales"
+   "assumption": "dep_pct_sales",
+   "type": "DERIVED"
   },
   {
    "source": "kb/annual_report/tables/table_p0659_1.md",
@@ -103,7 +158,8 @@
    "quote": "Trade Receivables INR 6,382.54 cr at 31 March 2026 against INR 4,432.36 cr at 31 March 2025",
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0659_1.md",
-   "assumption": "dso"
+   "assumption": "dso",
+   "type": "REPORTED"
   },
   {
    "source": "kb/annual_report/tables/table_p0659_1.md",
@@ -111,7 +167,8 @@
    "quote": "Inventories INR 685.00 cr at 31 March 2026 against INR 521.80 cr at 31 March 2025",
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0659_1.md",
-   "assumption": "dio"
+   "assumption": "dio",
+   "type": "REPORTED"
   },
   {
    "source": "kb/annual_report/tables/table_p0725_1.md, note 19",
@@ -119,7 +176,8 @@
    "quote": "Total outstanding dues of micro enterprises and small enterprises 242.31; other creditors 2,493.93; total 2,736.24 (FY25: 166.73 + 2,553.77 = 2,720.50)",
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0725_1.md",
-   "assumption": "dpo"
+   "assumption": "dpo",
+   "type": "REPORTED"
   },
   {
    "source": "kb/annual_report/sections/12_management_discussion_and_analysis.md",
@@ -127,7 +185,8 @@
    "quote": "It also provides a 10-year tax holiday for companies developing, maintaining and operating ports and inland waterways",
    "grade": "VERIFIED",
    "found": "kb/annual_report/sections/12_management_discussion_and_analysis.md",
-   "assumption": "effective_tax_rate"
+   "assumption": "effective_tax_rate",
+   "type": "REPORTED"
   },
   {
    "source": "kb/annual_report/tables/table_p0739_1.md segment note",
@@ -135,7 +194,8 @@
    "quote": "Tax Expense 2,066.53 on Profit before tax 14,848.56",
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0739_1.md",
-   "assumption": "effective_tax_rate"
+   "assumption": "effective_tax_rate",
+   "type": "REPORTED"
   },
   {
    "source": "data/financials.json, from screener.xlsx",
@@ -143,7 +203,8 @@
    "quote": "Interest INR 4,653.98 cr in FY26 on borrowings of INR 63,565.52 cr (Screener basis, lease-inclusive)",
    "grade": "DERIVED",
    "why": null,
-   "assumption": "interest_rate"
+   "assumption": "interest_rate",
+   "type": "DERIVED"
   },
   {
    "source": "FY26 media release",
@@ -151,7 +212,8 @@
    "quote": "APSEZ completed bond buyback programmes of USD 386.03m in August 2025 and USD 199.57m in March 2026",
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
-   "assumption": "interest_rate"
+   "assumption": "interest_rate",
+   "type": "REPORTED"
   },
   {
    "source": "kb/annual_report/pages/page_0665.md",
@@ -159,7 +221,8 @@
    "quote": "The initial port infrastructure facilities at Mundra ... developed pursuant to the concession agreement with Government of Gujarat (GoG) and Gujarat Maritime Bo",
    "grade": "VERIFIED",
    "found": "kb/annual_report/pages/page_0665.md",
-   "assumption": "terminal_growth"
+   "assumption": "terminal_growth",
+   "type": "REPORTED"
   },
   {
    "source": "kb/annual_report/pages/page_0665.md",
@@ -167,7 +230,8 @@
    "quote": "MICTL was given rights to handle container cargo at the CT 1 Terminal for a period that was co-terminus with the Concession Agreement of Mundra Port, i.e. till ",
    "grade": "VERIFIED",
    "found": "kb/annual_report/pages/page_0665.md",
-   "assumption": "terminal_growth"
+   "assumption": "terminal_growth",
+   "type": "REPORTED"
   },
   {
    "source": "kb/annual_report/pages/page_0665.md",
@@ -175,7 +239,8 @@
    "quote": "At Mundra, the Company has expanded port infrastructure facilities at West Basin through GoG approval for which the concession period will be effective till the",
    "grade": "VERIFIED",
    "found": "kb/annual_report/pages/page_0665.md",
-   "assumption": "terminal_growth"
+   "assumption": "terminal_growth",
+   "type": "REPORTED"
   },
   {
    "source": "Trading Economics / RBI policy, 5 August 2026",
@@ -183,7 +248,8 @@
    "quote": "The 10-year G-Sec yield declined approximately 3 basis points to 6.78% post-announcement following the RBI's August 5 policy decision",
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
-   "assumption": "risk_free_rate"
+   "assumption": "risk_free_rate",
+   "type": "MARKET"
   },
   {
    "source": "external",
@@ -191,7 +257,8 @@
    "quote": "market convention",
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
-   "assumption": "equity_risk_premium"
+   "assumption": "equity_risk_premium",
+   "type": "ANALYST"
   },
   {
    "source": "GuruFocus, NSE:ADANIPORTS beta",
@@ -199,7 +266,8 @@
    "quote": "Adani Ports & Special Economic Zone's beta is 1.2339 as of April 15, 2026",
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
-   "assumption": "beta"
+   "assumption": "beta",
+   "type": "MARKET"
   },
   {
    "source": "TradingView, NSE:ADANIPORTS",
@@ -207,7 +275,8 @@
    "quote": "ADANIPORTS stock has a beta coefficient of 1.36",
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
-   "assumption": "beta"
+   "assumption": "beta",
+   "type": "MARKET"
   },
   {
    "source": "GuruFocus, NSE:ADANIPORTS WACC",
@@ -215,7 +284,8 @@
    "quote": "levered beta of 1.44 with a cost of equity of 15.41%",
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
-   "assumption": "beta"
+   "assumption": "beta",
+   "type": "MARKET"
   },
   {
    "source": "Alpha Spread, ADANIPORTS discount rate",
@@ -223,7 +293,8 @@
    "quote": "beta of 0.75 with a risk-free rate of 6.3% and an equity risk premium of 4.12%",
    "grade": "EXTERNAL",
    "why": "third-party source, no URL or file in the citation",
-   "assumption": "beta"
+   "assumption": "beta",
+   "type": "MARKET"
   },
   {
    "source": "inputs/ambition_2031.pdf deck page 33",
@@ -231,7 +302,8 @@
    "quote": "Net Debt / EBITDA FY26 guidance 2.2x-2.5x, reported 1.9x",
    "grade": "NUMBERS_ONLY",
    "found": "inputs/ambition_2031.pdf p.33",
-   "assumption": "target_debt_weight"
+   "assumption": "target_debt_weight",
+   "type": "REPORTED"
   },
   {
    "source": "kb/annual_report/tables/table_p0659_1.md",
@@ -239,7 +311,8 @@
    "quote": "Borrowings 50,424.16 non-current and 4,678.81 current; Cash and Cash Equivalents 5,161.55; Bank Balances other than Cash 3,321.96; Bank Deposits having maturity",
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0659_1.md",
-   "assumption": "net_debt"
+   "assumption": "net_debt",
+   "type": "REPORTED"
   },
   {
    "source": "FY26 media release",
@@ -247,7 +320,8 @@
    "quote": "Gross debt at INR 55,103 cr, cash balance at INR 12,193 cr, Net Debt/EBITDA 1.9x",
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
-   "assumption": "net_debt"
+   "assumption": "net_debt",
+   "type": "REPORTED"
   },
   {
    "source": "inputs/shareholding.pdf, BSE filing for quarter ended 30-06-2026",
@@ -255,7 +329,8 @@
    "quote": "Promoter & Promoter Group 1,521,337,573 shares 66.03%; Public 782,621,525 33.97%; Total 2,303,959,098",
    "grade": "NUMBERS_ONLY",
    "found": "inputs/shareholding.pdf p.3",
-   "assumption": "shares_out"
+   "assumption": "shares_out",
+   "type": "REPORTED"
   },
   {
    "source": "kb/annual_report/tables/table_p0659_1.md",
@@ -263,7 +338,8 @@
    "quote": "Equity Share Capital 460.79 (FY25: 432.03) at face value INR 2",
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0659_1.md",
-   "assumption": "shares_out"
+   "assumption": "shares_out",
+   "type": "REPORTED"
   },
   {
    "source": "inputs/screener.xlsx, Data Sheet META block",
@@ -271,7 +347,8 @@
    "quote": "Current Price 1695.0",
    "grade": "VERIFIED",
    "found": "inputs/screener.xlsx",
-   "assumption": "current_price"
+   "assumption": "current_price",
+   "type": "MARKET"
   },
   {
    "source": "external",
@@ -279,7 +356,8 @@
    "quote": "to be reconciled against the peer median from build_comps.py",
    "grade": "EXTERNAL",
    "why": "no URL in the source text",
-   "assumption": "exit_multiple"
+   "assumption": "exit_multiple",
+   "type": "ANALYST"
   },
   {
    "source": "kb/annual_report/tables/table_p0659_1.md and note 19 table_p0725_1.md",
@@ -287,7 +365,8 @@
    "quote": "Trade Receivables 6,382.54; Inventories 685.00; Trade Payables 2,736.24 at 31 March 2026",
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/tables/table_p0659_1.md, kb/annual_report/tables/table_p0725_1.md",
-   "assumption": "nwc_pct_sales"
+   "assumption": "nwc_pct_sales",
+   "type": "REPORTED"
   },
   {
    "source": "data/model.json roiic block (Screener.in consolidated)",
@@ -295,7 +374,8 @@
    "quote": "ROIC FY22-FY26: 7.0%, 7.8%, 10.4%, 11.1%, 9.9%",
    "grade": "DERIVED",
    "why": null,
-   "assumption": "terminal_ronic"
+   "assumption": "terminal_ronic",
+   "type": "DERIVED"
   },
   {
    "source": "kb/annual_report/pages/page_0659.md (Consolidated Balance Sheet)",
@@ -303,7 +383,8 @@
    "quote": "Lease Liabilities 7,786.56 (non-current), 509.46 (current)",
    "grade": "NUMBERS_ONLY",
    "found": "kb/annual_report/pages/page_0659.md",
-   "assumption": "lease_liabilities"
+   "assumption": "lease_liabilities",
+   "type": "REPORTED"
   },
   {
    "source": "kb/annual_report/pages/page_0659.md (Consolidated Balance Sheet)",
@@ -311,7 +392,8 @@
    "quote": "Non-Controlling Interests 2,856.18",
    "grade": "VERIFIED",
    "found": "kb/annual_report/pages/page_0659.md",
-   "assumption": "minority_interest"
+   "assumption": "minority_interest",
+   "type": "REPORTED"
   }
  ]
 }

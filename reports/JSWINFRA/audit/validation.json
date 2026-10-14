@@ -1,6 +1,6 @@
 {
  "ticker": "JSWINFRA",
- "validated_at": "2026-10-14T17:59:27",
+ "validated_at": "2026-10-14T22:46:49",
  "status": "PASS WITH NOTES",
  "failed": [],
  "notes": [
@@ -16,12 +16,12 @@
   },
   "workbook": {
    "status": "PASS",
-   "detail": "verified 2026-10-14T17:56:07",
-   "run_at": "2026-10-14T17:56:07"
+   "detail": "verified 2026-10-14T18:02:28",
+   "run_at": "2026-10-14T18:02:28"
   },
   "citations": {
    "status": "PASS",
-   "detail": "DERIVED 2, EXTERNAL 7, NOT_HELD 2, NUMBERS_ONLY 5, PARTIAL 1, VERIFIED 11, VERIFIED_VISUAL 3",
+   "detail": "DERIVED 2, EXTERNAL 7, NOT_HELD 2, NUMBERS_ONLY 5, PARTIAL 1, VERIFIED 11, VERIFIED_VISUAL 3; evidence types: ASPIRATION 1, DERIVED 3, GUIDANCE 4, MARKET 5, REPORTED 16, THIRD_PARTY_FORECAST 2",
    "counts": {
     "NUMBERS_ONLY": 5,
     "VERIFIED": 11,
@@ -31,7 +31,21 @@
     "PARTIAL": 1,
     "DERIVED": 2
    },
-   "records": 31
+   "records": 31,
+   "evidence_types": {
+    "DERIVED": 3,
+    "REPORTED": 16,
+    "GUIDANCE": 4,
+    "THIRD_PARTY_FORECAST": 2,
+    "MARKET": 5,
+    "ASPIRATION": 1
+   },
+   "forward_support": {
+    "ebitda_margin": "GUIDANCE",
+    "capex_pct_sales": "GUIDANCE",
+    "target_debt_weight": "THIRD_PARTY_FORECAST",
+    "capacity_addition": "GUIDANCE"
+   }
   },
   "sources": {
    "status": "PASS",
@@ -39,7 +53,7 @@
   },
   "stress": {
    "status": "PASS",
-   "detail": "6 cases, run 2026-10-14T17:47:02; 0 invariant violation(s); 1 case(s) breach a reference level"
+   "detail": "6 cases, run 2026-10-14T22:43:48; 0 invariant violation(s); 1 case(s) breach a reference level"
   },
   "typed_numbers": {
    "status": "PASS",

@@ -176,6 +176,17 @@ def check_workbook(reports, quick):
            + " - each equals its Python value, 0 formula errors")
 
 
+def check_engine_tests():
+    """The synthetic-company engine tests (tests/run_tests.py): closed-form DCF checks, three-statement
+    identities re-derived from the rows, and a golden end-to-end value. Needs no source documents."""
+    t = os.path.join(SKILL, "tests", "run_tests.py")
+    if not os.path.exists(t):
+        return report("engine", "SKIP", "tests/run_tests.py missing")
+    r = subprocess.run([PY, t], capture_output=True, text=True)
+    last = (r.stdout.strip().splitlines() or ["no output"])[-1]
+    report("engine", "PASS" if r.returncode == 0 else "FAIL", last)
+
+
 def check_number_lint(reports):
     """No current model output may be typed into a fixture report's build code."""
     import number_lint
@@ -243,6 +254,7 @@ def main():
     check_regression(a.reports)
     check_three_statement(a.reports)
     check_workbook(a.reports, a.quick)
+    check_engine_tests()
     check_number_lint(a.reports)
     check_package()
     check_copies()

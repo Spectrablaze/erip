@@ -1156,6 +1156,39 @@ The workbook gets a recorded Stress sheet, and the site gets a stress table.
 `validate_report.py` fails a report whose stress run is older than its model or shows an
 invariant violation.
 
+**What kind of evidence, not just where from.** `citation_check.py` also labels every
+evidence record with a type. A citation proves where a number came from, not that it is a
+fact. Override a mislabel with `"type"` on the evidence record. The types:
+- REPORTED: audited or filed figures.
+- GUIDANCE: near-term company forward statements.
+- ASPIRATION: long-range ambitions such as "Ambition 2031".
+- THIRD_PARTY_FORECAST: rating agencies and brokers.
+- MARKET: prices, yields, betas.
+- ANALYST: house conventions.
+- DERIVED: calculated from the report's own data.
+
+It reports each assumption's best forward-looking support. If a forecast driver's forward
+view rests only on ASPIRATION, the methodology must say so, from the data (APSEZ revenue
+and margin do).
+
+**Track record: score calls against the market, without hindsight.** `price_ledger.py` keeps
+`reports/_knowledge/price_ledger.json`. For each published call it holds the price and the
+benchmark level (NIFTY 50) on the call date. Dated observations are appended, never edited,
+and each names its source. A call is SCORED only at its 12-month horizon; before that,
+observations are INTERIM. The site shows the interim marks, wrong calls included.
+
+```bash
+python3 <skill>/scripts/price_ledger.py --root reports observe --ticker T --date YYYY-MM-DD \
+        --price P --benchmark B --source "..."
+```
+
+**Engine tests anyone can run.** `tests/run_tests.py` needs no source documents. It checks
+the DCF against closed-form answers: Gordon on a constant-growth stream, RONIC = WACC, the
+stub, the equity bridge and the target. It also checks a fully synthetic company's three
+statements, with every identity re-derived from the rows, and a golden end-to-end value.
+The public repo runs it in GitHub Actions on every push, and `selftest.py` runs it too.
+Change `tests/expected.json` only deliberately (`--update-golden`), saying why.
+
 **Evidence, sources and the publish gate.** Run the three scripts below last. The first two
 also run inside the third:
 

@@ -77,6 +77,12 @@ svg text{fill:var(--muted);font-size:11px}
 .st th:first-child,.st td:first-child{text-align:left}
 .st td{text-align:right;padding:6px 8px;border-bottom:1px solid var(--line)}
 .st tr.hit td{color:var(--neg);font-weight:600}
+.recon{padding:10px 16px;margin:-12px 0 24px;font-size:13.5px}
+.recon table{border-collapse:collapse;width:100%}
+.recon td,.recon th{padding:4px 8px;text-align:right;border-bottom:1px solid var(--line)}
+.recon th{font-size:12px;color:var(--muted);font-weight:600}
+.recon td:first-child,.recon th:first-child{text-align:left}
+.ok{color:var(--pos);font-weight:700} .bad{color:var(--neg);font-weight:700}
 .status{padding:12px 16px;margin:-12px 0 24px;font-size:13.5px}
 .status summary{cursor:pointer;display:flex;gap:10px;align-items:center;flex-wrap:wrap;list-style:none}
 .status summary::-webkit-details-marker{display:none}
@@ -112,6 +118,8 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
 
 <section id="call" class="card call" aria-live="polite"></section>
 <div class="btns" id="btns"></div>
+<div class="card recon" id="track"></div>
+<div class="card recon" id="recon"></div>
 <details class="card status" id="status"></details>
 
 <h2>Try the valuation</h2>
@@ -343,7 +351,37 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
       Source: ${t.source}</p><ul class="note">${rev}</ul>
       <p class="note">Invariant checks: ${(S.invariant_violations || []).length ? S.invariant_violations.length + " violation(s)" : "all hold"}.</p>`;
   }
-  function init(){ tabs(); call(); status(); controls(); setCase("base"); stress(); }
+  // the same value three ways: model.py, the LibreOffice-recalculated Excel model, and this page
+  function recon(){
+    const R = co.reconciliation || {}, order = ["bear", "base", "bull"].filter(k => R[k]);
+    const rows = order.map(k => {
+      const page = perp(co.cases[k], co.cases[k].wacc, co.cases[k].g), py = R[k].python, xl = R[k].excel;
+      const ok = Math.round(page) === py && (xl == null || Math.abs(xl - page) < 0.01);
+      return `<tr><td>${k[0].toUpperCase() + k.slice(1)}</td><td class="num">${inr(py)}</td>
+        <td class="num">${xl == null ? "n/a" : "INR " + xl.toFixed(2)}</td><td class="num">INR ${page.toFixed(2)}</td>
+        <td class="${ok ? "ok" : "bad"}">${ok ? "match" : "MISMATCH"}</td></tr>`;
+    }).join("");
+    const run = (R.base || {}).excel_run;
+    $("recon").innerHTML = `<table><tr><th>Perpetuity value per share, same inputs</th><th>Python (model.py)</th>
+      <th>Excel (recalculated in LibreOffice${run ? ", " + run.slice(0, 10) : ""})</th><th>This page (JavaScript)</th><th></th></tr>${rows}</table>`;
+  }
+  // what has happened since each published call, against the benchmark; interim until the horizon
+  function track(){
+    const T = co.track_record || [];
+    if (!T.length){ $("track").innerHTML = `<p class="note">No call outcomes recorded yet.</p>`; return; }
+    const rows = T.map(c => {
+      const l = c.last, dir = l && l.direction_right == null ? "n/a" : (l && l.direction_right ? "right so far" : "wrong so far");
+      return `<tr><td>v${c.version} ${c.rating} INR ${c.target} on ${c.date} at INR ${c.price_at_call}</td>
+        <td class="num">${l ? sgn(l.stock_return / 100) : "n/a"}</td><td class="num">${l ? sgn(l.benchmark_return / 100) : "n/a"}</td>
+        <td class="num">${l ? (l.relative > 0 ? "+" : "") + l.relative.toFixed(1) + "pp" : ""}</td>
+        <td>${l ? `${l.status}, day ${l.days} of ${c.horizon_days}; <span class="${l.direction_right === false ? "bad" : "ok"}">${dir}</span>` : ""}</td></tr>`;
+    }).join("");
+    const d = T[0].last ? T[0].last.date : "";
+    $("track").innerHTML = `<table><tr><th>Track record: the original published call, marked to ${d}</th><th>Stock</th>
+      <th>${T[0].benchmark_name}</th><th>Relative</th><th>Status</th></tr>${rows}</table>
+      <p class="note">Recorded in an append-only price ledger. A call is scored only at its 12-month horizon; until then these are interim marks, failures included.</p>`;
+  }
+  function init(){ tabs(); call(); track(); recon(); status(); controls(); setCase("base"); stress(); }
   window.addEventListener("resize", render);
   window.ERIP_CALC = {perp, exitv, published, whatIfTarget};
   init();

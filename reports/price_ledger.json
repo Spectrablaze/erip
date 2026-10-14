@@ -1,0 +1,67 @@
+{
+  "_about": "The call ledger (calls.json) records what ERIP believed and when. This records what happened, in\nreports/_knowledge/price_ledger.json, so calls can be scored without hindsight:",
+  "calls": [
+    {
+      "ticker": "ADANIPORTS",
+      "version": 1,
+      "rating": "REDUCE",
+      "target": 1165.0,
+      "date": "2026-08-07",
+      "price_at_call": 1695.0,
+      "benchmark_name": "NIFTY 50",
+      "benchmark_at_call": 24570.65,
+      "horizon_days": 365,
+      "source": "Price: Screener.in export at cover; NIFTY 50 close 7 Aug 2026, Yahoo Finance ^NSEI history",
+      "observations": [
+        {
+          "date": "2026-10-13",
+          "price": 1763.0,
+          "benchmark": 22721.95,
+          "dividends": 0.0,
+          "source": "ADANIPORTS.NS close 13 Oct 2026, Yahoo Finance history; NIFTY 50 close 22,721.95 (HDFC Sky market close report, 13 Oct 2026); dividends: none recorded since 7 Aug (FY26 dividend paid before the cover date; not independently verified)",
+          "recorded_at": "2026-10-14T22:38:40",
+          "score": {
+            "days": 67,
+            "stock_return": 4.01,
+            "benchmark_return": -7.52,
+            "relative": 11.54,
+            "direction_right": false,
+            "progress_to_target": -12.8,
+            "status": "INTERIM"
+          }
+        }
+      ]
+    },
+    {
+      "ticker": "JSWINFRA",
+      "version": 1,
+      "rating": "SELL",
+      "target": 165.0,
+      "date": "2026-10-01",
+      "price_at_call": 357.45,
+      "benchmark_name": "NIFTY 50",
+      "benchmark_at_call": 22421.95,
+      "horizon_days": 365,
+      "source": "Price: Screener.in export at cover; NIFTY 50 close 1 Oct 2026, Yahoo Finance ^NSEI history",
+      "observations": [
+        {
+          "date": "2026-10-13",
+          "price": 343.3,
+          "benchmark": 22721.95,
+          "dividends": 0.0,
+          "source": "JSWINFRA.NS close 13 Oct 2026, Yahoo Finance history; NIFTY 50 close 22,721.95 (HDFC Sky market close report, 13 Oct 2026); dividends: none recorded since 1 Oct",
+          "recorded_at": "2026-10-14T22:38:41",
+          "score": {
+            "days": 12,
+            "stock_return": -3.96,
+            "benchmark_return": 1.34,
+            "relative": -5.3,
+            "direction_right": true,
+            "progress_to_target": 7.4,
+            "status": "INTERIM"
+          }
+        }
+      ]
+    }
+  ]
+}

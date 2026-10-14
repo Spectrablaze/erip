@@ -1,5 +1,5 @@
 {
- "run_at": "2026-10-14T17:47:02",
+ "run_at": "2026-10-14T22:43:48",
  "thresholds": {
   "net_debt_ebitda_max": {
    "value": 3.5,
@@ -21,6 +21,7 @@
   "min_interest_cover": 5.96,
   "min_interest_cover_year": "Mar-27E",
   "peak_revolver": 4105,
+  "peak_revolver_year": "Mar-29E",
   "min_cash_headroom": 0,
   "nd_ebitda_path": [
    0.89,
@@ -54,6 +55,7 @@
    "min_interest_cover": 5.41,
    "min_interest_cover_year": "Mar-27E",
    "peak_revolver": 4816,
+   "peak_revolver_year": "Mar-29E",
    "min_cash_headroom": 0,
    "nd_ebitda_path": [
     0.92,
@@ -83,6 +85,7 @@
    "min_interest_cover": 5.3,
    "min_interest_cover_year": "Mar-27E",
    "peak_revolver": 5058,
+   "peak_revolver_year": "Mar-29E",
    "min_cash_headroom": 0,
    "nd_ebitda_path": [
     1.08,
@@ -112,6 +115,7 @@
    "min_interest_cover": 5.33,
    "min_interest_cover_year": "Mar-29E",
    "peak_revolver": 8341,
+   "peak_revolver_year": "Mar-29E",
    "min_cash_headroom": 0,
    "nd_ebitda_path": [
     1.45,
@@ -141,6 +145,7 @@
    "min_interest_cover": 4.63,
    "min_interest_cover_year": "Mar-27E",
    "peak_revolver": 4494,
+   "peak_revolver_year": "Mar-29E",
    "min_cash_headroom": 0,
    "nd_ebitda_path": [
     0.92,
@@ -170,6 +175,7 @@
    "min_interest_cover": 5.96,
    "min_interest_cover_year": "Mar-27E",
    "peak_revolver": 3979,
+   "peak_revolver_year": "Mar-29E",
    "min_cash_headroom": 0,
    "nd_ebitda_path": [
     0.89,
@@ -199,6 +205,7 @@
    "min_interest_cover": 4.24,
    "min_interest_cover_year": "Mar-29E",
    "peak_revolver": 9533,
+   "peak_revolver_year": "Mar-29E",
    "min_cash_headroom": 0,
    "nd_ebitda_path": [
     1.71,
@@ -370,6 +377,7 @@
     "min_interest_cover": 4.51,
     "min_interest_cover_year": "Mar-36E",
     "peak_revolver": 4316,
+    "peak_revolver_year": "Mar-29E",
     "min_cash_headroom": 0,
     "nd_ebitda_path": [
      0.94,
@@ -402,6 +410,7 @@
     "min_interest_cover": 3.92,
     "min_interest_cover_year": "Mar-27E",
     "peak_revolver": 7045,
+    "peak_revolver_year": "Mar-29E",
     "min_cash_headroom": 0,
     "nd_ebitda_path": [
      1.69,

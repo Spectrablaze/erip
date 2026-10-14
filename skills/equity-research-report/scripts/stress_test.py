@@ -113,7 +113,8 @@ def metrics(m, ts, th):
            "peak_nd_ebitda": round(nd_e[k_nd], 2), "peak_nd_ebitda_year": per[k_nd],
            "min_interest_cover": None if k_cov is None else round(cover[k_cov], 2),
            "min_interest_cover_year": None if k_cov is None else per[k_cov],
-           "peak_revolver": round(max(rev)), "min_cash_headroom": round(min(cash_head)),
+           "peak_revolver": round(max(rev)), "peak_revolver_year": per[max(range(n), key=lambda i: rev[i])],
+           "min_cash_headroom": round(min(cash_head)),
            "nd_ebitda_path": [round(x, 2) for x in nd_e]}
     br = []
     if th.get("net_debt_ebitda_max") and out["peak_nd_ebitda"] > th["net_debt_ebitda_max"]["value"]:

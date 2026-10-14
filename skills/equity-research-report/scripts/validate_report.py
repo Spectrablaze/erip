@@ -74,11 +74,15 @@ def validate(root, paths=None):
     # citations
     cc = citation_check.run(root)
     c = cc["counts"]
-    checks["citations"] = {"status": cc["status"], "detail": ", ".join(f"{k} {v}" for k, v in sorted(c.items())),
-                           "counts": c, "records": cc["records"]}
+    checks["citations"] = {"status": cc["status"], "detail": ", ".join(f"{k} {v}" for k, v in sorted(c.items()))
+                           + "; evidence types: " + ", ".join(f"{k} {v}" for k, v in sorted(cc["evidence_types"].items())),
+                           "counts": c, "records": cc["records"], "evidence_types": cc["evidence_types"],
+                           "forward_support": cc["forward_support"]}
     ext_no_url = [r for r in cc["rows"] if r["grade"] == "EXTERNAL" and r.get("why")]
     if ext_no_url:
         notes.append(f"{len(ext_no_url)} web citation(s) without a URL")
+    if cc.get("forward_view_on_aspiration"):
+        notes.append("forward view rests on long-range ambition only: " + ", ".join(cc["forward_view_on_aspiration"]))
     if c.get("NOT_HELD"):
         notes.append(f"{c['NOT_HELD']} citation(s) to documents not among the inputs")
 

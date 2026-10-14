@@ -16,6 +16,26 @@ import json
 import os
 
 
+def _track(root, ticker):
+    """Every ledgered call on this ticker with its latest observation, scored from the raw numbers."""
+    p = os.path.join(os.path.dirname(root), "_knowledge", "price_ledger.json")
+    if not os.path.exists(p):
+        return []
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from price_ledger import score
+    out = []
+    for c in json.load(open(p, encoding="utf-8"))["calls"]:
+        if c["ticker"] != ticker:
+            continue
+        last = c["observations"][-1] if c["observations"] else None
+        out.append({k: c[k] for k in ("version", "rating", "target", "date", "price_at_call", "benchmark_name",
+                                      "benchmark_at_call", "horizon_days")}
+                   | {"superseded_on": c.get("superseded_on"), "last": None if not last else
+                      {"date": last["date"], "price": last["price"], "benchmark": last["benchmark"], **score(c, last)}})
+    return out
+
+
 def company(root, links):
     J = lambda p: json.load(open(os.path.join(root, p), encoding="utf-8"))
     M, S3, A = J("data/model.json"), J("data/scenarios_3s.json"), J("data/assumptions.json")
@@ -50,8 +70,16 @@ def company(root, links):
         "tornado": T["drivers"], "tornado_base": T.get("base_value"),
         "cases": cases, "target": M["dcf"]["target"],
         "validation": J("data/validation.json") if os.path.exists(os.path.join(root, "data", "validation.json")) else None,
+        # Python value vs the LibreOffice-recalculated workbook, per case; the page adds its own value
+        "reconciliation": {k: {"python": c["intrinsic_value_per_share"],
+                               "python_exact": None, "excel": ((J("data/workbook_check.json")["cases"].get(k) or {}).get("value")
+                                                              if os.path.exists(os.path.join(root, "data", "workbook_check.json")) else None),
+                               "excel_run": (J("data/workbook_check.json")["run_at"]
+                                             if os.path.exists(os.path.join(root, "data", "workbook_check.json")) else None)}
+                           for k, c in S3["cases"].items()},
         "claims": {"lease_liabilities": M["dcf"]["timing"].get("lease_liabilities", 0),
                    "minority_interest": M["dcf"]["timing"].get("minority_interest", 0)},
+        "track_record": _track(root, ticker),
         **links.get(ticker, {}),
     }
 

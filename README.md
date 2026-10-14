@@ -122,6 +122,22 @@ Every report carries a validation record, shown as a status panel on the
 A git `pre-push` hook (`hooks/pre-push`) runs the pipeline self-test and every report's validation,
 and refuses the push if anything fails.
 
+- **Evidence types**:
+  - Every piece of evidence is labelled: a reported figure, management guidance, long-range ambition, a
+    third-party forecast, market data or an analyst convention.
+  - Each report states which forecast drivers rest only on ambition. For Adani Ports, revenue and
+    margin rest on the Ambition 2031 targets.
+- **Engine tests anyone can run** (`skills/equity-research-report/tests/run_tests.py`, run by GitHub
+  Actions on every push):
+  - The DCF is checked against closed-form answers.
+  - A fully synthetic company's three statements are checked identity by identity.
+  - A golden end-to-end value guards against silent changes.
+  - No source documents are needed.
+- **Track record** (`reports/price_ledger.json`, shown on the live page):
+  - Each original call is marked against the NIFTY 50 from its date, in an append-only ledger.
+  - Calls are scored only at their 12-month horizon; until then the marks are interim, and they
+    include calls that are currently going the wrong way.
+
 ## How it works
 
 ```mermaid

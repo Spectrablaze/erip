@@ -219,6 +219,44 @@ def locate(root, q, doc, out, cited=None):
     return {**out, "grade": "NOT_FOUND", "why": f"not in kb/{doc}" + (f" (cited {cited})" if cited else "")}
 
 
+# What kind of claim each piece of evidence is. A citation proves where a number came from, not
+# that it is a fact: an "Ambition 2031" target and an audited balance sheet are not equal support.
+# An explicit "type" on the evidence record overrides the heuristic.
+TYPES = ("REPORTED", "GUIDANCE", "ASPIRATION", "THIRD_PARTY_FORECAST", "MARKET", "ANALYST", "DERIVED")
+_FWD = r"\b(forecast|expect|projected|project|assume|guid|plan|plans|will|would|aim|to rise|by fy ?\d\d)"
+_FWD_YEAR = r"\bfy ?\d\d ?e\b|\bfy ?\d\d ?f\b|\bfy ?\d\d ?-? ?fy ?\d\d\b"
+_LONG_RANGE = r"\bfy ?3\d\b|\bfy ?3\d ?[ef]\b|\b20[3-9]\d\b|ambition|vision 20\d\d|aspir"
+_MARKET = r"screener|tradingview|finbox|alpha spread|gurufocus|ccil|g-sec|\byields?\b|trading economics|current price|market cap|bse close|nse close"
+_AGENCY = r"fitch|moody|crisil|icra|s&p|care ratings|india ratings"
+_COMPANY_FWD = r"concall|earnings call|transcript|guidance|investor presentation|deck|media release|press release|kb/concall|kb/investor"
+
+
+def evidence_type(rec):
+    if rec.get("type") in TYPES:
+        return rec["type"]
+    src, q = str(rec.get("source") or "").lower(), str(rec.get("quote") or "").lower()
+    both = src + " " + q
+    if re.match(DERIVED, src.strip()) or src.startswith(("data/", "segment_build")) or "derived" in src:
+        return "DERIVED"
+    if re.search(r"\bconvention\b|\bjudg(e)?ment\b|\bhouse\b|to be reconciled", both):
+        return "ANALYST"
+    if re.search(_MARKET, both):
+        return "MARKET"
+    if re.search(_AGENCY, q) and not re.search(r"forecast|expect|project|assume", q):
+        return "REPORTED"                       # a rating action is a fact
+    if re.search(_AGENCY, src):
+        return "THIRD_PARTY_FORECAST" if re.search(_FWD, q) else "REPORTED"
+    forward = re.search(_FWD, q) or re.search(_FWD_YEAR, q)
+    historical = re.search(r"\breported\b|\bactual\b|\bfy ?\d\d ?a\b", q) and not re.search(_FWD_YEAR, q)
+    if historical:
+        return "REPORTED"
+    if forward and re.search(_LONG_RANGE, both):
+        return "ASPIRATION"
+    if forward and (re.search(_COMPANY_FWD, src) or re.search(_FWD_YEAR, q) or "kb/" in src):
+        return "GUIDANCE"
+    return "REPORTED"
+
+
 def run(root, strict=False):
     D = json.load(open(os.path.join(root, "decisions.json"), encoding="utf-8"))
     so_p = os.path.join(root, "data", "citation_signoffs.json")
@@ -228,6 +266,7 @@ def run(root, strict=False):
         for rec in a.get("evidence") or []:
             r = check(root, rec)
             r["assumption"] = key
+            r["type"] = evidence_type(rec)
             if r["grade"] in ("IMAGE", "NOT_FOUND"):
                 so = next((x for x in signoffs if x["assumption"] == key
                            and x["source_contains"] in str(rec.get("source"))), None)
@@ -240,7 +279,31 @@ def run(root, strict=False):
         counts[r["grade"]] = counts.get(r["grade"], 0) + 1
     blocking = [r for r in rows if r["grade"] in ("NOT_FOUND", "UNRESOLVED")
                 or (strict and r["grade"] in ("MOVED", "PARTIAL", "NOT_HELD"))]
+    # per assumption: the strongest kind of support it has
+    rank = {"REPORTED": 0, "MARKET": 1, "DERIVED": 2, "THIRD_PARTY_FORECAST": 3, "GUIDANCE": 4, "ANALYST": 5, "ASPIRATION": 6}
+    support = {}
+    for r in rows:
+        k = r["assumption"]
+        if k not in support or rank[r["type"]] < rank[support[k]]:
+            support[k] = r["type"]
+    # The forward view of each assumption: the best forward-looking support it has. A forecast that
+    # rests only on a long-range ambition is weaker than one backed by near-term guidance.
+    fwd_rank = {"GUIDANCE": 0, "THIRD_PARTY_FORECAST": 1, "ASPIRATION": 2}
+    forward = {}
+    for r in rows:
+        if r["type"] in fwd_rank:
+            k = r["assumption"]
+            if k not in forward or fwd_rank[r["type"]] < fwd_rank[forward[k]]:
+                forward[k] = r["type"]
+    types = {}
+    for r in rows:
+        types[r["type"]] = types.get(r["type"], 0) + 1
     out = {"run_at": datetime.now().isoformat(timespec="seconds"), "records": len(rows), "counts": counts,
+           "evidence_types": types, "strongest_support": support,
+           "forward_support": forward,
+           "forward_view_on_aspiration": sorted(k for k, t in forward.items() if t == "ASPIRATION"),
+           "rests_on_aspiration": sorted(k for k, t in support.items() if t == "ASPIRATION"),
+           "rests_on_guidance": sorted(k for k, t in support.items() if t == "GUIDANCE"),
            "status": "FAIL" if blocking else "PASS", "rows": rows}
     json.dump(out, open(os.path.join(root, "data", "citation_check.json"), "w", encoding="utf-8"), indent=1,
               ensure_ascii=False)
@@ -257,6 +320,13 @@ def main():
     for r in out["rows"]:
         if a.verbose or r["grade"] not in ("VERIFIED", "DERIVED"):
             print(f"  {r['grade']:12} {r['assumption']:20} {r.get('why') or r.get('found') or ''}"[:200])
+    print("evidence types: " + ", ".join(f"{k} {v}" for k, v in sorted(out["evidence_types"].items())))
+    if out["forward_view_on_aspiration"]:
+        print("  forward view rests on long-range ambition only: " + ", ".join(out["forward_view_on_aspiration"]))
+    if out["rests_on_aspiration"]:
+        print("  rests on management aspiration only: " + ", ".join(out["rests_on_aspiration"]))
+    if out["rests_on_guidance"]:
+        print("  rests on management guidance at best: " + ", ".join(out["rests_on_guidance"]))
     print(f"{out['records']} evidence records: " + ", ".join(f"{k} {v}" for k, v in sorted(out["counts"].items()))
           + f"  -> {out['status']}")
     sys.exit(1 if out["status"] == "FAIL" else 0)

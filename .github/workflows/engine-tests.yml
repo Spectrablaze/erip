@@ -1,0 +1,19 @@
+name: engine tests
+
+# Runs the ERIP engine tests on a synthetic company: closed-form DCF checks, three-statement
+# identities re-derived from the rows, and a golden end-to-end value. No source documents needed,
+# so anyone can reproduce this run.
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install openpyxl==3.1.5
+      - run: python skills/equity-research-report/tests/run_tests.py
