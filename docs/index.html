@@ -118,7 +118,7 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
     <div class="outs">
       <div class="out"><div class="lab">Perpetuity DCF</div><div class="big num" id="oPerp"></div><div class="sub" id="oPerpS"></div></div>
       <div class="out"><div class="lab">DCF at exit multiple</div><div class="big num" id="oExit"></div><div class="sub" id="oExitS"></div></div>
-      <div class="out"><div class="lab">Rating on these inputs</div><div id="oRate"></div><div class="sub" id="oRateS"></div></div>
+      <div class="out"><div class="lab">What-if target and rating</div><div id="oRate"></div><div class="sub" id="oRateS"></div></div>
     </div>
     <div class="chartbox"><svg id="ff" width="100%" height="230" role="img" aria-label="Value per share by method against the share price"></svg></div>
     <div class="legend"><span><i style="background:var(--bar)"></i>Peer multiple bands</span>
@@ -172,13 +172,16 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
   function tv(c, w, g){
     return c.ronic ? c.nopat_T * (1 + g) * (1 - g / c.ronic) / (w - g) : c.fcff[c.fcff.length - 1] * (1 + g) / (w - g);
   }
-  function eq(c, w, ev){ return (ev - c.net_debt + c.nonop) * c.roll / c.shares; }
+  function eq(c, w, ev){ return (ev - c.net_debt - (c.claims || 0) + c.nonop) * c.roll / c.shares; }
   const perp = (c, w, g) => eq(c, w, pv(c, w) + tv(c, w, g) / Math.pow(1 + w, c.terminal_period));
   const exitv = (c, w, m) => eq(c, w, pv(c, w) + m * c.ebitda_T / Math.pow(1 + w, c.terminal_period));
   const rating = (o, co) => o > co.buy_above / 100 ? "BUY" : (o < -co.sell_below / 100 ? "SELL" : "HOLD");
-  function published(co){
-    const b = co.cases.base, t = Math.round(exitv(b, b.wacc, co.house_multiple) / co.round) * co.round;
-    return {target: t, ups: t / co.cmp - 1, rating: rating(t / co.cmp - 1, co)};
+  // the published call comes from model.py; the page never recomputes it
+  function published(co){ return {target: co.target.target, ups: co.target.upside, rating: co.target.rating}; }
+  // what-if target on the published method: perpetuity value, rolled forward at the cost of equity, less dividends
+  function whatIfTarget(co, vp){
+    const t = co.target, h = t.horizon_months / 12;
+    return Math.round((vp * Math.pow(1 + t.cost_of_equity, h) - t.dps_next12 * h) / co.round) * co.round;
   }
 
   // ---- tabs and the call ---------------------------------------------------------------------
@@ -191,7 +194,7 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
     $("call").innerHTML = `
       <div><div class="lab">${co.ticker}</div><div style="font-weight:700;margin-top:4px">${co.name}</div><div class="sub">Cover ${co.cover_date}</div></div>
       <div><div class="lab">Rating</div><span class="rating ${p.rating}">${p.rating}</span></div>
-      <div><div class="lab">Target price</div><div class="big num">${inr(p.target)}</div><div class="sub">DCF, ${co.house_multiple}x exit EV/EBITDA</div></div>
+      <div><div class="lab">Target price</div><div class="big num">${inr(p.target)}</div><div class="sub">Perpetuity DCF, ${co.target.horizon_months}m forward</div></div>
       <div><div class="lab">Share price</div><div class="big num">${inr(co.cmp)}</div><div class="sub">at the cover date</div></div>
       <div><div class="lab">To target</div><div class="big num" style="color:${p.ups < 0 ? "var(--neg)" : "var(--pos)"}">${sgn(p.ups)}</div><div class="sub">probability-weighted perpetuity ${inr(co.weighted)}</div></div>`;
     $("btns").innerHTML = `<a class="btn" href="${co.pdf}">Read the report (PDF)</a><a class="btn" href="${co.xlsx}">Excel model, live formulas</a><a class="btn" href="${co.audit}">Audit trail</a>`;
@@ -216,7 +219,9 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
     $("reset").onclick = () => setCase("base");
     const b = co.cases.base;
     $("method1").textContent = `Cash flows discounted from the net-debt date${b.first_year_share < 1 ? ` (first year counted ${Math.round(b.first_year_share * 100)}%)` : ""}, ` +
-      `equity rolled to the cover date. Terminal value funded at a ${pct(b.ronic)} return on new capital.`;
+      `equity rolled to the cover date, after lease liabilities and minority interest. Terminal value funded at a ${pct(b.ronic)} ` +
+      `return on new capital. Target = perpetuity value, ${co.target.horizon_months} months forward at the cost of equity, less dividends; ` +
+      `rating bands BUY above +${co.buy_above}%, SELL below -${co.sell_below}%.`;
   }
 
   // ---- outputs and charts -------------------------------------------------------------------
@@ -224,11 +229,12 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
     const c = co.cases[caseKey], g = Math.min(st.g, st.w - 0.005);
     $("waccV").textContent = pct(st.w, 2); $("gV").textContent = pct(g, 2) + (g < st.g ? " (capped)" : ""); $("multV").textContent = st.m.toFixed(1) + "x";
     const vp = perp(c, st.w, g), vx = exitv(c, st.w, st.m), o = vx / co.cmp - 1;
+    const wt = whatIfTarget(co, vp), wo = wt / co.cmp - 1;
     $("oPerp").textContent = inr(vp); $("oPerpS").textContent = `${sgn(vp / co.cmp - 1)} vs the share price`;
-    $("oExit").textContent = inr(vx); $("oExitS").textContent = `${sgn(o)} vs the share price`;
-    const r = rating(o, co);
-    $("oRate").innerHTML = `<span class="rating ${r}">${r}</span>`;
-    $("oRateS").textContent = `bands: BUY above +${co.buy_above}%, SELL below -${co.sell_below}%`;
+    $("oExit").textContent = inr(vx); $("oExitS").textContent = `${sgn(o)} vs the share price (cross-check, not the target)`;
+    const r = rating(wo, co);
+    $("oRate").innerHTML = `<span class="big num" style="font-size:22px">${inr(wt)}</span> <span class="rating ${r}">${r}</span>`;
+    $("oRateS").textContent = `Your inputs, same method as the published call (${sgn(wo)}). Not the published rating.`;
     football(vp, vx); fcff(c); tornado();
   }
   function football(vp, vx){
@@ -237,6 +243,7 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
     const cs = co.cases;
     rows.push({label: "DCF bear to bull (perpetuity)", low: cs.bear.value, high: cs.bull.value, col: "var(--dcf)", mid: cs.base.value});
     rows.push({label: "Your inputs: perpetuity / exit", low: Math.min(vp, vx), high: Math.max(vp, vx), col: "var(--bar2)", pts: [vp, vx]});
+    rows.push({label: "Published target", low: co.target.target, high: co.target.target, col: "var(--accent)"});
     const vals = rows.flatMap(r => [r.low, r.high]).concat([co.cmp]);
     const hi = Math.max(...vals) * 1.08, x = v => L + (W - L - R) * Math.max(0, v) / hi;
     svg.setAttribute("height", top + rows.length * rowH + 26);
@@ -245,7 +252,7 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
       const y = top + i * rowH;
       h += `<text x="${L - 10}" y="${y + 17}" text-anchor="end">${r.label}</text>`;
       h += `<rect x="${x(r.low)}" y="${y + 6}" width="${Math.max(3, x(r.high) - x(r.low))}" height="16" rx="3" fill="${r.col}"/>`;
-      h += `<text x="${x(r.high) + 6}" y="${y + 18}" class="num">${Math.round(r.low).toLocaleString("en-IN")}–${Math.round(r.high).toLocaleString("en-IN")}</text>`;
+      h += `<text x="${x(r.high) + 6}" y="${y + 18}" class="num">${Math.round(r.low) === Math.round(r.high) ? Math.round(r.low).toLocaleString("en-IN") : Math.round(r.low).toLocaleString("en-IN") + "–" + Math.round(r.high).toLocaleString("en-IN")}</text>`;
     });
     const xc = x(co.cmp), yb = top + rows.length * rowH;
     h += `<line x1="${xc}" x2="${xc}" y1="${top}" y2="${yb}" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 3"/>`;
@@ -290,7 +297,7 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
   }
   function init(){ tabs(); call(); controls(); setCase("base"); }
   window.addEventListener("resize", render);
-  window.ERIP_CALC = {perp, exitv, published};
+  window.ERIP_CALC = {perp, exitv, published, whatIfTarget};
   init();
 })();
 </script>

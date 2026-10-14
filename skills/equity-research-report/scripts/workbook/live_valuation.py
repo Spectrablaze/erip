@@ -381,6 +381,15 @@ def build(root, out):
 
     ronic = _rate(A.get("terminal_ronic")) if A.get("terminal_ronic") else None
     KE = f"WACC!$B${ke_r}"
+    TP = dict(A.get("target_policy") or {})
+    if not TP:     # older reports: the exit-multiple target from valuation_settings.json
+        TP = {"method": "exit_multiple", "exit_multiple": cfg.get("target_exit_multiple", 10)}
+    TP.setdefault("horizon_months", 0 if "target_policy" not in A else 12)
+    TP.setdefault("round", cfg.get("target_round", 5))
+    TP.setdefault("buy_above", cfg.get("buy_above", 15))
+    TP.setdefault("sell_below", cfg.get("sell_below", 10))
+    DPS_REF = (f"=IFERROR('Schedules'!{COL(fc[0])}{SCH['Dividends declared']}/'Schedules'!{COL(fc[0])}"
+               f"{SCH['Shares outstanding']},0)")
     nd = float(A.get("net_debt", 0))
     sh_ref = f"='Schedules'!{COL(last_hist)}{SCH['Shares outstanding']}"
     if ronic:
@@ -404,8 +413,10 @@ def build(root, out):
         ("ev", "*Enterprise value", "={sum_pv}+{pv_tv}", "formula", NUM),
         ("tv_pct", "Terminal value as % of EV", "={pv_tv}/{ev}", "formula", PCT),
         ("nd", "Net debt at the balance-sheet date  (negative = net cash)", nd, "input", NUM),
+        ("lease", "Lease liabilities (Ind AS 116, debt-like)", float(A.get("lease_liabilities") or 0), "input", NUM),
+        ("nci", "Minority interest (book value)", float(A.get("minority_interest") or 0), "input", NUM),
         ("nonop", "Non-operating assets", float(A.get("non_operating_assets") or 0), "input", NUM),
-        ("eq_bal", "Equity value at the balance-sheet date", "={ev}-{nd}+{nonop}", "formula", NUM),
+        ("eq_bal", "Equity value at the balance-sheet date", "={ev}-{nd}-{lease}-{nci}+{nonop}", "formula", NUM),
         ("ke", "Cost of equity", f"={KE}", "link", PCT),
         ("roll", "Roll-forward to the valuation date  ((1 + ke) ^ years)",
          "=(1+{ke})^((B19-B17)/365.25)" if (bal_d and val_d) else 1,
@@ -416,28 +427,38 @@ def build(root, out):
         ("cmp", "Current market price (INR)", float(A.get("current_price") or 0), "input", "#,##0.00"),
         ("ups", "Upside / (downside)", "={vps}/{cmp}-1", "formula", PCT),
         (None, None, None, None, None),
-        ("sec", "Exit-multiple cross-check and target", None, None, None),
-        ("ebitda_n", "Terminal-year EBITDA", f"={LASTC}7", "formula", NUM),
-        ("impl", "Exit EV/EBITDA implied by the perpetuity TV", "={tv}/{ebitda_n}", "formula", MULT),
-        ("mult", "Exit multiple (house convention)", float(cfg.get("target_exit_multiple", 10)), "input", MULT),
-        ("tv_x", "Terminal value at exit multiple", "={mult}*{ebitda_n}", "formula", NUM),
-        ("pv_x", "PV of exit terminal value", f"={{tv_x}}/(1+{{wacc}})^{LASTC}22", "formula", NUM),
-        ("vps_x", "*Value per share at exit multiple (INR)", "=({sum_pv}+{pv_x}-{nd}+{nonop})*{roll}/{sh}", "formula", INR),
-        ("rnd", "Rounding step (INR)", float(cfg.get("target_round", 5)), "input", "0"),
-        ("tgt", "*Target price (INR)", "=ROUND({vps_x}/{rnd},0)*{rnd}", "formula", INR),
+        ("sec", f"Target price ({int(TP['horizon_months'])}-month forward)", None, None, None),
+        ("tmeth", "Target method  (Perpetuity DCF or Exit multiple)",
+         "Exit multiple" if TP["method"] == "exit_multiple" else "Perpetuity DCF", "input", "@"),
+        ("hor", "Horizon (months)", float(TP["horizon_months"]), "input", "0"),
+        ("base_t", "Value per share today, on the target method", '=IF({tmeth}="Exit multiple",{vps_x},{vps})', "formula", INR),
+        ("dps", "Dividend per share, next 12 months (first forecast year)", DPS_REF, "link", "0.00"),
+        ("fwd", "Forward value  (value x (1 + ke)^(h/12) - DPS x h/12)", "={base_t}*(1+{ke})^({hor}/12)-{dps}*{hor}/12", "formula", INR),
+        ("rnd", "Rounding step (INR)", float(TP["round"]), "input", "0"),
+        ("tgt", "*Target price (INR)", "=ROUND({fwd}/{rnd},0)*{rnd}", "formula", INR),
         ("ups_t", "Upside / (downside) to target", "={tgt}/{cmp}-1", "formula", PCT),
-        ("buy", "BUY above", _rate(cfg.get("buy_above", 15)), "input", PCT),
-        ("sell", "SELL below", -abs(_rate(cfg.get("sell_below", 10))), "input", PCT),
+        ("buy", "BUY above", _rate(TP["buy_above"]), "input", PCT),
+        ("sell", "SELL below", -abs(_rate(TP["sell_below"])), "input", PCT),
         ("rating", "*Rating", '=IF({ups_t}>{buy},"BUY",IF({ups_t}<{sell},"SELL","HOLD"))', "formula", "@"),
         (None, None, None, None, None),
+        ("sec", "Exit-multiple cross-check (not the target unless chosen above)", None, None, None),
+        ("ebitda_n", "Terminal-year EBITDA", f"={LASTC}7", "formula", NUM),
+        ("impl", "Exit EV/EBITDA implied by the perpetuity TV", "={tv}/{ebitda_n}", "formula", MULT),
+        ("mult", "Exit multiple", float(TP.get("exit_multiple") or 10), "input", MULT),
+        ("tv_x", "Terminal value at exit multiple", "={mult}*{ebitda_n}", "formula", NUM),
+        ("pv_x", "PV of exit terminal value", f"={{tv_x}}/(1+{{wacc}})^{LASTC}22", "formula", NUM),
+        ("vps_x", "*Value per share at exit multiple (INR)", "=({sum_pv}+{pv_x}-{nd}-{lease}-{nci}+{nonop})*{roll}/{sh}", "formula", INR),
         ("alt", "Alternative exit multiple", float(A.get("exit_multiple") or 14), "input", MULT),
         ("vps_alt", "Value per share at alternative exit (INR)",
-         f"=({{sum_pv}}+{{alt}}*{{ebitda_n}}/(1+{{wacc}})^{LASTC}22-{{nd}}+{{nonop}})*{{roll}}/{{sh}}", "formula", INR),
+         f"=({{sum_pv}}+{{alt}}*{{ebitda_n}}/(1+{{wacc}})^{LASTC}22-{{nd}}-{{lease}}-{{nci}}+{{nonop}})*{{roll}}/{{sh}}", "formula", INR),
     ]
     notes = {"nd": "assumptions.json net_debt, as at the balance-sheet date",
+             "lease": "assumptions.json lease_liabilities (annual report)",
+             "nci": "assumptions.json minority_interest (annual report)",
              "nonop": "Treasury investments and stakes not in FCFF",
              "cmp": cfg.get("price_note", "Price at the cover date"),
-             "mult": "Target anchor: DCF with an exit multiple",
+             "tmeth": "assumptions.json target_policy",
+             "dps": "Schedules: dividends declared / shares, first forecast year",
              "ronic": "assumptions.json terminal_ronic",
              "buy": "House rating policy", "sell": "House rating policy",
              "alt": "Cross-check (assumptions.json exit_multiple)"}
@@ -495,7 +516,7 @@ def build(root, out):
                 T.put(rr, 2 + j, cell_f(w, x), fmt=INR, bold=(i == 2 and j == 2))
         return top + 8
 
-    tail = f"-{X['nd']}+{X['nonop']})*{X['roll']}/{X['sh']}"
+    tail = f"-{X['nd']}-{X['lease']}-{X['nci']}+{X['nonop']})*{X['roll']}/{X['sh']}"
     if ronic:
         tv_cell = lambda w, g: f"DCF!${LASTC}$10*(1+{g})*(1-{g}/{X['ronic']})/({w}-{g})"
     else:
@@ -523,7 +544,8 @@ def build(root, out):
     call = [("Rating", dcf("rating"), "@", True), ("Target price (INR)", dcf("tgt"), INR, True),
             ("Current market price (INR)", dcf("cmp"), "#,##0.00", False),
             ("Upside / (downside) to target", dcf("ups_t"), PCT, True),
-            ("Target basis: DCF with an exit EV/EBITDA of", dcf("mult"), MULT, False),
+            ("Target basis", dcf("tmeth"), "@", False),
+            ("Target horizon (months)", dcf("hor"), "0", False),
             ("Active scenario", "=Scenarios!B5", "@", False)]
     for k, (lab, f, fmt, bold) in enumerate(call):
         B.label(5 + k, lab, 1, bold=bold)
@@ -542,7 +564,7 @@ def build(root, out):
     B.header(top, ["INR / share"], label="Value per share by method")
     meth = [(f"{c.title()} case, perpetuity DCF", f"=Scenarios!C{first + i}") for i, c in enumerate(order)]
     meth += [("Probability-weighted, perpetuity", f"=Scenarios!D{WTD_ROW}"),
-             ("DCF at the target exit multiple", dcf("vps_x")),
+             ("DCF at the cross-check exit multiple", dcf("vps_x")),
              ("DCF at the alternative exit multiple", dcf("vps_alt")),
              ("Current market price", dcf("cmp"))]
     for k, (lab, f) in enumerate(meth):
@@ -645,6 +667,16 @@ def build(root, out):
             f"- Scenarios '{'/'.join(order)}' were each built by financial-model and valued by model.py; "
             "the Scenarios sheet checks this workbook against those values."]):
         info.cell(r + 1 + k, 1, t)
+    # Failed checks with a known, sourced reason (data/exceptions.json) are listed, never hidden.
+    exc_p = os.path.join(root, "data", "exceptions.json")
+    if os.path.exists(exc_p):
+        exc = json.load(open(exc_p, encoding="utf-8")).get("exceptions", [])
+        r = info.max_row + 2
+        info.cell(r, 1, "Explained check failures").font = Font(bold=True)
+        for k, e in enumerate(exc):
+            info.cell(r + 1 + k, 1, f"- {e['status']}  {e['check']} ({e['period']}, INR {e['amount_cr']:,} Cr): "
+                                    f"{e['reason']} Moves the valuation: {'yes' if e.get('moves_valuation') else 'no'}. "
+                                    f"Source: {e['source']}")
     wb.calculation.iterate = True
     wb.calculation.iterateCount = 1000
     wb.calculation.iterateDelta = 1e-7

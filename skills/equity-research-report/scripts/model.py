@@ -786,7 +786,13 @@ def dcf(R: dict, A: dict) -> dict:
     if not nonop:
         derived.append("non_operating_assets = 0 — confirm the company has no surplus "
                        "treasury investments or stakes to add back")
-    eq_bal = ev - net_debt + nonop
+    # Other claims on enterprise value. FCFF counts 100% of consolidated subsidiaries' cash, so
+    # minority holders' share must come off; and Ind AS 116 EBITDA excludes rent, so lease
+    # liabilities are debt-like. Both are optional and default to zero.
+    leases = float(A.get("lease_liabilities") or 0)
+    nci = float(A.get("minority_interest") or 0)
+    claims = leases + nci
+    eq_bal = ev - net_debt - claims + nonop
     eq_val = eq_bal * roll
     sh = float(A.get("shares_out") or s["shares"][-1] or 0)
     vps = _d(eq_val, sh)
@@ -803,7 +809,7 @@ def dcf(R: dict, A: dict) -> dict:
         for gg in gts:
             if gg >= w:
                 row.append(float("nan")); continue
-            v_ = (_pv(w) + _tv(w, gg) / (1 + w) ** t_last - net_debt + nonop) * roll
+            v_ = (_pv(w) + _tv(w, gg) / (1 + w) ** t_last - net_debt - claims + nonop) * roll
             row.append(round(_d(v_, sh) or 0))
         grid.append(row)
 
@@ -821,7 +827,7 @@ def dcf(R: dict, A: dict) -> dict:
         tv_x = float(exit_mult) * term_ebitda
         pv_tv_x = tv_x / (1 + wacc) ** t_last
         ev_x = pv_sum + pv_tv_x
-        vps_x = _d((ev_x - net_debt + nonop) * roll, sh)
+        vps_x = _d((ev_x - net_debt - claims + nonop) * roll, sh)
         cross.update({
             "Exit multiple supplied (x)": float(exit_mult),
             "Terminal value at exit multiple": round(tv_x),
@@ -838,6 +844,47 @@ def dcf(R: dict, A: dict) -> dict:
         derived.append("no exit_multiple supplied — the terminal value rests on Gordon "
                      "Growth alone. Cross-check the implied exit multiple against "
                      "where the sector trades.")
+
+    # ---- target price ----------------------------------------------------------
+    # One place for the published call. target_policy (decisions.json, top level):
+    #   method          "dcf" (value per share above) or "exit_multiple" (with exit_multiple)
+    #   horizon_months  the target is that far forward: value x (1 + ke)^h, less dividends paid
+    #   round, buy_above, sell_below (percent) the house rating bands
+    tp = A.get("target_policy") or {}
+    target = None
+    if tp and vps is not None and cmp_:
+        h = float(tp.get("horizon_months", 12)) / 12
+        method = tp.get("method", "dcf")
+        tx = float(tp.get("exit_multiple") or exit_mult or 0)
+        val_x = (_d((pv_sum + tx * term_ebitda / (1 + wacc) ** t_last - net_debt - claims + nonop) * roll, sh)
+                 if tx else None)
+        now = val_x if method == "exit_multiple" else vps
+        br_ = A.get("_bridge") or {}
+        dps = 0.0
+        if br_.get("dividends") and br_.get("shares") and br_["shares"][0]:
+            dps = float(br_["dividends"][0]) / float(br_["shares"][0])
+        fwd = now * (1 + ke) ** h - dps * h
+        rnd = float(tp.get("round", 5))
+        tgt = round(fwd / rnd) * rnd
+        ups = tgt / float(cmp_) - 1
+        buy, sell = float(tp.get("buy_above", 15)) / 100, -abs(float(tp.get("sell_below", 10))) / 100
+        rating = "BUY" if ups > buy else ("SELL" if ups < sell else "HOLD")
+        # what perpetual growth an exit multiple implies at the funded terminal economics
+        implied_g = None
+        if tx and ronic:
+            want, lo, hi = tx * term_ebitda, 0.0, wacc - 1e-6
+            f = lambda gg: term_nopat * (1 + gg) * (1 - gg / ronic) / (wacc - gg)
+            if f(hi) >= want:
+                for _ in range(200):
+                    mid_ = (lo + hi) / 2
+                    lo, hi = (mid_, hi) if f(mid_) < want else (lo, mid_)
+                implied_g = lo
+        target = {"method": method, "horizon_months": h * 12, "value_now": now, "cost_of_equity": ke,
+                  "dps_next12": dps, "forward_value": fwd, "target": tgt, "upside": ups, "rating": rating,
+                  "buy_above": buy, "sell_below": sell, "round": rnd,
+                  "exit_multiple": tx or None, "value_at_exit_multiple": val_x,
+                  "exit_implied_growth_at_ronic": implied_g,
+                  "exit_reachable_at_ronic": (implied_g is not None) if (tx and ronic) else None}
 
     return {
         "wacc_build": {"Risk-free rate": round(rf * 100, 2), "Equity risk premium": round(erp * 100, 2),
@@ -857,6 +904,8 @@ def dcf(R: dict, A: dict) -> dict:
                  "PV of terminal value": round(pv_tv), "TV as % of EV": round(pv_tv / ev * 100, 1),
                  "Enterprise value": round(ev), "Less: net debt": round(-net_debt),
                  "Add: non-operating assets": round(nonop),
+                 **({"Less: lease liabilities": round(-leases)} if leases else {}),
+                 **({"Less: minority interest": round(-nci)} if nci else {}),
                  **({"Equity value at balance-sheet date": round(eq_bal),
                      "Roll-forward to valuation date": round(eq_val - eq_bal)} if roll != 1.0 else {}),
                  "Equity value": round(eq_val), "Shares outstanding (Cr)": round(sh, 2),
@@ -871,7 +920,9 @@ def dcf(R: dict, A: dict) -> dict:
                    "roll_forward": roll, "terminal_ronic": ronic,
                    "terminal_nopat": term_nopat, "terminal_ebitda": term_ebitda,
                    "pv_explicit": pv_sum, "net_debt": net_debt, "non_operating_assets": nonop,
-                   "shares": sh, "wacc": wacc, "cost_of_equity": ke, "terminal_growth": gt},
+                   "shares": sh, "wacc": wacc, "cost_of_equity": ke, "terminal_growth": gt,
+                   "lease_liabilities": leases, "minority_interest": nci},
+        "target": target,
         "three_statement": fm,
         "derived_from": derived,
     }

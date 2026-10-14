@@ -82,6 +82,8 @@ MODEL_MAP = {
     "current_price":      ("current_price", "value"),
     "exit_multiple":      ("exit_multiple", "value"),
     "terminal_ronic":     ("terminal_ronic", "rate"),
+    "lease_liabilities":  ("lease_liabilities", "value"),
+    "minority_interest":  ("minority_interest", "value"),
 }
 
 # analyst-facing assumptions model.py does not read directly; kept in the JSON
@@ -327,7 +329,7 @@ def build(dec: dict, strict: bool, strategy: dict | None = None,
         A["_analyst"] = {k: _val(v) for k, v in analyst.items()}
     for k in ("peers", "peer_betas", "scenarios", "mid_year_convention",
               "blume_adjust", "non_operating_assets",
-              "balance_date", "first_fy_end", "valuation_date"):
+              "balance_date", "first_fy_end", "valuation_date", "target_policy"):
         if k in dec:
             A[k] = dec[k]
         elif k in A_in:

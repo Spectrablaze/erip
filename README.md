@@ -18,8 +18,8 @@ assumptions before any valuation is computed.
 
 | Company | Rating | Target | Price at cover | Report | Model | Audit trail |
 |---|---|---|---|---|---|---|
-| **JSW Infrastructure Ltd** (JSWINFRA) | SELL | INR 185 | INR 357.45 (1 Oct 2026) | [PDF, 21 pp](reports/JSWINFRA/JSW%20Infrastructure%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/JSWINFRA/JSW_Infrastructure_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro](reports/JSWINFRA/audit/) |
-| **Adani Ports and SEZ Ltd** (ADANIPORTS) | SELL | INR 1,195 | INR 1,695 (7 Aug 2026) | [PDF, 32 pp](reports/ADANIPORTS/Adani%20Ports%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/ADANIPORTS/Adani_Ports_and_Special_Economic_Zone_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro, audit book](reports/ADANIPORTS/audit/) |
+| **JSW Infrastructure Ltd** (JSWINFRA) | SELL | INR 130 | INR 357.45 (1 Oct 2026) | [PDF, 21 pp](reports/JSWINFRA/JSW%20Infrastructure%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/JSWINFRA/JSW_Infrastructure_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro](reports/JSWINFRA/audit/) |
+| **Adani Ports and SEZ Ltd** (ADANIPORTS) | SELL | INR 575 | INR 1,695 (7 Aug 2026) | [PDF, 32 pp](reports/ADANIPORTS/Adani%20Ports%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/ADANIPORTS/Adani_Ports_and_Special_Economic_Zone_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro, audit book](reports/ADANIPORTS/audit/) |
 
 <table>
 <tr>
@@ -37,9 +37,10 @@ assumptions before any valuation is computed.
 - The FY27-FY28 build-out is lower-risk than it looks: 96 of the 117 MTPA being added is take-or-pay
   capacity for the anchor customer, JSW Steel. The report credits it in full, including the slurry
   pipeline's INR 800 Cr EBITDA disclosed by the CFO.
-- Even so, a ten-year DCF of the three-statement model's free cash flow returns INR 121 a share
-  (bull 129, bear 58). At these cash flows the market price implies a cost of capital of about 7.0%,
-  in line with the company's own 7.0% pre-tax borrowing cost.
+- Even so, a ten-year DCF of the three-statement model's free cash flow returns INR 115 a share
+  today (bull 123, bear 53) after lease liabilities and minority interest. At these cash flows the
+  market price implies a cost of capital of about 7%, against a 12.3% CAPM cost of equity and a 7.2%
+  risk-free rate: the price needs the business to be discounted almost like a government bond.
 - A guidance scorecard built from old earnings-call transcripts shows management hitting 3 of 3
   near-term figures and 1 of 5 set a year or more ahead.
 - Four falsifiers, each with a metric, threshold and date, define what would change the view.
@@ -59,14 +60,38 @@ calculations and green for links between sheets.
 - **Drivers to Schedules**: a linked P&amp;L, balance sheet and cash flow. A revolver and interest
   on average debt are solved iteratively, and the balance sheet ties in every year of every scenario.
 - **WACC and DCF**: free cash flow is built from the statements (EBIT after tax, plus D&amp;A, less
-  capex and the increase in working capital), with mid-year discounting, a Gordon terminal value,
-  an exit-multiple target and the rating rule.
+  capex and the increase in working capital), with mid-year discounting, a funded terminal value,
+  the forward target and the rating rule, with an exit-multiple cross-check.
 - **Sensitivity**: WACC x terminal growth and WACC x exit multiple. Each cell recomputes the DCF.
 
 Before publishing, the build recalculates the workbook in LibreOffice for every scenario and
 stops unless each one reproduces the Python model's value with no formula errors.
 
 ---
+
+## Valuation policy
+
+Applied the same way in the reports, the Excel models and the web page, and recorded per report in
+`decisions.json`:
+
+- **Target** = the perpetuity DCF value per share, rolled 12 months forward at the cost of equity,
+  less the next year's dividend, rounded to INR 5. Exit multiples are reported as a cross-check, never
+  averaged in. For both companies, a 10x exit would need perpetual growth close to or above the WACC
+  at the company's own return on capital. So it isn't used as the target.
+- **Rating** follows mechanically from the upside to target: BUY above +15%, SELL below -10%, HOLD
+  between.
+- **Equity bridge**:
+  - start from enterprise value at the date of the net-debt figure;
+  - deduct net debt, Ind AS 116 lease liabilities and minority interest at book;
+  - add non-operating assets;
+  - roll forward to the cover date at the cost of equity.
+- **Terminal value** ties growth to reinvestment at the company's own recent return on new capital.
+- **Ratings are append-only.** A revision adds a new dated version with its reason; earlier versions
+  are kept. JSW went from SELL 165 to 130, and Adani Ports from REDUCE 1,165 to SELL 575, as the
+  method was corrected, not because either thesis changed.
+- **Known check exceptions** (for example, reserve movements from share issues that Screener does not
+  record) are listed with their source and size in each workbook's Model info sheet, rather than
+  silently tolerated.
 
 ## How it works
 

@@ -28,6 +28,8 @@ Forecast horizon: 5.0 years  |  Sector: realestate
 | exit_multiple | 14.0 | Low | analyst | Cross-check on the perpetuity terminal value. APSEZ currently trades at roughly 18.9x EV/E |
 | nwc_pct_sales | 11.1, 10.82, 10.55, 10.27, 10.0 | Medium | analyst | Supplied directly as a series rather than derived, for two reasons. First, derive_nwc in b |
 | terminal_ronic | 10.5 | Medium | analyst | Return on new invested capital in perpetuity, tying terminal growth to the reinvestment th |
+| lease_liabilities | 8296.02 | High | analyst | Ind AS 116 lease liabilities at 31 Mar 2026: non-current 7,786.56 + current 509.46. EBITDA |
+| minority_interest | 2856.18 | High | analyst | Non-controlling interests at 31 Mar 2026, at book value. FCFF includes 100% of consolidate |
 
 ## Detail
 
@@ -333,6 +335,30 @@ Forecast horizon: 5.0 years  |  Sector: realestate
 - "ROIC FY22-FY26: 7.0%, 7.8%, 10.4%, 11.1%, 9.9%" - `data/model.json roiic block (Screener.in consolidated)`
 
 **Confidence:** Medium
+
+### lease_liabilities
+
+**Value:** 8296.02 cr
+
+**Why**
+- Ind AS 116 lease liabilities at 31 Mar 2026: non-current 7,786.56 + current 509.46. EBITDA is after Ind AS 116, so rent is not deducted from the cash flows and the lease liabilities are debt-like. Reverses the Phase 3b exclusion: excluding them while using post-Ind AS 116 EBITDA overstated the equity by about INR 36 a share.
+
+**Evidence**
+- "Lease Liabilities 7,786.56 (non-current), 509.46 (current)" (p. 660) - `kb/annual_report/pages/page_0659.md (Consolidated Balance Sheet)`
+
+**Confidence:** High
+
+### minority_interest
+
+**Value:** 2856.18 cr
+
+**Why**
+- Non-controlling interests at 31 Mar 2026, at book value. FCFF includes 100% of consolidated subsidiaries' cash flows, so the minority share is deducted. Minorities took INR 322.5 cr of FY26 profit; on a market-value basis (at APSEZ's own P/E) the deduction would be larger, so book value is the less punitive convention.
+
+**Evidence**
+- "Non-Controlling Interests 2,856.18" (p. 660) - `kb/annual_report/pages/page_0659.md (Consolidated Balance Sheet)`
+
+**Confidence:** High
 
 ## Checks raised at build time
 

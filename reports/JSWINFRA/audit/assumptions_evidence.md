@@ -26,6 +26,8 @@ Forecast horizon: 10.0 years  |  Sector: realestate
 | exit_multiple | 14.0 | Low | analyst | Cross-check on the perpetuity terminal value only. JSWINFRA trades at ~30x trailing EV/EBI |
 | capacity_addition | 9, 63, 30, 15, 0, 5, 5, 5, 5, 5 | Medium | analyst | Change in effective average capacity, FY27-FY36: Tuticorin bulk and Kolkata interim (+9),  |
 | terminal_ronic | 12.0 | Medium | analyst | Return on new invested capital in perpetuity. Gordon on FY36 FCFF assumed 25% returns on n |
+| lease_liabilities | 489.07 | High | analyst | Ind AS 116 lease liabilities at 31 Mar 2026: non-current 457.98 + current 31.09. EBITDA is |
+| minority_interest | 815.24 | High | analyst | Non-controlling interests at 31 Mar 2026, at book value. The FCFF includes 100% of consoli |
 
 ## Detail
 
@@ -283,6 +285,30 @@ Forecast horizon: 10.0 years  |  Sector: realestate
 - "NOPAT 1,213 / 1,448 / 1,644 cr on invested capital 8,695 / 12,257 / 15,459 cr, FY24-FY26" - `data/model.json roiic block (Screener.in consolidated)`
 
 **Confidence:** Medium
+
+### lease_liabilities
+
+**Value:** 489.07 cr
+
+**Why**
+- Ind AS 116 lease liabilities at 31 Mar 2026: non-current 457.98 + current 31.09. EBITDA is after Ind AS 116 (rent is not an operating cost), so leases are debt-like and come off enterprise value. Net cash of INR 2,769 cr is borrowings only and excludes them.
+
+**Evidence**
+- "Lease liabilities 457.98 (non-current), 31.09 (current)" (p. 180) - `kb/annual_report/pages/page_0179.md (Consolidated Balance Sheet)`
+
+**Confidence:** High
+
+### minority_interest
+
+**Value:** 815.24 cr
+
+**Why**
+- Non-controlling interests at 31 Mar 2026, at book value. The FCFF includes 100% of consolidated subsidiaries' cash flows, so the minority holders' share is deducted. Book value is the convention used; NCI earns INR 23.6 cr a year, so a market-value basis would move the answer by under INR 1 a share.
+
+**Evidence**
+- "Non-controlling interests (NCI) 815.24" (p. 180) - `kb/annual_report/pages/page_0179.md (Consolidated Balance Sheet)`
+
+**Confidence:** High
 
 ## Checks raised at build time
 

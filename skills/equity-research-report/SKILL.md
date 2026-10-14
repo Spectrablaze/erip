@@ -700,7 +700,39 @@ python3 <skill>/scripts/scenario_runs.py --root reports/<T> --sector "<sector>"
     analyst; it's a valuation decision.
   - If RONIC is below WACC, higher terminal growth lowers the value. Say so in the text.
 
-All four inputs are optional. Without them `model.py` behaves exactly as it did before.
+**Deduct every claim on enterprise value.** These are cited facts, so they go inside
+`assumptions` with evidence:
+- **`lease_liabilities`**: Ind AS 116 balances, current plus non-current. Indian EBITDA is after
+  Ind AS 116, so rent is not in the cash flows and the leases are debt-like.
+- **`minority_interest`**: non-controlling interests at book. FCFF includes 100% of the
+  consolidated subsidiaries.
+- Screener exports carry neither, so take both from the consolidated balance sheet. Excluding
+  APSEZ's leases had overstated it by about INR 36 a share.
+
+**The target comes from `target_policy`**, set at the top level of `decisions.json`:
+`{"method": "dcf" | "exit_multiple", "horizon_months": 12, "round": 5, "buy_above": 15,
+"sell_below": 10, "exit_multiple": 10}`.
+- `model.py` computes the whole call once and writes it to `dcf.target`: value today, value
+  rolled forward at the cost of equity, less the first forecast year's dividend per share,
+  then the target, upside and rating.
+- It also reports what perpetual growth the exit multiple would need at `terminal_ronic`, or
+  that no growth below WACC reaches it.
+- **Report, workbook and web page read `dcf.target`; none of them recomputes it.**
+- Choosing `exit_multiple` when `dcf.target.exit_reachable_at_ronic` is false (or the implied
+  growth is near WACC) needs an explicit written override. Both sample reports moved off a 10x
+  exit for exactly this reason.
+
+**Explain check failures; never hide them.** A three-statement check that fails for a known
+reason goes into `data/exceptions.json`. Each entry gives the check, the period, the amount,
+the reason, its source, and whether it moves the valuation. Entries that move the valuation
+belong in the report's stated limitations. The workbook lists all of them on Model info.
+
+**The call ledger is append-only.** Never edit a recorded call in `reports/_knowledge/calls.json`.
+`kb.py call` on a ticker that already has a standing call appends a new version with
+`supersedes`, and stamps the old one `superseded_on`. Superseded entries never count as the
+standing call or as a scored outcome.
+
+All of these inputs are optional. Without them `model.py` behaves exactly as it did before.
 `model.json` `dcf.timing` carries the unrounded periods, roll-forward and terminal inputs.
 Derive any exit-multiple value in the report from it, never re-implement the discounting.
 

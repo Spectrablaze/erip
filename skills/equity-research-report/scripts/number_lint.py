@@ -25,8 +25,11 @@ NUM = re.compile(r"(?<![\w.\-])(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)(?![\
 UNIT = re.compile(r"\s*(?:%?\s*)?(?:MT|MMT|MTPA|km|years?|yrs?|months?|days?|bp|bps|TEU|rakes?|ports?|"
                   r"Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b")
 
+RANGE = re.compile(r"\s*(?:to|-|–)\s*[\d,.]+")
+# accounting standards and legal references: "Ind AS 116", "Section 135", "Rule 11"
+REF = re.compile(r"(?:\bAS|\bIFRS|\bSection|\bRule|\bSchedule|\bReg\.?)\s*$")
 # page references: "p.107", "pp.70, 107", "pp.103-107"
-PAGE = re.compile(r"\bpp?\.\s?[\d,\s\-–]*$")
+PAGE = re.compile(r"\bpp?\.\s?(?:[\d,\s\-\u2013]|to\b)*$")
 
 
 def outputs(root):
@@ -44,7 +47,7 @@ def outputs(root):
             out.setdefault(("f", round(abs(v), 1)), where)
 
     d = M.get("dcf") or {}
-    INPUTS = ("net debt", "market price", "Shares", "non-operating")   # sourced inputs, not outputs
+    INPUTS = ("net debt", "market price", "Shares", "non-operating", "lease", "minority")   # sourced inputs, not outputs
     for k, v in (d.get("bridge") or {}).items():
         if not any(t in k for t in INPUTS):
             add(v, f"dcf.bridge.{k}")
@@ -74,7 +77,7 @@ def _strings(tree):
     """(lineno, text) for every literal piece of text, f-string text parts included."""
     for node in ast.walk(tree):
         if isinstance(node, ast.Constant) and isinstance(node.value, str):
-            yield node.lineno, node.value
+            yield node.lineno, getattr(node, "end_lineno", node.lineno), node.value
 
 
 def lint(root, paths):
@@ -90,13 +93,20 @@ def lint(root, paths):
     for f in files:
         src = open(f, encoding="utf-8").read()
         lines = src.splitlines()
-        for ln, text in _strings(ast.parse(src)):
-            if ln <= len(lines) and "lint: not-model" in lines[ln - 1]:
+        for ln, end, text in _strings(ast.parse(src)):
+            if any("lint: not-model" in lines[k - 1] for k in range(ln, min(end, len(lines)) + 1)):
                 continue
             for m in NUM.finditer(text):
                 if UNIT.match(text, m.end()) or PAGE.search(text[max(0, m.start() - 24):m.start()]):
                     continue
+                rng = RANGE.match(text, m.end())          # "117 to 122 MT": the unit is on the second number
+                if rng and UNIT.match(text, rng.end()):
+                    continue
+                if REF.search(text[max(0, m.start() - 12):m.start()]):
+                    continue
                 raw = m.group(1).replace(",", "")
+                if "." not in raw and text[m.end():m.end() + 1] == "%":   # whole-number percentages
+                    continue
                 v = float(raw)
                 key = ("f", round(v, 1)) if "." in raw else ("i", round(v))
                 if key in guard:

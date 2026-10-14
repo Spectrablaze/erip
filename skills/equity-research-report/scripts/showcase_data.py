@@ -19,7 +19,6 @@ import os
 def company(root, links):
     J = lambda p: json.load(open(os.path.join(root, p), encoding="utf-8"))
     M, S3, A = J("data/model.json"), J("data/scenarios_3s.json"), J("data/assumptions.json")
-    VS = J("data/valuation_settings.json")
     P = J("data/peers.json")
     T = J("data/tornado.json") if os.path.exists(os.path.join(root, "data", "tornado.json")) else {"drivers": []}
     BR = M["dcf"]["bridge"]
@@ -34,20 +33,24 @@ def company(root, links):
                     "terminal_period": t["terminal_period"], "roll": t["roll_forward"], "ronic": t["terminal_ronic"],
                     "nopat_T": t["terminal_nopat"], "ebitda_T": t["terminal_ebitda"], "net_debt": t["net_debt"],
                     "nonop": t["non_operating_assets"], "shares": t["shares"], "wacc": t["wacc"],
+                    "claims": t.get("lease_liabilities", 0) + t.get("minority_interest", 0),
                     "g": t["terminal_growth"], "revenue": c.get("revenue")}
     ff = [m for m in P.get("football_field", []) if "52" not in m.get("label", "")]
     ts = J(S3["cases"]["base"]["three_statement"])
     return {
         "ticker": ticker, "name": name, "cmp": BR["Current market price (INR)"],
-        "house_multiple": VS["target_exit_multiple"], "round": VS["target_round"],
-        "buy_above": VS["buy_above"], "sell_below": VS["sell_below"],
+        "house_multiple": M["dcf"]["target"].get("exit_multiple") or 10, "round": M["dcf"]["target"]["round"],
+        "buy_above": M["dcf"]["target"]["buy_above"] * 100, "sell_below": -M["dcf"]["target"]["sell_below"] * 100,
         "alt_multiple": M["dcf"]["terminal_cross_check"].get("Exit multiple supplied (x)"),
         "peer_ev_ebitda": (P.get("comps") or {}).get("median", {}).get("EV/EBITDA (x)"),
         "weighted": S3["probability_weighted"],
         "years": [p.replace("Mar-", "FY") for p in ts["bridge"]["periods"]],
         "football": [{"label": m["label"], "low": m["low"], "high": m["high"], "mid": m.get("mid")} for m in ff],
         "tornado": T["drivers"], "tornado_base": T.get("base_value"),
-        "cases": cases, **links.get(ticker, {}),
+        "cases": cases, "target": M["dcf"]["target"],
+        "claims": {"lease_liabilities": M["dcf"]["timing"].get("lease_liabilities", 0),
+                   "minority_interest": M["dcf"]["timing"].get("minority_interest", 0)},
+        **links.get(ticker, {}),
     }
 
 

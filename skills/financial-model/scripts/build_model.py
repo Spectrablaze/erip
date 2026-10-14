@@ -483,7 +483,7 @@ def write_json(path, doc, M, checks, notes):
         "change_in_nwc": f("d_nwc"), "tax_rate": f("tax_rate"),
         "fcff": f("s_fcff"), "fcfe": f("s_fcfe"),
         "net_debt_close": f("s_net_debt"), "shares": f("shares"),
-        "eps": f("eps"), "bvps": f("bvps"),
+        "eps": f("eps"), "bvps": f("bvps"), "dividends": f("dividends"),
     }
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:

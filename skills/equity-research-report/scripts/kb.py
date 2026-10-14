@@ -147,12 +147,22 @@ def cmd_call(args):
     p = os.path.join(kb_dir(args.root), "calls.json")
     calls = _load(p, [])
     review = (date.today() + timedelta(days=30 * int(args.review_months))).isoformat()
-    calls.append({
+    # Append-only ledger: never edit a recorded call. A new call on a ticker with a standing call
+    # supersedes it; the old entry keeps its terms and gains only a superseded_on stamp.
+    prior = [c for c in calls if c.get("ticker") == args.ticker and c.get("outcome") is None
+             and not c.get("superseded_on")]
+    entry = {
         "ticker": args.ticker, "date": _today(), "rating": args.rating,
         "target": args.target, "cmp_at_call": args.cmp,
         "thesis": args.thesis, "falsifiers": args.falsifier or [],
-        "review_on": review, "outcome": None,
-    })
+        "review_on": review, "outcome": None, "version": 1,
+    }
+    if prior:
+        old = prior[-1]
+        old["superseded_on"] = _today()
+        entry["version"] = int(old.get("version", 1)) + 1
+        entry["supersedes"] = {k: old.get(k) for k in ("date", "version", "rating", "target")}
+    calls.append(entry)
     _save(p, calls)
     print(f"recorded {args.rating} on {args.ticker}: TP {args.target} vs CMP {args.cmp}")
     print(f"  review due {review}  ({len(args.falsifier or [])} falsifiers logged)")
@@ -163,7 +173,7 @@ def cmd_close(args):
     p = os.path.join(kb_dir(args.root), "calls.json")
     calls = _load(p, [])
     open_calls = [c for c in calls if c["ticker"].upper() == args.ticker.upper()
-                  and c["outcome"] is None]
+                  and c["outcome"] is None and not c.get("superseded_on")]
     if not open_calls:
         print(f"no open call on {args.ticker}")
         return
@@ -262,7 +272,7 @@ def cmd_brief(args):
 
     # --- calibration + due reviews ---
     _print_calibration(calls)
-    due = [c for c in calls if c["outcome"] is None
+    due = [c for c in calls if c["outcome"] is None and not c.get("superseded_on")
            and (_days_since(c["review_on"]) or -1) >= 0]
     if due:
         print(f"\n** {len(due)} CALL(S) DUE FOR REVIEW — score before starting new work **")
@@ -309,7 +319,7 @@ def cmd_review(args):
         print("no calls recorded yet")
         return
     _print_calibration(calls)
-    op = [c for c in calls if c["outcome"] is None]
+    op = [c for c in calls if c["outcome"] is None and not c.get("superseded_on")]
     print(f"\n{len(op)} open call(s):")
     for c in op:
         d = _days_since(c["review_on"])

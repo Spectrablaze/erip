@@ -52,8 +52,10 @@ def find_call(root: str, ticker: str) -> tuple[dict | None, list]:
     """The standing call = the most recent OPEN call on this ticker."""
     calls = _load(os.path.join(root, "_knowledge", "calls.json"), []) or []
     mine = [c for c in calls if str(c.get("ticker", "")).upper() == ticker.upper()]
-    open_calls = [c for c in mine if c.get("outcome") is None]
-    return (open_calls[-1] if open_calls else None), mine
+    # The ledger is append-only: a revision adds a new entry and stamps the old one superseded_on.
+    # Superseded entries are history, never the standing call and never a scored outcome.
+    open_calls = [c for c in mine if c.get("outcome") is None and not c.get("superseded_on")]
+    return (open_calls[-1] if open_calls else None), [c for c in mine if not c.get("superseded_on")]
 
 
 def dcf_forecast(model: dict) -> dict:

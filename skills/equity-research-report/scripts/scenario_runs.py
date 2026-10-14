@@ -109,6 +109,7 @@ def main():
             "intrinsic_value_per_share": br["Intrinsic value per share (INR)"],
             "TV_as_%_of_EV": br["TV as % of EV"],
             "upside_%": br.get("Upside / (downside) %"),
+            "target": (m["dcf"].get("target") or {}).get("target"),
             "implied_exit_ev_ebitda": tcc.get("Implied exit EV/EBITDA (x)"),
             "revenue_growth_y1_%": round(_rate1(a["revenue_growth"]) * 100, 1),
             "exit_ebit_margin_%": m["dcf"]["forecast"][-1].get("EBIT %"),
