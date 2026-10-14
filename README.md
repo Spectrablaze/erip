@@ -16,7 +16,7 @@ assumptions before any valuation is computed.
 
 | Company | Rating | Target | Price at cover | Report | Model | Audit trail |
 |---|---|---|---|---|---|---|
-| **JSW Infrastructure Ltd** (JSWINFRA) | SELL | INR 165 | INR 357.45 (1 Oct 2026) | [PDF, 21 pp](reports/JSWINFRA/JSW%20Infrastructure%20-%20Equity%20Research%20Report.pdf) | [Excel](reports/JSWINFRA/JSW_Infrastructure_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro](reports/JSWINFRA/audit/) |
+| **JSW Infrastructure Ltd** (JSWINFRA) | SELL | INR 170 | INR 357.45 (1 Oct 2026) | [PDF, 21 pp](reports/JSWINFRA/JSW%20Infrastructure%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/JSWINFRA/JSW_Infrastructure_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro](reports/JSWINFRA/audit/) |
 | **Adani Ports and SEZ Ltd** (ADANIPORTS) | REDUCE | INR 1,165 | INR 1,695 (7 Aug 2026) | [PDF, 32 pp](reports/ADANIPORTS/Adani%20Ports%20-%20Equity%20Research%20Report.pdf) | [Excel](reports/ADANIPORTS/Adani_Ports_and_Special_Economic_Zone_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro, audit book](reports/ADANIPORTS/audit/) |
 
 <table>
@@ -35,11 +35,31 @@ assumptions before any valuation is computed.
 - The FY27-FY28 build-out is lower-risk than it looks: 96 of the 117 MTPA being added is take-or-pay
   capacity for the anchor customer, JSW Steel. The report credits it in full, including the slurry
   pipeline's INR 800 Cr EBITDA disclosed by the CFO.
-- Even so, a ten-year FCFF DCF returns INR 126 a share. At these cash flows the market price
-  implies a cost of capital of about 7.3%, close to the company's own borrowing cost.
+- Even so, a ten-year DCF of the three-statement model's free cash flow returns INR 129 a share
+  (bull 155, bear 60). At these cash flows the market price implies a cost of capital of about 7.4%,
+  close to the company's own borrowing cost.
 - A guidance scorecard built from old earnings-call transcripts shows management hitting 3 of 3
   near-term figures and 1 of 5 set a year or more ahead.
 - Four falsifiers, each with a metric, threshold and date, define what would change the view.
+
+### The JSW Infrastructure Excel model
+
+The workbook is a working model, not a printout of one. History is data; every forecast and
+valuation cell is a formula (about 2,000 of them), coloured blue for inputs, black for
+calculations and green for links between sheets.
+
+- **Scenarios**: one cell switches between base, bull and bear. The revenue-growth, margin and
+  capex paths change on the Drivers sheet, and the P&amp;L, balance sheet, cash flow, checks and
+  DCF all recalculate.
+- **Drivers to Schedules**: a linked P&amp;L, balance sheet and cash flow. A revolver and interest
+  on average debt are solved iteratively, and the balance sheet ties in every year of every scenario.
+- **WACC and DCF**: free cash flow is built from the statements (EBIT after tax, plus D&amp;A, less
+  capex and the increase in working capital), with mid-year discounting, a Gordon terminal value,
+  an exit-multiple target and the rating rule.
+- **Sensitivity**: WACC x terminal growth and WACC x exit multiple. Each cell recomputes the DCF.
+
+Before publishing, the build recalculates the workbook in LibreOffice for every scenario and
+stops unless each one reproduces the Python model's value with no formula errors.
 
 ---
 
@@ -53,7 +73,7 @@ flowchart TD
     G -->|financial-model-assumptions| H[Cited assumptions<br/>assumptions.json]
     P[Peer exports] -->|peer-comps| C[Comps, bands,<br/>football field]
     H -->|financial-model| T[Linked three-statement<br/>model that must tie]
-    T --> V[model.py:<br/>DCF, scenarios,<br/>forensic, DuPont, ROIIC]
+    T --> V[model.py:<br/>DCF on three-statement FCFF,<br/>scenarios, forensic, DuPont, ROIIC]
     C --> V
     M[RBI, MoSPI, IMF, CCIL] -->|india-macro-pack| X[Dated macro pack]
     V --> R[Report PDF + Excel + audit book]
@@ -82,8 +102,9 @@ Nine phases, each ending in a checkpoint:
   and which valuation methods fit, and can refuse a company outright (banks, NBFCs, insurers).
 - **Every assumption carries a page citation and a confidence level**, or is declared "not enough
   evidence" instead of being guessed.
-- **The DCF has to fund itself.** A linked P&amp;L, balance sheet and cash flow must tie every year,
-  and the DCF's free cash flow is cross-checked against it.
+- **The DCF has to fund itself.** It discounts the free cash flow of a linked P&amp;L, balance sheet
+  and cash flow that tie every year, and each scenario re-runs that model rather than nudging a
+  margin. The Excel model carries the same calculation as live formulas.
 - **Methods are reconciled, not averaged.** Where the DCF and the multiples disagree, the report
   says why; a reverse DCF shows what the price assumes.
 - **Forensic screens are interpreted, not printed**: accruals, cash conversion, capitalised interest,
@@ -116,7 +137,8 @@ included: they are third-party material. The audit files cite them by page.
 ## Running it
 
 Requirements: Claude Code, Python 3.12 with `marker-pdf`, `pypdfium2`, `openpyxl`, `matplotlib`,
-`pillow`; WeasyPrint for the PDF (native, or inside WSL on Windows); Node.js for the chart renderer.
+`pillow`; WeasyPrint for the PDF (native, or inside WSL on Windows); Node.js for the chart renderer;
+LibreOffice Calc with `python3-uno` to recalculate and verify the Excel model (inside WSL on Windows).
 
 ```bash
 # install the skills where Claude Code can find them

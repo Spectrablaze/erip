@@ -554,7 +554,9 @@ def _fm_bridge(A: dict, n: int, own_rows: list, own_fcff: list, tax: float):
 			for key, src in (("D&A", dep), ("Capex", capex), ("Δ NWC", dnwc)):
 				if i < len(src) and src[i] is not None:
 					v = float(src[i])
-					r[key] = round(v if key == "D&A" else -abs(v))
+					# capex is a spend whatever its sign in the bridge; an NWC increase uses
+					# cash and a release frees it, so its sign must survive the display.
+					r[key] = round(v if key == "D&A" else (-abs(v) if key == "Capex" else -v))
 			r["FCFF"] = round(f)
 			r["source"] = "three-statement model"
 			rows.append(r)

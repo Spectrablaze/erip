@@ -669,6 +669,21 @@ match and the run says so rather than inventing years.
 Valuation lives here and only here. `financial-model` deliberately does not value the
 company — the `bridge` block is the entire hand-off, so there is only ever one DCF.
 
+**Scenarios under `--fcff-from-model` need their own three-statement runs.** model.py's
+built-in scenarios flex its internal driver projection, which no longer feeds the
+discounted cash flows once `--fcff-from-model` is set. Only terminal growth would move, so
+bull and bear would collapse onto the base case. Run the scenario runner instead. It rebuilds the
+three-statement model for each case in `assumptions.json` `scenarios`, values each one on
+its own FCFF, and writes the base `data/model.json` with `scenarios.cases` attached:
+
+```bash
+python3 <skill>/scripts/scenario_runs.py --root reports/<T> --sector "<sector>"
+```
+
+A tornado must do the same. Each flex goes through `scenario_runs.value_case()`, so working
+capital, depreciation and financing move with the driver. A margin flex has to move
+`_analyst.ebitda_margin` as well, because ingest reads that path ahead of `ebit_margin`.
+
 **Always pass `--sector`.** Without it nothing is suppressed and metrics that do not
 apply to this business model reach the page — a services company would otherwise show
 inventory days, and the run prints `Unclassified — unfiltered` to say so. The output
@@ -722,6 +737,33 @@ the report's value comes from, and it is the step most reports skip. Because Pha
 already indexed these, it is now a series of targeted lookups rather than a read of the
 whole document: start at `context/*.md` to orient, then open only the pages and tables
 that matter. See `reference/research-and-writing.md` Part 1 for the full source map.
+
+### 3g. The client workbook (live formulas)
+
+The Excel model a client sees is the financial-model workbook plus the valuation, as
+formulas. It is not a pasted copy of `model.json`:
+
+```bash
+python3 <skill>/scripts/workbook/live_valuation.py --root reports/<T> \
+        --out "reports/<T>/<Company>_ERIP_Model.xlsx" --recalc
+```
+
+The script adds:
+- **Scenarios**: a selector cell, plus each case's driver paths as inputs. The driver rows
+  that differ between cases become links on the Drivers sheet.
+- **WACC**: the CAPM build.
+- **DCF**: FCFF linked to the statements, mid-year discounting, a Gordon terminal value at
+  N − 0.5, the exit-multiple target and the mechanical rating. The target settings come
+  from `data/valuation_settings.json`.
+- **Sensitivity**: WACC × g and WACC × exit-multiple grids, with every cell a formula.
+
+`--recalc` opens the workbook in headless LibreOffice (`workbook/lo_recalc.py`; on
+Windows it runs through WSL with `libreoffice-calc python3-uno`) and switches through
+every case. **Each case must reproduce its Python value with zero formula errors, or the
+build stops.** The file is then saved on the base case with cached values, so viewers that
+don't calculate still show numbers. The interest line is circular, so the recalc repeats
+until values stop moving. A single pass leaves cash short of the minimum balance. Render the
+sheets and look at them before shipping.
 
 ## Phase 4 — Research the macro and industry layer
 
