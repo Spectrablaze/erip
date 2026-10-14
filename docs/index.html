@@ -72,6 +72,11 @@ svg text{fill:var(--muted);font-size:11px}
 .why{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .why .card{padding:14px 16px;font-size:14px}
 .why b{color:var(--ink)}
+.st{width:100%;border-collapse:collapse;font-size:13.5px}
+.st th{text-align:right;font-size:12px;color:var(--muted);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line)}
+.st th:first-child,.st td:first-child{text-align:left}
+.st td{text-align:right;padding:6px 8px;border-bottom:1px solid var(--line)}
+.st tr.hit td{color:var(--neg);font-weight:600}
 .status{padding:12px 16px;margin:-12px 0 24px;font-size:13.5px}
 .status summary{cursor:pointer;display:flex;gap:10px;align-items:center;flex-wrap:wrap;list-style:none}
 .status summary::-webkit-details-marker{display:none}
@@ -144,6 +149,9 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
 <div class="card chartbox" style="padding-top:12px"><svg id="tor" width="100%" height="230" role="img" aria-label="Sensitivity tornado"></svg>
   <div class="note">Each bar re-runs the full three-statement model with one driver flexed.</div></div>
 
+<h2>Stress tests: what breaks the balance sheet</h2>
+<div class="card chartbox" style="padding-top:12px"><div id="stress"></div></div>
+
 <h2 id="method">How it is built</h2>
 <div class="steps">
   <div class="card step"><b>Knowledge base</b><p>Annual report, deck and call PDFs become page-cited markdown, tables and classified images.</p></div>
@@ -205,7 +213,7 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
       <div><div class="lab">Rating</div><span class="rating ${p.rating}">${p.rating}</span></div>
       <div><div class="lab">Target price</div><div class="big num">${inr(p.target)}</div><div class="sub">Perpetuity DCF, ${co.target.horizon_months}m forward</div></div>
       <div><div class="lab">Share price</div><div class="big num">${inr(co.cmp)}</div><div class="sub">at the cover date</div></div>
-      <div><div class="lab">To target</div><div class="big num" style="color:${p.ups < 0 ? "var(--neg)" : "var(--pos)"}">${sgn(p.ups)}</div><div class="sub">probability-weighted perpetuity ${inr(co.weighted)}</div></div>`;
+      <div><div class="lab">To target</div><div class="big num" style="color:${p.ups < 0 ? "var(--neg)" : "var(--pos)"}">${sgn(p.ups)}</div><div class="sub">bear to bull perpetuity INR ${co.range.low}–${co.range.high}</div></div>`;
     $("btns").innerHTML = `<a class="btn" href="${co.pdf}">Read the report (PDF)</a><a class="btn" href="${co.xlsx}">Excel model, live formulas</a><a class="btn" href="${co.audit}">Audit trail</a>`;
   }
 
@@ -217,7 +225,7 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
     const G = $("g"); G.min = 0; G.max = 0.07; G.value = c.g;
     const M = $("mult"); M.min = 4; M.max = 24; M.value = co.house_multiple;
     $("scen").querySelectorAll("button").forEach(b => b.setAttribute("aria-selected", b.dataset.k === k));
-    $("scenNote").textContent = `${k[0].toUpperCase() + k.slice(1)} case, probability ${Math.round(c.probability * 100)}%: its own three-statement run.`;
+    $("scenNote").textContent = `${k[0].toUpperCase() + k.slice(1)} case: its own three-statement run. Cases are a range, not probability-weighted.`;
     render();
   }
   function controls(){
@@ -316,7 +324,26 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
       <table>${row("Valuation date", `${d.cover_date} (net debt at ${d.balance_sheet_date})`)}${row("Forecast", d.forecast)}
       ${row("Model run", d.model_run)}${chk}${v.notes.length ? row("Open notes", v.notes.join("; ")) : ""}</table>`;
   }
-  function init(){ tabs(); call(); status(); controls(); setCase("base"); }
+  function stress(){
+    const S = co.stress, el = $("stress");
+    if (!S){ el.innerHTML = `<p class="note">No stress tests on record for this report.</p>`; return; }
+    const t = S.thresholds.net_debt_ebitda_max || {}, ic = S.thresholds.interest_cover_min || {};
+    const tr = (c, base) => {
+      const hit = (c.breaches || []).some(b => !b.startsWith("revolver"));
+      return `<tr class="${hit ? "hit" : ""}"><td>${c.name || "Base case"}</td><td class="num">${inr(c.value_per_share)}</td>
+        <td class="num">${base ? "" : sgn(c.value_per_share / S.base.value_per_share - 1)}</td>
+        <td class="num">${c.peak_nd_ebitda.toFixed(2)}x <span class="sub">${c.peak_nd_ebitda_year}</span></td>
+        <td class="num">${c.min_interest_cover.toFixed(1)}x</td><td class="num">${Math.round(c.peak_revolver).toLocaleString("en-IN")}</td></tr>`;
+    };
+    const rev = (S.reverse || []).map(r => `<li><b>${r.label}:</b> ${r.shock == null ? r.result + `: leverage stays inside the reference level, but value falls to ${inr(r.at_shock.value_per_share)}. This shock destroys value, not solvency`
+      : `breaches at ${r.shock > 0 ? "+" : ""}${r.shock} (peak ${r.at_shock.peak_nd_ebitda.toFixed(2)}x, value ${inr(r.at_shock.value_per_share)})`}</li>`).join("");
+    el.innerHTML = `<table class="st"><tr><th>Stress (each rebuilds the three-statement model)</th><th>Value/share</th><th>vs base</th>
+      <th>Peak net debt/EBITDA</th><th>Min EBITDA/interest</th><th>Revolver peak (Cr)</th></tr>${tr(S.base, true)}${S.cases.map(c => tr(c)).join("")}</table>
+      <p class="note">Red rows breach a reference level: ${t.value}x net debt/EBITDA (${t.kind}) or ${ic.value}x interest cover (${ic.kind}).
+      Source: ${t.source}</p><ul class="note">${rev}</ul>
+      <p class="note">Invariant checks: ${(S.invariant_violations || []).length ? S.invariant_violations.length + " violation(s)" : "all hold"}.</p>`;
+  }
+  function init(){ tabs(); call(); status(); controls(); setCase("base"); stress(); }
   window.addEventListener("resize", render);
   window.ERIP_CALC = {perp, exitv, published, whatIfTarget};
   init();

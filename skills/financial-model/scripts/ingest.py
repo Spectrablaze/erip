@@ -301,10 +301,17 @@ RATE_DRIVERS = {
 
 
 def _rate(x):
-    """Accept 12.0 or 0.12 and return a decimal."""
+    """Accept 12.0 or 0.12 and return a decimal.
+
+    A path is judged as a whole: if any value is above 1.5 in magnitude the path is in percent,
+    so 0.36 in [13.0, 6.4, 0.36] is 0.36% and not 36%. Judging each value alone misread every
+    low-growth year of a stressed or bear path as a fraction (found by stress_test.py, 2026-10-14)."""
     if x is None:
         return None
     if isinstance(x, list):
+        vals = [float(i) for i in x if isinstance(i, (int, float))]
+        if vals and max(abs(v) for v in vals) > 1.5:
+            return [None if i is None else float(i) / 100.0 for i in x]
         return [_rate(i) for i in x]
     try:
         f = float(x)

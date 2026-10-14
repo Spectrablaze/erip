@@ -18,8 +18,8 @@ assumptions before any valuation is computed.
 
 | Company | Rating | Target | Price at cover | Report | Model | Audit trail |
 |---|---|---|---|---|---|---|
-| **JSW Infrastructure Ltd** (JSWINFRA) | SELL | INR 130 | INR 357.45 (1 Oct 2026) | [PDF, 21 pp](reports/JSWINFRA/JSW%20Infrastructure%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/JSWINFRA/JSW_Infrastructure_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro](reports/JSWINFRA/audit/) |
-| **Adani Ports and SEZ Ltd** (ADANIPORTS) | SELL | INR 575 | INR 1,695 (7 Aug 2026) | [PDF, 32 pp](reports/ADANIPORTS/Adani%20Ports%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/ADANIPORTS/Adani_Ports_and_Special_Economic_Zone_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro, audit book](reports/ADANIPORTS/audit/) |
+| **JSW Infrastructure Ltd** (JSWINFRA) | SELL | INR 130 | INR 357.45 (1 Oct 2026) | [PDF, 22 pp](reports/JSWINFRA/JSW%20Infrastructure%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/JSWINFRA/JSW_Infrastructure_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro](reports/JSWINFRA/audit/) |
+| **Adani Ports and SEZ Ltd** (ADANIPORTS) | SELL | INR 575 | INR 1,695 (7 Aug 2026) | [PDF, 33 pp](reports/ADANIPORTS/Adani%20Ports%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/ADANIPORTS/Adani_Ports_and_Special_Economic_Zone_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro, audit book](reports/ADANIPORTS/audit/) |
 
 <table>
 <tr>
@@ -86,6 +86,17 @@ Applied the same way in the reports, the Excel models and the web page, and reco
   - add non-operating assets;
   - roll forward to the cover date at the cost of equity.
 - **Terminal value** ties growth to reinvestment at the company's own recent return on new capital.
+- **Scenarios are a range, not a weighted value.** Bear, base and bull each re-run the full model; no
+  probabilities are attached, because none could be evidenced.
+- **Stress tests**:
+  - Each named shock rebuilds the three-statement model: project delay, margin, capex overrun,
+    rates, cargo, and a combined case.
+  - Two drivers are moved together.
+  - A reverse stress finds the shock that first breaches a leverage reference level.
+  - Reference levels are cited (Fitch's 3.5x forecast for JSW; management's 2.5x ceiling for Adani
+    Ports). Neither company discloses its loan covenants.
+  - Committed project capex is held fixed under revenue shocks.
+  - Invariant checks confirm value rises with growth and margin.
 - **Ratings are append-only.** A revision adds a new dated version with its reason; earlier versions
   are kept. JSW went from SELL 165 to 130, and Adani Ports from REDUCE 1,165 to SELL 575, as the
   method was corrected, not because either thesis changed.

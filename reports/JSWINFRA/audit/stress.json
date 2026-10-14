@@ -1,0 +1,426 @@
+{
+ "run_at": "2026-10-14T17:47:02",
+ "thresholds": {
+  "net_debt_ebitda_max": {
+   "value": 3.5,
+   "kind": "rating-agency reference, not a covenant",
+   "source": "Fitch Ratings, 19 Aug 2026: 'we forecast JSWIL's total debt/EBITDA leverage to rise to 3.5x by FY29' at the current rating. Loan covenants are not disclosed (AR notes say only that covenants are complied with)."
+  },
+  "interest_cover_min": {
+   "value": 3.0,
+   "kind": "house reference",
+   "source": "EBITDA / interest of 3.0x, a common floor for investment-grade infrastructure borrowers; no company-specific covenant is disclosed."
+  }
+ },
+ "base": {
+  "value_per_share": 115,
+  "target": 130.0,
+  "rating": "SELL",
+  "peak_nd_ebitda": 2.03,
+  "peak_nd_ebitda_year": "Mar-28E",
+  "min_interest_cover": 5.96,
+  "min_interest_cover_year": "Mar-27E",
+  "peak_revolver": 4105,
+  "min_cash_headroom": 0,
+  "nd_ebitda_path": [
+   0.89,
+   2.03,
+   1.85,
+   1.37,
+   0.89,
+   0.43,
+   -0.01,
+   -0.44,
+   -0.86,
+   -1.27
+  ],
+  "breaches": [
+   "revolver drawn, peak INR 4,105 Cr"
+  ]
+ },
+ "committed_capex_years": [
+  0,
+  1,
+  2
+ ],
+ "invariant_violations": [],
+ "cases": [
+  {
+   "value_per_share": 112,
+   "target": 125.0,
+   "rating": "SELL",
+   "peak_nd_ebitda": 2.62,
+   "peak_nd_ebitda_year": "Mar-28E",
+   "min_interest_cover": 5.41,
+   "min_interest_cover_year": "Mar-27E",
+   "peak_revolver": 4816,
+   "min_cash_headroom": 0,
+   "nd_ebitda_path": [
+    0.92,
+    2.62,
+    2.24,
+    1.66,
+    1.14,
+    0.68,
+    0.24,
+    -0.19,
+    -0.61,
+    -1.02
+   ],
+   "breaches": [
+    "revolver drawn, peak INR 4,816 Cr"
+   ],
+   "name": "Phase I slips a year",
+   "why": "Anchor projects (slurry pipeline, Jatadhar, Jaigarh expansion) commission a year late while capex is spent on schedule; FY27 grows 8% on existing ports.",
+   "watch": "Slurry pipeline commissioning by March 2027 (take-or-pay starts 1 April 2027)."
+  },
+  {
+   "value_per_share": 91,
+   "target": 100.0,
+   "rating": "SELL",
+   "peak_nd_ebitda": 2.39,
+   "peak_nd_ebitda_year": "Mar-28E",
+   "min_interest_cover": 5.3,
+   "min_interest_cover_year": "Mar-27E",
+   "peak_revolver": 5058,
+   "min_cash_headroom": 0,
+   "nd_ebitda_path": [
+    1.08,
+    2.39,
+    2.26,
+    1.79,
+    1.33,
+    0.89,
+    0.48,
+    0.07,
+    -0.32,
+    -0.7
+   ],
+   "breaches": [
+    "revolver drawn, peak INR 5,058 Cr"
+   ],
+   "name": "EBITDA margin 5pp lower",
+   "why": "Logistics mix and lower-margin third-party cargo dilute margins faster than modelled.",
+   "watch": "Quarterly consolidated EBITDA margin below 40%."
+  },
+  {
+   "value_per_share": 100,
+   "target": 110.0,
+   "rating": "SELL",
+   "peak_nd_ebitda": 2.78,
+   "peak_nd_ebitda_year": "Mar-28E",
+   "min_interest_cover": 5.33,
+   "min_interest_cover_year": "Mar-29E",
+   "peak_revolver": 8341,
+   "min_cash_headroom": 0,
+   "nd_ebitda_path": [
+    1.45,
+    2.78,
+    2.63,
+    2.08,
+    1.57,
+    1.08,
+    0.62,
+    0.18,
+    -0.26,
+    -0.68
+   ],
+   "breaches": [
+    "revolver drawn, peak INR 8,341 Cr"
+   ],
+   "name": "Capex 20% over plan, FY27-FY29",
+   "why": "Cost overrun on the INR 16,500 Cr Phase I programme.",
+   "watch": "Capex spend versus the INR 16,500 Cr FY27-FY28 guide."
+  },
+  {
+   "value_per_share": 84,
+   "target": 95.0,
+   "rating": "SELL",
+   "peak_nd_ebitda": 2.08,
+   "peak_nd_ebitda_year": "Mar-28E",
+   "min_interest_cover": 4.63,
+   "min_interest_cover_year": "Mar-27E",
+   "peak_revolver": 4494,
+   "min_cash_headroom": 0,
+   "nd_ebitda_path": [
+    0.92,
+    2.08,
+    1.92,
+    1.46,
+    0.99,
+    0.54,
+    0.12,
+    -0.3,
+    -0.71,
+    -1.11
+   ],
+   "breaches": [
+    "revolver drawn, peak INR 4,494 Cr"
+   ],
+   "name": "Rates 200 bp higher",
+   "why": "G-sec and borrowing costs both rise 2 points (repo hike cycle).",
+   "watch": "10-year G-sec above 9%."
+  },
+  {
+   "value_per_share": 91,
+   "target": 100.0,
+   "rating": "SELL",
+   "peak_nd_ebitda": 2.15,
+   "peak_nd_ebitda_year": "Mar-28E",
+   "min_interest_cover": 5.96,
+   "min_interest_cover_year": "Mar-27E",
+   "peak_revolver": 3979,
+   "min_cash_headroom": 0,
+   "nd_ebitda_path": [
+    0.89,
+    2.15,
+    2.14,
+    1.62,
+    1.12,
+    0.64,
+    0.18,
+    -0.26,
+    -0.69,
+    -1.11
+   ],
+   "breaches": [
+    "revolver drawn, peak INR 3,979 Cr"
+   ],
+   "name": "Cargo shock: growth 10pp lower in FY28-FY29",
+   "why": "Coal and iron-ore volumes stall for two years (JSW Steel demand, import substitution).",
+   "watch": "FY28 cargo below 150 MT."
+  },
+  {
+   "value_per_share": 82,
+   "target": 90.0,
+   "rating": "SELL",
+   "peak_nd_ebitda": 3.94,
+   "peak_nd_ebitda_year": "Mar-28E",
+   "min_interest_cover": 4.24,
+   "min_interest_cover_year": "Mar-29E",
+   "peak_revolver": 9533,
+   "min_cash_headroom": 0,
+   "nd_ebitda_path": [
+    1.71,
+    3.94,
+    3.45,
+    2.72,
+    2.12,
+    1.64,
+    1.19,
+    0.76,
+    0.33,
+    -0.07
+   ],
+   "breaches": [
+    "net debt/EBITDA above 3.5x in Mar-28E",
+    "revolver drawn, peak INR 9,533 Cr"
+   ],
+   "name": "Combined: slip + margin -3pp + capex +20%",
+   "why": "The three execution risks together.",
+   "watch": "Any two of the above in the same year."
+  }
+ ],
+ "grid": {
+  "x": {
+   "label": "Revenue growth (pp a year)",
+   "steps": [
+    -6,
+    -3,
+    0,
+    3,
+    6
+   ]
+  },
+  "y": {
+   "label": "EBITDA margin (pp)",
+   "steps": [
+    -6,
+    -3,
+    0,
+    3,
+    6
+   ]
+  },
+  "cells": [
+   [
+    {
+     "value": 37,
+     "peak_nd_ebitda": 2.71
+    },
+    {
+     "value": 59,
+     "peak_nd_ebitda": 2.57
+    },
+    {
+     "value": 86,
+     "peak_nd_ebitda": 2.47
+    },
+    {
+     "value": 120,
+     "peak_nd_ebitda": 2.37
+    },
+    {
+     "value": 161,
+     "peak_nd_ebitda": 2.29
+    }
+   ],
+   [
+    {
+     "value": 47,
+     "peak_nd_ebitda": 2.43
+    },
+    {
+     "value": 71,
+     "peak_nd_ebitda": 2.33
+    },
+    {
+     "value": 101,
+     "peak_nd_ebitda": 2.24
+    },
+    {
+     "value": 138,
+     "peak_nd_ebitda": 2.15
+    },
+    {
+     "value": 183,
+     "peak_nd_ebitda": 2.07
+    }
+   ],
+   [
+    {
+     "value": 57,
+     "peak_nd_ebitda": 2.22
+    },
+    {
+     "value": 83,
+     "peak_nd_ebitda": 2.12
+    },
+    {
+     "value": 115,
+     "peak_nd_ebitda": 2.03
+    },
+    {
+     "value": 155,
+     "peak_nd_ebitda": 1.95
+    },
+    {
+     "value": 205,
+     "peak_nd_ebitda": 1.87
+    }
+   ],
+   [
+    {
+     "value": 67,
+     "peak_nd_ebitda": 2.02
+    },
+    {
+     "value": 95,
+     "peak_nd_ebitda": 1.93
+    },
+    {
+     "value": 130,
+     "peak_nd_ebitda": 1.85
+    },
+    {
+     "value": 173,
+     "peak_nd_ebitda": 1.77
+    },
+    {
+     "value": 227,
+     "peak_nd_ebitda": 1.7
+    }
+   ],
+   [
+    {
+     "value": 76,
+     "peak_nd_ebitda": 1.85
+    },
+    {
+     "value": 107,
+     "peak_nd_ebitda": 1.76
+    },
+    {
+     "value": 145,
+     "peak_nd_ebitda": 1.69
+    },
+    {
+     "value": 191,
+     "peak_nd_ebitda": 1.61
+    },
+    {
+     "value": 249,
+     "peak_nd_ebitda": 1.55
+    }
+   ]
+  ]
+ },
+ "reverse": [
+  {
+   "label": "Uniform cut to revenue growth (pp a year)",
+   "threshold": "net_debt_ebitda_max",
+   "result": "no breach within -15",
+   "shock": null,
+   "at_shock": {
+    "value_per_share": 5,
+    "target": 5.0,
+    "rating": "SELL",
+    "peak_nd_ebitda": 2.75,
+    "peak_nd_ebitda_year": "Mar-29E",
+    "min_interest_cover": 4.51,
+    "min_interest_cover_year": "Mar-36E",
+    "peak_revolver": 4316,
+    "min_cash_headroom": 0,
+    "nd_ebitda_path": [
+     0.94,
+     2.55,
+     2.75,
+     2.36,
+     1.97,
+     1.53,
+     1.03,
+     0.46,
+     -0.21,
+     -1.0
+    ],
+    "breaches": [
+     "revolver drawn, peak INR 4,316 Cr"
+    ]
+   }
+  },
+  {
+   "label": "Uniform cut to EBITDA margin (pp)",
+   "threshold": "net_debt_ebitda_max",
+   "shock": -15.43,
+   "result": "breaches at -15.4",
+   "at_shock": {
+    "value_per_share": 40,
+    "target": 45.0,
+    "rating": "SELL",
+    "peak_nd_ebitda": 3.52,
+    "peak_nd_ebitda_year": "Mar-29E",
+    "min_interest_cover": 3.92,
+    "min_interest_cover_year": "Mar-27E",
+    "peak_revolver": 7045,
+    "min_cash_headroom": 0,
+    "nd_ebitda_path": [
+     1.69,
+     3.47,
+     3.52,
+     3.1,
+     2.71,
+     2.34,
+     2.0,
+     1.68,
+     1.37,
+     1.07
+    ],
+    "breaches": [
+     "net debt/EBITDA above 3.5x in Mar-29E",
+     "revolver drawn, peak INR 7,045 Cr"
+    ]
+   }
+  }
+ ],
+ "_note": "Each run rebuilds the three-statement model; thresholds are reference levels with sources, not disclosed covenants unless stated."
+}

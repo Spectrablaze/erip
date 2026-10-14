@@ -10,6 +10,7 @@ displays and the pre-push hook enforces.
   citations         citation_check.py: no NOT_FOUND or UNRESOLVED evidence
   sources           source_register.py: every knowledge base built from the input on file
   typed numbers     number_lint.py: no model output typed into the report code
+  stress            stress_test.py has run since the model last changed, with no invariant violations
   call              the standing call in reports/_knowledge/calls.json matches the model's target
 
 Status is FAIL if any of these fail, PASS WITH NOTES if they pass but there are open notes (web
@@ -85,6 +86,21 @@ def validate(root, paths=None):
     sr = source_register.build(root)
     checks["sources"] = {"status": sr["status"], "detail": f"{len(sr['documents'])} input documents hashed; "
                          + ", ".join(f"{k['kb']} {k['status']}" for k in sr["knowledge_bases"])}
+
+    # stress tests: on record, not older than the model, and no invariant violations
+    ST = J("data", "stress.json")
+    if not ST:
+        checks["stress"] = {"status": "FAIL", "detail": "no stress tests on record (run stress_test.py)"}
+    else:
+        st_stale = datetime.fromisoformat(ST["run_at"]).timestamp() < m_time - 1
+        viol = ST.get("invariant_violations") or []
+        brk = [c["name"] for c in ST.get("cases", []) if any("revolver" not in b for b in c.get("breaches", []))]
+        checks["stress"] = {"status": "FAIL" if (st_stale or viol) else "PASS",
+                            "detail": f"{len(ST.get('cases', []))} cases, run {ST['run_at']}; "
+                                      f"{len(viol)} invariant violation(s); {len(brk)} case(s) breach a reference level"
+                                      + (" ; model.json is newer: re-run stress_test.py" if st_stale else "")}
+        if brk:
+            notes.append(f"stress breaches: {', '.join(brk)}")
 
     # typed numbers
     if paths is None:

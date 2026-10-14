@@ -1125,6 +1125,37 @@ box and spans first ink to last. Pair it with `reports/<T>/pdf_qa.py` for
 the document-level checks: ink density, recap-aware duplicate visuals and cross-document
 figure consistency.
 
+**Stress tests, and no probability weights.** Bear, base and bull are reported as a **range**.
+Earlier reports put 25/50/25 weights on them, but the weights were never evidenced, so
+`scenario_runs.py` no longer computes a weighted value. Any `probability` key is ignored.
+
+Stress the balance sheet and the thesis with `stress_test.py`, driven by `data/stress_spec.json`:
+
+```bash
+python3 <skill>/scripts/stress_test.py --root reports/<T> --sector "<sector>"   # -> data/stress.json
+```
+
+- **Every case rebuilds the three-statement model**, so the revolver, interest and cash respond
+  to the shock.
+- **Thresholds** are reference levels with a cited source: a disclosed covenant if one exists;
+  otherwise a rating agency's forecast or management's stated ceiling, labelled as such.
+- **Named cases** each carry a `why` and a `watch` indicator.
+- **Also run:** a two-driver grid (revenue growth × EBITDA margin), and a reverse stress for
+  the uniform shock that first breaches a threshold.
+- **Committed capex.** Capex is a % of sales in the model, so a revenue shock would shrink a
+  contracted build-out. `committed_capex_years` holds those years in rupees.
+  - Without it, JSW's "Phase I slips a year" *raised* the value.
+  - The tornado's revenue flex must use the same rule.
+- **Invariants run every time:** value must rise with growth and with margin, and no adverse
+  case may raise it. A violation means the model, not the company, is driving the answer.
+  These checks found a real ingest bug: per-value percent/fraction detection read a 0.36%
+  growth year as 36%. `ingest._rate` now judges a whole path at once.
+
+`stress_section.py` renders the report page from stress.json using the report's own helpers.
+The workbook gets a recorded Stress sheet, and the site gets a stress table.
+`validate_report.py` fails a report whose stress run is older than its model or shows an
+invariant violation.
+
 **Evidence, sources and the publish gate.** Run the three scripts below last. The first two
 also run inside the third:
 

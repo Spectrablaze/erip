@@ -47,10 +47,11 @@ def _run(cmd):
     return r.stdout
 
 
-def value_case(root, assumptions, tag, sector, strategy=None, keep_dir=None):
+def value_case(root, assumptions, tag, sector, strategy=None, keep_dir=None, with_statements=False):
     """Build the three-statement model for one assumption set and value its own FCFF.
 
-    Returns the model.py output dict. keep_dir keeps the three-statement model on disk."""
+    Returns the model.py output dict (and, with_statements, the three-statement model.json too).
+    keep_dir keeps the three-statement model on disk."""
     a = copy.deepcopy(assumptions)
     a.pop("scenarios", None)
     with tempfile.TemporaryDirectory() as td:
@@ -75,6 +76,8 @@ def value_case(root, assumptions, tag, sector, strategy=None, keep_dir=None):
         if strategy:
             cmd += ["--strategy", strategy]
         _run(cmd)
+        if with_statements:
+            return json.load(open(out)), json.load(open(os.path.join(outdir, "model.json"), encoding="utf-8"))
         return json.load(open(out))
 
 
@@ -87,7 +90,7 @@ def main():
     strat = os.path.join(root, "data", "model_strategy.json")
     strat = strat if os.path.exists(strat) else None
     A = json.load(open(os.path.join(root, "data", "assumptions.json"), encoding="utf-8"))
-    cases = {k: v for k, v in (A.get("scenarios") or {}).items() if not k.startswith("_")} or {"base": {"probability": 1.0}}
+    cases = {k: v for k, v in (A.get("scenarios") or {}).items() if not k.startswith("_")} or {"base": {}}
     res, base_model = {}, None
     for name, sc in cases.items():
         a = copy.deepcopy(A)
@@ -105,7 +108,6 @@ def main():
         m = value_case(root, a, name, args.sector, strat, keep_dir=keep)
         br, tcc = m["dcf"]["bridge"], m["dcf"]["terminal_cross_check"]
         res[name] = {
-            "probability": sc.get("probability"),
             "intrinsic_value_per_share": br["Intrinsic value per share (INR)"],
             "TV_as_%_of_EV": br["TV as % of EV"],
             "upside_%": br.get("Upside / (downside) %"),
@@ -124,21 +126,24 @@ def main():
         }
         if name == "base":
             base_model = m
-        print(f"  {name:5} p={sc.get('probability')}  INR {br['Intrinsic value per share (INR)']}  "
+        print(f"  {name:5}  INR {br['Intrinsic value per share (INR)']}  "
               f"TV {br['TV as % of EV']}% of EV  FCFF Y1 {res[name]['fcff'][0]:,}")
-    w = sum((v["probability"] or 0) * v["intrinsic_value_per_share"] for v in res.values())
+    # No probability weighting: the weights were never evidenced, so the cases are reported as a
+    # range (decision 2026-10-14). A scenario's "probability" key, if present, is ignored.
+    vals = {k: v["intrinsic_value_per_share"] for k, v in res.items()}
+    rng = {"low": min(vals.values()), "high": max(vals.values()), "base": vals.get("base")}
     out = {"basis": "each case re-runs the linked three-statement model; DCF discounts its FCFF",
-           "cases": res, "probability_weighted": round(w)}
+           "weighting": "none: cases are a range, not a probability-weighted value", "cases": res, "range": rng}
     json.dump(out, open(os.path.join(root, "data", "scenarios_3s.json"), "w"), indent=1)
     # The report and charts read scenarios off model.json, so the base model carries them.
-    base_model["scenarios"] = {"basis": out["basis"], "probability_weighted": out["probability_weighted"],
-                               "cases": {k: {kk: v[kk] for kk in ("probability", "intrinsic_value_per_share",
+    base_model["scenarios"] = {"basis": out["basis"], "weighting": out["weighting"], "range": rng,
+                               "cases": {k: {kk: v[kk] for kk in ("intrinsic_value_per_share",
                                                                   "TV_as_%_of_EV", "implied_exit_ev_ebitda",
                                                                   "revenue_growth_y1_%", "exit_ebit_margin_%",
-                                                                  "terminal_growth_%", "upside_%")}
+                                                                  "terminal_growth_%", "upside_%", "target")}
                                          for k, v in res.items()}}
     json.dump(base_model, open(os.path.join(root, "data", "model.json"), "w"), indent=1)
-    print(f"  weighted INR {round(w)}  -> data/scenarios_3s.json; base -> data/model.json")
+    print(f"  range INR {rng['low']} to {rng['high']} (base {rng['base']})  -> data/scenarios_3s.json; base -> data/model.json")
 
 
 if __name__ == "__main__":

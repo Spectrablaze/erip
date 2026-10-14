@@ -132,7 +132,6 @@ def build(root, out):
 
     sc_meta = (A.get("scenarios") or {})
     tg = {c: _rate(sc_meta.get(c, {}).get("terminal_growth", A["terminal_growth"])) for c in order}
-    prob = {c: S3["cases"][c]["probability"] for c in order}
 
     # ---- Scenarios sheet ---------------------------------------------------------------------
     ws = wb.create_sheet("Scenarios", index=wb.sheetnames.index("Drivers"))
@@ -155,7 +154,7 @@ def build(root, out):
     blocks = {}
     for c in order:
         why = (sc_meta.get(c) or {}).get("_why", "")
-        Sc.section(row, f"{c.title()} case inputs  (probability {prob[c]:.0%})")
+        Sc.section(row, f"{c.title()} case inputs")
         row += 1
         blocks[c] = {}
         for r, lab, paths in varying:
@@ -168,10 +167,6 @@ def build(root, out):
         Sc.label(row, "Terminal growth", indent=1)
         Sc.put(row, 2, tg[c], "input", PCT)
         blocks[c]["tg"] = row
-        row += 1
-        Sc.label(row, "Probability", indent=1)
-        Sc.put(row, 2, prob[c], "input", '0%')
-        blocks[c]["p"] = row
         row += 1
         if why:
             ws.cell(row, 1, why[:400]).font = Font(size=8, italic=True, color="FF595959")
@@ -197,27 +192,24 @@ def build(root, out):
 
     # Recorded per-case values: the only numbers on this sheet that are outputs. Each was
     # produced by recalculating this workbook (and the Python model) with the selector at that case.
-    Sc.section(row, "Scenario values  (INR per share; recorded with the selector at each case)")
+    # No probability weights: they were never evidenced, so the cases are shown as a range.
+    Sc.section(row, "Scenario values  (INR per share; recorded with the selector at each case; a range, not weighted)")
     row += 1
-    Sc.header(row, ["Prob.", "Value", "Weighted"], label="Case")
+    Sc.header(row, ["Value", "Target"], label="Case")
     row += 1
     first = row
     for c in order:
         Sc.label(row, c.title(), indent=1)
-        Sc.put(row, 2, f"=B{blocks[c]['p']}", fmt='0%')
-        Sc.put(row, 3, S3["cases"][c]["intrinsic_value_per_share"], "input", INR)
-        Sc.put(row, 4, f"=B{row}*C{row}", fmt=INR)
+        Sc.put(row, 2, S3["cases"][c]["intrinsic_value_per_share"], "input", INR)
+        Sc.put(row, 3, S3["cases"][c].get("target"), "input", INR)
         row += 1
-    Sc.label(row, "Probability-weighted value", bold=True)
-    Sc.put(row, 2, f"=SUM(B{first}:B{row - 1})", fmt='0%')
-    Sc.put(row, 4, f"=SUM(D{first}:D{row - 1})", fmt=INR, bold=True)
-    WTD_ROW = row
-    row += 2
+    RANGE_ROWS = (first, row - 1)
+    row += 1
     Sc.label(row, "Live value, active case (DCF sheet)")
     live_ref_row = row
     row += 1
     Sc.label(row, "Recorded value, active case")
-    Sc.put(row, 2, f"=INDEX(C{first}:C{first + len(order) - 1},{SEL})", fmt=INR)
+    Sc.put(row, 2, f"=INDEX(B{first}:B{first + len(order) - 1},{SEL})", fmt=INR)
     row += 1
     Sc.label(row, "Difference (must be 0)", bold=True)
     Sc.put(row, 2, f"=ROUND(B{live_ref_row},0)-B{row - 1}", fmt=INR, bold=True)
@@ -532,6 +524,52 @@ def build(root, out):
     for j in range(5):
         ws.column_dimensions[COL(2 + j)].width = 12
 
+    # ---- Stress (recorded): each case is a full three-statement rebuild, so it cannot be a formula
+    st_p = os.path.join(root, "data", "stress.json")
+    if os.path.exists(st_p):
+        ST = json.load(open(st_p, encoding="utf-8"))
+        ws = wb.create_sheet("Stress")
+        X_ = Sheet(ws, proto)
+        X_.title(f"{D['A1'].value.split(' - ')[0]} - Stress tests (recorded)",
+                 f"Recorded from stress_test.py on {ST['run_at'][:10]}: each case rebuilds the three-statement model. "
+                 "Not live formulas; re-run the script after changing assumptions.")
+        X_.header(4, ["INR/share", "Peak ND/EBITDA", "Year", "Min cover", "Revolver peak", "Breaches"], label="Stress")
+        r = 5
+        for c in [dict(ST["base"], name="Base case")] + ST["cases"]:
+            X_.label(r, c["name"], 1)
+            for j, (v, f) in enumerate([(c["value_per_share"], INR), (c["peak_nd_ebitda"], '0.00"x"'),
+                                        (c["peak_nd_ebitda_year"], "@"), (c["min_interest_cover"], '0.0"x"'),
+                                        (c["peak_revolver"], NUM), ("; ".join(c.get("breaches") or []) or "none", "@")]):
+                X_.put(r, 2 + j, v, "formula", f)
+            r += 1
+        r += 1
+        X_.section(r, "Reference levels (not disclosed covenants)")
+        r += 1
+        for k, t in ST["thresholds"].items():
+            X_.label(r, f"{k.replace('_', ' ')}: {t['value']} ({t.get('kind', '')})", 1)
+            ws.cell(r, 3, t.get("source", "")[:250]).font = Font(size=8, italic=True, color="FF595959")
+            r += 1
+        g = ST.get("grid")
+        if g:
+            r += 1
+            X_.section(r, f"Two drivers at once: value per share (rows {g['y']['label']}, columns {g['x']['label']})")
+            r += 1
+            for j, x in enumerate(g["x"]["steps"]):
+                X_.put(r, 2 + j, f"{x:+}pp", fmt="@", bold=True)
+            r += 1
+            for i, y in enumerate(g["y"]["steps"]):
+                X_.put(r, 1, f"{y:+}pp", fmt="@", bold=True)
+                for j, cell in enumerate(g["cells"][i]):
+                    X_.put(r, 2 + j, cell["value"], "formula", INR)
+                r += 1
+        for rv in ST.get("reverse") or []:
+            r += 1
+            X_.label(r, f"Reverse stress, {rv['label']}: {rv['result']}", 1)
+        ws.column_dimensions["A"].width = 52
+        for j in range(6):
+            ws.column_dimensions[COL(2 + j)].width = 15
+        ws.column_dimensions["G"].width = 60
+
     # ---- Dashboard: the call on one screen, every cell a link into the model -----------------------
     from openpyxl.chart import BarChart, Reference
     from openpyxl.chart.label import DataLabelList
@@ -563,7 +601,7 @@ def build(root, out):
     top = 13 + len(val) + 1
     B.header(top, ["INR / share"], label="Value per share by method")
     meth = [(f"{c.title()} case, perpetuity DCF", f"=Scenarios!C{first + i}") for i, c in enumerate(order)]
-    meth += [("Probability-weighted, perpetuity", f"=Scenarios!D{WTD_ROW}"),
+    meth += [
              ("DCF at the cross-check exit multiple", dcf("vps_x")),
              ("DCF at the alternative exit multiple", dcf("vps_alt")),
              ("Current market price", dcf("cmp"))]
@@ -650,7 +688,7 @@ def build(root, out):
     # ---- order, model info ---------------------------------------------------------------------
     names = wb.sheetnames
     want = ["Dashboard", "Model info", "Summary", "Scenarios", "Drivers", "Income Statement", "Balance Sheet", "Cash Flow",
-            "Schedules", "WACC", "DCF", "Sensitivity", "Checks"]
+            "Schedules", "WACC", "DCF", "Sensitivity", "Stress", "Checks"]
     want = [n for n in want if n in names] + [n for n in names if n not in want]
     wb._sheets = [wb[n] for n in want]
     wb.active = 0
@@ -687,7 +725,7 @@ def build(root, out):
                      "target": f"DCF!B{row_of('tgt')}", "rating": f"DCF!B{row_of('rating')}",
                      "wacc": f"DCF!B{row_of('wacc')}", "tv_pct": f"DCF!B{row_of('tv_pct')}",
                      "alt_exit": f"DCF!B{row_of('vps_alt')}", "diff": f"Scenarios!B{live_ref_row + 2}",
-                     "weighted": f"Scenarios!D{WTD_ROW}", "fcff1": "DCF!B14", "sens_centre": "Sensitivity!D11"}}
+                     "fcff1": "DCF!B14", "sens_centre": "Sensitivity!D11"}}
 
 
 def _lo(args):

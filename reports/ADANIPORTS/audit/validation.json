@@ -1,6 +1,6 @@
 {
  "ticker": "ADANIPORTS",
- "validated_at": "2026-10-14T17:22:06",
+ "validated_at": "2026-10-14T17:59:30",
  "status": "PASS WITH NOTES",
  "failed": [],
  "notes": [
@@ -14,8 +14,8 @@
   },
   "workbook": {
    "status": "PASS",
-   "detail": "verified 2026-10-14T17:22:04",
-   "run_at": "2026-10-14T17:22:04"
+   "detail": "verified 2026-10-14T17:57:08",
+   "run_at": "2026-10-14T17:57:08"
   },
   "citations": {
    "status": "PASS",
@@ -32,6 +32,10 @@
    "status": "PASS",
    "detail": "12 input documents hashed; kb/annual_report MATCH, kb/concall MATCH, kb/investor_presentation MATCH"
   },
+  "stress": {
+   "status": "PASS",
+   "detail": "6 cases, run 2026-10-14T17:47:14; 0 invariant violation(s); 0 case(s) breach a reference level"
+  },
   "typed_numbers": {
    "status": "PASS",
    "detail": "0 model output(s) typed into 1 file(s)"
@@ -46,7 +50,7 @@
   "balance_sheet_date": "2026-03-31",
   "last_actual_period": "Mar-26",
   "forecast": "Mar-27E to Mar-31E",
-  "model_run": "2026-10-14T13:11:03"
+  "model_run": "2026-10-14T17:42:35"
  },
  "call": {
   "rating": "SELL",

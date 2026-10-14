@@ -1,12 +1,13 @@
 {
  "ticker": "JSWINFRA",
- "validated_at": "2026-10-14T17:21:24",
+ "validated_at": "2026-10-14T17:59:27",
  "status": "PASS WITH NOTES",
  "failed": [],
  "notes": [
   "2 explained check exception(s)",
   "3 web citation(s) without a URL",
-  "2 citation(s) to documents not among the inputs"
+  "2 citation(s) to documents not among the inputs",
+  "stress breaches: Combined: slip + margin -3pp + capex +20%"
  ],
  "checks": {
   "three_statement": {
@@ -15,8 +16,8 @@
   },
   "workbook": {
    "status": "PASS",
-   "detail": "verified 2026-10-14T17:21:22",
-   "run_at": "2026-10-14T17:21:22"
+   "detail": "verified 2026-10-14T17:56:07",
+   "run_at": "2026-10-14T17:56:07"
   },
   "citations": {
    "status": "PASS",
@@ -36,9 +37,13 @@
    "status": "PASS",
    "detail": "8 input documents hashed; kb/annual_report MATCH, kb/concall MATCH, kb/investor_presentation MATCH, kb/shareholding MATCH"
   },
+  "stress": {
+   "status": "PASS",
+   "detail": "6 cases, run 2026-10-14T17:47:02; 0 invariant violation(s); 1 case(s) breach a reference level"
+  },
   "typed_numbers": {
    "status": "PASS",
-   "detail": "0 model output(s) typed into 13 file(s)"
+   "detail": "0 model output(s) typed into 14 file(s)"
   },
   "call_ledger": {
    "status": "PASS",
@@ -50,7 +55,7 @@
   "balance_sheet_date": "2026-06-30",
   "last_actual_period": "Mar-26",
   "forecast": "Mar-27E to Mar-36E",
-  "model_run": "2026-10-14T13:09:51"
+  "model_run": "2026-10-14T17:42:22"
  },
  "call": {
   "rating": "SELL",

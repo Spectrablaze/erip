@@ -28,7 +28,7 @@ def company(root, links):
     cases = {}
     for k, c in S3["cases"].items():
         t = c["timing"]
-        cases[k] = {"probability": c["probability"], "value": c["intrinsic_value_per_share"],
+        cases[k] = {"value": c["intrinsic_value_per_share"],
                     "fcff": c["fcff_exact"], "first_year_share": t["first_year_share"], "periods": t["periods"],
                     "terminal_period": t["terminal_period"], "roll": t["roll_forward"], "ronic": t["terminal_ronic"],
                     "nopat_T": t["terminal_nopat"], "ebitda_T": t["terminal_ebitda"], "net_debt": t["net_debt"],
@@ -43,7 +43,8 @@ def company(root, links):
         "buy_above": M["dcf"]["target"]["buy_above"] * 100, "sell_below": -M["dcf"]["target"]["sell_below"] * 100,
         "alt_multiple": M["dcf"]["terminal_cross_check"].get("Exit multiple supplied (x)"),
         "peer_ev_ebitda": (P.get("comps") or {}).get("median", {}).get("EV/EBITDA (x)"),
-        "weighted": S3["probability_weighted"],
+        "range": S3.get("range"),
+        "stress": J("data/stress.json") if os.path.exists(os.path.join(root, "data", "stress.json")) else None,
         "years": [p.replace("Mar-", "FY") for p in ts["bridge"]["periods"]],
         "football": [{"label": m["label"], "low": m["low"], "high": m["high"], "mid": m.get("mid")} for m in ff],
         "tornado": T["drivers"], "tornado_base": T.get("base_value"),
