@@ -281,8 +281,14 @@ def build(root, out):
     W.put(r, 2, _rate(A.get("cost_of_debt", float(A["rf"]) + 1.5)), "input", PCT)
     kd_r = r
     r += 1
-    W.label(r, "Tax rate", 1, note="assumptions.json", note_col=3)
-    W.put(r, 2, tax, "input", PCT)
+    tax_active = next((active[rr] for rr, lab, _ in varying if lab == "Effective tax rate"), None)
+    if tax_active:
+        # a scenario that moves tax moves the debt tax shield too, as model.py does
+        W.label(r, "Tax rate (active scenario, first forecast year)", 1, note="Scenarios sheet", note_col=3)
+        W.put(r, 2, f"=Scenarios!B{tax_active}", "link", PCT)
+    else:
+        W.label(r, "Tax rate", 1, note="assumptions.json", note_col=3)
+        W.put(r, 2, tax, "input", PCT)
     tax_r = r
     r += 1
     W.label(r, "Post-tax cost of debt", 1)
@@ -316,7 +322,7 @@ def build(root, out):
     ws = wb.create_sheet("DCF")
     F = Sheet(ws, proto)
     F.title(f"{D['A1'].value.split(' - ')[0]} - DCF",
-            "FCFF from the linked statements; mid-year discounting; Gordon terminal value; exit-multiple target")
+            "FCFF from the linked statements; stub-period discounting from the balance-sheet date; exit-multiple target")
     F.header(4, years)
     IS, SCH, DRV = R["Income Statement"], R["Schedules"], R["Drivers"]
 
@@ -339,74 +345,127 @@ def build(root, out):
         for i in range(N):
             F.put(rr, 2 + i, fn(i), kind, fmt, bold)
     FCFF_R = 14
-    F.section(16, "Discounting")
-    F.label(17, "Discount period (mid-year)", 1)
-    F.put(17, 2, 0.5, "input", "0.0")  # mid-year: first year's cash arrives at t = 0.5
-    for i in range(1, N):
-        F.put(17, 2 + i, f"={COL(1 + i)}17+1", fmt="0.0")
-    F.label(18, "Discount factor", 1)
-    F.label(19, "Present value of FCFF", 1)
-    for i in range(N):
-        F.put(18, 2 + i, f"=1/(1+{WACC})^{COL(2 + i)}17", fmt="0.000")
-        F.put(19, 2 + i, f"={COL(2 + i)}14*{COL(2 + i)}18", fmt=NUM)
-    LASTC = COL(1 + N)
-    FIRSTC = "B"
+    LASTC, FIRSTC = COL(1 + N), "B"
+    from datetime import date as _date
+    _dt = lambda k: _date.fromisoformat(str(A[k])) if A.get(k) else None
+    bal_d, fy1_d, val_d = _dt("balance_date"), _dt("first_fy_end"), _dt("valuation_date")
+    mid = bool(A.get("mid_year_convention", False))
+    DATE = "dd-mmm-yyyy"
 
+    F.section(16, "Timing and discounting")
+    F.label(17, "Balance-sheet date (date of the net debt)", 1, note="Cash flows before it are inside net debt", note_col=3)
+    F.label(18, "First forecast year ends", 1)
+    F.label(19, "Valuation date (cover)", 1)
+    F.label(20, "Share of the first year counted (stub)", 1)
+    if bal_d and fy1_d:
+        F.put(17, 2, bal_d, "input", DATE)
+        F.put(18, 2, fy1_d, "input", DATE)
+        F.put(19, 2, val_d or bal_d, "input", DATE)
+        F.put(20, 2, "=MIN(1,MAX(0,(B18-B17)/365.25))", fmt="0.000")
+    else:
+        F.put(20, 2, 1, "input", "0.000")
+    F.label(21, "Share of year counted", 1)
+    F.label(22, "Discount period (years from balance-sheet date, " + ("mid-year)" if mid else "year-end)"), 1)
+    F.label(23, "Discount factor", 1)
+    F.label(24, "Present value of FCFF", 1)
+    for i in range(N):
+        c = COL(2 + i)
+        if i == 0:
+            F.put(21, 2, "=$B$20", fmt="0.000")
+            F.put(22, 2, "=$B$20*0.5" if mid else "=$B$20", fmt="0.00")
+        else:
+            F.put(21, 2 + i, 1, "input", "0.000")
+            F.put(22, 2 + i, ("=$B$20+0.5" if mid else "=$B$20+1") if i == 1 else f"={COL(1 + i)}22+1", fmt="0.00")
+        F.put(23, 2 + i, f"=1/(1+{WACC})^{c}22", fmt="0.000")
+        F.put(24, 2 + i, f"={c}14*{c}21*{c}23", fmt=NUM)
+
+    ronic = _rate(A.get("terminal_ronic")) if A.get("terminal_ronic") else None
+    KE = f"WACC!$B${ke_r}"
     nd = float(A.get("net_debt", 0))
     sh_ref = f"='Schedules'!{COL(last_hist)}{SCH['Shares outstanding']}"
-    rows = [
-        ("Valuation: perpetuity growth", None, None, None, None),
-        ("WACC", f"={WACC}", "link", '0.00%', None),
-        ("Terminal growth (active scenario)", f"={TG}", "link", PCT, None),
-        ("Sum of PV of FCFF", f"=SUM({FIRSTC}19:{LASTC}19)", "formula", NUM, None),
-        ("Terminal value  (FCFF N x (1 + g) / (WACC - g))", f"={LASTC}14*(1+B23)/(B22-B23)", "formula", NUM, None),
-        ("PV of terminal value  (discounted at N - 0.5)", f"=B25/(1+B22)^{LASTC}17", "formula", NUM, None),
-        ("Enterprise value", "=B24+B26", "formula", NUM, "b"),
-        ("Terminal value as % of EV", "=B26/B27", "formula", PCT, None),
-        ("Net debt  (negative = net cash)", nd, "input", NUM, "Net debt at the valuation date (assumptions.json)"),
-        ("Non-operating assets", float(A.get("non_operating_assets") or 0), "input", NUM, "Treasury investments and stakes not in FCFF"),
-        ("Equity value", "=B27-B29+B30", "formula", NUM, "b"),
-        ("Shares outstanding (Cr)", sh_ref, "link", "0.00", None),
-        ("Value per share, perpetuity (INR)", "=B31/B32", "formula", INR, "b"),
-        ("Current market price (INR)", float(A.get("current_price") or 0), "input", '#,##0.00', cfg.get("price_note", "Price at the cover date")),
-        ("Upside / (downside)", "=B33/B34-1", "formula", PCT, None),
-        (None, None, None, None, None),
-        ("Exit-multiple cross-check and target", None, None, None, None),
-        ("Terminal-year EBITDA", f"={LASTC}7", "formula", NUM, None),
-        ("Exit EV/EBITDA implied by the perpetuity TV", "=B25/B38", "formula", MULT, None),
-        ("Exit multiple (house convention)", float(cfg.get("target_exit_multiple", 10)), "input", MULT, "Target anchor: DCF with an exit multiple"),
-        ("Terminal value at exit multiple", "=B40*B38", "formula", NUM, None),
-        ("PV of exit terminal value", f"=B41/(1+B22)^{LASTC}17", "formula", NUM, None),
-        ("Value per share at exit multiple (INR)", "=(B24+B42-B29+B30)/B32", "formula", INR, "b"),
-        ("Rounding step (INR)", float(cfg.get("target_round", 5)), "input", "0", None),
-        ("Target price (INR)", "=ROUND(B43/B44,0)*B44", "formula", INR, "b"),
-        ("Upside / (downside) to target", "=B45/B34-1", "formula", PCT, None),
-        ("BUY above", _rate(cfg.get("buy_above", 15)), "input", PCT, "House rating policy"),
-        ("SELL below", -abs(_rate(cfg.get("sell_below", 10))), "input", PCT, "House rating policy"),
-        ("Rating", '=IF(B46>B47,"BUY",IF(B46<B48,"SELL","HOLD"))', "formula", "@", "b"),
-        (None, None, None, None, None),
-        ("Alternative exit multiple", float(A.get("exit_multiple") or 14), "input", MULT, "Cross-check (assumptions.json exit_multiple)"),
-        ("Value per share at alternative exit (INR)", f"=(B24+B51*B38/(1+B22)^{LASTC}17-B29+B30)/B32", "formula", INR, None),
+    if ronic:
+        tv_lab = "Terminal value  (NOPAT N x (1 + g) x (1 - g / RONIC) / (WACC - g))"
+        tv_f = f"={LASTC}10*(1+{{g}})*(1-{{g}}/{{ronic}})/({{wacc}}-{{g}})"
+    else:
+        tv_lab = "Terminal value  (FCFF N x (1 + g) / (WACC - g))"
+        tv_f = f"={LASTC}14*(1+{{g}})/({{wacc}}-{{g}})"
+    spec2 = [
+        ("sec", "Valuation: perpetuity", None, None, None),
+        ("wacc", "WACC", f"={WACC}", "link", "0.00%"),
+        ("g", "Terminal growth (active scenario)", f"={TG}", "link", PCT),
     ]
-    r = 21
-    for lab, v, kind, fmt, note in rows:
+    if ronic:
+        spec2 += [("ronic", "Return on new invested capital in perpetuity (RONIC)", ronic, "input", PCT),
+                  ("reinv", "Terminal reinvestment rate  (g / RONIC, share of NOPAT)", "={g}/{ronic}", "formula", PCT)]
+    spec2 += [
+        ("sum_pv", "Sum of PV of FCFF", f"=SUM({FIRSTC}24:{LASTC}24)", "formula", NUM),
+        ("tv", tv_lab, tv_f, "formula", NUM),
+        ("pv_tv", "PV of terminal value  (at the final cash flow's period)", f"={{tv}}/(1+{{wacc}})^{LASTC}22", "formula", NUM),
+        ("ev", "*Enterprise value", "={sum_pv}+{pv_tv}", "formula", NUM),
+        ("tv_pct", "Terminal value as % of EV", "={pv_tv}/{ev}", "formula", PCT),
+        ("nd", "Net debt at the balance-sheet date  (negative = net cash)", nd, "input", NUM),
+        ("nonop", "Non-operating assets", float(A.get("non_operating_assets") or 0), "input", NUM),
+        ("eq_bal", "Equity value at the balance-sheet date", "={ev}-{nd}+{nonop}", "formula", NUM),
+        ("ke", "Cost of equity", f"={KE}", "link", PCT),
+        ("roll", "Roll-forward to the valuation date  ((1 + ke) ^ years)",
+         "=(1+{ke})^((B19-B17)/365.25)" if (bal_d and val_d) else 1,
+         "formula" if (bal_d and val_d) else "input", "0.0000"),
+        ("eq", "*Equity value at the valuation date", "={eq_bal}*{roll}", "formula", NUM),
+        ("sh", "Shares outstanding (Cr)", sh_ref, "link", "0.00"),
+        ("vps", "*Value per share, perpetuity (INR)", "={eq}/{sh}", "formula", INR),
+        ("cmp", "Current market price (INR)", float(A.get("current_price") or 0), "input", "#,##0.00"),
+        ("ups", "Upside / (downside)", "={vps}/{cmp}-1", "formula", PCT),
+        (None, None, None, None, None),
+        ("sec", "Exit-multiple cross-check and target", None, None, None),
+        ("ebitda_n", "Terminal-year EBITDA", f"={LASTC}7", "formula", NUM),
+        ("impl", "Exit EV/EBITDA implied by the perpetuity TV", "={tv}/{ebitda_n}", "formula", MULT),
+        ("mult", "Exit multiple (house convention)", float(cfg.get("target_exit_multiple", 10)), "input", MULT),
+        ("tv_x", "Terminal value at exit multiple", "={mult}*{ebitda_n}", "formula", NUM),
+        ("pv_x", "PV of exit terminal value", f"={{tv_x}}/(1+{{wacc}})^{LASTC}22", "formula", NUM),
+        ("vps_x", "*Value per share at exit multiple (INR)", "=({sum_pv}+{pv_x}-{nd}+{nonop})*{roll}/{sh}", "formula", INR),
+        ("rnd", "Rounding step (INR)", float(cfg.get("target_round", 5)), "input", "0"),
+        ("tgt", "*Target price (INR)", "=ROUND({vps_x}/{rnd},0)*{rnd}", "formula", INR),
+        ("ups_t", "Upside / (downside) to target", "={tgt}/{cmp}-1", "formula", PCT),
+        ("buy", "BUY above", _rate(cfg.get("buy_above", 15)), "input", PCT),
+        ("sell", "SELL below", -abs(_rate(cfg.get("sell_below", 10))), "input", PCT),
+        ("rating", "*Rating", '=IF({ups_t}>{buy},"BUY",IF({ups_t}<{sell},"SELL","HOLD"))', "formula", "@"),
+        (None, None, None, None, None),
+        ("alt", "Alternative exit multiple", float(A.get("exit_multiple") or 14), "input", MULT),
+        ("vps_alt", "Value per share at alternative exit (INR)",
+         f"=({{sum_pv}}+{{alt}}*{{ebitda_n}}/(1+{{wacc}})^{LASTC}22-{{nd}}+{{nonop}})*{{roll}}/{{sh}}", "formula", INR),
+    ]
+    notes = {"nd": "assumptions.json net_debt, as at the balance-sheet date",
+             "nonop": "Treasury investments and stakes not in FCFF",
+             "cmp": cfg.get("price_note", "Price at the cover date"),
+             "mult": "Target anchor: DCF with an exit multiple",
+             "ronic": "assumptions.json terminal_ronic",
+             "buy": "House rating policy", "sell": "House rating policy",
+             "alt": "Cross-check (assumptions.json exit_multiple)"}
+    REF, r = {}, 26
+    for key, lab, v, kind, fmt in spec2:          # assign rows first so formulas can refer forward
+        if lab is not None and key != "sec":
+            REF[key] = f"$B${r}"
+        r += 1
+    r = 26
+    for key, lab, v, kind, fmt in spec2:
         if lab is None:
             r += 1
             continue
-        if v is None:
+        if key == "sec":
             F.section(r, lab)
         else:
-            F.label(r, lab, indent=0 if note == "b" else 1, bold=note == "b",
-                    note=None if note in (None, "b") else note, note_col=3)
-            F.put(r, 2, v, kind, fmt, bold=note == "b")
+            bold = lab.startswith("*")
+            F.label(r, lab.lstrip("*"), indent=0 if bold else 1, bold=bold, note=notes.get(key), note_col=3)
+            F.put(r, 2, v.format(**REF) if isinstance(v, str) else v, kind, fmt, bold=bold)
         r += 1
-    assert ws["A33"].value.strip().startswith("Value per share, perpetuity"), ws["A33"].value
-    assert ws["A45"].value.strip().startswith("Target price"), ws["A45"].value
-    ws.column_dimensions["A"].width = 50
+
+    def row_of(k):
+        return int(REF[k].split("$")[-1])
+    ws.column_dimensions["A"].width = 58
     for i in range(N):
         ws.column_dimensions[COL(2 + i)].width = 11
     ws.freeze_panes = "B5"
-    wb["Scenarios"].cell(live_ref_row, 2, "=DCF!B33")
+    wb["Scenarios"].cell(live_ref_row, 2, f"=DCF!B{row_of('vps')}")
     wb["Scenarios"].cell(live_ref_row, 2).number_format = INR
     wb["Scenarios"].cell(live_ref_row, 2).font = Font(color=GREEN)
 
@@ -415,7 +474,9 @@ def build(root, out):
     T = Sheet(ws, proto)
     T.title(f"{D['A1'].value.split(' - ')[0]} - Sensitivity",
             "Value per share (INR); every cell recomputes the DCF from the FCFF row")
-    pv = (f"SUMPRODUCT(DCF!${FIRSTC}$14:${LASTC}$14,1/(1+{{w}})^DCF!${FIRSTC}$17:${LASTC}$17)")
+    X = {k: "DCF!" + v for k, v in REF.items()}
+    pv = (f"SUMPRODUCT(DCF!${FIRSTC}$14:${LASTC}$14,DCF!${FIRSTC}$21:${LASTC}$21,"
+          f"1/(1+{{w}})^DCF!${FIRSTC}$22:${LASTC}$22)")
     T.label(4, "Step (WACC and growth)", bold=True)
     T.put(4, 2, 0.005, "input", PCT)
     T.label(5, "Step (exit multiple)", bold=True)
@@ -428,20 +489,24 @@ def build(root, out):
             T.put(top + 1, 2 + j, col_val(j - 2), fmt=PCT if "growth" in col_lab else MULT, bold=True)
         for i in range(5):
             rr = top + 2 + i
-            T.put(rr, 1, f"=DCF!$B$22+({i - 2})*$B$4", fmt='0.00%', bold=True)
+            T.put(rr, 1, f"={X['wacc']}+({i - 2})*$B$4", fmt="0.00%", bold=True)
             for j in range(5):
                 w, x = f"$A{rr}", f"{COL(2 + j)}${top + 1}"
                 T.put(rr, 2 + j, cell_f(w, x), fmt=INR, bold=(i == 2 and j == 2))
         return top + 8
 
-    nd_terms = "-DCF!$B$29+DCF!$B$30)/DCF!$B$32"
+    tail = f"-{X['nd']}+{X['nonop']})*{X['roll']}/{X['sh']}"
+    if ronic:
+        tv_cell = lambda w, g: f"DCF!${LASTC}$10*(1+{g})*(1-{g}/{X['ronic']})/({w}-{g})"
+    else:
+        tv_cell = lambda w, g: f"DCF!${LASTC}$14*(1+{g})/({w}-{g})"
     nxt = grid(7, "WACC x terminal growth (perpetuity value per share)", "terminal growth",
-               lambda k: f"=DCF!$B$23+({k})*$B$4",
-               lambda w, g: (f"=IF({g}>={w},NA(),({pv.format(w=w)}+DCF!${LASTC}$14*(1+{g})/({w}-{g})"
-                             f"/(1+{w})^DCF!${LASTC}$17{nd_terms})"))
+               lambda k: f"={X['g']}+({k})*$B$4",
+               lambda w, g: (f"=IF({g}>={w},NA(),({pv.format(w=w)}+{tv_cell(w, g)}"
+                             f"/(1+{w})^DCF!${LASTC}$22{tail})"))
     grid(nxt, "WACC x exit multiple (value per share at exit)", "exit EV/EBITDA",
-         lambda k: f"=DCF!$B$40+({k})*$B$5",
-         lambda w, m: f"=({pv.format(w=w)}+{m}*DCF!$B$38/(1+{w})^DCF!${LASTC}$17{nd_terms}")
+         lambda k: f"={X['mult']}+({k})*$B$5",
+         lambda w, m: f"=({pv.format(w=w)}+{m}*{X['ebitda_n']}/(1+{w})^DCF!${LASTC}$22{tail}")
     ws.column_dimensions["A"].width = 30
     for j in range(5):
         ws.column_dimensions[COL(2 + j)].width = 12
@@ -470,8 +535,10 @@ def build(root, out):
     wb.calculation.fullCalcOnLoad = True
     wb.save(out)
     return {"varying_rows": [lab for _, lab, _ in varying], "cases": order, "N": N,
-            "read": {"value": "DCF!B33", "exit": "DCF!B43", "target": "DCF!B45", "rating": "DCF!B49",
-                     "wacc": "DCF!B22", "tv_pct": "DCF!B28", "alt_exit": "DCF!B52", "diff": f"Scenarios!B{live_ref_row + 2}",
+            "read": {"value": f"DCF!B{row_of('vps')}", "exit": f"DCF!B{row_of('vps_x')}",
+                     "target": f"DCF!B{row_of('tgt')}", "rating": f"DCF!B{row_of('rating')}",
+                     "wacc": f"DCF!B{row_of('wacc')}", "tv_pct": f"DCF!B{row_of('tv_pct')}",
+                     "alt_exit": f"DCF!B{row_of('vps_alt')}", "diff": f"Scenarios!B{live_ref_row + 2}",
                      "weighted": f"Scenarios!D{WTD_ROW}", "fcff1": "DCF!B14", "sens_centre": "Sensitivity!D11"}}
 
 

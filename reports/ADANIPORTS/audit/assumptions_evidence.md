@@ -27,6 +27,7 @@ Forecast horizon: 5.0 years  |  Sector: realestate
 | current_price | 1695.0 | High | analyst | Close as carried in the Screener export used for the subject company and all four peers, s |
 | exit_multiple | 14.0 | Low | analyst | Cross-check on the perpetuity terminal value. APSEZ currently trades at roughly 18.9x EV/E |
 | nwc_pct_sales | 11.1, 10.82, 10.55, 10.27, 10.0 | Medium | analyst | Supplied directly as a series rather than derived, for two reasons. First, derive_nwc in b |
+| terminal_ronic | 10.5 | Medium | analyst | Return on new invested capital in perpetuity, tying terminal growth to the reinvestment th |
 
 ## Detail
 
@@ -317,6 +318,19 @@ Forecast horizon: 5.0 years  |  Sector: realestate
 
 **Evidence**
 - "Trade Receivables 6,382.54; Inventories 685.00; Trade Payables 2,736.24 at 31 March 2026" (p. 659) - `kb/annual_report/tables/table_p0659_1.md and note 19 table_p0725_1.md`
+
+**Confidence:** Medium
+
+### terminal_ronic
+
+**Value:** 10.5 %
+
+**Why**
+- Return on new invested capital in perpetuity, tying terminal growth to the reinvestment that funds it: TV = NOPAT x (1 - g / RONIC) / (WACC - g).
+- 10.5% is APSEZ's own FY24-FY26 average ROIC (10.4%, 11.1%, 9.9%; NOPAT over invested capital), the same rule applied to JSW Infrastructure. It sits below the 12.56% WACC, so terminal growth destroys a little value: the returns of the current build-out do not yet cover its cost of capital.
+
+**Evidence**
+- "ROIC FY22-FY26: 7.0%, 7.8%, 10.4%, 11.1%, 9.9%" - `data/model.json roiic block (Screener.in consolidated)`
 
 **Confidence:** Medium
 

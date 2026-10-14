@@ -1,160 +1,210 @@
-# Adani Ports and Special Economic Zone Ltd — Audit Book
+# Adani Ports and Special Economic Zone Ltd — ERIP Audit Book
 
-- **Company:** Adani Ports and Special Economic Zone Ltd
-- **Ticker:** ADANIPORTS
-- **Sector:** Real estate / infrastructure / EPC
-- **Currency:** INR (crore)
-- **Built:** 2026-08-13 09:15 UTC
-- **Overall:** PASS
+**Sector:** realestate | **Currency:** INR cr | **Generated:** 2026-10-14 12:32
 
-## 1. Source Register
+---
 
-### Altman Z
+## Model Metadata
 
-| Key | Label | Source | Provenance | Confidence |
-|-----|-------|--------|-----------|------------|
-| altman_z | Altman Z | model.json (computed by model.py) | **MODEL_DERIVED** | 🟢 |
+| Field | Value |
+|-------|-------|
+| Company | Adani Ports and Special Economic Zone Ltd |
+| Currency | INR cr |
+| Sector | realestate |
+| Model built | 2026-10-14 |
+| Depreciation basis | net_block |
+| History | Mar-17 – Mar-26 (10 yr) |
+| Forecast | Mar-27E – Mar-31E (5 yr) |
 
-### Dcf
+---
 
-| Key | Label | Source | Provenance | Confidence |
-|-----|-------|--------|-----------|------------|
-| dcf | Dcf | model.json (computed by model.py) | **MODEL_DERIVED** | 🟢 |
+## Source Register
 
-### Dupont
+This register documents the origin of every material input to the model.
 
-| Key | Label | Source | Provenance | Confidence |
-|-----|-------|--------|-----------|------------|
-| dupont | Dupont | model.json (computed by model.py) | **MODEL_DERIVED** | 🟢 |
+| Row Key | Source | Page | Provenance | Confidence | Period | Notes |
+|---------|--------|------|------------|------------|--------|-------|
+| rf | assumptions.json > rf |  | ASSUMPTION | MEDIUM |  | Analyst-assumed Risk-free rate: 6.78 |
+| erp | assumptions.json > erp |  | ASSUMPTION | MEDIUM |  | Analyst-assumed Equity risk premium: 5.5 |
+| beta | assumptions.json > beta |  | ASSUMPTION | MEDIUM |  | Analyst-assumed Equity beta: 1.3 |
+| cost_of_debt | assumptions.json > cost_of_debt |  | ASSUMPTION | MEDIUM |  | Analyst-assumed Cost of debt: 8.0 |
+| tax_rate | assumptions.json > tax_rate |  | ASSUMPTION | MEDIUM |  | Analyst-assumed Effective tax rate: 18.5 |
+| terminal_growth | assumptions.json > terminal_growth |  | ASSUMPTION | MEDIUM |  | Analyst-assumed Terminal growth rate: 5.0 |
 
-### Forensic
+### Provenance Type Definitions
 
-| Key | Label | Source | Provenance | Confidence |
-|-----|-------|--------|-----------|------------|
-| forensic | Forensic | model.json (computed by model.py) | **MODEL_DERIVED** | 🟢 |
+| Type | Definition |
+|------|-----------|
+| REPORTED | Directly from audited financial statements or regulatory filings |
+| DERIVED | Calculated from reported figures (e.g., margin %) |
+| ASSUMPTION | Analyst judgment not directly observable |
+| MARKET | External market data (beta, WACC inputs, comps) |
+| MODEL_DERIVED | Output of the model's own calculations |
 
-### Piotroski F
+### Confidence Level Definitions
 
-| Key | Label | Source | Provenance | Confidence |
-|-----|-------|--------|-----------|------------|
-| piotroski_f | Piotroski F | model.json (computed by model.py) | **MODEL_DERIVED** | 🟢 |
+| Level | Definition |
+|-------|-----------|
+| HIGH | Audited / regulatory filing |
+| MEDIUM | Estimated / management guidance |
+| LOW | Analyst judgment / no external source |
 
-### Ratios
+---
 
-| Key | Label | Source | Provenance | Confidence |
-|-----|-------|--------|-----------|------------|
-| ratios | Ratios | model.json (computed by model.py) | **MODEL_DERIVED** | 🟢 |
+## Assumption Register
 
-### Relative
+This register documents every significant assumption, its provenance, rationale, and approval status.
 
-| Key | Label | Source | Provenance | Confidence |
-|-----|-------|--------|-----------|------------|
-| relative | Relative | model.json (computed by model.py) | **MODEL_DERIVED** | 🟢 |
+| Key | Value | Unit | Provenance | Rationale | Approval | Downstream Dependencies |
+|-----|-------|------|------------|-----------|----------|------------------------|
+| forecast_years | 5.0 |  | DERIVED | Set in assumptions.json for model | PENDING | model.json, model-workbook.xlsx, audit_book.md |
+| tax_rate | 18.5 | % | ASSUMPTION | Set in assumptions.json for model | APPROVED | model.json, model-workbook.xlsx, audit_book.md |
+| terminal_growth | 5.0 | % | ASSUMPTION | Set in assumptions.json for model | PENDING | model.json, model-workbook.xlsx, audit_book.md |
+| cost_of_debt | 8.0 |  | ASSUMPTION | Set in assumptions.json for model | APPROVED | model.json, model-workbook.xlsx, audit_book.md |
+| rf | 6.78 |  | ASSUMPTION | Set in assumptions.json for model | APPROVED | model.json, model-workbook.xlsx, audit_book.md |
+| erp | 5.5 |  | ASSUMPTION | Set in assumptions.json for model | APPROVED | model.json, model-workbook.xlsx, audit_book.md |
+| beta | 1.3 |  | ASSUMPTION | Set in assumptions.json for model | APPROVED | model.json, model-workbook.xlsx, audit_book.md |
+| target_debt_weight | 12.0 |  | DERIVED | Set in assumptions.json for model | PENDING | model.json, model-workbook.xlsx, audit_book.md |
+| net_debt | 42910.0 |  | DERIVED | Set in assumptions.json for model | PENDING | model.json, model-workbook.xlsx, audit_book.md |
+| shares_out | 230.396 |  | DERIVED | Set in assumptions.json for model | PENDING | model.json, model-workbook.xlsx, audit_book.md |
+| current_price | 1695.0 |  | DERIVED | Set in assumptions.json for model | PENDING | model.json, model-workbook.xlsx, audit_book.md |
+| exit_multiple | 14.0 |  | DERIVED | Set in assumptions.json for model | PENDING | model.json, model-workbook.xlsx, audit_book.md |
+| terminal_ronic | 10.5 |  | DERIVED | Set in assumptions.json for model | PENDING | model.json, model-workbook.xlsx, audit_book.md |
+| mid_year_convention | True |  | DERIVED | Set in assumptions.json for model | PENDING | model.json, model-workbook.xlsx, audit_book.md |
+| blume_adjust | True |  | DERIVED | Set in assumptions.json for model | PENDING | model.json, model-workbook.xlsx, audit_book.md |
+| non_operating_assets | 3340.86 |  | DERIVED | Set in assumptions.json for model | PENDING | model.json, model-workbook.xlsx, audit_book.md |
+| bull.revenue_growth | [5 values] | % | ASSUMPTION | Management delivers close to Ambition 2031: the 1bn-tonne capacity target lands on time, Colombo and Vizhinjam phase 2 ramp faster than modelled, the SEZ tax shield persists longer, and capex comes in at the bottom of the guided range. Mundra concession renewal is granted on existing terms. | PENDING | Scenario analysis (bull) |
+| bull.ebitda_margin | [5 values] | % | ASSUMPTION | Management delivers close to Ambition 2031: the 1bn-tonne capacity target lands on time, Colombo and Vizhinjam phase 2 ramp faster than modelled, the SEZ tax shield persists longer, and capex comes in at the bottom of the guided range. Mundra concession renewal is granted on existing terms. | PENDING | Scenario analysis (bull) |
+| bull.capex_pct_sales | [5 values] |  | ASSUMPTION | Management delivers close to Ambition 2031: the 1bn-tonne capacity target lands on time, Colombo and Vizhinjam phase 2 ramp faster than modelled, the SEZ tax shield persists longer, and capex comes in at the bottom of the guided range. Mundra concession renewal is granted on existing terms. | PENDING | Scenario analysis (bull) |
+| bull.terminal_growth | 5.5 | % | ASSUMPTION | Management delivers close to Ambition 2031: the 1bn-tonne capacity target lands on time, Colombo and Vizhinjam phase 2 ramp faster than modelled, the SEZ tax shield persists longer, and capex comes in at the bottom of the guided range. Mundra concession renewal is granted on existing terms. | PENDING | Scenario analysis (bull) |
+| bear.revenue_growth | [5 values] | % | ASSUMPTION | The volume-miss pattern continues and worsens: domestic cargo grows mid single digit rather than high single digit, the international book stays sub-scale at NQXT's lower realisation, and capex overshoots guidance as it did by 65% in FY24 and 33% in FY26. The SEZ tax shield unwinds to statutory. Terminal growth cut to 3.5% to reflect unresolved Mundra concession renewal beyond February 2031. | PENDING | Scenario analysis (bear) |
+| bear.ebitda_margin | [5 values] | % | ASSUMPTION | The volume-miss pattern continues and worsens: domestic cargo grows mid single digit rather than high single digit, the international book stays sub-scale at NQXT's lower realisation, and capex overshoots guidance as it did by 65% in FY24 and 33% in FY26. The SEZ tax shield unwinds to statutory. Terminal growth cut to 3.5% to reflect unresolved Mundra concession renewal beyond February 2031. | PENDING | Scenario analysis (bear) |
+| bear.capex_pct_sales | [5 values] |  | ASSUMPTION | The volume-miss pattern continues and worsens: domestic cargo grows mid single digit rather than high single digit, the international book stays sub-scale at NQXT's lower realisation, and capex overshoots guidance as it did by 65% in FY24 and 33% in FY26. The SEZ tax shield unwinds to statutory. Terminal growth cut to 3.5% to reflect unresolved Mundra concession renewal beyond February 2031. | PENDING | Scenario analysis (bear) |
+| bear.terminal_growth | 3.5 | % | ASSUMPTION | The volume-miss pattern continues and worsens: domestic cargo grows mid single digit rather than high single digit, the international book stays sub-scale at NQXT's lower realisation, and capex overshoots guidance as it did by 65% in FY24 and 33% in FY26. The SEZ tax shield unwinds to statutory. Terminal growth cut to 3.5% to reflect unresolved Mundra concession renewal beyond February 2031. | PENDING | Scenario analysis (bear) |
 
-### Roiic
+---
 
-| Key | Label | Source | Provenance | Confidence |
-|-----|-------|--------|-----------|------------|
-| roiic | Roiic | model.json (computed by model.py) | **MODEL_DERIVED** | 🟢 |
+## Data Lineage
 
-### Scenarios
+Data lineage traces how inputs flow through the model to produce outputs.
 
-| Key | Label | Source | Provenance | Confidence |
-|-----|-------|--------|-----------|------------|
-| scenarios | Scenarios | model.json (computed by model.py) | **MODEL_DERIVED** | 🟢 |
+### Stage 1: Sources (Raw Inputs)
 
-### Sector Profile
+Raw inputs from source documents
 
-| Key | Label | Source | Provenance | Confidence |
-|-----|-------|--------|-----------|------------|
-| sector_profile | Sector Profile | model.json (computed by model.py) | **MODEL_DERIVED** | 🟢 |
+**Inputs:** 
 
-### Valuation Strategy
+### Stage 2: Assumptions (Analyst Judgment)
 
-| Key | Label | Source | Provenance | Confidence |
-|-----|-------|--------|-----------|------------|
-| valuation_strategy | Valuation Strategy | model.json (computed by model.py) | **MODEL_DERIVED** | 🟢 |
+Analyst assumptions from assumptions.json
 
-## 2. Assumption Registers
+**Inputs:** forecast_years, sector, revenue_growth, ebit_margin, capex_pct_sales, dep_pct_sales, nwc_pct_sales, tax_rate, terminal_growth, cost_of_debt, rf, erp, beta, target_debt_weight, net_debt, shares_out, current_price, exit_multiple, terminal_ronic, peers, scenarios, mid_year_convention, blume_adjust, non_operating_assets, balance_date, first_fy_end, valuation_date
 
-**Total assumptions:** 23
+### Stage 3: Calculations (Model-Derived)
 
-| ID | Description | Value | Unit | Provenance | Confidence | Source |
-|----|-----------|-------|------|-----------|------------|--------|
-| forecast_years | Forecast Years | 5.0000 | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| sector | Sector | realestate | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| revenue_growth | Revenue Growth | [21.39, 13.02, 14.47, 14.81, 12.09] | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| ebit_margin | Ebit Margin | [44.0, 43.5, 43.0, 42.5, 42.0] | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| capex_pct_sales | Capex Pct Sales | [31.0, 30.0, 29.0, 28.0, 26.0] | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| dep_pct_sales | Dep Pct Sales | [14.5, 14.5, 14.8, 15.0, 15.2] | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| nwc_pct_sales | Nwc Pct Sales | [11.1, 10.82, 10.55, 10.27, 10.0] | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| tax_rate | Tax Rate | 18.5000 | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| terminal_growth | Terminal Growth | 5.0000 | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| cost_of_debt | Cost Of Debt | 8.0000 | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| rf | Rf | 6.7800 | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| erp | Erp | 5.5000 | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| beta | Beta | 1.3000 | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| target_debt_weight | Target Debt Weight | 12.0000 | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| net_debt | Net Debt | 42910.0000 | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| shares_out | Shares Out | 230.3960 | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| current_price | Current Price | 1695.0000 | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| exit_multiple | Exit Multiple | 14.0000 | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| peers | Peers | [{'name': 'Adani Ports and Special Economic Zone Ltd', 'price': 1695.0, 'mcap': 390521.0505, 'ev': 448459.2405, 'sales': 40430.43, 'ebitda': 23398.73, 'pat': 13112.02, 'bv': 95958.76999999999, 'roe': 16.6}, {'name': 'JSW Infrastructure Ltd', 'price': 327.5, 'mcap': 68775.0655, 'ev': 73356.2855, 'sales': 5582.42, 'ebitda': 2696.4, 'pat': 1485.26, 'bv': 10877.5, 'roe': 14.4}, {'name': 'Gujarat Pipavav Port Ltd', 'price': 151.26, 'mcap': 7312.51344, 'ev': 6673.4634399999995, 'sales': 1158.9, 'ebitda': 709.23, 'pat': 500.36, 'bv': 2155.23, 'roe': 23.4}, {'name': 'Container Corporation of India Ltd', 'price': 512.0, 'mcap': 31195.8528, 'ev': 28673.1028, 'sales': 9085.1, 'ebitda': 1961.53, 'pat': 1242.0, 'bv': 12942.35, 'roe': 9.8}] | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| scenarios | Scenarios | {'bull': {'probability': 0.25, 'revenue_growth': [24.0, 16.0, 17.0, 17.0, 15.0], 'ebitda_margin': [59.5, 59.5, 59.0, 59.0, 58.5], 'capex_pct_sales': [30.0, 28.0, 27.0, 25.0, 23.0], 'terminal_growth': 5.5, 'effective_tax_rate': 16.0, '_why': 'Management delivers close to Ambition 2031: the 1bn-tonne capacity target lands on time, Colombo and Vizhinjam phase 2 ramp faster than modelled, the SEZ tax shield persists longer, and capex comes in at the bottom of the guided range. Mundra concession renewal is granted on existing terms.'}, 'base': {'probability': 0.5, '_why': 'The assumption set above as recommended.'}, 'bear': {'probability': 0.25, 'revenue_growth': [16.0, 8.0, 8.0, 8.0, 7.0], 'ebitda_margin': [57.0, 55.5, 54.0, 53.0, 52.0], 'capex_pct_sales': [34.0, 34.0, 33.0, 32.0, 30.0], 'terminal_growth': 3.5, 'effective_tax_rate': 23.0, '_why': "The volume-miss pattern continues and worsens: domestic cargo grows mid single digit rather than high single digit, the international book stays sub-scale at NQXT's lower realisation, and capex overshoots guidance as it did by 65% in FY24 and 33% in FY26. The SEZ tax shield unwinds to statutory. Terminal growth cut to 3.5% to reflect unresolved Mundra concession renewal beyond February 2031."}} | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| mid_year_convention | Mid Year Convention | True | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| blume_adjust | Blume Adjust | True | various | **ASSUMPTION** | 🟡 | assumptions.json |
-| non_operating_assets | Non Operating Assets | 3340.8600 | various | **ASSUMPTION** | 🟡 | assumptions.json |
+Model-generated values (model-derived)
 
-## 3. Lineage
+**Inputs:** gross_profit, opex, ebit, eps, total_assets, debt_total, total_liab_eq, cf_pat, cf_dep, cf_wc, cfo, cf_capex, cf_invest, cfi, cf_debt, cf_revolver, cf_div, cf_equity, cff, net_change_cash, cash_open, cash_close, cfo_gap, nb_open, sch_dep, nb_close, nwc, d_nwc, wc_days, td_open, cff_ex_rev, cash_pre_rev, revolver_draw, revolver_repay, avg_debt, equity, bvps, chk_balance, chk_cash_tie, chk_reserves, chk_fa_roll, chk_min_cash, chk_revolver_pos, chk_nb_pos, chk_equity_pos, s_revenue, s_rev_growth, s_ebitda, s_ebitda_margin, s_ebit, s_pat, s_eps, s_fcff, s_fcfe, s_cash_conv, s_net_debt, s_nd_ebitda, s_int_cover, s_capemp, s_roce, s_roe
 
-### Phase 1 — Data ingestion
+### Stage 4: Outputs
 
-- **Source:** Screener.in XLSX export (consolidated, FY17–FY26)
-- **Output:** reports/ADANIPORTS/data/financials_raw.json
-- **Description:** Ten-year historical income statement, balance sheet and cash flow extracted from Screener.in export.
+Final model outputs
 
-### Phase 3f — Model computation
+**Outputs:** model.json, Company_ERIP_Model.xlsx, Company_ERIP_Audit_Book
 
-- **Source:** model.py (ratios, DuPont, ROIIC, forensic, DCF, relative valuation)
-- **Output:** reports/ADANIPORTS/data/model.json
-- **Description:** All ratios, ratios, DCF parameters, scenarios and sensitivity arrays computed from historical data and assumptions.
+---
 
-### Phase 3c — Assumptions
+## Material Valuation Inputs
 
-- **Source:** assumptions.json (analyst-cited)
-- **Output:** reports/ADANIPORTS/data/assumptions.json
-- **Description:** Operating and valuation assumptions set by analyst with source citations.
+This section explains the key inputs that drive the DCF valuation output.
 
-### Phase 5 — Workbook
+| Input | Value | Format | Source | Provenance | Rationale |
+|-------|-------|--------|--------|------------|-----------|
+| Terminal Growth | 5.0 | 0.00% | assumptions.json | ASSUMPTION | Long-run GDP-equivalent growth rate for terminal value |
 
-- **Source:** model.json + assumptions.json → model_workbook_adapter.py → build_workbook.py
-- **Output:** reports/ADANIPORTS/output/ADANIPORTS_Model.xlsx
-- **Description:** Formula-driven Excel workbook with 13 sheets, cross-sheet references, DCF and sensitivity tables.
+---
 
-### This audit book
+## Model Checks
 
-- **Source:** model_audit_adapter.py + build_audit_book.py
-- **Output:** reports/ADANIPORTS/output/ADANIPORTS_Audit_Book.md
-- **Description:** Provenance trace from source files through every model layer.
+| Status | Count | Description |
+|--------|-------|-------------|
+| Total checks | 16 | All integrity checks in model.json |
+| Passed | 15 | Checks within tolerance |
+| Failed | 1 | Checks outside tolerance |
+| Blocking | 9 | Severity: blocking |
+| Warning | 0 | Severity: warning |
+| Overall | **PASS** | All checks within tolerance |
 
-## 4. Valuation Inputs
+### Check Detail
 
-| Parameter | Value | Unit | Source | Provenance | Confidence | Notes |
-|-----------|-------|------|--------|-----------|------------|-------|
-| WACC | 12.5600 | % | model.json > dcf.wacc_build | **MARKET** | 🟡 | Built from Rf=6.78%, Beta=1.2, ERP=5.5% |
-| Cost of equity | 13.3900 | % | model.json > dcf.wacc_build | **MARKET** | 🟡 | CAPM: Rf=6.78%, Beta=1.2, ERP=5.5% |
-| Cost of debt (post-tax) | 6.5200 | % | model.json > dcf.wacc_build | **MARKET** | 🟡 | Pre-tax: 8.0%, Tax rate: 18.5% |
-| Target debt weight | 12.0000 | % | model.json > dcf.wacc_build | **ASSUMPTION** | 🟡 | Analyst-set target capital structure |
-| Enterprise value | 187180 | INR crore | model.json > dcf.bridge | **MODEL_DERIVED** | 🟢 | PV explicit FCFF: 44518 + PV TV: 142663 |
-| Equity value per share | — | INR | model.json > dcf.bridge | **MODEL_DERIVED** | 🟢 | EV: 187180 cr, Net debt: None cr |
-| Terminal EBIT margin | 42.0000 | % | model.json > dcf.forecast[-1] | **ASSUMPTION** | 🟡 | Exit margin from final forecast year |
+| Check ID | Label | Status | Worst Value | Severity | Period |
+|----------|-------|--------|-------------|----------|--------|
+| chk_balance | Total assets less total liabilities and equity (forecast) | PASS | 0.0 | blocking | Mar-29E |
+| chk_cash_tie | Balance sheet cash less cash flow closing cash (forecast) | PASS | 0.0 | blocking | Mar-31E |
+| chk_reserves | Reserves roll-forward residual (forecast) | PASS | 0.0 | blocking | Mar-31E |
+| chk_fa_roll | Net block roll-forward residual (forecast) | PASS | 0.0 | blocking | Mar-31E |
+| chk_reserves_hist | Reserves roll-forward residual (history) | FAIL | 22582.9 | advisory | Mar-26 |
+| chk_fa_roll_hist | Net block roll-forward residual (history) | PASS | 0.0 | advisory | Mar-21 |
+| cfo_reconstruction | Reconstructed CFO close to reported CFO | PASS | 4415.24 | advisory | Mar-22 |
+| chk_min_cash | Cash less the minimum cash balance | PASS | 10550.461 | blocking | Mar-27E |
+| chk_revolver_pos | Revolver balance | PASS | 0.0 | blocking | Mar-27E |
+| chk_nb_pos | Net block | PASS | 138607.4628 | blocking | Mar-27E |
+| chk_equity_pos | Shareholders' equity | PASS | 107697.64 | blocking | Mar-27E |
+| hist_balance | Historical balance sheet ties to the source | PASS | 0.0 | blocking | Mar-26 |
+| band_tax_rate | Effective tax rate inside a plausible band | PASS | 0.0 | advisory | - |
+| band_ebitda_margin | EBITDA margin inside a plausible band | PASS | 0.0 | advisory | - |
+| band_rev_growth | Revenue growth inside a plausible band | PASS | 0.0 | advisory | - |
+| band_payout_ratio | Dividend payout inside a plausible band | PASS | 0.0 | advisory | - |
 
-## 5. Checks
+---
 
-| Check | Severity | Result |
-|-------|----------|--------|
-| block 'derived' not found in the export | info | ✅ Pass |
-| block 'price' not found in the export | info | ✅ Pass |
+## Screener vs Annual Report Reconciliation
 
-**Total:** 2 | **Passed:** 2 | **Failed:** 0 | **Blocking:** 0
+This section documents the reconciliation between Screener.in data and the company's audited Annual Report.
 
+| Line | Period | Screener Value | Annual Report Value | Difference % |
+|------|--------|---------------|--------------------|--------------|
+
+---
+
+## Annual Report Citations
+
+| Key | Source | Page |
+|------|--------|------|
+
+---
+
+## Build Notes
+
+- overrides.actuals.payables: period '_page' is not in the historical range, ignored
+- trade payables supplied from the annual report were netted out of other liabilities so the balance sheet still ties
+- no gross margin in assumptions.json: set equal to the EBITDA margin, which zeroes the opex line
+- built against modeling strategy: revenue_model=segment_buildup, modelability=AMBER, decision=APPROVED
+- block 'derived' not found in the export
+- block 'price' not found in the export
+- held at the trailing historical average (no value in assumptions.json or overrides): other_income_pct, dep_pct_nb, cwip_pct_sales, other_ca_pct, other_liab_pct, interest_income_rate, debt_growth, term_debt_repay, equity_issued, payout_ratio, min_cash
+- not in the source at all, held at zero for every year: exceptional
+- no actual for 'capex' in Mar-17: set to zero
+
+---
+
+## Appendices
+
+### A. Input File Paths
+
+| File | Path |
+|------|------|
+| model.json | data/three_statement/scenarios/base/model.json |
+| assumptions.json | data/assumptions.json |
+
+### B. Approval Signatures
+
+| Role | Name | Date | Status |
+|------|------|------|--------|
+| Analyst | | | PENDING |
+| Reviewer | | | PENDING |
+| Sign-off Authority | | | PENDING |
+
+---
+
+*This audit book was generated automatically from model.json and assumptions.json. All values trace back to the authoritative model state. The audit book does not recalculate the financial model.*

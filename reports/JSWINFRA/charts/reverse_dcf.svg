@@ -6,13 +6,13 @@
 <text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(90.3 90.375)" fill="#5b6875">Price-implied, g 4%</text>
 <text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(90.3 130.625)" fill="#5b6875">Price-implied, g 5%</text>
 <text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(90.3 170.875)" fill="#5b6875">Our WACC (g 4%)</text>
-<path d="M98.3 39.1L216.6 39.1A2 2 0 0 1 218.6 41.1L218.6 59.1A2 2 0 0 1 216.6 61.1L98.3 61.1L98.3 39.1Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr18-cls-79"></path>
-<path d="M98.3 79.4L230.4 79.4A2 2 0 0 1 232.4 81.4L232.4 99.4A2 2 0 0 1 230.4 101.4L98.3 101.4L98.3 79.4Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr18-cls-79"></path>
-<path d="M98.3 119.6L244.7 119.6A2 2 0 0 1 246.7 121.6L246.7 139.6A2 2 0 0 1 244.7 141.6L98.3 141.6L98.3 119.6Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr18-cls-79"></path>
+<path d="M98.3 39.1L214.6 39.1A2 2 0 0 1 216.6 41.1L216.6 59.1A2 2 0 0 1 214.6 61.1L98.3 61.1L98.3 39.1Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr18-cls-79"></path>
+<path d="M98.3 79.4L223.5 79.4A2 2 0 0 1 225.5 81.4L225.5 99.4A2 2 0 0 1 223.5 101.4L98.3 101.4L98.3 79.4Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr18-cls-79"></path>
+<path d="M98.3 119.6L233 119.6A2 2 0 0 1 235 121.6L235 139.6A2 2 0 0 1 233 141.6L98.3 141.6L98.3 119.6Z" fill="#0b3d62" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr18-cls-79"></path>
 <path d="M98.3 159.9L306.1 159.9A2 2 0 0 1 308.1 161.9L308.1 179.9A2 2 0 0 1 306.1 181.9L98.3 181.9L98.3 159.9Z" fill="#bd8621" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr18-cls-80"></path>
-<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(221.585 50.125)" fill="#5b6875">6.6</text>
-<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(235.436 90.375)" fill="#5b6875">7.4</text>
-<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(249.6515 130.625)" fill="#5b6875">8.1</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(219.5803 50.125)" fill="#5b6875">6.5</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(228.5105 90.375)" fill="#5b6875">7</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(237.9875 130.625)" fill="#5b6875">7.5</text>
 <text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(311.0698 170.875)" fill="#5b6875">11.5</text>
 <style ><![CDATA[
 .zr18-cls-78:hover {

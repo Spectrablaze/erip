@@ -25,6 +25,7 @@ Forecast horizon: 10.0 years  |  Sector: realestate
 | current_price | 357.45 | High | analyst | NSE close on the cover date, 1 October 2026 (2 October a market holiday), as carried in th |
 | exit_multiple | 14.0 | Low | analyst | Cross-check on the perpetuity terminal value only. JSWINFRA trades at ~30x trailing EV/EBI |
 | capacity_addition | 9, 63, 30, 15, 0, 5, 5, 5, 5, 5 | Medium | analyst | Change in effective average capacity, FY27-FY36: Tuticorin bulk and Kolkata interim (+9),  |
+| terminal_ronic | 12.0 | Medium | analyst | Return on new invested capital in perpetuity. Gordon on FY36 FCFF assumed 25% returns on n |
 
 ## Detail
 
@@ -267,6 +268,19 @@ Forecast horizon: 10.0 years  |  Sector: realestate
 **Evidence**
 - "Phase I to 300 MTPA by FY28E ... Phase II to 400 MTPA by FY30E" (p. 8) - `kb/annual_report/images/charts/capacity_roadmap_400mtpa.jpg`
 - "expanding our capacity from the current 186 million tonnes per annum to 300 million tonnes by FY28 and further to 400 million tonnes per annum by FY 2030 or earlier" (p. 3) - `kb/concall/pages/page_0002.md`
+
+**Confidence:** Medium
+
+### terminal_ronic
+
+**Value:** 12.0 %
+
+**Why**
+- Return on new invested capital in perpetuity. Gordon on FY36 FCFF assumed 25% returns on new capital in the base case and 55% in the bear (reinvestment of 16% and 5% of NOPAT funding 4% and 3% growth forever). The value-driver terminal value ties growth to the reinvestment it needs: TV = NOPAT x (1 - g / RONIC) / (WACC - g).
+- 12.0% is JSW's own FY24-FY26 average ROIC (13.9%, 11.8%, 10.6%; NOPAT over invested capital), modestly above the 11.51% WACC: new berths earn a small spread under concessions with a captive anchor customer. ROIC has fallen three years running as Phase I capital arrives ahead of its volume, so the FY24 peak is not used.
+
+**Evidence**
+- "NOPAT 1,213 / 1,448 / 1,644 cr on invested capital 8,695 / 12,257 / 15,459 cr, FY24-FY26" - `data/model.json roiic block (Screener.in consolidated)`
 
 **Confidence:** Medium
 

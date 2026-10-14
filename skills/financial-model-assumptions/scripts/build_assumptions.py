@@ -81,6 +81,7 @@ MODEL_MAP = {
     "shares_out":         ("shares_out", "value"),
     "current_price":      ("current_price", "value"),
     "exit_multiple":      ("exit_multiple", "value"),
+    "terminal_ronic":     ("terminal_ronic", "rate"),
 }
 
 # analyst-facing assumptions model.py does not read directly; kept in the JSON
@@ -105,6 +106,7 @@ BANDS = {
     "beta": (0.2, 2.5), "target_debt_weight": (0, 80),
     "dso": (0, 300), "dio": (0, 400), "dpo": (0, 300),
     "customer_retention": (0, 105), "nwc_pct_sales": (-40, 80),
+    "terminal_ronic": (5, 40),
 }
 
 CONFIDENCE = {"high", "medium", "low"}
@@ -324,7 +326,8 @@ def build(dec: dict, strict: bool, strategy: dict | None = None,
     if analyst:
         A["_analyst"] = {k: _val(v) for k, v in analyst.items()}
     for k in ("peers", "peer_betas", "scenarios", "mid_year_convention",
-              "blume_adjust", "non_operating_assets"):
+              "blume_adjust", "non_operating_assets",
+              "balance_date", "first_fy_end", "valuation_date"):
         if k in dec:
             A[k] = dec[k]
         elif k in A_in:

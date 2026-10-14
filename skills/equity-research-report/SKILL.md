@@ -680,6 +680,30 @@ its own FCFF, and writes the base `data/model.json` with `scenarios.cases` attac
 python3 <skill>/scripts/scenario_runs.py --root reports/<T> --sector "<sector>"
 ```
 
+**Date the valuation, and fund the terminal value.** Two sets of inputs in `decisions.json`:
+
+- **Dates.** Set `balance_date`, `first_fy_end` and `valuation_date` at the top level.
+  - `balance_date` is the date of the `net_debt` figure. Cash flows before it are already
+    inside that net debt.
+  - The first forecast year then counts only the share left after `balance_date`, so a
+    June net-cash figure doesn't count April to June twice.
+  - Discounting runs from `balance_date`.
+  - Equity is rolled forward to the cover date at the cost of equity.
+  - On JSWINFRA, leaving this out overstated FY27's capex burden and started discounting
+    six months early.
+- **Terminal value.** Set `terminal_ronic` inside `assumptions`, since it's a cited judgement.
+  - The terminal value then becomes NOPAT × (1 − g ÷ RONIC) ÷ (WACC − g), rather than
+    Gordon on the final year's FCFF.
+  - Gordon silently assumes the final year's reinvestment funds g forever. On JSWINFRA's
+    bear case that implied a 55% return on new capital.
+  - Anchor RONIC to the company's own recent ROIC (the `roiic` block), and ask the
+    analyst; it's a valuation decision.
+  - If RONIC is below WACC, higher terminal growth lowers the value. Say so in the text.
+
+All four inputs are optional. Without them `model.py` behaves exactly as it did before.
+`model.json` `dcf.timing` carries the unrounded periods, roll-forward and terminal inputs.
+Derive any exit-multiple value in the report from it, never re-implement the discounting.
+
 A tornado must do the same. Each flex goes through `scenario_runs.value_case()`, so working
 capital, depreciation and financing move with the driver. A margin flex has to move
 `_analyst.ebitda_margin` as well, because ingest reads that path ahead of `ebit_margin`.

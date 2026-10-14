@@ -186,6 +186,24 @@ If you install this skill in more than one place (user-level, project-level, a h
 account copy), they do not auto-sync. Edit one source of truth, validate it, copy it to
 the others, and re-package for any hosted copy with `skill-creator/scripts/package_skill.py`.
 
+## Self-test: run before every package or push
+
+```
+python scripts/selftest.py --reports <path to reports/>   # add --quick to skip LibreOffice
+```
+
+It checks:
+- every .py parses
+- tab-indented files (a warning)
+- model.py reproduces a saved model.json exactly (fixture: reports/ADANIPORTS)
+- a three-statement base case rebuilt from scratch matches its saved FCFF and value (fixture: reports/JSWINFRA)
+- the live Excel workbook reproduces every scenario in LibreOffice
+- the packaged zip has no build output and is under 10 MB
+- the installed copies are in sync
+
+Checks whose fixtures are missing are skipped, not failed. The script writes only to
+temp directories.
+
 ## Render engines
 
 `render.py` auto-selects: `weasyprint` → `wsl` → `chromium`. Check with `--engines`.

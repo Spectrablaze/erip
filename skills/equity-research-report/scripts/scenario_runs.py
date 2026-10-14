@@ -94,6 +94,13 @@ def main():
         for k in FM_KEYS + VAL_KEYS:
             if k in sc:
                 a[k] = sc[k]
+        # decisions.json names the tax driver effective_tax_rate; assumptions.json and ingest read tax_rate
+        if "effective_tax_rate" in sc:
+            a["tax_rate"] = sc["effective_tax_rate"]
+        unknown = [k for k in sc if not k.startswith("_") and k not in FM_KEYS + VAL_KEYS
+                   + ("probability", "effective_tax_rate", "ebit_margin")]
+        if unknown:
+            print(f"  ! {name}: scenario keys not applied to the three-statement run: {unknown}")
         keep = os.path.join(root, "data", "three_statement", "scenarios", name)
         m = value_case(root, a, name, args.sector, strat, keep_dir=keep)
         br, tcc = m["dcf"]["bridge"], m["dcf"]["terminal_cross_check"]
@@ -101,6 +108,7 @@ def main():
             "probability": sc.get("probability"),
             "intrinsic_value_per_share": br["Intrinsic value per share (INR)"],
             "TV_as_%_of_EV": br["TV as % of EV"],
+            "upside_%": br.get("Upside / (downside) %"),
             "implied_exit_ev_ebitda": tcc.get("Implied exit EV/EBITDA (x)"),
             "revenue_growth_y1_%": round(_rate1(a["revenue_growth"]) * 100, 1),
             "exit_ebit_margin_%": m["dcf"]["forecast"][-1].get("EBIT %"),
@@ -123,7 +131,7 @@ def main():
                                "cases": {k: {kk: v[kk] for kk in ("probability", "intrinsic_value_per_share",
                                                                   "TV_as_%_of_EV", "implied_exit_ev_ebitda",
                                                                   "revenue_growth_y1_%", "exit_ebit_margin_%",
-                                                                  "terminal_growth_%")}
+                                                                  "terminal_growth_%", "upside_%")}
                                          for k, v in res.items()}}
     json.dump(base_model, open(os.path.join(root, "data", "model.json"), "w"), indent=1)
     print(f"  weighted INR {round(w)}  -> data/scenarios_3s.json; base -> data/model.json")
