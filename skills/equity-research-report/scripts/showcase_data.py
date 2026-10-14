@@ -48,6 +48,7 @@ def company(root, links):
         "football": [{"label": m["label"], "low": m["low"], "high": m["high"], "mid": m.get("mid")} for m in ff],
         "tornado": T["drivers"], "tornado_base": T.get("base_value"),
         "cases": cases, "target": M["dcf"]["target"],
+        "validation": J("data/validation.json") if os.path.exists(os.path.join(root, "data", "validation.json")) else None,
         "claims": {"lease_liabilities": M["dcf"]["timing"].get("lease_liabilities", 0),
                    "minority_interest": M["dcf"]["timing"].get("minority_interest", 0)},
         **links.get(ticker, {}),

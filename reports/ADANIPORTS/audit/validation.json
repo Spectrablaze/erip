@@ -1,0 +1,56 @@
+{
+ "ticker": "ADANIPORTS",
+ "validated_at": "2026-10-14T17:22:06",
+ "status": "PASS WITH NOTES",
+ "failed": [],
+ "notes": [
+  "1 explained check exception(s)",
+  "12 web citation(s) without a URL"
+ ],
+ "checks": {
+  "three_statement": {
+   "status": "PASS",
+   "detail": "16 checks; 0 blocking failures; 1 explained exception(s); 0 unexplained"
+  },
+  "workbook": {
+   "status": "PASS",
+   "detail": "verified 2026-10-14T17:22:04",
+   "run_at": "2026-10-14T17:22:04"
+  },
+  "citations": {
+   "status": "PASS",
+   "detail": "DERIVED 4, EXTERNAL 12, NUMBERS_ONLY 16, VERIFIED 6",
+   "counts": {
+    "NUMBERS_ONLY": 16,
+    "EXTERNAL": 12,
+    "DERIVED": 4,
+    "VERIFIED": 6
+   },
+   "records": 38
+  },
+  "sources": {
+   "status": "PASS",
+   "detail": "12 input documents hashed; kb/annual_report MATCH, kb/concall MATCH, kb/investor_presentation MATCH"
+  },
+  "typed_numbers": {
+   "status": "PASS",
+   "detail": "0 model output(s) typed into 1 file(s)"
+  },
+  "call_ledger": {
+   "status": "PASS",
+   "detail": "standing call v3 SELL 575"
+  }
+ },
+ "dates": {
+  "cover_date": "2026-08-07",
+  "balance_sheet_date": "2026-03-31",
+  "last_actual_period": "Mar-26",
+  "forecast": "Mar-27E to Mar-31E",
+  "model_run": "2026-10-14T13:11:03"
+ },
+ "call": {
+  "rating": "SELL",
+  "target": 575.0,
+  "version": 3
+ }
+}

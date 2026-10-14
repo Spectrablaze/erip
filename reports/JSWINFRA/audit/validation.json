@@ -1,0 +1,60 @@
+{
+ "ticker": "JSWINFRA",
+ "validated_at": "2026-10-14T17:21:24",
+ "status": "PASS WITH NOTES",
+ "failed": [],
+ "notes": [
+  "2 explained check exception(s)",
+  "3 web citation(s) without a URL",
+  "2 citation(s) to documents not among the inputs"
+ ],
+ "checks": {
+  "three_statement": {
+   "status": "PASS",
+   "detail": "16 checks; 0 blocking failures; 2 explained exception(s); 0 unexplained"
+  },
+  "workbook": {
+   "status": "PASS",
+   "detail": "verified 2026-10-14T17:21:22",
+   "run_at": "2026-10-14T17:21:22"
+  },
+  "citations": {
+   "status": "PASS",
+   "detail": "DERIVED 2, EXTERNAL 7, NOT_HELD 2, NUMBERS_ONLY 5, PARTIAL 1, VERIFIED 11, VERIFIED_VISUAL 3",
+   "counts": {
+    "NUMBERS_ONLY": 5,
+    "VERIFIED": 11,
+    "VERIFIED_VISUAL": 3,
+    "EXTERNAL": 7,
+    "NOT_HELD": 2,
+    "PARTIAL": 1,
+    "DERIVED": 2
+   },
+   "records": 31
+  },
+  "sources": {
+   "status": "PASS",
+   "detail": "8 input documents hashed; kb/annual_report MATCH, kb/concall MATCH, kb/investor_presentation MATCH, kb/shareholding MATCH"
+  },
+  "typed_numbers": {
+   "status": "PASS",
+   "detail": "0 model output(s) typed into 13 file(s)"
+  },
+  "call_ledger": {
+   "status": "PASS",
+   "detail": "standing call v4 SELL 130"
+  }
+ },
+ "dates": {
+  "cover_date": "2026-10-01",
+  "balance_sheet_date": "2026-06-30",
+  "last_actual_period": "Mar-26",
+  "forecast": "Mar-27E to Mar-36E",
+  "model_run": "2026-10-14T13:09:51"
+ },
+ "call": {
+  "rating": "SELL",
+  "target": 130.0,
+  "version": 4
+ }
+}

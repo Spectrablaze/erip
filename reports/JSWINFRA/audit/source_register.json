@@ -1,0 +1,176 @@
+{
+ "built_at": "2026-10-14T17:21:24",
+ "documents": [
+  {
+   "id": "SRC-01",
+   "path": "inputs/annual_report.pdf",
+   "kind": "annual report",
+   "sha256": "decd706fd7a342a63f48671a8c014b7df560019a7fd5801be343669a74142691",
+   "bytes": 15568725,
+   "pages": 246,
+   "file_date": "2026-10-04"
+  },
+  {
+   "id": "SRC-02",
+   "path": "inputs/concall.pdf",
+   "kind": "earnings call transcript",
+   "sha256": "008afaf5dac459420ed19c2169fc400d34b7e0a7774ba8ff58386410c372f5e4",
+   "bytes": 161379,
+   "pages": 15,
+   "file_date": "2026-10-04"
+  },
+  {
+   "id": "SRC-03",
+   "path": "inputs/investor_presentation.pdf",
+   "kind": "investor presentation",
+   "sha256": "f84bb5da301be395a133fc51cb69fec860fd976080f73613ec6acce268596c13",
+   "bytes": 7595023,
+   "pages": 37,
+   "file_date": "2026-10-04"
+  },
+  {
+   "id": "SRC-04",
+   "path": "inputs/screener.xlsx",
+   "kind": "Screener.in export",
+   "sha256": "64ae81060f2f85627c35a290888c6ef318ad5d0c205865617306b82ad51e8636",
+   "bytes": 29013,
+   "pages": null,
+   "file_date": "2026-10-04"
+  },
+  {
+   "id": "SRC-05",
+   "path": "inputs/shareholding.pdf",
+   "kind": "shareholding pattern",
+   "sha256": "a848d73b3dc0e746fa2ebf0836aceeae75c58e9669aa7001d2d9908def224111",
+   "bytes": 2034369,
+   "pages": 47,
+   "file_date": "2026-10-04"
+  },
+  {
+   "id": "SRC-06",
+   "path": "inputs/peers/adaniports.xlsx",
+   "kind": "peer export",
+   "sha256": "bee450d4d827f4b4199e0d22ebec0680edccded57ba189221dd5b6534a9b25c5",
+   "bytes": 29292,
+   "pages": null,
+   "file_date": "2026-10-04"
+  },
+  {
+   "id": "SRC-07",
+   "path": "inputs/peers/concor.xlsx",
+   "kind": "peer export",
+   "sha256": "6f08faf49d04a7011af62a8c21f5fc1df5d75fca11f5cb4f1755851d6e4b021f",
+   "bytes": 29032,
+   "pages": null,
+   "file_date": "2026-10-04"
+  },
+  {
+   "id": "SRC-08",
+   "path": "inputs/peers/gppl.xlsx",
+   "kind": "peer export",
+   "sha256": "99cf9f249b4c65a981a4e2b7b25b23d581400914be610454a7ce229d4dae1d43",
+   "bytes": 28736,
+   "pages": null,
+   "file_date": "2026-10-04"
+  }
+ ],
+ "knowledge_bases": [
+  {
+   "kb": "kb/annual_report",
+   "sha256": "decd706fd7a342a63f48671a8c014b7df560019a7fd5801be343669a74142691",
+   "built_from": "SRC-01",
+   "status": "MATCH"
+  },
+  {
+   "kb": "kb/concall",
+   "sha256": "008afaf5dac459420ed19c2169fc400d34b7e0a7774ba8ff58386410c372f5e4",
+   "built_from": "SRC-02",
+   "status": "MATCH"
+  },
+  {
+   "kb": "kb/investor_presentation",
+   "sha256": "f84bb5da301be395a133fc51cb69fec860fd976080f73613ec6acce268596c13",
+   "built_from": "SRC-03",
+   "status": "MATCH"
+  },
+  {
+   "kb": "kb/shareholding",
+   "sha256": "a848d73b3dc0e746fa2ebf0836aceeae75c58e9669aa7001d2d9908def224111",
+   "built_from": "SRC-05",
+   "status": "MATCH"
+  }
+ ],
+ "external_sources": [
+  {
+   "assumption": "ebitda_margin",
+   "source": "Fitch Ratings, 19 Aug 2026",
+   "url": null,
+   "dated": "19 Aug 2026",
+   "gap": "no URL"
+  },
+  {
+   "assumption": "ebitda_margin",
+   "source": "Q3 FY26 earnings call transcript (Nagarajan J., CFO), January 2026",
+   "url": null,
+   "dated": "January 2026",
+   "gap": "no URL"
+  },
+  {
+   "assumption": "ebitda_margin",
+   "source": "Q1 FY26 earnings call transcript (Lalit Singhvi), July 2025",
+   "url": null,
+   "dated": "July 2025",
+   "gap": "no URL"
+  },
+  {
+   "assumption": "terminal_growth",
+   "source": "Fitch Ratings, 19 Aug 2026",
+   "url": null,
+   "dated": "19 Aug 2026",
+   "gap": "no URL"
+  },
+  {
+   "assumption": "risk_free_rate",
+   "source": "ccilindia.com tenor-wise indicative yields",
+   "url": "ccilindia.com",
+   "dated": null,
+   "gap": "no date"
+  },
+  {
+   "assumption": "equity_risk_premium",
+   "source": "reports/ADANIPORTS/decisions.json, 7 Aug 2026",
+   "url": null,
+   "dated": "7 Aug 2026",
+   "gap": "no URL"
+  },
+  {
+   "assumption": "beta",
+   "source": "finbox.com/NSEI:JSWINFRA/explorer/beta_1y",
+   "url": "finbox.com/NSEI:JSWINFRA/explorer/beta_1y",
+   "dated": null,
+   "gap": "no date"
+  },
+  {
+   "assumption": "beta",
+   "source": "tradingview.com/symbols/NSE-JSWINFRA",
+   "url": "tradingview.com/symbols/NSE-JSWINFRA",
+   "dated": null,
+   "gap": "no date"
+  },
+  {
+   "assumption": "target_debt_weight",
+   "source": "Fitch Ratings, 19 Aug 2026",
+   "url": null,
+   "dated": "19 Aug 2026",
+   "gap": "no URL"
+  },
+  {
+   "assumption": "exit_multiple",
+   "source": "screener.in/company/JSWINFRA/consolidated (1 Oct 2026 close)",
+   "url": "screener.in/company/JSWINFRA/consolidated",
+   "dated": "1 Oct 2026",
+   "gap": null
+  }
+ ],
+ "status": "PASS"
+}

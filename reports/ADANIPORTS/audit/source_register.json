@@ -1,0 +1,220 @@
+{
+ "built_at": "2026-10-14T17:22:06",
+ "documents": [
+  {
+   "id": "SRC-01",
+   "path": "inputs/ambition_2031.pdf",
+   "kind": "investor presentation",
+   "sha256": "612cfc3a5013da8cdd8df76faa2d7dac592a6443444bcdee4588dcf047889ebc",
+   "bytes": 3127779,
+   "pages": 44,
+   "file_date": "2026-08-07"
+  },
+  {
+   "id": "SRC-02",
+   "path": "inputs/annual_report.pdf",
+   "kind": "annual report",
+   "sha256": "d6c0079d6de1b16ee48a62d6d8ba6bb278c604063d1801a2c70290db389f8a7d",
+   "bytes": 70532757,
+   "pages": 855,
+   "file_date": "2026-07-31"
+  },
+  {
+   "id": "SRC-03",
+   "path": "inputs/concall.pdf",
+   "kind": "earnings call transcript",
+   "sha256": "05b7d8f0ea81c3dee19c4dea20be21bbbe265e04b3e8c1da515a432b87b83f82",
+   "bytes": 325576,
+   "pages": 25,
+   "file_date": "2026-07-31"
+  },
+  {
+   "id": "SRC-04",
+   "path": "inputs/investor_presentation.pdf",
+   "kind": "investor presentation",
+   "sha256": "f913504f5e7274296fc7e5a28ca102b68397e1b0768a46d3da5f995fd2d69ff2",
+   "bytes": 2414077,
+   "pages": 58,
+   "file_date": "2026-07-31"
+  },
+  {
+   "id": "SRC-05",
+   "path": "inputs/q1fy27_operational.pdf",
+   "kind": "quarterly results / operational update",
+   "sha256": "f02e198abf211727c24adeea41b9b861dd6ff0afbb5d96664a1271dcad2edafd",
+   "bytes": 2265007,
+   "pages": 48,
+   "file_date": "2026-08-07"
+  },
+  {
+   "id": "SRC-06",
+   "path": "inputs/q1fy27_results.pdf",
+   "kind": "quarterly results / operational update",
+   "sha256": "597e4880cf59bbbb66245e7eb34e4edccb35233249eefb69582c93e8e15165d2",
+   "bytes": 2781710,
+   "pages": 34,
+   "file_date": "2026-08-07"
+  },
+  {
+   "id": "SRC-07",
+   "path": "inputs/screener.xlsx",
+   "kind": "Screener.in export",
+   "sha256": "bee450d4d827f4b4199e0d22ebec0680edccded57ba189221dd5b6534a9b25c5",
+   "bytes": 29292,
+   "pages": null,
+   "file_date": "2026-08-07"
+  },
+  {
+   "id": "SRC-08",
+   "path": "inputs/shareholding.pdf",
+   "kind": "shareholding pattern",
+   "sha256": "fa461b60bf4a66678abcfeb4613df6e8d218a7cca79232eb6a45a77aa6e5b3fb",
+   "bytes": 383240,
+   "pages": 10,
+   "file_date": "2026-08-07"
+  },
+  {
+   "id": "SRC-09",
+   "path": "inputs/peers/concor.xlsx",
+   "kind": "peer export",
+   "sha256": "6f08faf49d04a7011af62a8c21f5fc1df5d75fca11f5cb4f1755851d6e4b021f",
+   "bytes": 29032,
+   "pages": null,
+   "file_date": "2026-08-07"
+  },
+  {
+   "id": "SRC-10",
+   "path": "inputs/peers/gmrairport.xlsx",
+   "kind": "peer export",
+   "sha256": "a9a7cdeed4d283349c412d11d45e518f032b656ae9d1e7e42327ae6b4137f0c2",
+   "bytes": 29144,
+   "pages": null,
+   "file_date": "2026-08-07"
+  },
+  {
+   "id": "SRC-11",
+   "path": "inputs/peers/gppl.xlsx",
+   "kind": "peer export",
+   "sha256": "99cf9f249b4c65a981a4e2b7b25b23d581400914be610454a7ce229d4dae1d43",
+   "bytes": 28736,
+   "pages": null,
+   "file_date": "2026-08-07"
+  },
+  {
+   "id": "SRC-12",
+   "path": "inputs/peers/jswinfra.xlsx",
+   "kind": "peer export",
+   "sha256": "6cf57edddaeff436ef5a571888a68a820a0f5f97f4911aa58680c001f9c44d79",
+   "bytes": 29011,
+   "pages": null,
+   "file_date": "2026-08-07"
+  }
+ ],
+ "knowledge_bases": [
+  {
+   "kb": "kb/annual_report",
+   "sha256": "d6c0079d6de1b16ee48a62d6d8ba6bb278c604063d1801a2c70290db389f8a7d",
+   "built_from": "SRC-02",
+   "status": "MATCH"
+  },
+  {
+   "kb": "kb/concall",
+   "sha256": "05b7d8f0ea81c3dee19c4dea20be21bbbe265e04b3e8c1da515a432b87b83f82",
+   "built_from": "SRC-03",
+   "status": "MATCH"
+  },
+  {
+   "kb": "kb/investor_presentation",
+   "sha256": "f913504f5e7274296fc7e5a28ca102b68397e1b0768a46d3da5f995fd2d69ff2",
+   "built_from": "SRC-04",
+   "status": "MATCH"
+  }
+ ],
+ "external_sources": [
+  {
+   "assumption": "ebitda_margin",
+   "source": "FY26 media release",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "ebitda_margin",
+   "source": "FY26 media release segment table",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "capex_pct_sales",
+   "source": "FY26 media release",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "interest_rate",
+   "source": "FY26 media release",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "risk_free_rate",
+   "source": "Trading Economics / RBI policy, 5 August 2026",
+   "url": null,
+   "dated": "5 August 2026",
+   "gap": "no URL"
+  },
+  {
+   "assumption": "equity_risk_premium",
+   "source": "external",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "beta",
+   "source": "GuruFocus, NSE:ADANIPORTS beta",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "beta",
+   "source": "TradingView, NSE:ADANIPORTS",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "beta",
+   "source": "GuruFocus, NSE:ADANIPORTS WACC",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "beta",
+   "source": "Alpha Spread, ADANIPORTS discount rate",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "net_debt",
+   "source": "FY26 media release",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "exit_multiple",
+   "source": "external",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  }
+ ],
+ "status": "PASS"
+}

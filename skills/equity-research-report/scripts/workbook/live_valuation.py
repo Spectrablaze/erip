@@ -682,7 +682,7 @@ def build(root, out):
     wb.calculation.iterateDelta = 1e-7
     wb.calculation.fullCalcOnLoad = True
     wb.save(out)
-    return {"varying_rows": [lab for _, lab, _ in varying], "cases": order, "N": N,
+    return {"varying_rows": [lab for _, lab, _ in varying], "cases": order, "N": N, "root": root,
             "read": {"value": f"DCF!B{row_of('vps')}", "exit": f"DCF!B{row_of('vps_x')}",
                      "target": f"DCF!B{row_of('tgt')}", "rating": f"DCF!B{row_of('rating')}",
                      "wacc": f"DCF!B{row_of('wacc')}", "tv_pct": f"DCF!B{row_of('tv_pct')}",
@@ -720,6 +720,13 @@ def recalc_and_verify(raw, out, info):
         if res["errors"] or v[rd["diff"]] != 0:
             raise SystemExit(f"{case}: workbook does not reproduce the Python value: {report[case]}")
     _lo([raw, "--set", "Scenarios!B4=1", "--out", out])
+    # recorded for the validation status: when the workbook last reproduced every case
+    root = info.get("root")
+    if root:
+        from datetime import datetime
+        json.dump({"run_at": datetime.now().isoformat(timespec="seconds"), "workbook": os.path.basename(out),
+                   "status": "PASS", "cases": report},
+                  open(os.path.join(root, "data", "workbook_check.json"), "w", encoding="utf-8"), indent=1)
     return report
 
 

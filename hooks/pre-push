@@ -1,0 +1,28 @@
+#!/bin/sh
+# ERIP pre-push gate. Nothing is published unless the skill self-test passes, every report
+# validates (data/validation.json), and the web page carries no failed validation.
+# Install once per clone:  cp hooks/pre-push .git/hooks/pre-push
+# Bypass only deliberately: git push --no-verify (and say why in the commit).
+PY=${ERIP_PY:-py}
+SK="$HOME/.claude/skills/equity-research-report/scripts"
+if [ ! -f "$SK/selftest.py" ]; then
+  echo "pre-push: ERIP skill not installed on this machine; gate skipped"; exit 0
+fi
+echo "pre-push: running the ERIP self-test (quick)..."
+"$PY" "$SK/selftest.py" --quick > /tmp/erip_selftest.log 2>&1 || {
+  cat /tmp/erip_selftest.log; echo "pre-push: self-test FAILED, push blocked"; exit 1; }
+REPORTS=$("$PY" -c "import json,os;print(json.load(open(os.path.expanduser('~/.claude/erip_selftest.json'))).get('reports',''))" 2>/dev/null)
+for T in JSWINFRA ADANIPORTS; do
+  [ -d "$REPORTS/$T" ] || continue
+  "$PY" "$SK/validate_report.py" --root "$REPORTS/$T" > /tmp/erip_validate.log 2>&1 || {
+    cat /tmp/erip_validate.log; echo "pre-push: $T validation FAILED, push blocked"; exit 1; }
+done
+"$PY" - <<'PYEOF' || { echo "pre-push: docs/data.js shows a failed or missing validation, push blocked"; exit 1; }
+import json, sys
+s = open("docs/data.js", encoding="utf-8").read()
+data = json.loads(s[s.index("["):s.rindex(";")])
+bad = [d["ticker"] for d in data if not d.get("validation") or d["validation"]["status"] == "FAIL"]
+if bad:
+    print("  not validated on the page:", ", ".join(bad)); sys.exit(1)
+PYEOF
+echo "pre-push: all gates passed"

@@ -1125,6 +1125,47 @@ box and spans first ink to last. Pair it with `reports/<T>/pdf_qa.py` for
 the document-level checks: ink density, recap-aware duplicate visuals and cross-document
 figure consistency.
 
+**Evidence, sources and the publish gate.** Run the three scripts below last. The first two
+also run inside the third:
+
+```bash
+python3 <skill>/scripts/citation_check.py  --root reports/<T>   # every evidence quote vs its source
+python3 <skill>/scripts/source_register.py --root reports/<T>   # hash every input; KB built from it?
+python3 <skill>/scripts/validate_report.py --root reports/<T>   # one status -> data/validation.json
+```
+
+`citation_check.py` grades each evidence record in decisions.json:
+- **Checked against the source:**
+  - VERIFIED: the words are on the page.
+  - NUMBERS_ONLY: paraphrased, but every number is there.
+  - PARTIAL: lists the missing numbers, usually the analyst's own arithmetic.
+  - MOVED: the text is real, but on another page.
+- **Checked another way:**
+  - IMAGE: from a chart image.
+  - VERIFIED_VISUAL: checked by eye, with a dated sign-off in `data/citation_signoffs.json`.
+  - DERIVED: from the report's own data.
+  - EXTERNAL: web or third-party, so put the URL and date in the source text.
+  - NOT_HELD: a document the inputs don't contain.
+- **Blocking:** NOT_FOUND and UNRESOLVED.
+
+It reads cited input PDFs and spreadsheets directly, not only the knowledge base. Some
+filings (BSE shareholding patterns) use an encoded font: their text layer and the OCR are
+unreadable. Render the page, read it, and record a sign-off. Don't mark the citation verified
+by assertion.
+
+`validate_report.py` combines six checks:
+- three-statement checks, with explained exceptions;
+- the LibreOffice workbook check, which must be newer than model.json;
+- citations;
+- sources;
+- typed numbers;
+- whether the standing call in the ledger equals `dcf.target`.
+
+It writes PASS, PASS WITH NOTES or FAIL. `showcase_data.py` publishes that status on the web page.
+The public repo's `hooks/pre-push` runs the quick self-test and every report's validation, and
+refuses the push on any failure. Install it once per clone with
+`cp hooks/pre-push .git/hooks/pre-push`.
+
 **No model output may be typed into the report code.** Run the typed-number gate:
 
 ```bash

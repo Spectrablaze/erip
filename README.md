@@ -93,6 +93,24 @@ Applied the same way in the reports, the Excel models and the web page, and reco
   record) are listed with their source and size in each workbook's Model info sheet, rather than
   silently tolerated.
 
+## Verification
+
+Every report carries a validation record, shown as a status panel on the
+[live page](https://spectrablaze.github.io/erip/) and saved in its `audit/` folder:
+
+- **Citations** (`citation_check.json`): every evidence quote is checked against the page it cites,
+  in the knowledge base or the original PDF or spreadsheet. Each gets a grade: verified word for word,
+  numbers only, checked by eye with a dated sign-off, or external. External means a web source that
+  can't be checked offline, flagged when it lacks a URL.
+- **Sources** (`source_register.json`): every input document is SHA-256 hashed with its page count and
+  date. Each knowledge base is confirmed to be built from that exact file.
+- **Model and call** (`validation.json`): three-statement checks, with any exceptions explained; the
+  Excel model recalculated in LibreOffice against every scenario; no model output typed into the
+  report text; and the standing call in the ledger equal to the model's target.
+
+A git `pre-push` hook (`hooks/pre-push`) runs the pipeline self-test and every report's validation,
+and refuses the push if anything fails.
+
 ## How it works
 
 ```mermaid

@@ -72,6 +72,14 @@ svg text{fill:var(--muted);font-size:11px}
 .why{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .why .card{padding:14px 16px;font-size:14px}
 .why b{color:var(--ink)}
+.status{padding:12px 16px;margin:-12px 0 24px;font-size:13.5px}
+.status summary{cursor:pointer;display:flex;gap:10px;align-items:center;flex-wrap:wrap;list-style:none}
+.status summary::-webkit-details-marker{display:none}
+.badge{font-size:12px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:5px;color:#fff;background:var(--pos)}
+.badge.FAIL{background:var(--neg)} .badge.NOTES{background:#a77d1f}
+.status table{width:100%;border-collapse:collapse;margin-top:10px}
+.status td{padding:5px 8px;border-top:1px solid var(--line);vertical-align:top}
+.status td:first-child{white-space:nowrap;font-weight:600;width:1%}
 footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
 @media (max-width:860px){
   .call{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -99,6 +107,7 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
 
 <section id="call" class="card call" aria-live="polite"></section>
 <div class="btns" id="btns"></div>
+<details class="card status" id="status"></details>
 
 <h2>Try the valuation</h2>
 <div class="grid2">
@@ -295,7 +304,19 @@ footer{margin:40px 0 50px;font-size:12.5px;color:var(--muted);border-top:1px sol
     h += `<text x="${cx}" y="${T + d.length * rh + 16}" text-anchor="middle">base ${base}</text>`;
     svg.innerHTML = h;
   }
-  function init(){ tabs(); call(); controls(); setCase("base"); }
+  function status(){
+    const v = co.validation, el = $("status");
+    if (!v){ el.innerHTML = `<summary><span class="badge FAIL">NOT VALIDATED</span> No validation record for this report.</summary>`; return; }
+    const cls = v.status === "PASS" ? "" : (v.status === "FAIL" ? "FAIL" : "NOTES");
+    const d = v.dates, row = (k, val) => `<tr><td>${k}</td><td>${val ?? "n/a"}</td></tr>`;
+    const chk = Object.entries(v.checks).map(([k, c]) => row(k.replace("_", " "), `<b>${c.status}</b> ${c.detail}`)).join("");
+    el.innerHTML = `<summary><span class="badge ${cls}">${v.status}</span>
+      <span>Validated ${v.validated_at.replace("T", " ")} · call v${v.call.version} · cover ${d.cover_date} · actuals to ${d.last_actual_period}</span>
+      <span class="sub">details</span></summary>
+      <table>${row("Valuation date", `${d.cover_date} (net debt at ${d.balance_sheet_date})`)}${row("Forecast", d.forecast)}
+      ${row("Model run", d.model_run)}${chk}${v.notes.length ? row("Open notes", v.notes.join("; ")) : ""}</table>`;
+  }
+  function init(){ tabs(); call(); status(); controls(); setCase("base"); }
   window.addEventListener("resize", render);
   window.ERIP_CALC = {perp, exitv, published, whatIfTarget};
   init();

@@ -1,0 +1,267 @@
+{
+ "run_at": "2026-10-14T17:21:24",
+ "records": 31,
+ "counts": {
+  "NUMBERS_ONLY": 5,
+  "VERIFIED": 11,
+  "VERIFIED_VISUAL": 3,
+  "EXTERNAL": 7,
+  "NOT_HELD": 2,
+  "PARTIAL": 1,
+  "DERIVED": 2
+ },
+ "status": "PASS",
+ "rows": [
+  {
+   "source": "segment_build.md / kb/annual_report/pages/page_0219.md",
+   "page": 219,
+   "quote": "Consolidated revenue is the sum of segment revenue ... reproduces FY26 within tolerance (Port Operation 4,646.91, Logistic Operation 714.53)",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0219.md",
+   "assumption": "revenue_growth"
+  },
+  {
+   "source": "kb/concall/pages/page_0004.md",
+   "page": 5,
+   "quote": "Operational EBITDA for port segment stood at INR601 crores ... EBITDA margin was close to 49.8% vis-a-vis 51.8% a year ago. The dip ... mainly attributable to t",
+   "grade": "VERIFIED",
+   "found": "kb/concall/pages/page_0004.md",
+   "assumption": "ebitda_margin"
+  },
+  {
+   "source": "kb/investor_presentation/images/charts/ports_targets_fy28.jpg, logistics_targets_fy28.jpg",
+   "page": 14,
+   "quote": "Ports FY26A revenue 4,647 / EBITDA 2,462; Logistics FY26A 715 / 142; FY27E 1,650 / 400; FY28E 2,800 / 700",
+   "grade": "VERIFIED_VISUAL",
+   "found": "kb/investor_presentation/images/charts/ports_targets_fy28.jpg",
+   "why": "Claude, image, 2026-10-14: Ports FY26A revenue 4,647 / EBITDA 2,462; FY27E 5,200 / 2,600; FY28E 8,000 / 4,300. Logistics FY26A 715 / 142; FY27E 1,650 / 400; FY28E 2,800 / 700 (INR Cr).",
+   "assumption": "ebitda_margin"
+  },
+  {
+   "source": "Fitch Ratings, 19 Aug 2026",
+   "page": null,
+   "quote": "We forecast the EBITDA margin for the ports segment to improve to 54% in FY29-FY30, from 52% in FY26 ... For the logistics segment, we assume that the EBITDA ma",
+   "grade": "EXTERNAL",
+   "why": "no URL in the source text",
+   "assumption": "ebitda_margin"
+  },
+  {
+   "source": "Q3 FY26 earnings call transcript (Nagarajan J., CFO), January 2026",
+   "page": null,
+   "quote": "So slurry, you know that we have a take-or-pay contract, which can throw out INR800 crores if constructed on time. Jatadhar can give another INR300 crores to IN",
+   "grade": "NOT_HELD",
+   "why": "not in kb/concall: the inputs do not include this document",
+   "assumption": "ebitda_margin"
+  },
+  {
+   "source": "Q1 FY26 earnings call transcript (Lalit Singhvi), July 2025",
+   "page": null,
+   "quote": "Slurry pipeline has already got the take-or-pay agreement which will trigger from 1st of April '27.",
+   "grade": "NOT_HELD",
+   "why": "not in kb/concall: the inputs do not include this document",
+   "assumption": "ebitda_margin"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0219.md",
+   "page": 219,
+   "quote": "Total operating profit 2,060.90 on revenue 5,361.44 (segment results before finance expense)",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0219.md",
+   "assumption": "ebit_margin"
+  },
+  {
+   "source": "kb/concall/pages/page_0004.md",
+   "page": 5,
+   "quote": "For FY27 and FY28, company plans to invest approximately INR16,500 crores with a significant portion around INR13,000 crores allocated to the port segment and I",
+   "grade": "VERIFIED",
+   "found": "kb/concall/pages/page_0004.md",
+   "assumption": "capex_pct_sales"
+  },
+  {
+   "source": "kb/concall/pages/page_0005.md",
+   "page": 6,
+   "quote": "the company has already committed further INR5,500 crores of capex by placing orders for machinery, long lead items and other civil work",
+   "grade": "VERIFIED",
+   "found": "kb/concall/pages/page_0005.md",
+   "assumption": "capex_pct_sales"
+  },
+  {
+   "source": "kb/concall/pages/page_0004.md",
+   "page": 5,
+   "quote": "Consolidated depreciation was INR166 crores ... in the current quarter",
+   "grade": "VERIFIED",
+   "found": "kb/concall/pages/page_0004.md",
+   "assumption": "dep_pct_sales"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0184.md",
+   "page": 184,
+   "quote": "These assets are amortized based on the lower of their useful lives or concession period.",
+   "grade": "VERIFIED",
+   "found": "kb/annual_report/pages/page_0184.md",
+   "assumption": "dep_pct_sales"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0179.md",
+   "page": 179,
+   "quote": "Trade payables: MSE 74.62 / others 299.87 (FY26); 42.59 / 306.77 (FY25)",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0179.md",
+   "assumption": "nwc_pct_sales"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0219.md",
+   "page": 219,
+   "quote": "Profit before tax 1,872.84; Less: Tax expense 325.94 (17.4%)",
+   "grade": "PARTIAL",
+   "found": "kb/annual_report/pages/page_0219.md",
+   "why": "numbers not on the page: 17.4",
+   "assumption": "effective_tax_rate"
+  },
+  {
+   "source": "kb/concall/pages/page_0005.md",
+   "page": 6,
+   "quote": "Moody's has assigned JSW Infrastructure an investment grade rating of Baa3 from Ba1 with a stable outlook",
+   "grade": "VERIFIED",
+   "found": "kb/concall/pages/page_0005.md",
+   "assumption": "interest_rate"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0079.md",
+   "page": 79,
+   "quote": "The operational facilities have a capacity-weighted average remaining concession period of around 21 years, with one of its largest, Jaigarh Port, holding a rem",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0079.md",
+   "assumption": "terminal_growth"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0226.md",
+   "page": 226,
+   "quote": "providing cargo handling & allied services to JSL ... effective from 1st April, 2026 to 30th June, 2030 i.e., for the remaining term of the cargo handling agree",
+   "grade": "VERIFIED",
+   "found": "kb/annual_report/pages/page_0226.md",
+   "assumption": "terminal_growth"
+  },
+  {
+   "source": "Fitch Ratings, 19 Aug 2026",
+   "page": null,
+   "quote": "the average remaining life of its concessions, weighted by capacity, is 23 years. The concession for the JSWIL-operated terminal in Goa expires in 2029, but an ",
+   "grade": "EXTERNAL",
+   "why": "no URL in the source text",
+   "assumption": "terminal_growth"
+  },
+  {
+   "source": "ccilindia.com tenor-wise indicative yields",
+   "page": null,
+   "quote": "2026-10-01, 9Y-10Y, 6.94% GS 2036, 7.2036",
+   "grade": "EXTERNAL",
+   "why": null,
+   "assumption": "risk_free_rate"
+  },
+  {
+   "source": "reports/ADANIPORTS/decisions.json, 7 Aug 2026",
+   "page": null,
+   "quote": "equity_risk_premium 5.5% (house convention)",
+   "grade": "DERIVED",
+   "why": null,
+   "assumption": "equity_risk_premium"
+  },
+  {
+   "source": "finbox.com/NSEI:JSWINFRA/explorer/beta_1y",
+   "page": null,
+   "quote": "JSW Infrastructure's beta (1 year) is 0.76",
+   "grade": "EXTERNAL",
+   "why": null,
+   "assumption": "beta"
+  },
+  {
+   "source": "tradingview.com/symbols/NSE-JSWINFRA",
+   "page": null,
+   "quote": "JSWINFRA stock ... has beta coefficient of 0.82",
+   "grade": "EXTERNAL",
+   "why": null,
+   "assumption": "beta"
+  },
+  {
+   "source": "Fitch Ratings, 19 Aug 2026",
+   "page": null,
+   "quote": "we forecast JSWIL's total debt/EBITDA leverage to rise to 3.5x by FY29, from 2.3x in FY27",
+   "grade": "EXTERNAL",
+   "why": "no URL in the source text",
+   "assumption": "target_debt_weight"
+  },
+  {
+   "source": "kb/concall/pages/page_0005.md",
+   "page": 6,
+   "quote": "Given the QIP receipts of INR6,555 crores into the company, as of June '26, we have a net cash position of INR2,769 crores.",
+   "grade": "VERIFIED",
+   "found": "kb/concall/pages/page_0005.md",
+   "assumption": "net_debt"
+  },
+  {
+   "source": "inputs/shareholding.pdf, Table I",
+   "page": 4,
+   "quote": "Total 2330001567 ... (C2) Shares held by Employee Trusts 6537830",
+   "grade": "VERIFIED_VISUAL",
+   "why": "Claude, rendered page, 2026-10-14: Table I, PDF page 4: Total 2,330,001,567 shares; (C2) Shares held by Employee Trusts 6,537,830. The PDF uses an encoded font, so its text layer and the OCR knowledge",
+   "assumption": "shares_out"
+  },
+  {
+   "source": "inputs/screener.xlsx, Data Sheet META",
+   "page": null,
+   "quote": "Current Price 357.45; Market Capitalization 83285.91",
+   "grade": "VERIFIED",
+   "found": "inputs/screener.xlsx",
+   "assumption": "current_price"
+  },
+  {
+   "source": "screener.in/company/JSWINFRA/consolidated (1 Oct 2026 close)",
+   "page": null,
+   "quote": "Market Cap 83,286 cr; TTM operating profit 2,696 cr",
+   "grade": "EXTERNAL",
+   "why": null,
+   "assumption": "exit_multiple"
+  },
+  {
+   "source": "kb/annual_report/images/charts/capacity_roadmap_400mtpa.jpg",
+   "page": 8,
+   "quote": "Phase I to 300 MTPA by FY28E ... Phase II to 400 MTPA by FY30E",
+   "grade": "VERIFIED_VISUAL",
+   "found": "kb/annual_report/images/charts/capacity_roadmap_400mtpa.jpg",
+   "why": "Claude, image, 2026-10-14: Capacity bridge: 183 MTPA FY26 to 300 MTPA FY28E (Phase I) to 400 MTPA FY30E (Phase II).",
+   "assumption": "capacity_addition"
+  },
+  {
+   "source": "kb/concall/pages/page_0002.md",
+   "page": 3,
+   "quote": "expanding our capacity from the current 186 million tonnes per annum to 300 million tonnes by FY28 and further to 400 million tonnes per annum by FY 2030 or ear",
+   "grade": "VERIFIED",
+   "found": "kb/concall/pages/page_0002.md",
+   "assumption": "capacity_addition"
+  },
+  {
+   "source": "data/model.json roiic block (Screener.in consolidated)",
+   "page": null,
+   "quote": "NOPAT 1,213 / 1,448 / 1,644 cr on invested capital 8,695 / 12,257 / 15,459 cr, FY24-FY26",
+   "grade": "DERIVED",
+   "why": null,
+   "assumption": "terminal_ronic"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0179.md (Consolidated Balance Sheet)",
+   "page": 180,
+   "quote": "Lease liabilities 457.98 (non-current), 31.09 (current)",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0179.md",
+   "assumption": "lease_liabilities"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0179.md (Consolidated Balance Sheet)",
+   "page": 180,
+   "quote": "Non-controlling interests (NCI) 815.24",
+   "grade": "VERIFIED",
+   "found": "kb/annual_report/pages/page_0179.md",
+   "assumption": "minority_interest"
+  }
+ ]
+}
