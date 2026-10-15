@@ -1,0 +1,189 @@
+{
+ "built_at": "2026-10-15T11:17:34",
+ "documents": [
+  {
+   "id": "SRC-01",
+   "path": "inputs/annual_report.pdf",
+   "kind": "annual report",
+   "sha256": "a8169c58115637645bc72d16910d42536bdf84dbdb96a88d77b7dc3bccb3d0b2",
+   "bytes": 34763018,
+   "pages": 261,
+   "file_date": "2026-10-15"
+  },
+  {
+   "id": "SRC-02",
+   "path": "inputs/investor_presentation.pdf",
+   "kind": "investor presentation",
+   "sha256": "3eca482f8e2fae34516d475db4aee39cfe1378c561d86cde71aedbf28695b012",
+   "bytes": 6420563,
+   "pages": 35,
+   "file_date": "2026-10-15"
+  },
+  {
+   "id": "SRC-03",
+   "path": "inputs/press_release_q1fy27.pdf",
+   "kind": "quarterly results / operational update",
+   "sha256": "e5b4c614933fbaf9f0a0e7a0e6396b622e60d2dc18722a02809e932d7c6263ab",
+   "bytes": 546229,
+   "pages": 5,
+   "file_date": "2026-10-15"
+  },
+  {
+   "id": "SRC-04",
+   "path": "inputs/screener.xlsx",
+   "kind": "Screener.in export",
+   "sha256": "b5354bda4f8364a1cfd0567b7397773ed80aac549aff7ea8648a8a2726775d87",
+   "bytes": 29074,
+   "pages": null,
+   "file_date": "2026-10-15"
+  },
+  {
+   "id": "SRC-05",
+   "path": "inputs/shareholding.pdf",
+   "kind": "shareholding pattern",
+   "sha256": "08757559a4c6b815bd26653acffdfdeda10e0972c9304d69d92b94a720db64ee",
+   "bytes": 1672720,
+   "pages": 17,
+   "file_date": "2026-10-15"
+  },
+  {
+   "id": "SRC-06",
+   "path": "inputs/peers/ABFRL.xlsx",
+   "kind": "peer export",
+   "sha256": "8460617ee7abea26442c4c5b5228babe2724d658269f5779d067676265d4c35a",
+   "bytes": 28944,
+   "pages": null,
+   "file_date": "2026-10-15"
+  },
+  {
+   "id": "SRC-07",
+   "path": "inputs/peers/DMART.xlsx",
+   "kind": "peer export",
+   "sha256": "1ed0ec5af84d028627dac40b7cffb9c282d135f3aa5b5b88104cd5291f2a7c65",
+   "bytes": 29149,
+   "pages": null,
+   "file_date": "2026-10-15"
+  },
+  {
+   "id": "SRC-08",
+   "path": "inputs/peers/SHOPERSTOP.xlsx",
+   "kind": "peer export",
+   "sha256": "ef635f9869251415034972eace249c032d55d312d93824dadd10e1c14d42e04b",
+   "bytes": 28984,
+   "pages": null,
+   "file_date": "2026-10-15"
+  },
+  {
+   "id": "SRC-09",
+   "path": "inputs/peers/V2RETAIL.xlsx",
+   "kind": "peer export",
+   "sha256": "850de7670e21ef8c3d0449bf076fbfd538e047241a06f56373f5448695fc2e5a",
+   "bytes": 28811,
+   "pages": null,
+   "file_date": "2026-10-15"
+  },
+  {
+   "id": "SRC-10",
+   "path": "inputs/peers/VMART.xlsx",
+   "kind": "peer export",
+   "sha256": "f59373cf2551b42c8169743912d13f6503ad39897b5c19211fe9e145d0d16dc6",
+   "bytes": 28918,
+   "pages": null,
+   "file_date": "2026-10-15"
+  }
+ ],
+ "knowledge_bases": [
+  {
+   "kb": "kb/annual_report",
+   "sha256": "a8169c58115637645bc72d16910d42536bdf84dbdb96a88d77b7dc3bccb3d0b2",
+   "built_from": "SRC-01",
+   "status": "MATCH"
+  },
+  {
+   "kb": "kb/investor_presentation",
+   "sha256": "3eca482f8e2fae34516d475db4aee39cfe1378c561d86cde71aedbf28695b012",
+   "built_from": "SRC-02",
+   "status": "MATCH"
+  }
+ ],
+ "external_sources": [
+  {
+   "assumption": "revenue_growth",
+   "source": "Business Standard, 6 Oct 2026 (Q2 FY27 business update)",
+   "url": null,
+   "dated": "6 Oct 2026",
+   "gap": "no URL"
+  },
+  {
+   "assumption": "terminal_growth",
+   "source": "reports/_knowledge/macro.json",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "terminal_growth",
+   "source": "reports/_knowledge/macro.json",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "risk_free_rate",
+   "source": "tradingeconomics.com/india/government-bond-yield",
+   "url": "tradingeconomics.com/india/government-bond-yield",
+   "dated": null,
+   "gap": "no date"
+  },
+  {
+   "assumption": "risk_free_rate",
+   "source": "Reuters, 7 Oct 2026, https://www.reuters.com/world/india/india-raises-policy-rate-by-25-bps-first-hike-nearly-four-years-2026-10-07/",
+   "url": "https://www.reuters.com/world/india/india-raises-policy-rate-by-25-bps-first-hike-nearly-four-years-2026-10-07/",
+   "dated": "7 Oct 2026",
+   "gap": null
+  },
+  {
+   "assumption": "equity_risk_premium",
+   "source": "reports/JSWINFRA/decisions.json",
+   "url": null,
+   "dated": null,
+   "gap": "no URL, no date"
+  },
+  {
+   "assumption": "beta",
+   "source": "moneycontrol.com/india/stockpricequote/retail/trent/T04",
+   "url": "moneycontrol.com/india/stockpricequote/retail/trent/T04",
+   "dated": null,
+   "gap": "no date"
+  },
+  {
+   "assumption": "beta",
+   "source": "gurufocus.com/term/beta/NSE:TRENT",
+   "url": "gurufocus.com/term/beta/NSE:TRENT",
+   "dated": null,
+   "gap": "no date"
+  },
+  {
+   "assumption": "beta",
+   "source": "moneycontrol.com/india/stockpricequote/retail/avenuesupermarts/AS19",
+   "url": "moneycontrol.com/india/stockpricequote/retail/avenuesupermarts/AS19",
+   "dated": null,
+   "gap": "no date"
+  },
+  {
+   "assumption": "beta",
+   "source": "moneycontrol.com/india/stockpricequote/retail/v-martretail/VR03",
+   "url": "moneycontrol.com/india/stockpricequote/retail/v-martretail/VR03",
+   "dated": null,
+   "gap": "no date"
+  },
+  {
+   "assumption": "exit_multiple",
+   "source": "screener.in/company/TRENT/consolidated (14 Oct 2026)",
+   "url": "screener.in/company/TRENT/consolidated",
+   "dated": "14 Oct 2026",
+   "gap": null
+  }
+ ],
+ "status": "PASS"
+}

@@ -1,0 +1,72 @@
+{
+ "ticker": "TRENT",
+ "validated_at": "2026-10-15T11:17:34",
+ "status": "PASS WITH NOTES",
+ "failed": [],
+ "notes": [
+  "2 explained check exception(s)",
+  "1 web citation(s) without a URL"
+ ],
+ "checks": {
+  "three_statement": {
+   "status": "PASS",
+   "detail": "16 checks; 0 blocking failures; 2 explained exception(s); 0 unexplained"
+  },
+  "workbook": {
+   "status": "PASS",
+   "detail": "verified 2026-10-15T10:42:41",
+   "run_at": "2026-10-15T10:42:41"
+  },
+  "citations": {
+   "status": "PASS",
+   "detail": "DERIVED 5, EXTERNAL 8, IMAGE 2, NUMBERS_ONLY 15, PARTIAL 1, VERIFIED 7; evidence types: ANALYST 1, DERIVED 2, GUIDANCE 1, MARKET 11, REPORTED 23",
+   "counts": {
+    "IMAGE": 2,
+    "EXTERNAL": 8,
+    "NUMBERS_ONLY": 15,
+    "VERIFIED": 7,
+    "PARTIAL": 1,
+    "DERIVED": 5
+   },
+   "records": 38,
+   "evidence_types": {
+    "REPORTED": 23,
+    "GUIDANCE": 1,
+    "MARKET": 11,
+    "DERIVED": 2,
+    "ANALYST": 1
+   },
+   "forward_support": {
+    "gross_margin": "GUIDANCE"
+   }
+  },
+  "sources": {
+   "status": "PASS",
+   "detail": "10 input documents hashed; kb/annual_report MATCH, kb/investor_presentation MATCH"
+  },
+  "stress": {
+   "status": "PASS",
+   "detail": "6 cases, run 2026-10-15T10:41:18; 0 invariant violation(s); 0 case(s) breach a reference level"
+  },
+  "typed_numbers": {
+   "status": "PASS",
+   "detail": "0 model output(s) typed into 14 file(s)"
+  },
+  "call_ledger": {
+   "status": "PASS",
+   "detail": "standing call v1 SELL 875"
+  }
+ },
+ "dates": {
+  "cover_date": "2026-10-14",
+  "balance_sheet_date": "2026-03-31",
+  "last_actual_period": "Mar-26",
+  "forecast": "Mar-27E to Mar-36E",
+  "model_run": "2026-10-15T10:40:32"
+ },
+ "call": {
+  "rating": "SELL",
+  "target": 875.0,
+  "version": 1
+ }
+}

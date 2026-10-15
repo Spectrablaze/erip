@@ -1,0 +1,87 @@
+<svg preserveAspectRatio="xMidYMid meet" width="680" height="288" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 680 288">
+<rect width="680" height="288" x="0" y="0" fill="none"></rect>
+<path d="M144.5 26L144.5 266" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr12-cls-56"></path>
+<path d="M269.5 26L269.5 266" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr12-cls-56"></path>
+<path d="M395.5 26L395.5 266" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr12-cls-56"></path>
+<path d="M520.5 26L520.5 266" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr12-cls-56"></path>
+<path d="M646.5 26L646.5 266" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr12-cls-56"></path>
+<path d="M-132 -5.5l132 0l0 11l-132 0Z" transform="translate(136 46)" fill="none" pointer-events="visible" class="zr12-cls-56"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(136 46)" fill="#5b6875">Peer P/E (25th-75th)</text>
+<path d="M-132 -5.5l132 0l0 11l-132 0Z" transform="translate(136 86)" fill="none" pointer-events="visible" class="zr12-cls-56"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(136 86)" fill="#5b6875">Peer EV/EBITDA (25th-75th)</text>
+<path d="M-132 -5.5l132 0l0 11l-132 0Z" transform="translate(136 126)" fill="none" pointer-events="visible" class="zr12-cls-56"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(136 126)" fill="#5b6875">DCF (bear-base-bull)</text>
+<path d="M-132 -5.5l132 0l0 11l-132 0Z" transform="translate(136 166)" fill="none" pointer-events="visible" class="zr12-cls-56"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(136 166)" fill="#5b6875">DCF, 25x exit multiple</text>
+<path d="M-132 -11l132 0l0 22l-132 0Z" transform="translate(136 206)" fill="none" pointer-events="visible" class="zr12-cls-56"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="-5.5" transform="translate(136 206)" fill="#5b6875">DCF, 40x exit (today&#39;s </text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5.5" transform="translate(136 206)" fill="#5b6875">multiple)</text>
+<path d="M-132 -5.5l132 0l0 11l-132 0Z" transform="translate(136 246)" fill="none" pointer-events="visible" class="zr12-cls-56"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(136 246)" fill="#5b6875">52-week range</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(144 272)" fill="#5b6875">0</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(269.5 272)" fill="#5b6875">1,000</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(395 272)" fill="#5b6875">2,000</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(520.5 272)" fill="#5b6875">3,000</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(646 272)" fill="#5b6875">4,000</text>
+<path d="M144 31.4l176.7 0l0 13.9l-176.7 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<path d="M144 71.4l122.7 0l0 13.9l-122.7 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<path d="M144 111.4l60.6 0l0 13.9l-60.6 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<path d="M144 151.4l304.2 0l0 13.9l-304.2 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<path d="M144 191.4l463.3 0l0 13.9l-463.3 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="4" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<path d="M144 231.4l274.1 0l0 13.9l-274.1 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="5" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<path d="M322.7 31.4L395.8 31.4A2 2 0 0 1 397.8 33.4L397.8 43.3A2 2 0 0 1 395.8 45.3L322.7 45.3A2 2 0 0 1 320.7 43.3L320.7 33.4A2 2 0 0 1 322.7 31.4Z" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr12-cls-57"></path>
+<path d="M268.7 71.4L295.4 71.4A2 2 0 0 1 297.4 73.4L297.4 83.3A2 2 0 0 1 295.4 85.3L268.7 85.3A2 2 0 0 1 266.7 83.3L266.7 73.4A2 2 0 0 1 268.7 71.4Z" fill="#1173a8" ecmeta_series_index="1" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr12-cls-57"></path>
+<path d="M206.6 111.4L272.6 111.4A2 2 0 0 1 274.6 113.4L274.6 123.3A2 2 0 0 1 272.6 125.3L206.6 125.3A2 2 0 0 1 204.6 123.3L204.6 113.4A2 2 0 0 1 206.6 111.4Z" fill="#0b3d62" ecmeta_series_index="1" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr12-cls-58"></path>
+<path d="M448.2 151.4L448.2 165.3L448.2 151.4Z" fill="#0b3d62" ecmeta_series_index="1" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr12-cls-58"></path>
+<path d="M607.3 191.4L607.3 205.3L607.3 191.4Z" fill="#0b3d62" ecmeta_series_index="1" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr12-cls-58"></path>
+<path d="M420.1 231.4L568.7 231.4A2 2 0 0 1 570.7 233.4L570.7 243.3A2 2 0 0 1 568.7 245.3L420.1 245.3A2 2 0 0 1 418.1 243.3L418.1 233.4A2 2 0 0 1 420.1 231.4Z" fill="#a9c6dc" ecmeta_series_index="1" ecmeta_data_index="5" ecmeta_ssr_type="chart" class="zr12-cls-59"></path>
+<path d="M144 46.7l253.8 0l0 13.9l-253.8 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="0" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<path d="M144 86.7l153.4 0l0 13.9l-153.4 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="1" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<path d="M144 126.7l130.6 0l0 13.9l-130.6 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="2" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<path d="M144 166.7l304.2 0l0 13.9l-304.2 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="3" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<path d="M144 206.7l463.3 0l0 13.9l-463.3 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="4" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<path d="M144 246.7l426.7 0l0 13.9l-426.7 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="5" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:600;" transform="translate(324.704 38.3524)" fill="#fff">1,408</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:600;" transform="translate(270.739 78.3524)" fill="#fff">978</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:600;" transform="translate(208.6165 118.3524)" fill="#fff">483</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:600;" transform="translate(452.212 158.3524)" fill="#fff">2,424</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:600;" transform="translate(611.346 198.3524)" fill="#fff">3,692</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:600;" transform="translate(422.092 238.3524)" fill="#fff">2,184</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(401.761 53.6476)" fill="#5b6875">2,022</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(301.361 93.6476)" fill="#5b6875">1,222</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(278.6455 133.6476)" fill="#5b6875">1,041</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(452.212 173.6476)" fill="#5b6875">2,424</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(611.346 213.6476)" fill="#5b6875">3,692</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(574.7 253.6476)" fill="#5b6875">3,400</text>
+<path d="M517 26L517 266" fill="none" pointer-events="visible" stroke="#16202c" stroke-width="2" stroke-dasharray="8,4" ecmeta_series_index="1" ecmeta_data_index="0" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr12-cls-56"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="-5" transform="matrix(0,1,-1,0,520.8605,30)" fill="#16202c">CMP 2,971</text>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(4,0,0,4,347.561,46)" fill="#16202c" fill-opacity="0.8" stroke="#fff" stroke-width="0.3" stroke-opacity="0.8" ecmeta_series_index="2" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr12-cls-60"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(4,0,0,4,269.6255,86)" fill="#16202c" fill-opacity="0.8" stroke="#fff" stroke-width="0.3" stroke-opacity="0.8" ecmeta_series_index="2" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr12-cls-60"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(4,0,0,4,240.886,126)" fill="#16202c" fill-opacity="0.8" stroke="#fff" stroke-width="0.3" stroke-opacity="0.8" ecmeta_series_index="2" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr12-cls-60"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(4,0,0,4,448.212,166)" fill="#16202c" fill-opacity="0.8" stroke="#fff" stroke-width="0.3" stroke-opacity="0.8" ecmeta_series_index="2" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr12-cls-60"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(4,0,0,4,607.346,206)" fill="#16202c" fill-opacity="0.8" stroke="#fff" stroke-width="0.3" stroke-opacity="0.8" ecmeta_series_index="2" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr12-cls-60"></path>
+<style ><![CDATA[
+.zr12-cls-56:hover {
+pointer-events:none;
+}
+.zr12-cls-57:hover {
+cursor:pointer;
+fill:rgba(18,126,184,1);
+}
+.zr12-cls-58:hover {
+cursor:pointer;
+fill:rgba(12,67,107,1);
+}
+.zr12-cls-59:hover {
+cursor:pointer;
+fill:rgba(185,217,242,1);
+}
+.zr12-cls-60:hover {
+cursor:pointer;
+fill:rgba(24,35,48,1);
+}
+
+]]>
+
+</style>
+</svg>

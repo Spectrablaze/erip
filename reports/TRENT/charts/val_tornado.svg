@@ -1,0 +1,86 @@
+<svg preserveAspectRatio="xMidYMid meet" width="680" height="250" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 680 250">
+<rect width="680" height="250" x="0" y="0" fill="none"></rect>
+<path d="M116.5 24L116.5 230" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr14-cls-64"></path>
+<path d="M224.5 24L224.5 230" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr14-cls-64"></path>
+<path d="M333.5 24L333.5 230" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr14-cls-64"></path>
+<path d="M441.5 24L441.5 230" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr14-cls-64"></path>
+<path d="M549.5 24L549.5 230" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr14-cls-64"></path>
+<path d="M658.5 24L658.5 230" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr14-cls-64"></path>
+<path d="M-104 -11l104 0l0 22l-104 0Z" transform="translate(108 212.8333)" fill="none" pointer-events="visible" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="-5.5" transform="translate(108 212.8333)" fill="#5b6875">Risk-free 7.85% / </text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5.5" transform="translate(108 212.8333)" fill="#5b6875">6.85%</text>
+<path d="M-104 -11l104 0l0 22l-104 0Z" transform="translate(108 178.5)" fill="none" pointer-events="visible" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="-5.5" transform="translate(108 178.5)" fill="#5b6875">Terminal RONIC 15% /</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5.5" transform="translate(108 178.5)" fill="#5b6875"> 30%</text>
+<path d="M-104 -5.5l104 0l0 11l-104 0Z" transform="translate(108 144.1667)" fill="none" pointer-events="visible" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(108 144.1667)" fill="#5b6875">Beta 1.4 / 1.0</text>
+<path d="M-104 -11l104 0l0 22l-104 0Z" transform="translate(108 109.8333)" fill="none" pointer-events="visible" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="-5.5" transform="translate(108 109.8333)" fill="#5b6875">Capex incl. leases </text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5.5" transform="translate(108 109.8333)" fill="#5b6875">+2pp / -2pp of sales</text>
+<path d="M-104 -11l104 0l0 22l-104 0Z" transform="translate(108 75.5)" fill="none" pointer-events="visible" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="-5.5" transform="translate(108 75.5)" fill="#5b6875">Revenue growth -3pp /</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="5.5" transform="translate(108 75.5)" fill="#5b6875"> +3pp a year</text>
+<path d="M-104 -11l104 0l0 22l-104 0Z" transform="translate(108 41.1667)" fill="none" pointer-events="visible" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="-5.5" transform="translate(108 41.1667)" fill="#5b6875">EBITDA margin -3pp / </text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5.5" transform="translate(108 41.1667)" fill="#5b6875">+3pp</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(116 236)" fill="#5b6875">0</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(224.4 236)" fill="#5b6875">200</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(332.8 236)" fill="#5b6875">400</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(441.2 236)" fill="#5b6875">600</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(549.6 236)" fill="#5b6875">800</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(658 236)" fill="#5b6875">1,000</text>
+<path d="M116 200.3l390.2 0l0 11.9l-390.2 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M116 166l382.7 0l0 11.9l-382.7 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M116 131.6l378.3 0l0 11.9l-378.3 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M116 97.3l349.6 0l0 11.9l-349.6 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M116 63l333.3 0l0 11.9l-333.3 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="4" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M116 28.6l309.5 0l0 11.9l-309.5 0Z" fill="none" pointer-events="visible" ecmeta_series_index="0" ecmeta_data_index="5" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M506.2 200.3l28.2 0l0 11.9l-28.2 0Z" fill="#b3261e" ecmeta_series_index="1" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr14-cls-65"></path>
+<path d="M498.7 166l35.8 0l0 11.9l-35.8 0Z" fill="#b3261e" ecmeta_series_index="1" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr14-cls-65"></path>
+<path d="M494.3 131.6l40.1 0l0 11.9l-40.1 0Z" fill="#b3261e" ecmeta_series_index="1" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr14-cls-65"></path>
+<path d="M465.6 97.3l68.8 0l0 11.9l-68.8 0Z" fill="#b3261e" ecmeta_series_index="1" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr14-cls-65"></path>
+<path d="M449.3 63l85.1 0l0 11.9l-85.1 0Z" fill="#b3261e" ecmeta_series_index="1" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr14-cls-65"></path>
+<path d="M425.5 28.6l108.9 0l0 11.9l-108.9 0Z" fill="#b3261e" ecmeta_series_index="1" ecmeta_data_index="5" ecmeta_ssr_type="chart" class="zr14-cls-65"></path>
+<path d="M534.4 200.3L564.9 200.3A2 2 0 0 1 566.9 202.3L566.9 210.2A2 2 0 0 1 564.9 212.2L534.4 212.2L534.4 200.3Z" fill="#1a7f4b" ecmeta_series_index="2" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr14-cls-66"></path>
+<path d="M534.4 166L568.2 166A2 2 0 0 1 570.2 168L570.2 175.9A2 2 0 0 1 568.2 177.9L534.4 177.9L534.4 166Z" fill="#1a7f4b" ecmeta_series_index="2" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr14-cls-66"></path>
+<path d="M534.4 131.6L581.7 131.6A2 2 0 0 1 583.7 133.6L583.7 141.6A2 2 0 0 1 581.7 143.6L534.4 143.6L534.4 131.6Z" fill="#1a7f4b" ecmeta_series_index="2" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr14-cls-66"></path>
+<path d="M534.4 97.3L601.3 97.3A2 2 0 0 1 603.3 99.3L603.3 107.2A2 2 0 0 1 601.3 109.2L534.4 109.2L534.4 97.3Z" fill="#1a7f4b" ecmeta_series_index="2" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr14-cls-66"></path>
+<path d="M534.4 63L639.7 63A2 2 0 0 1 641.7 65L641.7 72.9A2 2 0 0 1 639.7 74.9L534.4 74.9L534.4 63Z" fill="#1a7f4b" ecmeta_series_index="2" ecmeta_data_index="4" ecmeta_ssr_type="chart" class="zr14-cls-66"></path>
+<path d="M534.4 28.6L641.4 28.6A2 2 0 0 1 643.4 30.6L643.4 38.6A2 2 0 0 1 641.4 40.6L534.4 40.6L534.4 28.6Z" fill="#1a7f4b" ecmeta_series_index="2" ecmeta_data_index="5" ecmeta_ssr_type="chart" class="zr14-cls-66"></path>
+<path d="M116 213.4l450.9 0l0 11.9l-450.9 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="0" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M116 179.1l454.2 0l0 11.9l-454.2 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="1" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M116 144.8l467.7 0l0 11.9l-467.7 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="2" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M116 110.4l487.3 0l0 11.9l-487.3 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="3" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M116 76.1l525.7 0l0 11.9l-525.7 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="4" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<path d="M116 41.8l527.4 0l0 11.9l-527.4 0Z" fill="none" pointer-events="visible" ecmeta_series_index="3" ecmeta_data_index="5" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(510.24 206.2691)" fill="#fff">720</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(502.652 171.9358)" fill="#fff">706</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(498.316 137.6025)" fill="#fff">698</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(469.59 103.2691)" fill="#fff">645</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(453.33 68.9358)" fill="#fff">615</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(429.482 34.6025)" fill="#fff">571</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(569.944 219.3975)" fill="#5b6875">832</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(573.196 185.0642)" fill="#5b6875">838</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(586.746 150.7309)" fill="#5b6875">863</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(606.258 116.3975)" fill="#5b6875">899</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(644.74 82.0642)" fill="#5b6875">970</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(646.366 47.7309)" fill="#5b6875">973</text>
+<path d="M534.5 230L534.5 24" fill="none" pointer-events="visible" stroke="#16202c" stroke-width="1.3" stroke-dasharray="5.2,2.6" ecmeta_series_index="2" ecmeta_data_index="0" ecmeta_ssr_type="chart" ecmeta_silent="true" class="zr14-cls-64"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" xml:space="preserve" y="-5" transform="translate(534.424 236)" fill="#16202c">Base 772</text>
+<style ><![CDATA[
+.zr14-cls-64:hover {
+pointer-events:none;
+}
+.zr14-cls-65:hover {
+cursor:pointer;
+fill:rgba(196,41,33,1);
+}
+.zr14-cls-66:hover {
+cursor:pointer;
+fill:rgba(28,139,82,1);
+}
+
+]]>
+
+</style>
+</svg>

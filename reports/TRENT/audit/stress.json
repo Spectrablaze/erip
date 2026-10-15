@@ -1,0 +1,428 @@
+{
+ "run_at": "2026-10-15T11:21:26",
+ "thresholds": {
+  "net_debt_ebitda_max": {
+   "value": 1.0,
+   "kind": "house reference, not a covenant",
+   "source": "Trent has no financial debt after redeeming its 5.78% NCD on 29 May 2026 (AR KB p.226) and discloses no covenant. 1.0x net debt/EBITDA marks the point at which a debt-free retailer would be borrowing to fund its store roll-out; lease liabilities are excluded, as in net_debt."
+  },
+  "interest_cover_min": {
+   "value": 5.0,
+   "kind": "house reference",
+   "source": "EBITDA / interest of 5.0x. Interest in the model is mostly the run-off of existing lease liabilities; no company-specific covenant is disclosed."
+  }
+ },
+ "base": {
+  "value_per_share": 772,
+  "target": 875.0,
+  "rating": "SELL",
+  "peak_nd_ebitda": -0.03,
+  "peak_nd_ebitda_year": "Mar-27E",
+  "min_interest_cover": 25.16,
+  "min_interest_cover_year": "Mar-27E",
+  "peak_revolver": 624,
+  "peak_revolver_year": "Mar-27E",
+  "min_cash_headroom": 0,
+  "nd_ebitda_path": [
+   -0.03,
+   -0.21,
+   -0.42,
+   -0.66,
+   -0.92,
+   -1.21,
+   -1.51,
+   -1.84,
+   -2.17,
+   -2.52
+  ],
+  "breaches": [
+   "revolver drawn, peak INR 624 Cr"
+  ]
+ },
+ "committed_capex_years": [],
+ "invariant_violations": [],
+ "cases": [
+  {
+   "value_per_share": 729,
+   "target": 825.0,
+   "rating": "SELL",
+   "peak_nd_ebitda": -0.27,
+   "peak_nd_ebitda_year": "Mar-27E",
+   "min_interest_cover": 28.11,
+   "min_interest_cover_year": "Mar-27E",
+   "peak_revolver": 0,
+   "peak_revolver_year": "Mar-27E",
+   "min_cash_headroom": 428,
+   "nd_ebitda_path": [
+    -0.27,
+    -0.64,
+    -1.02,
+    -1.18,
+    -1.38,
+    -1.63,
+    -1.9,
+    -2.2,
+    -2.52,
+    -2.84
+   ],
+   "breaches": [],
+   "name": "Store openings halve, FY27-FY29",
+   "why": "Net area additions fall to ~1.7 mn sq ft a year (about 100 Zudio and 25 Westside stores) as property availability or returns on new micro-markets disappoint; capex falls with the openings. Each 1.7 mn sq ft of lost area is about 5pp of revenue growth at FY26 sales per sq ft.",
+   "watch": "Net store additions below 60 in any quarter of H2 FY27 (Q2 FY27: 27)."
+  },
+  {
+   "value_per_share": 742,
+   "target": 840.0,
+   "rating": "SELL",
+   "peak_nd_ebitda": -0.05,
+   "peak_nd_ebitda_year": "Mar-27E",
+   "min_interest_cover": 24.52,
+   "min_interest_cover_year": "Mar-27E",
+   "peak_revolver": 552,
+   "peak_revolver_year": "Mar-27E",
+   "min_cash_headroom": 0,
+   "nd_ebitda_path": [
+    -0.05,
+    -0.23,
+    -0.44,
+    -0.67,
+    -0.93,
+    -1.22,
+    -1.52,
+    -1.85,
+    -2.18,
+    -2.53
+   ],
+   "breaches": [
+    "revolver drawn, peak INR 552 Cr"
+   ],
+   "name": "Sales per sq ft falls 10% in FY27",
+   "why": "The FY26 productivity decline (-14% revenue per average sq ft) repeats at two-thirds strength instead of moderating to -5%: Tier II/III stores stay immature and like-for-like turns negative.",
+   "watch": "Standalone revenue growth below 15% in Q3 FY27 with area growth above 20%."
+  },
+  {
+   "value_per_share": 571,
+   "target": 645.0,
+   "rating": "SELL",
+   "peak_nd_ebitda": 0.09,
+   "peak_nd_ebitda_year": "Mar-27E",
+   "min_interest_cover": 19.03,
+   "min_interest_cover_year": "Mar-27E",
+   "peak_revolver": 1467,
+   "peak_revolver_year": "Mar-28E",
+   "min_cash_headroom": 0,
+   "nd_ebitda_path": [
+    0.09,
+    -0.0,
+    -0.14,
+    -0.33,
+    -0.54,
+    -0.79,
+    -1.06,
+    -1.36,
+    -1.66,
+    -1.98
+   ],
+   "breaches": [
+    "revolver drawn, peak INR 1,467 Cr"
+   ],
+   "name": "EBITDA margin 3pp lower",
+   "why": "Value-fashion competition in Tier II/III forces markdowns and higher marketing; margin returns to the FY24-FY25 level of ~16-17%.",
+   "watch": "Quarterly EBITDA margin (post Ind AS 116) below 17% for two consecutive quarters."
+  },
+  {
+   "value_per_share": 595,
+   "target": 685.0,
+   "rating": "SELL",
+   "peak_nd_ebitda": -0.03,
+   "peak_nd_ebitda_year": "Mar-27E",
+   "min_interest_cover": 20.22,
+   "min_interest_cover_year": "Mar-27E",
+   "peak_revolver": 656,
+   "peak_revolver_year": "Mar-27E",
+   "min_cash_headroom": 0,
+   "nd_ebitda_path": [
+    -0.03,
+    -0.2,
+    -0.41,
+    -0.65,
+    -0.91,
+    -1.2,
+    -1.5,
+    -1.83,
+    -2.17,
+    -2.51
+   ],
+   "breaches": [
+    "revolver drawn, peak INR 656 Cr"
+   ],
+   "name": "Rates 200 bp higher",
+   "why": "The RBI's October 2026 hike starts a cycle and the 10-year G-sec rises from 7.35% to ~9.35%.",
+   "watch": "10-year G-sec above 8.5%."
+  },
+  {
+   "value_per_share": 736,
+   "target": 835.0,
+   "rating": "SELL",
+   "peak_nd_ebitda": 0.17,
+   "peak_nd_ebitda_year": "Mar-27E",
+   "min_interest_cover": 20.61,
+   "min_interest_cover_year": "Mar-27E",
+   "peak_revolver": 1593,
+   "peak_revolver_year": "Mar-27E",
+   "min_cash_headroom": 0,
+   "nd_ebitda_path": [
+    0.17,
+    0.0,
+    -0.2,
+    -0.43,
+    -0.69,
+    -0.97,
+    -1.26,
+    -1.59,
+    -1.91,
+    -2.25
+   ],
+   "breaches": [
+    "revolver drawn, peak INR 1,593 Cr"
+   ],
+   "name": "Inventory 25 days higher",
+   "why": "Inventory builds by 25 days of purchases (71 to 96, about 2pp of sales) as slower sell-through meets a pre-committed buying calendar; inventory growing faster than sales is the sector's leading indicator of a write-down. Flexes DIO, which is what the three-statement model reads (a shift to nwc_pct_sales left the model unchanged).",
+   "watch": "Inventory days above 85 on purchases at the half-year."
+  },
+  {
+   "value_per_share": 520,
+   "target": 590.0,
+   "rating": "SELL",
+   "peak_nd_ebitda": 0.06,
+   "peak_nd_ebitda_year": "Mar-27E",
+   "min_interest_cover": 18.81,
+   "min_interest_cover_year": "Mar-27E",
+   "peak_revolver": 997,
+   "peak_revolver_year": "Mar-27E",
+   "min_cash_headroom": 0,
+   "nd_ebitda_path": [
+    0.06,
+    -0.26,
+    -0.58,
+    -0.67,
+    -0.81,
+    -1.0,
+    -1.23,
+    -1.48,
+    -1.76,
+    -2.05
+   ],
+   "breaches": [
+    "revolver drawn, peak INR 997 Cr"
+   ],
+   "name": "Combined: openings halve + margin -3pp + inventory +25 days",
+   "why": "A demand slowdown hitting openings, pricing and inventory at once.",
+   "watch": "Any two of the above in the same half-year."
+  }
+ ],
+ "grid": {
+  "x": {
+   "label": "Revenue growth (pp a year)",
+   "steps": [
+    -6,
+    -3,
+    0,
+    3,
+    6
+   ]
+  },
+  "y": {
+   "label": "EBITDA margin (pp)",
+   "steps": [
+    -6,
+    -3,
+    0,
+    3,
+    6
+   ]
+  },
+  "cells": [
+   [
+    {
+     "value": 221,
+     "peak_nd_ebitda": 0.24
+    },
+    {
+     "value": 286,
+     "peak_nd_ebitda": 0.27
+    },
+    {
+     "value": 370,
+     "peak_nd_ebitda": 0.3
+    },
+    {
+     "value": 479,
+     "peak_nd_ebitda": 0.32
+    },
+    {
+     "value": 617,
+     "peak_nd_ebitda": 0.35
+    }
+   ],
+   [
+    {
+     "value": 356,
+     "peak_nd_ebitda": 0.07
+    },
+    {
+     "value": 450,
+     "peak_nd_ebitda": 0.08
+    },
+    {
+     "value": 571,
+     "peak_nd_ebitda": 0.09
+    },
+    {
+     "value": 725,
+     "peak_nd_ebitda": 0.1
+    },
+    {
+     "value": 918,
+     "peak_nd_ebitda": 0.11
+    }
+   ],
+   [
+    {
+     "value": 491,
+     "peak_nd_ebitda": -0.05
+    },
+    {
+     "value": 615,
+     "peak_nd_ebitda": -0.04
+    },
+    {
+     "value": 772,
+     "peak_nd_ebitda": -0.03
+    },
+    {
+     "value": 970,
+     "peak_nd_ebitda": -0.02
+    },
+    {
+     "value": 1218,
+     "peak_nd_ebitda": -0.01
+    }
+   ],
+   [
+    {
+     "value": 626,
+     "peak_nd_ebitda": -0.14
+    },
+    {
+     "value": 779,
+     "peak_nd_ebitda": -0.13
+    },
+    {
+     "value": 973,
+     "peak_nd_ebitda": -0.12
+    },
+    {
+     "value": 1216,
+     "peak_nd_ebitda": -0.12
+    },
+    {
+     "value": 1519,
+     "peak_nd_ebitda": -0.11
+    }
+   ],
+   [
+    {
+     "value": 761,
+     "peak_nd_ebitda": -0.21
+    },
+    {
+     "value": 944,
+     "peak_nd_ebitda": -0.2
+    },
+    {
+     "value": 1174,
+     "peak_nd_ebitda": -0.19
+    },
+    {
+     "value": 1462,
+     "peak_nd_ebitda": -0.19
+    },
+    {
+     "value": 1820,
+     "peak_nd_ebitda": -0.18
+    }
+   ]
+  ]
+ },
+ "reverse": [
+  {
+   "label": "Uniform cut to revenue growth (pp a year)",
+   "threshold": "net_debt_ebitda_max",
+   "result": "no breach within -20",
+   "shock": null,
+   "at_shock": {
+    "value_per_share": 185,
+    "target": 205.0,
+    "rating": "SELL",
+    "peak_nd_ebitda": -0.11,
+    "peak_nd_ebitda_year": "Mar-27E",
+    "min_interest_cover": 22.44,
+    "min_interest_cover_year": "Mar-27E",
+    "peak_revolver": 335,
+    "peak_revolver_year": "Mar-27E",
+    "min_cash_headroom": 0,
+    "nd_ebitda_path": [
+     -0.11,
+     -0.42,
+     -0.81,
+     -1.31,
+     -1.92,
+     -2.68,
+     -3.59,
+     -4.73,
+     -6.08,
+     -7.71
+    ],
+    "breaches": [
+     "revolver drawn, peak INR 335 Cr"
+    ]
+   }
+  },
+  {
+   "label": "Uniform cut to EBITDA margin (pp)",
+   "threshold": "net_debt_ebitda_max",
+   "shock": -9.38,
+   "result": "breaches at -9.4",
+   "at_shock": {
+    "value_per_share": 144,
+    "target": 165.0,
+    "rating": "SELL",
+    "peak_nd_ebitda": 1.01,
+    "peak_nd_ebitda_year": "Mar-30E",
+    "min_interest_cover": 8.21,
+    "min_interest_cover_year": "Mar-30E",
+    "peak_revolver": 6584,
+    "peak_revolver_year": "Mar-32E",
+    "min_cash_headroom": 0,
+    "nd_ebitda_path": [
+     0.6,
+     0.84,
+     0.96,
+     1.01,
+     1.0,
+     0.92,
+     0.8,
+     0.65,
+     0.47,
+     0.26
+    ],
+    "breaches": [
+     "net debt/EBITDA above 1.0x in Mar-30E",
+     "revolver drawn, peak INR 6,584 Cr"
+    ]
+   }
+  }
+ ],
+ "_note": "Each run rebuilds the three-statement model; thresholds are reference levels with sources, not disclosed covenants unless stated."
+}

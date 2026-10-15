@@ -18,16 +18,21 @@ assumptions before any valuation is computed.
 
 | Company | Rating | Target | Price at cover | Report | Model | Audit trail |
 |---|---|---|---|---|---|---|
+| **Trent Ltd** (TRENT) | SELL | INR 875 | INR 2,971 (14 Oct 2026) | [PDF, 20 pp](reports/TRENT/Trent%20Ltd%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/TRENT/Trent_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro](reports/TRENT/audit/) |
 | **JSW Infrastructure Ltd** (JSWINFRA) | SELL | INR 130 | INR 357.45 (1 Oct 2026) | [PDF, 22 pp](reports/JSWINFRA/JSW%20Infrastructure%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/JSWINFRA/JSW_Infrastructure_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro](reports/JSWINFRA/audit/) |
 | **Adani Ports and SEZ Ltd** (ADANIPORTS) | SELL | INR 575 | INR 1,695 (7 Aug 2026) | [PDF, 33 pp](reports/ADANIPORTS/Adani%20Ports%20-%20Equity%20Research%20Report.pdf) | [Excel, live formulas](reports/ADANIPORTS/Adani_Ports_and_Special_Economic_Zone_Ltd_ERIP_Model.xlsx) | [assumptions, strategy, comps, macro, audit book](reports/ADANIPORTS/audit/) |
 
-**[JSW Infrastructure validation pack](https://spectrablaze.github.io/erip/validation/JSWINFRA.html)**: the working
+**[Trent validation pack](https://spectrablaze.github.io/erip/validation/TRENT.html)** and **[JSW Infrastructure validation pack](https://spectrablaze.github.io/erip/validation/JSWINFRA.html)**: the working
 behind the published valuation on one page, so it can be checked rather than trusted. It shows every three-statement
 check with its tolerance, history reconciled to the annual report, Python against Excel on every line, the
 enterprise-to-equity bridge, a WACC by terminal-growth grid, each assumption traced from source to value, and a list
 of known limitations.
 
 <table>
+<tr>
+<td><img src="docs/img/trent_cover.png" width="380" alt="Trent report cover"></td>
+<td><img src="docs/img/trent_valuation.png" width="380" alt="Trent relative valuation and football field"></td>
+</tr>
 <tr>
 <td><img src="docs/img/jswinfra_cover.png" width="380" alt="JSW Infrastructure report cover"></td>
 <td><img src="docs/img/jswinfra_valuation.png" width="380" alt="JSW Infrastructure relative valuation and football field"></td>
@@ -37,6 +42,19 @@ of known limitations.
 <td><img src="docs/img/apsez_valuation.png" width="380" alt="Adani Ports investment view"></td>
 </tr>
 </table>
+
+### What the Trent note argues, in brief
+
+- Trent is India's most productive apparel retailer, but its new space is less productive: in FY26 average retail area grew
+  36% while revenue grew 17%, so revenue per square foot fell 14% as Zudio expanded into Tier II and III towns and opened
+  most stores late in the year.
+- The model is retail area times sales per square foot, from the company's own quarterly disclosures. It credits a
+  tripling of revenue by FY36 and a 20% EBITDA margin, and charges new store leases as capex because EBITDA after
+  Ind AS 116 excludes rent.
+- The perpetuity DCF gives INR 772 today (bear 483, bull 1,041). At these cash flows the INR 2,971 price implies a WACC
+  of about 8.1%, within a point of the 10-year government bond. Target INR 875, SELL.
+- Four dated falsifiers are logged: H2 FY27 revenue growth of 25%+, a 22% EBITDA margin for two quarters, mid-single-digit
+  like-for-like in the FY27 annual report, and 4.5 mn sq ft of FY27 area additions with growth held.
 
 ### What the JSW Infrastructure note argues, in brief
 

@@ -1,0 +1,49 @@
+<svg preserveAspectRatio="xMidYMid meet" width="329" height="250" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 329 250">
+<rect width="329" height="250" x="0" y="0" fill="none"></rect>
+<path d="M32.8 228.5L277 228.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr13-cls-61"></path>
+<path d="M32.8 187.5L277 187.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr13-cls-61"></path>
+<path d="M32.8 146.5L277 146.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr13-cls-61"></path>
+<path d="M32.8 105.5L277 105.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr13-cls-61"></path>
+<path d="M32.8 65.5L277 65.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr13-cls-61"></path>
+<path d="M32.8 24.5L277 24.5" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr13-cls-61"></path>
+<path d="M33.5 24L33.5 228" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr13-cls-61"></path>
+<path d="M114.5 24L114.5 228" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr13-cls-61"></path>
+<path d="M195.5 24L195.5 228" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr13-cls-61"></path>
+<path d="M277.5 24L277.5 228" fill="none" pointer-events="visible" stroke="#dbe3ea" stroke-width="0.8" stroke-dasharray="4,4" class="zr13-cls-61"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" y="-5" transform="translate(32.8 18)" fill="#5b6875">P/E (x)</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" xml:space="preserve" transform="translate(281 228)" fill="#5b6875">ROE %</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(26.8 228)" fill="#5b6875">0</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(26.8 187.2)" fill="#5b6875">20</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(26.8 146.4)" fill="#5b6875">40</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(26.8 105.6)" fill="#5b6875">60</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(26.8 64.8)" fill="#5b6875">80</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" transform="translate(26.8 24)" fill="#5b6875">100</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(32.8 234)" fill="#5b6875">0</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(114.2 234)" fill="#5b6875">10</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(195.6 234)" fill="#5b6875">20</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;" y="5" transform="translate(277 234)" fill="#5b6875">30</text>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(6.5,0,0,6.5,269.674,49.296)" fill="#a3832e" fill-opacity="0.8" stroke="#fff" stroke-width="0.15384615384615385" stroke-opacity="0.8" ecmeta_series_index="0" ecmeta_data_index="0" ecmeta_ssr_type="chart" class="zr13-cls-62"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,143.504,82.344)" fill="#1173a8" fill-opacity="0.8" stroke="#fff" stroke-width="0.25" stroke-opacity="0.8" ecmeta_series_index="0" ecmeta_data_index="1" ecmeta_ssr_type="chart" class="zr13-cls-63"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,159.784,130.488)" fill="#1173a8" fill-opacity="0.8" stroke="#fff" stroke-width="0.25" stroke-opacity="0.8" ecmeta_series_index="0" ecmeta_data_index="2" ecmeta_ssr_type="chart" class="zr13-cls-63"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(4,0,0,4,264.79,156.396)" fill="#1173a8" fill-opacity="0.8" stroke="#fff" stroke-width="0.25" stroke-opacity="0.8" ecmeta_series_index="0" ecmeta_data_index="3" ecmeta_ssr_type="chart" class="zr13-cls-63"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:700;" transform="translate(280.674 49.296)" fill="#a3832e" fill-opacity="0.8">Trent</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:400;" transform="translate(152.004 82.344)" fill="#5b6875" fill-opacity="0.8">DMart</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:400;" transform="translate(168.284 130.488)" fill="#5b6875" fill-opacity="0.8">V-Mart</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Carlito, Calibri, 'DejaVu Sans', sans-serif;font-weight:400;" transform="translate(273.29 156.396)" fill="#5b6875" fill-opacity="0.8">V2</text>
+<style ><![CDATA[
+.zr13-cls-61:hover {
+pointer-events:none;
+}
+.zr13-cls-62:hover {
+cursor:pointer;
+fill:rgba(179,144,50,1);
+}
+.zr13-cls-63:hover {
+cursor:pointer;
+fill:rgba(18,126,184,1);
+}
+
+]]>
+
+</style>
+</svg>

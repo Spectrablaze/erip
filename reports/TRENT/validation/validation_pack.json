@@ -1,0 +1,56 @@
+{
+ "integrity": {
+  "blocking_checks": 27,
+  "blocking_pass": 27,
+  "tolerance_cr": 0.06434675250658747
+ },
+ "history": {
+  "screener_vs_ar_differences": 1,
+  "worst_cfo_gap_pct": 831.6
+ },
+ "excel": {
+  "numbers_compared": 189,
+  "largest_difference": 2.1827872842550278e-11,
+  "pass": true,
+  "run_at": "2026-10-15T10:42:41"
+ },
+ "valuation": {
+  "value_per_share": 772
+ },
+ "assumptions": {
+  "assumptions": 24,
+  "without_citation": [
+   "forecast_years"
+  ],
+  "accounting_scope": {
+   "UNSTATED": 4,
+   "N/A": 15,
+   "CONSOLIDATED": 15,
+   "BOTH_ON_PAGE": 4
+  },
+  "evidence_types": {
+   "REPORTED": 23,
+   "GUIDANCE": 1,
+   "MARKET": 11,
+   "DERIVED": 2,
+   "ANALYST": 1
+  }
+ },
+ "stress": {
+  "cases": 6,
+  "invariant_violations": 0
+ },
+ "limitations": [
+  "Format revenue",
+  "Productivity path",
+  "First-year ramp",
+  "Lease treatment",
+  "Terminal value",
+  "Beta",
+  "Equity-accounted stakes",
+  "Management commentary",
+  "Industry data",
+  "Citations"
+ ],
+ "built_at": "2026-10-15T11:31:07"
+}

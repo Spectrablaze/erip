@@ -62,6 +62,19 @@
           }
         }
       ]
+    },
+    {
+      "ticker": "TRENT",
+      "version": 1,
+      "rating": "SELL",
+      "target": 875.0,
+      "date": "2026-10-14",
+      "price_at_call": 2971.0,
+      "benchmark_name": "NIFTY 50",
+      "benchmark_at_call": 22622.7,
+      "horizon_days": 365,
+      "source": "NSE close 14 Oct 2026 (Screener export); NIFTY 50 close 22,622.70 (BusinessLine / Moneycontrol, 14 Oct 2026)",
+      "observations": []
     }
   ]
 }

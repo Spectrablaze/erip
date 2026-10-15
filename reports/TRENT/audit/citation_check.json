@@ -1,0 +1,443 @@
+{
+ "run_at": "2026-10-15T11:17:34",
+ "records": 38,
+ "counts": {
+  "IMAGE": 2,
+  "EXTERNAL": 8,
+  "NUMBERS_ONLY": 15,
+  "VERIFIED": 7,
+  "PARTIAL": 1,
+  "DERIVED": 5
+ },
+ "accounting_scope": {
+  "UNSTATED": 4,
+  "N/A": 15,
+  "CONSOLIDATED": 15,
+  "BOTH_ON_PAGE": 4
+ },
+ "standalone_figures": [],
+ "evidence_types": {
+  "REPORTED": 23,
+  "GUIDANCE": 1,
+  "MARKET": 11,
+  "DERIVED": 2,
+  "ANALYST": 1
+ },
+ "strongest_support": {
+  "revenue_growth": "REPORTED",
+  "gross_margin": "REPORTED",
+  "ebitda_margin": "REPORTED",
+  "dep_pct_sales": "REPORTED",
+  "ebit_margin": "REPORTED",
+  "capex_pct_sales": "REPORTED",
+  "dso": "REPORTED",
+  "dio": "REPORTED",
+  "dpo": "REPORTED",
+  "effective_tax_rate": "REPORTED",
+  "interest_rate": "REPORTED",
+  "terminal_growth": "MARKET",
+  "terminal_ronic": "DERIVED",
+  "risk_free_rate": "MARKET",
+  "equity_risk_premium": "ANALYST",
+  "beta": "MARKET",
+  "target_debt_weight": "REPORTED",
+  "net_debt": "REPORTED",
+  "shares_out": "REPORTED",
+  "current_price": "MARKET",
+  "exit_multiple": "MARKET",
+  "lease_liabilities": "REPORTED",
+  "minority_interest": "REPORTED"
+ },
+ "forward_support": {
+  "gross_margin": "GUIDANCE"
+ },
+ "forward_view_on_aspiration": [],
+ "rests_on_aspiration": [],
+ "rests_on_guidance": [],
+ "status": "PASS",
+ "rows": [
+  {
+   "source": "kb/annual_report/images/charts/retail_area_margin_shrinkage_fy22_fy26.jpg",
+   "page": 118,
+   "quote": "Retail Area (Million square feet) 5.3 / 7.0 / 9.4 / 13.5 / 17.7, FY22-FY26",
+   "grade": "IMAGE",
+   "found": "kb/annual_report/images/charts/retail_area_margin_shrinkage_fy22_fy26.jpg",
+   "why": null,
+   "assumption": "revenue_growth",
+   "type": "REPORTED",
+   "scope": "UNSTATED"
+  },
+  {
+   "source": "Business Standard, 6 Oct 2026 (Q2 FY27 business update)",
+   "page": null,
+   "quote": "Standalone revenue grew 23 per cent year-on-year in Q2 FY27 to 5,788 crore ... For the first half of FY27, growth stood at 21 per cent YoY to 11,454 crore",
+   "grade": "EXTERNAL",
+   "why": "third-party source, no URL or file in the citation",
+   "assumption": "revenue_growth",
+   "type": "REPORTED",
+   "scope": "N/A"
+  },
+  {
+   "source": "inputs/press_release_q1fy27.pdf",
+   "page": 3,
+   "quote": "Revenue from operations Q1 FY27 5,755 (consolidated), growth over Q1FY26 18%",
+   "grade": "NUMBERS_ONLY",
+   "found": "inputs/press_release_q1fy27.pdf p.3",
+   "assumption": "revenue_growth",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "kb/annual_report/images/charts/retail_area_margin_shrinkage_fy22_fy26.jpg",
+   "page": 118,
+   "quote": "Gross Margin 51.0 / 45.4 / 45.2 / 44.4 / 44.5 (FY22-FY26)",
+   "grade": "IMAGE",
+   "found": "kb/annual_report/images/charts/retail_area_margin_shrinkage_fy22_fy26.jpg",
+   "why": null,
+   "assumption": "gross_margin",
+   "type": "REPORTED",
+   "scope": "UNSTATED"
+  },
+  {
+   "source": "inputs/press_release_q1fy27.pdf",
+   "page": 2,
+   "quote": "The gross margin profile of Westside and Zudio remains stable.",
+   "grade": "VERIFIED",
+   "found": "inputs/press_release_q1fy27.pdf p.2",
+   "assumption": "gross_margin",
+   "type": "GUIDANCE",
+   "scope": "BOTH_ON_PAGE"
+  },
+  {
+   "source": "inputs/screener.xlsx, Quarters sheet",
+   "page": null,
+   "quote": "Q1 FY27 operating profit 1,119.16 on sales 5,754.71 (19.4%); Q1 FY26 847.86 on 4,883.48 (17.4%)",
+   "grade": "PARTIAL",
+   "found": "inputs/screener.xlsx",
+   "why": "numbers not on the page: 17.4, 19.4",
+   "assumption": "ebitda_margin",
+   "type": "REPORTED",
+   "scope": "UNSTATED"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0239.md",
+   "page": 239,
+   "quote": "In addition to fixed rent the Group has paid variable lease rentals ... amounting to 1,563.94 Crores ... which has not been considered in calculation right of u",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0239.md",
+   "assumption": "ebitda_margin",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0125.md",
+   "page": 125,
+   "quote": "Newer stores carry higher depreciation relative to revenues, impacting EBITDA in early years. Profitability normalises as stores mature",
+   "grade": "VERIFIED",
+   "found": "kb/annual_report/pages/page_0125.md",
+   "assumption": "dep_pct_sales",
+   "type": "REPORTED",
+   "scope": "BOTH_ON_PAGE"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0223.md",
+   "page": 223,
+   "quote": "Right of Use Asset accumulated amortisation additions 909.59 (FY26), 597.99 (FY25)",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0223.md",
+   "assumption": "dep_pct_sales",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "inputs/press_release_q1fy27.pdf",
+   "page": 2,
+   "quote": "Operating EBIT margin for Q1 FY27 was 12.9% (11.5% for Q1FY26).",
+   "grade": "VERIFIED",
+   "found": "inputs/press_release_q1fy27.pdf p.2",
+   "assumption": "ebit_margin",
+   "type": "REPORTED",
+   "scope": "BOTH_ON_PAGE"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0214.md (consolidated cash flow)",
+   "page": 214,
+   "quote": "Purchase of Property, Plant and Equipments & Investment Property (1,762.85) FY26, (1,268.19) FY25",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0214.md",
+   "assumption": "capex_pct_sales",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0223.md",
+   "page": 223,
+   "quote": "Right of Use Asset additions 1,241.87 (FY26), 1,152.48 (FY25)",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0223.md",
+   "assumption": "capex_pct_sales",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0117.md",
+   "page": 117,
+   "quote": "The capital employed for a new Zudio store is in the region of ` 3-4 Crores, including capex, deposits and inventory",
+   "grade": "VERIFIED",
+   "found": "kb/annual_report/pages/page_0117.md",
+   "assumption": "capex_pct_sales",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0224.md",
+   "page": 224,
+   "quote": "Trade Receivables considered good - Unsecured 51.14 (FY26), 62.95 (FY25)",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0224.md",
+   "assumption": "dso",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0212.md",
+   "page": 212,
+   "quote": "Inventories 2,289.01 (FY26), 2,045.05 (FY25); purchases 11,496.89 / 10,143.39 (Screener)",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0212.md",
+   "assumption": "dio",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0212.md",
+   "page": 212,
+   "quote": "Trade payables: MSE 43.21 / others 1,167.45 (FY26); 31.25 / 896.94 (FY25)",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0212.md",
+   "assumption": "dpo",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0212.md",
+   "page": 212,
+   "quote": "Profit before tax 2,236.48; Total tax expenses 515.15",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0212.md",
+   "assumption": "effective_tax_rate",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0226.md",
+   "page": 226,
+   "quote": "These Debentures carry an interest @ 5.78% p.a and are redeemable on 29th May 2026.",
+   "grade": "VERIFIED",
+   "found": "kb/annual_report/pages/page_0226.md",
+   "assumption": "interest_rate",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "reports/_knowledge/macro.json",
+   "page": null,
+   "quote": "india_gdp_latest_q 7.8% [MoSPI/NSO, Q1 2026-27, nominal GDP growth 10.3%]",
+   "grade": "DERIVED",
+   "why": null,
+   "assumption": "terminal_growth",
+   "type": "MARKET",
+   "scope": "N/A"
+  },
+  {
+   "source": "reports/_knowledge/macro.json",
+   "page": null,
+   "quote": "india_cpi 4.8% [MoSPI, CPI August 2026]",
+   "grade": "DERIVED",
+   "why": null,
+   "assumption": "terminal_growth",
+   "type": "MARKET",
+   "scope": "N/A"
+  },
+  {
+   "source": "data/model.json (roiic block)",
+   "page": null,
+   "quote": "ROIC = NOPAT / Invested Capital: 1,000/5,523 (FY24), 1,455/7,359 (FY25), 1,835/9,263 (FY26); ROIIC FY26 20.7%",
+   "grade": "DERIVED",
+   "why": null,
+   "assumption": "terminal_ronic",
+   "type": "DERIVED",
+   "scope": "N/A"
+  },
+  {
+   "source": "tradingeconomics.com/india/government-bond-yield",
+   "page": null,
+   "quote": "The yield on India 10Y Bond Yield eased to 7.35% on October 13, 2026",
+   "grade": "EXTERNAL",
+   "why": null,
+   "assumption": "risk_free_rate",
+   "type": "MARKET",
+   "scope": "N/A"
+  },
+  {
+   "source": "Reuters, 7 Oct 2026, https://www.reuters.com/world/india/india-raises-policy-rate-by-25-bps-first-hike-nearly-four-years-2026-10-07/",
+   "page": null,
+   "quote": "India's central bank raised its benchmark repo rate by 25 basis points to 5.5% on Wednesday ... benchmark 10-year bond yield was slightly higher at 7.2269%",
+   "grade": "EXTERNAL",
+   "why": null,
+   "assumption": "risk_free_rate",
+   "type": "MARKET",
+   "scope": "N/A"
+  },
+  {
+   "source": "reports/JSWINFRA/decisions.json",
+   "page": null,
+   "quote": "equity_risk_premium 5.5% (house convention)",
+   "grade": "DERIVED",
+   "why": null,
+   "assumption": "equity_risk_premium",
+   "type": "ANALYST",
+   "scope": "N/A"
+  },
+  {
+   "source": "moneycontrol.com/india/stockpricequote/retail/trent/T04",
+   "page": null,
+   "quote": "Beta 1.30 / 1.28",
+   "grade": "EXTERNAL",
+   "why": null,
+   "assumption": "beta",
+   "type": "MARKET",
+   "scope": "N/A"
+  },
+  {
+   "source": "gurufocus.com/term/beta/NSE:TRENT",
+   "page": null,
+   "quote": "Trent (NSE:TRENT) Beta is 1.8199 (Aug. 19, 2026)",
+   "grade": "EXTERNAL",
+   "why": null,
+   "assumption": "beta",
+   "type": "MARKET",
+   "scope": "N/A"
+  },
+  {
+   "source": "moneycontrol.com/india/stockpricequote/retail/avenuesupermarts/AS19",
+   "page": null,
+   "quote": "Avenue Supermarts Beta 0.52 / 0.48",
+   "grade": "EXTERNAL",
+   "why": null,
+   "assumption": "beta",
+   "type": "MARKET",
+   "scope": "N/A"
+  },
+  {
+   "source": "moneycontrol.com/india/stockpricequote/retail/v-martretail/VR03",
+   "page": null,
+   "quote": "V-Mart Retail Beta 0.94 / 0.95",
+   "grade": "EXTERNAL",
+   "why": null,
+   "assumption": "beta",
+   "type": "MARKET",
+   "scope": "N/A"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0212.md",
+   "page": 212,
+   "quote": "Lease Liabilities 1,206.80 (non-current), 854.56 (current); Borrowings 499.89 (current NCD, redeemed 29 May 2026)",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0212.md",
+   "assumption": "target_debt_weight",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "inputs/screener.xlsx, Data Sheet META",
+   "page": null,
+   "quote": "Market Capitalization 158518.82",
+   "grade": "VERIFIED",
+   "found": "inputs/screener.xlsx",
+   "assumption": "target_debt_weight",
+   "type": "MARKET",
+   "scope": "N/A"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0212.md",
+   "page": 212,
+   "quote": "Borrowings (current) 499.89; Cash and Cash Equivalents 281.36; Bank Balances 1.64; Current Investments 647.53",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0212.md",
+   "assumption": "net_debt",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "inputs/shareholding.pdf (BSE filing, quarter ended 30-09-2026)",
+   "page": 3,
+   "quote": "Total (A+B+C2) 533232301",
+   "grade": "NUMBERS_ONLY",
+   "found": "inputs/shareholding.pdf p.3",
+   "assumption": "shares_out",
+   "type": "REPORTED",
+   "scope": "UNSTATED"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0102.md",
+   "page": 102,
+   "quote": "issue of bonus shares in the ratio of 1 (One) equity share ... for every 2 (Two) fully paid-up equity shares ... as on 4th June 2026",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0102.md",
+   "assumption": "shares_out",
+   "type": "REPORTED",
+   "scope": "BOTH_ON_PAGE"
+  },
+  {
+   "source": "inputs/screener.xlsx, Data Sheet META",
+   "page": null,
+   "quote": "Current Price 2971.0; Market Capitalization 158518.82",
+   "grade": "VERIFIED",
+   "found": "inputs/screener.xlsx",
+   "assumption": "current_price",
+   "type": "MARKET",
+   "scope": "N/A"
+  },
+  {
+   "source": "screener.in/company/TRENT/consolidated (14 Oct 2026)",
+   "page": null,
+   "quote": "Market Cap 1,58,519 cr; TTM operating profit 3,928 cr",
+   "grade": "EXTERNAL",
+   "why": null,
+   "assumption": "exit_multiple",
+   "type": "MARKET",
+   "scope": "N/A"
+  },
+  {
+   "source": "data/comps.md (peer-comps, priced 14 Oct 2026)",
+   "page": null,
+   "quote": "EV/EBITDA: Trent 40.8x, Avenue Supermarts 40.4x, peer median 14.0x (IQR 13.7-17.0x)",
+   "grade": "DERIVED",
+   "why": null,
+   "assumption": "exit_multiple",
+   "type": "DERIVED",
+   "scope": "N/A"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0212.md",
+   "page": 212,
+   "quote": "Lease Liabilities 1,206.80 (non-current), 854.56 (current)",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0212.md",
+   "assumption": "lease_liabilities",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  },
+  {
+   "source": "kb/annual_report/pages/page_0212.md",
+   "page": 212,
+   "quote": "Non-Controlling Interest 123.28 (FY26), 121.62 (FY25)",
+   "grade": "NUMBERS_ONLY",
+   "found": "kb/annual_report/pages/page_0212.md",
+   "assumption": "minority_interest",
+   "type": "REPORTED",
+   "scope": "CONSOLIDATED"
+  }
+ ]
+}
