@@ -342,7 +342,7 @@ def build(root, out):
     _dt = lambda k: _date.fromisoformat(str(A[k])) if A.get(k) else None
     bal_d, fy1_d, val_d = _dt("balance_date"), _dt("first_fy_end"), _dt("valuation_date")
     mid = bool(A.get("mid_year_convention", False))
-    DATE = "dd-mmm-yyyy"
+    DATE = "dd-mmm-yy"   # 11-wide column: dd-mmm-yyyy printed as ### (TRENT, 2026-10-15)
 
     F.section(16, "Timing and discounting")
     F.label(17, "Balance-sheet date (date of the net debt)", 1, note="Cash flows before it are inside net debt", note_col=3)

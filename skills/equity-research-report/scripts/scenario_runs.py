@@ -47,11 +47,103 @@ def _run(cmd):
     return r.stdout
 
 
-def value_case(root, assumptions, tag, sector, strategy=None, keep_dir=None, with_statements=False):
+# Keys model.py itself reads once the DCF discounts the three-statement FCFF (--fcff-from-model).
+# Everything operating (growth, margin, capex, tax, depreciation, working capital) must go through
+# ingest.py, which reads dso/dio/dpo but NOT nwc_pct_sales: model.py's own nwc_pct_sales path is
+# dead under --fcff-from-model. TRENT, 15 Oct 2026: an nwc_pct_sales stress returned the base value.
+VALUATION_KEYS = set(VAL_KEYS) | {
+    "terminal_ronic", "net_debt", "non_operating_assets", "lease_liabilities", "minority_interest",
+    "shares_out", "current_price", "exit_multiple", "peer_betas", "blume_adjust",
+    "mid_year_convention", "balance_date", "first_fy_end", "valuation_date", "target_policy"}
+KEY_HINTS = {"nwc_pct_sales": "dso / dio / dpo (working-capital days)",
+             "ebit_margin": "ebitda_margin (or the 'margin' op, which moves both)",
+             "dividend_payout": "payout_ratio"}
+
+
+class DeadFlexError(SystemExit):
+    """A flex changed assumption keys that the three-statement model never reads."""
+
+
+def _ingest():
+    if FM not in sys.path:
+        sys.path.insert(0, FM)
+    import ingest
+    return ingest
+
+
+def ingested_drivers(root, assumptions):
+    """The drivers ingest.py would build from these assumptions, overrides.json included.
+
+    Calls ingest.drivers_from_assumptions directly, so this set cannot drift from what ingest reads."""
+    ing = _ingest()
+    drv = ing.drivers_from_assumptions(copy.deepcopy(assumptions), [])
+    ov = os.path.join(root, "data", "three_statement", "overrides.json")
+    if os.path.exists(ov):
+        for k, v in (json.load(open(ov, encoding="utf-8")).get("drivers") or {}).items():
+            if v is not None and not k.startswith("_"):
+                drv[k] = ing._rate(v) if k in ing.RATE_DRIVERS else v
+    return drv
+
+
+def _revert(flexed, base, name):
+    a = copy.deepcopy(flexed)
+    for d_f, d_b in ((a, base), (a.get("_analyst"), base.get("_analyst"))):
+        if isinstance(d_f, dict):
+            if isinstance(d_b, dict) and name in d_b:
+                d_f[name] = copy.deepcopy(d_b[name])
+            else:
+                d_f.pop(name, None)
+    return a
+
+
+def dead_flex_keys(root, base, flexed):
+    """Assumption keys that differ between base and flexed but reach neither ingest nor model.py."""
+    def flat(d):
+        d = {k: v for k, v in d.items() if k != "scenarios"}
+        an = d.pop("_analyst", None) or {}
+        return {**d, **{k: v for k, v in an.items() if k not in d}}
+    fb, ff = flat(base), flat(flexed)
+    changed = sorted(k for k in set(fb) | set(ff) if fb.get(k) != ff.get(k))
+    ref = ingested_drivers(root, flexed)
+    dead = []
+    for k in changed:
+        if k in VALUATION_KEYS or k.startswith("_"):
+            continue
+        if k == "ebit_margin" and "ebitda_margin" in changed:
+            continue                       # the 'margin' op moves both; ebitda_margin is the one read
+        if ingested_drivers(root, _revert(flexed, base, k)) == ref:
+            dead.append(k)
+    return dead
+
+
+def check_flex_live(root, base, flexed, label=""):
+    dead = dead_flex_keys(root, base, flexed)
+    if dead:
+        lines = [f"  '{k}' is not read by the three-statement model; use "
+                 f"{KEY_HINTS.get(k, 'a key ingest.drivers_from_assumptions reads')}" for k in dead]
+        raise DeadFlexError(f"DEAD FLEX{' in ' + repr(label) if label else ''}: the flex changes assumption "
+                            "keys that never reach the model, so the result would silently equal the base:\n"
+                            + "\n".join(lines))
+
+
+_BASE = {}
+
+
+def value_case(root, assumptions, tag, sector, strategy=None, keep_dir=None, with_statements=False,
+               check_live=True):
     """Build the three-statement model for one assumption set and value its own FCFF.
 
     Returns the model.py output dict (and, with_statements, the three-statement model.json too).
-    keep_dir keeps the three-statement model on disk."""
+    keep_dir keeps the three-statement model on disk.
+
+    check_live compares the assumptions with data/assumptions.json and raises DeadFlexError when
+    a changed key never reaches the model (see dead_flex_keys), instead of returning the base value."""
+    if check_live:
+        if root not in _BASE:
+            p = os.path.join(root, "data", "assumptions.json")
+            _BASE[root] = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else None
+        if _BASE[root] is not None:
+            check_flex_live(root, _BASE[root], assumptions, tag)
     a = copy.deepcopy(assumptions)
     a.pop("scenarios", None)
     with tempfile.TemporaryDirectory() as td:

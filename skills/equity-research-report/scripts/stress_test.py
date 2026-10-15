@@ -23,6 +23,11 @@ for maintenance capex and wrong for a contracted build-out: a delayed or weaker 
 what it costs. spec["committed_capex_years"] (0-based forecast years) holds those years' capex in
 rupees under any revenue shock; an explicit capex flex still scales them.
 
+Dead flexes. value_case compares every flexed assumption set with data/assumptions.json and raises
+DeadFlexError when a changed key never reaches the three-statement model (ingest reads dso/dio/dpo,
+not nwc_pct_sales), naming the key and the one to use. A non-base case whose value equals the base
+exactly is also reported as an invariant violation.
+
 Invariants. Every run is checked against what must be true whatever the numbers: value rises with
 revenue growth and with margin across the grid, and a delay, a cut or a cost shock never raises
 value. A violation is reported, because it means the model, not the company, is driving the answer.
@@ -209,6 +214,9 @@ def main():
                 if c[yi][xi]["value"] < c[yi - 1][xi]["value"]:
                     viol.append(f"grid: value falls as {grid['y']['label']} rises")
     for cs in cases:
+        if cs["value_per_share"] == base["value_per_share"]:
+            viol.append(f"case '{cs['name']}' returns exactly the base value ({base['value_per_share']}): "
+                        "its flex probably never reached the model")
         if cs["value_per_share"] > base["value_per_share"]:
             viol.append(f"case '{cs['name']}' raises value above the base ({cs['value_per_share']} vs {base['value_per_share']})")
     for v_ in viol:

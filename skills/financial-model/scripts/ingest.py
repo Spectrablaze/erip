@@ -300,8 +300,11 @@ RATE_DRIVERS = {
     "rev_growth", "ebitda_margin", "gross_margin", "capex_pct_sales",
     "dep_pct_sales", "tax_rate", "cost_of_debt", "payout_ratio", "debt_growth",
     "other_income_pct", "dep_pct_nb", "cwip_pct_sales", "other_ca_pct",
-    "other_liab_pct", "interest_income_rate", "term_debt_repay",
+    "other_liab_pct", "interest_income_rate",
 }
+# term_debt_repay is a rupee amount per year (rows.py: fmt="cur"), not a rate. It sat in
+# RATE_DRIVERS until 2026-10-15, so every override above 1.5 was divided by 100: a
+# repayment of 1,000 cr was applied as 10 cr and debt never ran off (found on TRENT).
 
 
 def _rate(x):

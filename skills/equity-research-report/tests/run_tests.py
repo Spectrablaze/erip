@@ -243,11 +243,26 @@ def test_rate_parsing():
     check("9 rate parsing judges the whole path", ok, f"[13, 6.4, 0.36] -> {[round(x, 4) for x in a]}")
 
 
+def test_dead_flex():
+    import scenario_runs as sr
+    base = {"revenue_growth": [10.0, 9.0], "ebitda_margin": [20.0, 20.0], "ebit_margin": [15.0, 15.0],
+            "nwc_pct_sales": [5.0, 5.0], "dso": 30.0, "dio": 60.0, "dpo": 45.0, "rf": 0.07}
+    with tempfile.TemporaryDirectory() as td:
+        def dead(**ch):
+            return sr.dead_flex_keys(td, base, {**base, **ch})
+        ok = (dead(nwc_pct_sales=[8.0, 8.0]) == ["nwc_pct_sales"]            # ingest never reads it
+              and dead(dio=80.0) == [] and dead(revenue_growth=[7.0, 6.0]) == []
+              and dead(rf=0.08) == []                                         # model.py reads it
+              and dead(ebit_margin=[12.0, 12.0], ebitda_margin=[17.0, 17.0]) == [])   # the 'margin' op
+    check("12 a flex on a key the three-statement model never reads is caught", ok)
+
+
 def main():
     update = "--update-golden" in sys.argv
     print("ERIP engine tests (synthetic data only)")
     test_dcf()
     test_rate_parsing()
+    test_dead_flex()
     with tempfile.TemporaryDirectory() as td:
         ts, m = run_synthetic(td)
     test_three_statement(ts)

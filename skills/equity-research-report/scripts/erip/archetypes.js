@@ -22,6 +22,10 @@ function bar_line_combo(d) {
   const dense = keep.size < n;
   const last = n - 1;
   const unit = d.bar_unit || "";
+  // The line rides a secondary axis that defaults to a percentage (margin, growth). A
+  // spec plotting something else on it - INR per sq ft, retail area - sets line_unit,
+  // or its values print as "13402%" (TRENT, 2026-10-15).
+  const lunit = d.line_unit === undefined ? "%" : d.line_unit;
   // A time series has a defensible focal point: the latest observation. Any
   // other accent must be named in the spec.
   const acc = H.accentIndex({ accent: d.accent === undefined ? "latest" : d.accent,
@@ -45,7 +49,7 @@ function bar_line_combo(d) {
       }),
       ...(line.length ? [H.valAxis({
         position: "right", show: !labelLine, splitLine: { show: false },
-        axisLabel: Object.assign({ formatter: "{value}%", margin: 4 }, H.TYPE.axis),
+        axisLabel: Object.assign({ formatter: (v) => H.fmtNum(v, lunit), margin: 4 }, H.TYPE.axis),
       })] : []),
     ],
     series: [
@@ -78,7 +82,7 @@ function bar_line_combo(d) {
         // than relying on the line clearing the bars.
         label: labelLine ? {
           show: true, position: "top", distance: 5,
-          formatter: (p) => (p.value === null ? "" : H.fmtNum(p.value, "%")),
+          formatter: (p) => (p.value === null ? "" : H.fmtNum(p.value, lunit)),
           fontSize: H.px(9), fontFamily: H.FONT, fontWeight: 700, color: S.blue,
           backgroundColor: "#ffffff", padding: [1.5, 2.5], borderRadius: 2,
         } : { show: false },
